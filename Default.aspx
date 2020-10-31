@@ -2,7 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="jumbotron">
+    <div class="jumbotron" style="background-color:olivedrab;" >
         <h1>CaMa</h1>
         <p class="lead">CaMa es una plataforma web que te permite encontrar la cabaña de tus sueños para disfrutar tus vacaciones y tu tiempo libre</p>
     </div>

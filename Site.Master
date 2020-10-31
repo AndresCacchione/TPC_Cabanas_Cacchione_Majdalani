@@ -18,7 +18,8 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
-<body>
+<body style="background-image:url(https://image.freepik.com/foto-gratis/fondo-minimalista-madera-color-claro_23-2148377179.jpg);" >
+ 
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -38,42 +39,17 @@
                 <asp:ScriptReference Name="WebFormsBundle" />
                 <%--Site Scripts--%>
             </Scripts>
-        </asp:ScriptManager>
-
-<%--        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" runat="server" href="~/">CaMa</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                 
-                </div>
-            </div>
-        </div>--%>
+        </asp:ScriptManager> 
 
 
-        <div class="pos-f-t">
-  <div class="collapse" id="navbarToggleExternalContent">
-    <div class="bg-dark p-4 ">
-        <a runat="server" href="~/">CaMa</a>
-        <a runat="server" href="~/Complejos">Complejos</a>
-        <a runat="server" href="~/Cabañas">Cabañas</a>
-        <a runat="server" href="~/Clientes">Clientes</a>
-    </div>
-  </div>
-  <nav class="navbar navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    </nav>
-</div>
-
-
+            <nav class="navbar navbar-light" style="background-color: #6E9038;">
+           <div>
+        <a class="mr-4 ml-4" runat="server" style="color: #FFFFFF; font-size: xx-large;" href="~/">CaMa</a>
+        <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Complejos">Complejos</a>
+        <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large; " href="~/Cabañas">Cabañas</a>
+        <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large; " href="~/Clientes">Clientes</a>
+          </div>
+</nav>
 
 
 
