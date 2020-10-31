@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Tp_Cabañas_Cacchione_Majdalani
+namespace TPC_CacchioneMajdalani
 {
     public partial class Clientes : System.Web.UI.Page
     {

@@ -7,7 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.FriendlyUrls.Resolvers;
 
-namespace Tp_Cabañas_Cacchione_Majdalani
+namespace TPC_CacchioneMajdalani
 {
     public partial class ViewSwitcher : System.Web.UI.UserControl
     {

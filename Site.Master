@@ -1,10 +1,9 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Tp_Cabañas_Cacchione_Majdalani.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="TPC_CacchioneMajdalani.SiteMaster" %>
 
 <!DOCTYPE html>
 
 <html lang="es">
 <head runat="server">
-
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,8 +15,7 @@
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
-</head>
+ </head>
 <body style="background-image:url(https://image.freepik.com/foto-gratis/fondo-minimalista-madera-color-claro_23-2148377179.jpg);" >
  
     <form runat="server">
@@ -50,29 +48,6 @@
         <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large; " href="~/Clientes">Clientes</a>
           </div>
 </nav>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

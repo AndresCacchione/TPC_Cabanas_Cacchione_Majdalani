@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Tp_Cabañas_Cacchione_Majdalani.Global" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="TPC_CacchioneMajdalani.Global" Language="C#" %>

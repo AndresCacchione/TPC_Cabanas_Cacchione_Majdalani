@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Optimization;
 using System.Web.UI;
 
-namespace Tp_Cabañas_Cacchione_Majdalani
+namespace TPC_CacchioneMajdalani
 {
     public class BundleConfig
     {

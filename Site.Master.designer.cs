@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Tp_Cabañas_Cacchione_Majdalani
+namespace TPC_CacchioneMajdalani
 {
 
 

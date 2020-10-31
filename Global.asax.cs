@@ -7,7 +7,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
 
-namespace Tp_Cabañas_Cacchione_Majdalani
+namespace TPC_CacchioneMajdalani
 {
     public class Global : HttpApplication
     {

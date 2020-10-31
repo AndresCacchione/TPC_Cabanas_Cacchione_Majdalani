@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // La información general sobre un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie los valores de estos atributos para modificar la información
 // asociada a un ensamblado.
-[assembly: AssemblyTitle("Tp_Cabañas_Cacchione_Majdalani")]
+[assembly: AssemblyTitle("TPC_CacchioneMajdalani")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Tp_Cabañas_Cacchione_Majdalani")]
+[assembly: AssemblyProduct("TPC_CacchioneMajdalani")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // El siguiente GUID es para el Id. typelib cuando este proyecto esté expuesto a COM
-[assembly: Guid("a58cf801-00db-4d1e-90c6-ab549cb77147")]
+[assembly: Guid("7061fb00-46ca-4b64-a220-86b0351e0b0f")]
 
 // La información de versión de un ensamblado consta de los siguientes cuatro valores:
 //

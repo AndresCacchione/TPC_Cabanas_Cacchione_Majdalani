@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Tp_Cabañas_Cacchione_Majdalani {
+namespace TPC_CacchioneMajdalani {
     
     
     public partial class Site_Mobile {
