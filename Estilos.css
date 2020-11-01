@@ -1,0 +1,15 @@
+﻿.imagenBackground {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-image: url(https://www.villalaangostura.com.ar/css/plantilla/fondo_body_madera.jpg);
+}
+
+body {
+    background: url(https://www.villalaangostura.com.ar/css/plantilla/fondo_body_madera.jpg) repeat;
+    margin: 0px;
+    padding: 0px;
+    font: 11px Tahoma;
+    /*color: #929292;*/
+}
