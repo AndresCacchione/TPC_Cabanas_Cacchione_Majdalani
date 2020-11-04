@@ -15,8 +15,9 @@
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="CSS/Estilos.css" rel="stylesheet" />
  </head>
-<body style="background-image:url(https://image.freepik.com/foto-gratis/fondo-minimalista-madera-color-claro_23-2148377179.jpg);" >
+<body>
  
     <form runat="server">
         <asp:ScriptManager runat="server">
