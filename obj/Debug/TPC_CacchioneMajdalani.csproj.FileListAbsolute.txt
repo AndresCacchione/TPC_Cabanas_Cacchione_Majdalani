@@ -230,3 +230,7 @@ C:\Users\jeronimo\Desktop\Cabañas\TPC_Cabanas_Cacchione_Majdalani\obj\Debug\TPC
 C:\Users\jeronimo\Desktop\Cabañas\TPC_Cabanas_Cacchione_Majdalani\obj\Debug\TPC_CacchioneMajdalani.csproj.CopyComplete
 C:\Users\jeronimo\Desktop\Cabañas\TPC_Cabanas_Cacchione_Majdalani\obj\Debug\TPC_CacchioneMajdalani.dll
 C:\Users\jeronimo\Desktop\Cabañas\TPC_Cabanas_Cacchione_Majdalani\obj\Debug\TPC_CacchioneMajdalani.pdb
+C:\Users\Andres\OneDrive\Documentos\GitHub\TPC - Cabañas\TPC_Cabanas_Cacchione_Majdalani\bin\Dominio.dll
+C:\Users\Andres\OneDrive\Documentos\GitHub\TPC - Cabañas\TPC_Cabanas_Cacchione_Majdalani\bin\Negocio.dll
+C:\Users\Andres\OneDrive\Documentos\GitHub\TPC - Cabañas\TPC_Cabanas_Cacchione_Majdalani\bin\Dominio.pdb
+C:\Users\Andres\OneDrive\Documentos\GitHub\TPC - Cabañas\TPC_Cabanas_Cacchione_Majdalani\bin\Negocio.pdb
