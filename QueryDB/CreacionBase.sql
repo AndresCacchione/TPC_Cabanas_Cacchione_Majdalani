@@ -245,8 +245,8 @@ precioDiario money not null,
 capacidad tinyint not null,
 cantidadAmbientes tinyint null,
 tiempoEntreReservas smallint not null,
-horaCheckIn time not null,
-horaCheckOut time not null,
+horaCheckIn datetime not null,
+horaCheckOut datetime not null,
 estado bit not null
 )
 

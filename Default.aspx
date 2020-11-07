@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="TPC_CacchioneMajdalani._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-     <div class="jumbotron" style="background-color:olivedrab;" >
+     <div class="jumbotron" style="background-color:#6E9038;" >
         <h1>CaMa</h1>
         <p class="lead">CaMa es una plataforma web que te permite encontrar la cabaña de tus sueños para disfrutar tus vacaciones y tu tiempo libre</p>
     </div>

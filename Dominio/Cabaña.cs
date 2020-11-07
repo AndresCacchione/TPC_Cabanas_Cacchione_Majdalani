@@ -9,13 +9,14 @@ namespace Dominio
     public class Cabaña
     {
          public Int64 Id { get; set; }
+         public decimal PrecioDiario { get; set; }
+         public Byte Capacidad { get; set; }
+         public List<string> Imagenes { get; set; }
+         public Byte Ambientes { get; set; }
+         public Int16 TiempoEntreReservas { get; set; }
+         public DateTime CheckIn { get; set; }
+         public DateTime CheckOut { get; set; }
+         public bool EstadoActivo { get; set; }
          public Complejo complejo { get; set; }
-         public decimal PrecioDiario  { get; set; }
-         public int Capacidad { get; set; }
-         public int Ambientes { get; set; }
-         public int TiempoEntreReservas { get; set; }
-         public int CheckIn { get; set; }
-         public int CheckOut { get; set; }
-         public int EstadoActivo { get; set; }
-}
+    }
 }

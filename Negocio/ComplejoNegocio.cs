@@ -29,8 +29,8 @@ namespace Negocio
                     aux.Nombre = (string)accessDB.Lector["Nombre"];
                     aux.Telefono = (string)accessDB.Lector["Telefono"];
                     aux.Ubicacion = (string)accessDB.Lector["Ubicacion"];
-                    aux.Mail = (string)accessDB.Lector["Mail"];
-                    aux.EstadoActivo = (bool)accessDB.Lector["EstadoActivo"];
+                    aux.Mail = (string)accessDB.Lector["Email"];
+                    aux.EstadoActivo = (bool)accessDB.Lector["Estado"];
                     aux.PrecioFeriado= (decimal)accessDB.Lector["DiferenciaFeriado"];
                     listaComplejos.Add(aux);
                 }

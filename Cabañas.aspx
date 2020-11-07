@@ -9,11 +9,11 @@
                        {%>  
                           <div class="col-md-4">
                         <div class="card mt-4" style="width:20rem;" >
-                             <img src="<%=item.Imagen%>" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title"><%=item.Nombre%></h5>
-                                <h5 class="card-title">Telefono <%=item.Telefono%></h5>
-                                 <a href="Cabañas.aspx?idArticulo=<%=item.ID.ToString()%>" class="btn btn-primary mr-auto ml-auto"> Ver Cabañas </a>
+                             <%--<img src="<%=item.Imagen%>" class="card-img-top" alt="...">--%>
+                            <div class="card-body" style="background-color:#6E9038;">
+                                <h5 class="card-title">Ambientes: <%=item.Ambientes%></h5>
+                                <h5 class="card-title">Capacidad: <%=item.Capacidad%></h5>
+                                 <a href="DetalleCabaña.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-primary mr-auto ml-auto"> Detalle </a>
                                 <%-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> --%>
                             </div>
                         </div>

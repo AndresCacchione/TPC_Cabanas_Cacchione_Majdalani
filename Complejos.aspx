@@ -13,7 +13,7 @@
                             <div class="card-body">
                                 <h5 class="card-title"><%=item.Nombre%></h5>
                                 <h5 class="card-title">Telefono <%=item.Telefono%></h5>
-                                 <a href="Cabañas.aspx?idArticulo=<%=item.ID.ToString()%>" class="btn btn-primary mr-auto ml-auto"> Ver Cabañas </a>
+                                 <a href="Cabañas.aspx?idComplejo=<%=item.ID.ToString()%>" class="btn btn-primary mr-auto ml-auto"> Ver Cabañas </a>
                                 <%-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> --%>
                             </div>
                         </div>
