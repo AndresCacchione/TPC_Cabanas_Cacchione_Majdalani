@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,6 +10,7 @@ namespace Dominio
     public class Complejo
     {
         public Int64 ID { get; set; }
+        public string Imagen { get; set; }
         public string Nombre { get; set; }
         public string Telefono { get; set; }
         public string Ubicacion { get; set; }

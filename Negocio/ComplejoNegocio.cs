@@ -25,6 +25,7 @@ namespace Negocio
                 {
                     Complejo aux = new Complejo(); 
                     aux.ID = (Int64)accessDB.Lector["Id"];
+                    aux.Imagen= (string)accessDB.Lector["Imagen"];
                     aux.Nombre = (string)accessDB.Lector["Nombre"];
                     aux.Telefono = (string)accessDB.Lector["Telefono"];
                     aux.Ubicacion = (string)accessDB.Lector["Ubicacion"];
