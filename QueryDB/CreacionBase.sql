@@ -38,6 +38,7 @@ add constraint UNI_nombre_NivelesAcceso unique(nombre)
 go
 Create Table Complejos(
 	ID bigint not null identity(1,1),
+	Imagen Varchar(200) not null,
 	nombre varchar(50) not null,
 	telefono varchar(20) not null,
 	ubicacion varchar(200) not null,
@@ -45,6 +46,7 @@ Create Table Complejos(
 	estado bit not null,
 	diferenciaFeriado decimal not null
 )
+
 
 go
 alter table Complejos
