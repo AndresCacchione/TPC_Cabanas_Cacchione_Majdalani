@@ -234,3 +234,7 @@ C:\Users\Andres\OneDrive\Documentos\GitHub\TPC - Cabañas\TPC_Cabanas_Cacchione_
 C:\Users\Andres\OneDrive\Documentos\GitHub\TPC - Cabañas\TPC_Cabanas_Cacchione_Majdalani\bin\Negocio.dll
 C:\Users\Andres\OneDrive\Documentos\GitHub\TPC - Cabañas\TPC_Cabanas_Cacchione_Majdalani\bin\Dominio.pdb
 C:\Users\Andres\OneDrive\Documentos\GitHub\TPC - Cabañas\TPC_Cabanas_Cacchione_Majdalani\bin\Negocio.pdb
+C:\Users\jeronimo\Desktop\Cabañas\TPC_Cabanas_Cacchione_Majdalani\bin\Dominio.dll
+C:\Users\jeronimo\Desktop\Cabañas\TPC_Cabanas_Cacchione_Majdalani\bin\Negocio.dll
+C:\Users\jeronimo\Desktop\Cabañas\TPC_Cabanas_Cacchione_Majdalani\bin\Dominio.pdb
+C:\Users\jeronimo\Desktop\Cabañas\TPC_Cabanas_Cacchione_Majdalani\bin\Negocio.pdb
