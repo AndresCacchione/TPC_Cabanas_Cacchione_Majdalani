@@ -21,7 +21,7 @@ namespace TPC_CacchioneMajdalani
             {
                 //if (Session["listaBuscados"] == null)
                 //{
-                ListaComplejosLocal = negocio.ListarComplejos();
+                ListaComplejosLocal = negocio.listarComplejos();
                 Session.Add("listaComplejos", ListaComplejosLocal);
                 //  }
                 //else

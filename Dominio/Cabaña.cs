@@ -8,6 +8,10 @@ namespace Dominio
 {
     public class Cabaña
     {
+        public Cabaña()
+         {
+            Imagenes = new List<string>();
+         }
          public Int64 Id { get; set; }
          public decimal PrecioDiario { get; set; }
          public Byte Capacidad { get; set; }

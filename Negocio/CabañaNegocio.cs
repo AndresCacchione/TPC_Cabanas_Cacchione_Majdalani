@@ -16,7 +16,7 @@ namespace Negocio
 
             try
             {
-                acceso.SetearQuery("select * from cabañas");
+                acceso.SetearQuery("select * from Cabañas");
                 acceso.EjecutarLector();
 
                 while(acceso.Lector.Read())
@@ -32,6 +32,7 @@ namespace Negocio
                     aux.TiempoEntreReservas = (Int16)acceso.Lector["tiempoEntreReservas"];
                     aux.CheckIn = (DateTime)acceso.Lector["horaCheckIn"];
                     aux.CheckOut = (DateTime)acceso.Lector["horaCheckOut"];
+                    aux.Imagenes.Add((string)acceso.Lector["imagenPortada"]);
                     lista.Add(aux);
                     }
                 }
@@ -40,6 +41,10 @@ namespace Negocio
             {
 
                 throw ex;
+            }
+            finally
+            {
+                acceso.CerrarConexion();
             }
             return lista;
         }

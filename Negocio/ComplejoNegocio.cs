@@ -5,44 +5,46 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio;
-using System.Data.SqlClient;
 
 namespace Negocio
 {
     public class ComplejoNegocio
     {
-      public List<Complejo> ListarComplejos()
+      public List<Complejo> listarComplejos()
         {
-            List<Complejo> listaComplejos = new List<Complejo>();
             AccessDB accessDB = new AccessDB();
-            accessDB.SetearQuery("Select *from complejos");
+            List<Complejo> lista = new List<Complejo>();
 
             try
             {
+                accessDB.SetearQuery("Select *from complejos");
                 accessDB.EjecutarLector();
-                
+
                 while (accessDB.Lector.Read())
                 {
-                    Complejo aux = new Complejo(); 
-                    aux.ID = (Int64)accessDB.Lector["Id"];
-                    aux.Imagen= (string)accessDB.Lector["Imagen"];
-                    aux.Nombre = (string)accessDB.Lector["Nombre"];
-                    aux.Telefono = (string)accessDB.Lector["Telefono"];
-                    aux.Ubicacion = (string)accessDB.Lector["Ubicacion"];
-                    aux.Mail = (string)accessDB.Lector["Email"];
-                    aux.EstadoActivo = (bool)accessDB.Lector["Estado"];
-                    aux.PrecioFeriado= (decimal)accessDB.Lector["DiferenciaFeriado"];
-                    listaComplejos.Add(aux);
+                    Complejo aux = new Complejo();
+                    aux.EstadoActivo = (bool)accessDB.Lector["estado"];
+                    if (aux.EstadoActivo == true)
+                    {
+                        aux.ID = (Int64)accessDB.Lector["Id"];
+                        aux.Imagen = (string)accessDB.Lector["imagenPortada"];
+                        aux.Telefono = (string)accessDB.Lector["Telefono"];
+                        aux.Ubicacion = (string)accessDB.Lector["Ubicacion"];
+                        aux.Mail = (string)accessDB.Lector["Email"];
+                        aux.EstadoActivo = (bool)accessDB.Lector["Estado"];
+                        aux.PrecioFeriado = (decimal)accessDB.Lector["DiferenciaFeriado"];
+                        aux.Nombre = (string)accessDB.Lector["nombre"];
+                        lista.Add(aux);
+                    }
                 }
-                accessDB.CerrarConexion();
-                return listaComplejos;
             }
-
             catch (Exception ex)
             {
                 accessDB.CerrarConexion();
                 throw ex;
             }
+            accessDB.CerrarConexion();
+            return lista;
         }
     }
 }
