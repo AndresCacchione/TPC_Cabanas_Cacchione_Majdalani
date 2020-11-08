@@ -10,6 +10,37 @@ namespace Negocio
 {
     public class ComplejoNegocio
     {
+
+        public Complejo listarComplejoPorID(Int64 IDComplejo)
+        {
+            AccessDB accessDB = new AccessDB();
+            Complejo aux = new Complejo();
+
+            try
+            {
+                accessDB.SetearQuery("Select * from complejos where ID=" + IDComplejo);
+                accessDB.EjecutarLector();
+                accessDB.Lector.Read();
+                aux.ID = (Int64)accessDB.Lector["Id"];
+                aux.Imagen = (string)accessDB.Lector["imagenPortada"];
+                aux.Telefono = (string)accessDB.Lector["Telefono"];
+                aux.Ubicacion = (string)accessDB.Lector["Ubicacion"];
+                aux.Mail = (string)accessDB.Lector["Email"];
+                aux.EstadoActivo = (bool)accessDB.Lector["Estado"];
+                aux.PrecioFeriado = (decimal)accessDB.Lector["DiferenciaFeriado"];
+                aux.Nombre = (string)accessDB.Lector["nombre"];
+            }
+            catch (Exception ex)
+            { 
+                throw ex;
+            }
+            finally
+            {
+                accessDB.CerrarConexion();
+            }
+            return aux;
+        }
+
       public List<Complejo> listarComplejos()
         {
             AccessDB accessDB = new AccessDB();

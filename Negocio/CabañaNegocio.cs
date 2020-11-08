@@ -21,6 +21,7 @@ namespace Negocio
 
                 while(acceso.Lector.Read())
                 {
+                    ComplejoNegocio negocio = new ComplejoNegocio();
                     Cabaña aux = new Cabaña();
                     aux.EstadoActivo= (bool)acceso.Lector["estado"];
                     if (aux.EstadoActivo==true)
@@ -33,9 +34,11 @@ namespace Negocio
                     aux.CheckIn = (DateTime)acceso.Lector["horaCheckIn"];
                     aux.CheckOut = (DateTime)acceso.Lector["horaCheckOut"];
                     aux.Imagenes.Add((string)acceso.Lector["imagenPortada"]);
+                    aux.complejo = negocio.listarComplejoPorID((Int64)acceso.Lector["Idcomplejo"]);
                     lista.Add(aux);
                     }
                 }
+                // listar complejo por I
             }
             catch (Exception ex)
             {

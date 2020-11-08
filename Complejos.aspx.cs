@@ -19,6 +19,8 @@ namespace TPC_CacchioneMajdalani
 
             try
             {
+
+                
                 //if (Session["listaBuscados"] == null)
                 //{
                 ListaComplejosLocal = negocio.listarComplejos();
