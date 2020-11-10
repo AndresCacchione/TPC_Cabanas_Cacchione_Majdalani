@@ -48,7 +48,7 @@
         <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large; " href="~/Cabañas">Cabañas</a>
         <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large; " href="~/Clientes">Clientes</a>
           </div>
-</nav>
+           </nav>
 
 
 

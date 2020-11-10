@@ -10,8 +10,30 @@ namespace Negocio
 {
     public class ComplejoNegocio
     {
+        public void EliminarComplejoPorId(Int64 IDComplejo)
+        {
 
-        public Complejo listarComplejoPorID(Int64 IDComplejo)
+            AccessDB accessDB = new AccessDB();
+            try
+            {
+                accessDB.SetearQuery("Delete * from complejos where id=" + IDComplejo);
+                accessDB.EjecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accessDB.CerrarConexion();
+            }
+            
+        }
+
+
+
+        public Complejo BuscarComplejoPorId(Int64 IDComplejo)
         {
             AccessDB accessDB = new AccessDB();
             Complejo aux = new Complejo();

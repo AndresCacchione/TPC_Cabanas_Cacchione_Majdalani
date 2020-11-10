@@ -118,6 +118,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="DetalleComplejo.aspx" />
+    <Content Include="EliminarComplejo.aspx" />
     <Content Include="Estilos.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -288,6 +290,20 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleComplejo.aspx.cs">
+      <DependentUpon>DetalleComplejo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetalleComplejo.aspx.designer.cs">
+      <DependentUpon>DetalleComplejo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EliminarComplejo.aspx.cs">
+      <DependentUpon>EliminarComplejo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EliminarComplejo.aspx.designer.cs">
+      <DependentUpon>EliminarComplejo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

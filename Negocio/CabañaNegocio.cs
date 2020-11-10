@@ -33,8 +33,8 @@ namespace Negocio
                     aux.TiempoEntreReservas = (Int16)acceso.Lector["tiempoEntreReservas"];
                     aux.CheckIn = (DateTime)acceso.Lector["horaCheckIn"];
                     aux.CheckOut = (DateTime)acceso.Lector["horaCheckOut"];
-                    aux.Imagenes.Add((string)acceso.Lector["imagenPortada"]);
-                    aux.complejo = negocio.listarComplejoPorID((Int64)acceso.Lector["Idcomplejo"]);
+                    aux.Imagen=(string)acceso.Lector["imagenPortada"];
+                    aux.complejo = negocio.BuscarComplejoPorId((Int64)acceso.Lector["Idcomplejo"]);
                     lista.Add(aux);
                     }
                 }
