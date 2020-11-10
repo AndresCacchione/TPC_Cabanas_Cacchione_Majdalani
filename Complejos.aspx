@@ -7,7 +7,7 @@
     <h2><%: Title %>.</h2>
     <asp:TextBox ID="TxtBuscarComplejo" runat="server"></asp:TextBox>
     <asp:Button Class="btn btn-primary mr-auto ml-auto" ID="BtnBuscarComplejo" runat="server" Text="Buscar" />
-    <a href="#" class="btn btn-success mr-auto ml-auto">Agregar</a>
+    <a href="AgregarComplejo.aspx" class="btn btn-success mr-auto ml-auto">Agregar</a>
     </div>
     
        
