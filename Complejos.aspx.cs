@@ -19,17 +19,12 @@ namespace TPC_CacchioneMajdalani
 
             try
             {
-
-                
-                //if (Session["listaBuscados"] == null)
-                //{
-                ListaComplejosLocal = negocio.listarComplejos();
-                Session.Add("listaComplejos", ListaComplejosLocal);
-                //  }
-                //else
-                //{
-                //    ListaComplejosLocal = (List<Complejo>)Session["listaBuscados"];
-                //    Session["listaBuscados"] = null;
+                ListaComplejosLocal = (List<Complejo>)(Session["listaComplejos"]);
+                if (ListaComplejosLocal == null)
+                {
+                    ListaComplejosLocal = negocio.listarComplejos();
+                    Session.Add("listaComplejos", ListaComplejosLocal);
+                }
             }
         
             catch (Exception ex)

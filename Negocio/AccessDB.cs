@@ -53,8 +53,10 @@ namespace Negocio
 
         public void CerrarConexion()
         {
-            Lector.Close();
-            Conexion.Close();
+            if (Lector != null)
+                Lector.Close();
+            if (Conexion != null)
+                Conexion.Close();
         }
 
         internal void EjecutarAccion()

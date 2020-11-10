@@ -40,7 +40,7 @@ namespace Negocio
 
             try
             {
-                accessDB.SetearQuery("Select * from complejos where ID=" + IDComplejo);
+                accessDB.SetearQuery("Select * from complejos where estado = 1 and ID=" + IDComplejo);
                 accessDB.EjecutarLector();
                 accessDB.Lector.Read();
                 aux.ID = (Int64)accessDB.Lector["Id"];
@@ -70,7 +70,7 @@ namespace Negocio
 
             try
             {
-                accessDB.SetearQuery("Select *from complejos");
+                accessDB.SetearQuery("Select *from complejos where estado = 1");
                 accessDB.EjecutarLector();
 
                 while (accessDB.Lector.Read())

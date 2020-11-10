@@ -14,16 +14,16 @@ namespace Negocio
             AccessDB acceso = new AccessDB();
             List<Cabaña> lista = new List<Cabaña>();
 
+
             try
             {
-                acceso.SetearQuery("select * from Cabañas");
+                acceso.SetearQuery("select * from Cabañas where estado = 1");
                 acceso.EjecutarLector();
-
                 while(acceso.Lector.Read())
                 {
                     ComplejoNegocio negocio = new ComplejoNegocio();
                     Cabaña aux = new Cabaña();
-                    aux.EstadoActivo= (bool)acceso.Lector["estado"];
+                    aux.EstadoActivo = (bool)acceso.Lector["estado"];
                     if (aux.EstadoActivo==true)
                     { 
                     aux.Id = (Int64)acceso.Lector["ID"];
