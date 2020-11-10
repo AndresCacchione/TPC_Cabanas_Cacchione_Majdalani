@@ -16,7 +16,7 @@ namespace Negocio
             AccessDB accessDB = new AccessDB();
             try
             {
-                accessDB.SetearQuery("Delete * from complejos where id=" + IDComplejo);
+                accessDB.SetearQuery("Delete from complejos where id=" + IDComplejo);
                 accessDB.EjecutarAccion();
 
             }

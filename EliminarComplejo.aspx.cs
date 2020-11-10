@@ -12,8 +12,7 @@ namespace TPC_CacchioneMajdalani
 {
     public partial class EliminarComplejo : System.Web.UI.Page
     {
-
-        public Complejo aux { get; set; }
+        public Complejo Aux { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,10 +20,30 @@ namespace TPC_CacchioneMajdalani
 
             long idaux = Convert.ToInt64(Request.QueryString["idComplejo"]);
 
-            Session["listaComplejos"].f
-
+            List<Complejo> listaAux = new List<Complejo>();
+            listaAux = (List<Complejo>)Session["listaComplejos"];
+            Aux = listaAux.Find(i => i.ID == idaux);
         }
 
-
+        protected void Eliminar_Click(object sender, EventArgs e)
+        {
+            if(check_eliminar.Checked)
+            {
+                ComplejoNegocio auxNeg = new ComplejoNegocio();
+                auxNeg.EliminarComplejoPorId(Aux.ID);
+                Response.Redirect("Complejos.aspx");
+            }
+            else
+            {
+                if(check_eliminar.ForeColor== System.Drawing.Color.Red)
+                {
+                    check_eliminar.ForeColor = System.Drawing.Color.Black;
+                }
+                else
+                {
+                    check_eliminar.ForeColor = System.Drawing.Color.Red;
+                }
+            }
+        }
     }
 }
