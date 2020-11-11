@@ -7,7 +7,7 @@
     <h2><%: Title %>.</h2>
     <asp:TextBox ID="TxtBuscarComplejo" runat="server"></asp:TextBox>
     <asp:Button Class="btn btn-primary mr-auto ml-auto" ID="BtnBuscarComplejo" runat="server" Text="Buscar" />
-    <a href="AgregarComplejo.aspx" class="btn btn-success mr-auto ml-auto">Agregar</a>
+    <a href="AgregarModificarComplejo.aspx" class="btn btn-success mr-auto ml-auto">Agregar</a>
     </div>
     
        
@@ -28,7 +28,7 @@
                                 
                                 
                                 <a href="Cabañas.aspx?idComplejo=<%=item.ID.ToString()%>" class="btn btn-primary mr-auto ml-auto">Cabañas</a>
-                                <a href="#" class="btn btn-secondary mr-auto ml-auto">Modificar</a>
+                                <a href="AgregarModificarComplejo.aspx?IdComplejo=<%=item.ID.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Modificar</a>
                                 <a href="EliminarComplejo.aspx?idComplejo=<%=item.ID.ToString()%>" class="btn btn-danger mr-auto ml-auto">Eliminar</a>
                                 <%-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> --%>
                             </div>

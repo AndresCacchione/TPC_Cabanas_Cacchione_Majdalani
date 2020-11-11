@@ -6,7 +6,7 @@
     background-image: url(https://www.villalaangostura.com.ar/css/plantilla/fondo_body_madera.jpg);
 }
 .colorVerdecito {
-    background-color:#6E9038;
+    background-color: #6E9038; /*rgb:  R:110, G:144, B:56 */
 }
 body {
     background: url(https://www.villalaangostura.com.ar/css/plantilla/fondo_body_madera.jpg) repeat;
