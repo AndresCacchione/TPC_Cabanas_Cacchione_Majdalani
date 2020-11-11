@@ -10,6 +10,77 @@ namespace Negocio
 {
     public class ComplejoNegocio
     {
+
+        public void ModificarComplejo(Complejo Aux)
+        {
+            AccessDB Acceso = new AccessDB();
+            try
+            {
+                Acceso.SetearQuery("Update Complejos set ImagenPortada=@UrlImagen, Nombre=@Nombre, Telefono=@Tel, Ubicacion=@Ubicacion, email=@Mail, Estado=1, DiferenciaFeriado=@PrecioFeriado where ID=@Id");
+                
+                Acceso.AgregarParametro("@UrlImagen", Aux.Imagen);
+                Acceso.AgregarParametro("@Nombre", Aux.Nombre);
+                Acceso.AgregarParametro("@Tel", Aux.Telefono);
+                Acceso.AgregarParametro("@Ubicacion", Aux.Ubicacion);
+                Acceso.AgregarParametro("@Mail", Aux.Mail);
+                Acceso.AgregarParametro("@PrecioFeriado", Aux.PrecioFeriado);
+                Acceso.AgregarParametro("@Id", Aux.ID);
+                Acceso.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                Acceso.CerrarConexion();
+            }
+
+
+        }
+
+
+
+
+
+
+        public void AgregarComplejo(Complejo Aux)
+        {
+            AccessDB Acceso = new AccessDB();
+            try
+            {
+            Acceso.SetearQuery("Insert into Complejos (ImagenPortada,Nombre,Telefono,Ubicacion,email,Estado,DiferenciaFeriado) values (@UrlImagen,@Nombre,@Tel,@Ubicacion,@Mail,1,@PrecioFeriado)");
+            Acceso.AgregarParametro("@UrlImagen", Aux.Imagen);
+            Acceso.AgregarParametro("@Nombre", Aux.Nombre);
+            Acceso.AgregarParametro("@Mail", Aux.Mail);
+            Acceso.AgregarParametro("@Tel", Aux.Telefono);
+            Acceso.AgregarParametro("@Ubicacion", Aux.Ubicacion);
+            Acceso.AgregarParametro("@PrecioFeriado", Aux.PrecioFeriado);
+            Acceso.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+              
+                Acceso.CerrarConexion();
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
         public void EliminarComplejoPorId(Int64 IDComplejo)
         {
 
@@ -22,10 +93,12 @@ namespace Negocio
             }
             catch (Exception ex)
             {
+
                 throw ex;
             }
             finally
             {
+            
                 accessDB.CerrarConexion();
             }
             
@@ -58,6 +131,7 @@ namespace Negocio
             }
             finally
             {
+               
                 accessDB.CerrarConexion();
             }
             return aux;
@@ -96,8 +170,12 @@ namespace Negocio
                 accessDB.CerrarConexion();
                 throw ex;
             }
+            finally{
+           
             accessDB.CerrarConexion();
+            }
             return lista;
+            
         }
     }
 }

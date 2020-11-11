@@ -12,7 +12,7 @@ namespace TPC_CacchioneMajdalani
 {
     public partial class EliminarComplejo : System.Web.UI.Page
     {
-        public Complejo Aux { get; set; }
+        public Dominio.Complejo Aux { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,28 +20,32 @@ namespace TPC_CacchioneMajdalani
 
             long idaux = Convert.ToInt64(Request.QueryString["idComplejo"]);
 
-            List<Complejo> listaAux = new List<Complejo>();
-            listaAux = (List<Complejo>)Session["listaComplejos"];
+            List<Dominio.Complejo> listaAux = new List<Dominio.Complejo>();
+            listaAux = (List<Dominio.Complejo>)base.Session["listaComplejos"];
             Aux = listaAux.Find(i => i.ID == idaux);
         }
 
         protected void Eliminar_Click(object sender, EventArgs e)
         {
-            if(check_eliminar.Checked)
+            if (check_eliminar.Checked)
             {
                 ComplejoNegocio auxNeg = new ComplejoNegocio();
                 auxNeg.EliminarComplejoPorId(Aux.ID);
-                
-                List<Complejo> listaAuxComplejos = new List<Complejo>();
-                listaAuxComplejos = (List<Complejo>)Session["listaComplejos"];
+
+                List<Dominio.Complejo> listaAuxComplejos = new List<Dominio.Complejo>();
+                listaAuxComplejos = (List<Dominio.Complejo>)base.Session["listaComplejos"];
                 listaAuxComplejos.RemoveAll(i => i.ID == Aux.ID);
                 Session["listaComplejos"] = listaAuxComplejos;
 
+                
+              
                 List<Cabaña> listaAuxCabañas = new List<Cabaña>();
                 listaAuxCabañas = (List<Cabaña>)Session["listaCabañas"];
+                if (listaAuxCabañas != null)
+                {  
                 listaAuxCabañas.RemoveAll(i => i.complejo.ID == Aux.ID);
-                Session["listaCabañas"] = listaAuxCabañas;
-
+                    Session["listaCabañas"] = listaAuxCabañas;
+                }
                 Response.Redirect("Complejos.aspx");
             }
             else

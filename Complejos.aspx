@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Complejos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Complejos.aspx.cs" Inherits="TPC_CacchioneMajdalani.Complejos" %>
+﻿<%@ Page Title="Complejos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Complejos.aspx.cs" Inherits="TPC_CacchioneMajdalani.Complejo" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
      <hr />
@@ -6,7 +6,7 @@
     <div>
     <h2><%: Title %>.</h2>
     <asp:TextBox ID="TxtBuscarComplejo" runat="server"></asp:TextBox>
-    <asp:Button Class="btn btn-primary mr-auto ml-auto" ID="BtnBuscarComplejo" runat="server" Text="Buscar" />
+    <asp:Button Class="btn btn-primary mr-auto ml-auto" OnClick="BtnBuscarComplejo_Click" ID="BtnBuscarComplejo" runat="server" Text="Buscar" />
     <a href="AgregarModificarComplejo.aspx" class="btn btn-success mr-auto ml-auto">Agregar</a>
     </div>
     
@@ -26,7 +26,7 @@
                                 
                                 
                                 
-                                
+                                <a href="DetalleComplejo.aspx?idComplejo=<%=item.ID.ToString()%>" class="btn btn-primary mr-auto ml-auto">Detalle</a>
                                 <a href="Cabañas.aspx?idComplejo=<%=item.ID.ToString()%>" class="btn btn-primary mr-auto ml-auto">Cabañas</a>
                                 <a href="AgregarModificarComplejo.aspx?IdComplejo=<%=item.ID.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Modificar</a>
                                 <a href="EliminarComplejo.aspx?idComplejo=<%=item.ID.ToString()%>" class="btn btn-danger mr-auto ml-auto">Eliminar</a>
