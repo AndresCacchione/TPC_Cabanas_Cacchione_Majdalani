@@ -1,8 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarModificarComplejo.aspx.cs" Inherits="TPC_CacchioneMajdalani.AgregarModificarComplejo" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    
-    <form>
+    <form action="/Home/Index" method="post">
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputNombre">Nombre</label>
@@ -10,7 +9,7 @@
     </div>
     <div class="form-group col-md-6">
       <label for="inputImagen">URL de la Imagen</label>
-      <input type="url" class="form-control" id="Imagen" placeholder="URL de la imagen" required runat="server">
+      <input type="url" class="form-control" id="Imagen" name="Imagen" placeholder="URL de la imagen" required runat="server">
     </div>
   </div>
          <div class="form-row">
@@ -33,19 +32,14 @@
     <input type="number" class="form-control" id="AumentoFeriado" placeholder="XXX (%)" required runat="server">
   </div>
  
-<%--    <div class="form-group col-md-6">
-      <label for="inputPassword4">Password</label>
-      <input type="password" class="form-control" id="" placeholder="Password">
-    </div>--%>
-  </div>
+        </div>
   <div class="form-group">
   </div>
 
-  <asp:Button class="btn btn-success mr-auto ml-auto" id="BtnAgregarComplejo" OnClick="BtnAgregarComplejo_Click" Text="Agregar" runat="server" />
+  <asp:Button type="submit" class="btn btn-success mr-auto ml-auto" id="BtnAgregarComplejo" OnClick="BtnAgregarComplejo_Click" Text="Agregar" runat="server" />
   <a href="Complejos.aspx" class="btn btn-primary mr-auto ml-auto">Volver</a>
-
-</form>
     
+</form>
 </asp:Content>  
     
     

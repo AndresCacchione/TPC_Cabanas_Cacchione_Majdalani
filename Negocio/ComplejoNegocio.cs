@@ -36,14 +36,7 @@ namespace Negocio
             {
                 Acceso.CerrarConexion();
             }
-
-
         }
-
-
-
-
-
 
         public void AgregarComplejo(Complejo Aux)
         {
@@ -71,16 +64,6 @@ namespace Negocio
             }
         }
 
-
-
-
-
-
-
-
-
-
-
         public void EliminarComplejoPorId(Int64 IDComplejo)
         {
 
@@ -103,8 +86,6 @@ namespace Negocio
             }
             
         }
-
-
 
         public Complejo BuscarComplejoPorId(Int64 IDComplejo)
         {

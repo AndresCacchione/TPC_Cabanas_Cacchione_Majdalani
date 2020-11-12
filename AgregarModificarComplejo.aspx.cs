@@ -27,7 +27,6 @@ namespace TPC_CacchioneMajdalani
 
         public void GuardarFormulario()
         {
-
             Auxiliar.Imagen = Imagen.Value;
             Auxiliar.Nombre = Nombre.Value;
             Auxiliar.Mail = Email.Value;
@@ -58,7 +57,6 @@ namespace TPC_CacchioneMajdalani
         protected void BtnAgregarComplejo_Click(object sender, EventArgs e)
         {
             GuardarFormulario();
-
             ComplejoNegocio negocio = new ComplejoNegocio();
 
             try
@@ -73,9 +71,11 @@ namespace TPC_CacchioneMajdalani
                 }
                 else
                 {
-                    GuardarFormulario();
                     negocio.ModificarComplejo(Auxiliar);
                     List<Dominio.Complejo> listaAux = new List<Dominio.Complejo>();
+                    listaAux = (List<Dominio.Complejo>)base.Session["listaComplejos"];
+                    listaAux.RemoveAll(item => item.ID == Auxiliar.ID);
+                    listaAux.Add(Auxiliar);
                     Session["listaComplejos"] = negocio.listarComplejos();
                 }
                 Response.Redirect("Complejos.aspx");
