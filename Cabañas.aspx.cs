@@ -14,9 +14,10 @@ namespace TPC_CacchioneMajdalani
     {
         public List<Cabaña> ListaCabañasLocal { get; set; }
 
-
+        public Int64 IDcabaña { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            IDcabaña = Convert.ToInt64(Request.QueryString["idComplejo"]);
 
             CabañaNegocio negocio = new CabañaNegocio();
             ListaCabañasLocal = (List<Cabaña>)(Session["listaCabañas"]);
