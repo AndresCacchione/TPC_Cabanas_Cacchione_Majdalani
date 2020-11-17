@@ -42,16 +42,18 @@ namespace TPC_CacchioneMajdalani
             long ID = Convert.ToInt64(Request.QueryString["IdComplejo"]);
             Auxiliar = new Dominio.Complejo();
             Auxiliar.ID = ID;
-             
+
             if (Auxiliar.ID != 0)
             {
                 List<Dominio.Complejo> listaAux = new List<Dominio.Complejo>();
                 listaAux = (List<Dominio.Complejo>)base.Session["listaComplejos"];
                 Auxiliar = listaAux.Find(i => i.ID == ID);
-
-                CargarFormulario();
-                BtnAgregarComplejo.Text = "Modificar Complejo";
-                BtnAgregarComplejo.BackColor = System.Drawing.Color.FromArgb(228, 192, 50);
+                if (!IsPostBack)
+                {
+                    CargarFormulario();
+                    BtnAgregarComplejo.Text = "Modificar Complejo";
+                    BtnAgregarComplejo.BackColor = System.Drawing.Color.FromArgb(228, 192, 50);
+                }
             }
         }
 

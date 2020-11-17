@@ -8,7 +8,6 @@
         <h2><%: Title %>.</h2>
     <asp:TextBox ID="TxtBuscarCabaña" runat="server"></asp:TextBox>
     <asp:Button Class="btn btn-primary mr-auto ml-auto" ID="BtnBuscarCabaña" runat="server" Text="Buscar" />
-    <a href="#" class="btn btn-success mr-auto ml-auto">Agregar</a>
   
         </div>
     
