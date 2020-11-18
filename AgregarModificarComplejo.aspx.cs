@@ -70,6 +70,7 @@ namespace TPC_CacchioneMajdalani
                     listaAux = (List<Dominio.Complejo>)base.Session["listaComplejos"];
                     listaAux.Add(Auxiliar);
                     Session["listaComplejos"] = listaAux;
+                    Response.Redirect("Complejos.aspx");
                 }
                 else
                 {
@@ -79,8 +80,8 @@ namespace TPC_CacchioneMajdalani
                     listaAux.RemoveAll(item => item.ID == Auxiliar.ID);
                     listaAux.Add(Auxiliar);
                     Session["listaComplejos"] = negocio.listarComplejos();
+                    Response.Redirect("DetalleComplejo.aspx?idComplejo="+Auxiliar.ID);
                 }
-                Response.Redirect("Complejos.aspx");
             }
 
             catch (Exception ex)
