@@ -13,7 +13,7 @@ namespace Dominio
          public Byte Capacidad { get; set; }
          public string Imagen { get; set; }
          public Byte Ambientes { get; set; }
-         public Int16 TiempoEntreReservas { get; set; }
+         public DateTime TiempoEntreReservas { get; set; }
          public DateTime CheckIn { get; set; }
          public DateTime CheckOut { get; set; }
          public bool EstadoActivo { get; set; }

@@ -245,7 +245,7 @@ IDComplejo bigint not null,
 precioDiario money not null,
 capacidad tinyint not null,
 cantidadAmbientes tinyint null,
-tiempoEntreReservas smallint not null,
+tiempoEntreReservas datetime not null,
 horaCheckIn datetime not null,
 horaCheckOut datetime not null,
 estado bit not null

@@ -30,7 +30,7 @@ namespace Negocio
                     aux.PrecioDiario = (decimal)acceso.Lector["precioDiario"];
                     aux.Capacidad = (Byte)acceso.Lector["capacidad"];
                     aux.Ambientes = (Byte)acceso.Lector["cantidadAmbientes"];
-                    aux.TiempoEntreReservas = (Int16)acceso.Lector["tiempoEntreReservas"];
+                    aux.TiempoEntreReservas = (DateTime)acceso.Lector["tiempoEntreReservas"];
                     aux.CheckIn = (DateTime)acceso.Lector["horaCheckIn"];
                     aux.CheckOut = (DateTime)acceso.Lector["horaCheckOut"];
                     aux.Imagen=(string)acceso.Lector["imagenPortada"];

@@ -5,7 +5,7 @@
     
     <div>
        <%--METER TODO EN LA MISMA LINEA --%>
-        <h2><%: Title %>.</h2>
+    <h2><%: Title %>.</h2>
     <asp:TextBox ID="TxtBuscarCabaña" runat="server"></asp:TextBox>
     <asp:Button Class="btn btn-primary mr-auto ml-auto" ID="BtnBuscarCabaña" runat="server" Text="Buscar" />
     <%if (Convert.ToInt64(Request.QueryString["idComplejo"]) != 0)
@@ -13,8 +13,7 @@
         <a href="AgregarModificarCabaña.aspx?idComplejo=<%=Convert.ToInt64(Request.QueryString["idComplejo"]).ToString()%>" class="btn btn-success mr-auto ml-auto">Agregar Cabaña</a>
         <%
         } %>
-  
-        </div>
+    </div>
     
            <div class="row align-content-md-between">
            <%foreach (Dominio.Cabaña item in ListaCabañasLocal)
