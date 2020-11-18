@@ -8,12 +8,7 @@
         <h2><%: Title %>.</h2>
     <asp:TextBox ID="TxtBuscarCabaña" runat="server"></asp:TextBox>
     <asp:Button Class="btn btn-primary mr-auto ml-auto" ID="BtnBuscarCabaña" runat="server" Text="Buscar" />
-        <%if (IDcabaña != 0)
-            {%>
-        <a href="AgregarModificarCabaña.aspx" class="btn btn-success mr-auto ml-auto">Agregar Cabaña</a>
-             <%
-             }%>
-
+  
         </div>
     
            <div class="row align-content-md-between">

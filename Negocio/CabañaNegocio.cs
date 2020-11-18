@@ -51,34 +51,6 @@ namespace Negocio
             }
             return lista;
         }
-        public void AgregarCabaña(Cabaña Caba)
-        {
-            AccessDB Acceso = new AccessDB();
-            try
-            {
-                
-                Acceso.SetearQuery("Insert into Cabañas (ImagenPortada,IdComplejo,PrecioDiario,Capacidad,CantidadAmbientes,TiempoEntreReservas,HoraCheckIn,HoraCheckout,Estado) values (@Imagen,@IdComplejo,@PrecioDiario,@Capacidad,@Ambientes,@Tiempo,@In,@Out,1)");
-                Acceso.AgregarParametro("@Imagen", Caba.Imagen);
-                Acceso.AgregarParametro("@IdComplejo", Caba.complejo.ID);
-                Acceso.AgregarParametro("@PrecioDiario", Caba.PrecioDiario);
-                Acceso.AgregarParametro("@Capacidad", Caba.Capacidad);
-                Acceso.AgregarParametro("@Ambientes", Caba.Ambientes);
-                Acceso.AgregarParametro("@Tiempo", Caba.TiempoEntreReservas);
-                Acceso.AgregarParametro("@In", Caba.CheckIn);
-                Acceso.AgregarParametro("@Out", Caba.CheckOut);
-                Acceso.EjecutarAccion();
-
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            finally
-            {
-                Acceso.CerrarConexion();
-            }
-        }
 
     }
 }
