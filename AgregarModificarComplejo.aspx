@@ -9,11 +9,8 @@
     </div>
     <div class="form-group col-md-6">
       <label for="inputImagen">URL de la Imagen</label>
-<<<<<<< HEAD
-      <input type="text" class="form-control" id="Imagen" placeholder="InserteUrl" required runat="server">
-=======
+
       <input type="url" class="form-control" id="Imagen" name="Imagen" placeholder="URL de la imagen" required runat="server">
->>>>>>> 29b9eecb80bba6c1db466b9107b74c3daa4a4fc9
     </div>
   </div>
          <div class="form-row">
@@ -33,16 +30,10 @@
   </div>
   <div class="form-group col-md-6">
     <label for="inputAumentoFeriado">Aumento Feriado (%)</label>
-<<<<<<< HEAD
-       <input type="number" class="form-control" id="AumentoFeriado" placeholder="xx%" required runat="server">                   
-      </div>
-  </div>
-=======
+
     <input type="number" class="form-control" id="AumentoFeriado" placeholder="XXX (%)" required runat="server">
   </div>
- 
         </div>
->>>>>>> 29b9eecb80bba6c1db466b9107b74c3daa4a4fc9
   <div class="form-group">
   </div>
 
@@ -50,11 +41,11 @@
   <a href="Complejos.aspx" class="btn btn-primary mr-auto ml-auto">Volver</a>
     
 </form>
-</asp:Content>  
-    
-    
-    
-    
-    
-    
- 
+</asp:Content>
+
+
+
+
+
+
+
