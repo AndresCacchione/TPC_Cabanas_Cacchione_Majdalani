@@ -1,0 +1,6 @@
+C:\Users\Andres\OneDrive\Documentos\GitHub\TPC - Cabañas\TPC_Cabanas_Cacchione_Majdalani\Dominio\bin\Release\Dominio.dll
+C:\Users\Andres\OneDrive\Documentos\GitHub\TPC - Cabañas\TPC_Cabanas_Cacchione_Majdalani\Dominio\bin\Release\Dominio.pdb
+C:\Users\Andres\OneDrive\Documentos\GitHub\TPC - Cabañas\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Release\Dominio.csprojAssemblyReference.cache
+C:\Users\Andres\OneDrive\Documentos\GitHub\TPC - Cabañas\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Release\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\Andres\OneDrive\Documentos\GitHub\TPC - Cabañas\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Release\Dominio.dll
+C:\Users\Andres\OneDrive\Documentos\GitHub\TPC - Cabañas\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Release\Dominio.pdb

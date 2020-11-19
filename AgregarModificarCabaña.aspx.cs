@@ -5,26 +5,30 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Negocio;
+using Dominio;
 
 
 namespace TPC_CacchioneMajdalani
 {
     public partial class AgregarModificarCabaña : System.Web.UI.Page
     {
+        public Dominio.Cabaña Auxiliar { get; set; }
         public AgregarModificarCabaña()
         {
-            Auxiliar = new Dominio.Cabaña();
-            Auxiliar.complejo = new Dominio.Complejo();
+            Auxiliar = new Dominio.Cabaña()
+            {
+                complejo = new Dominio.Complejo()
+            };
         }
-        public Dominio.Cabaña Auxiliar { get; set; }
+        
         public void CargarFormulario()
         {
             Imagen.Value = Auxiliar.Imagen;
             PrecioDiario.Value = Auxiliar.PrecioDiario.ToString();
-            TiempoEntreReservas.Value = Auxiliar.TiempoEntreReservas.ToString();
+            TiempoEntreReservas.Value = Auxiliar.TiempoEntreReservas.TimeOfDay.ToString();
             Capacidad.Value = Auxiliar.Capacidad.ToString();
-            CheckIn.Value = Auxiliar.CheckIn.ToString();
-            CheckOut.Value = Auxiliar.CheckOut.ToString();
+            CheckIn.Value = Auxiliar.CheckIn.TimeOfDay.ToString();
+            CheckOut.Value = Auxiliar.CheckOut.TimeOfDay.ToString();
             Ambientes.Value = Auxiliar.Ambientes.ToString();
         }
 
@@ -37,8 +41,6 @@ namespace TPC_CacchioneMajdalani
             Auxiliar.CheckIn = DateTime.Parse(CheckIn.Value);
             Auxiliar.CheckOut = DateTime.Parse(CheckOut.Value);
             Auxiliar.Ambientes = byte.Parse(Ambientes.Value);
-            Auxiliar.complejo.ID = Convert.ToInt64(Request.QueryString["IdComplejo"]);
-            Auxiliar.Id = Convert.ToInt64(Request.QueryString["IdCabaña"]);
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -88,9 +90,11 @@ namespace TPC_CacchioneMajdalani
                 else
                 {
                     negocio.ModificarCabaña(Auxiliar);
+                    
                     listaAux.RemoveAll(item => item.Id == Auxiliar.Id);
                     listaAux.Add(Auxiliar);
                     Session["listaCabañas"] = listaAux;
+
                     Response.Redirect("Cabañas.aspx?idComplejo ="+Auxiliar.complejo.ID);
                 }
             }
