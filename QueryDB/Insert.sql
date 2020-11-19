@@ -52,4 +52,4 @@ insert into ImagenesCabañas
 values(4,'https://cf.bstatic.com/images/hotel/max1024x768/136/136112818.jpg')
 go
 insert into ImagenesCabañas
-values(5,'https://media-cdn.tripadvisor.com/media/photo-s/12/1c/26/7b/cabanas-del-oso.jpg')
+values(1,'https://media-cdn.tripadvisor.com/media/photo-s/12/1c/26/7b/cabanas-del-oso.jpg')

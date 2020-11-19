@@ -32,7 +32,7 @@
                                  <a href="DetalleCabaña.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-primary mr-auto ml-auto"> Detalle </a>
                                      <a href="#" class="btn btn-success mr-auto ml-auto">Reservar</a>
                                 <a href="AgregarModificarCabaña.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Modificar</a>
-                                <a href="#" class="btn btn-danger mr-auto ml-auto">Eliminar</a>
+                                <a href="EliminarCabaña.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-danger mr-auto ml-auto">Eliminar</a>
                                 <%-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> --%>
                             </div>
                         </div>

@@ -36,7 +36,28 @@ namespace Negocio
                 Acceso.CerrarConexion();
             }
         }
+        public void EliminarCabañaPorId(Int64 IDCabaña)
+        {
 
+            AccessDB accessDB = new AccessDB();
+            try
+            {
+                accessDB.SetearQuery("Delete from cabañas where id=" + IDCabaña);
+                accessDB.EjecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+
+                accessDB.CerrarConexion();
+            }
+
+        }
         public List<Cabaña> listarCabañas()
         {
             AccessDB acceso = new AccessDB();
@@ -66,7 +87,6 @@ namespace Negocio
                     lista.Add(aux);
                     }
                 }
-                // listar complejo por I
             }
             catch (Exception ex)
             {

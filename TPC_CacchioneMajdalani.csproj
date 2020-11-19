@@ -120,7 +120,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="DetalleCabaña.aspx" />
     <Content Include="DetalleComplejo.aspx" />
+    <Content Include="EliminarCabaña.aspx" />
     <Content Include="EliminarComplejo.aspx" />
     <Content Include="Estilos.css" />
     <Content Include="favicon.ico" />
@@ -308,12 +310,26 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DetalleCabaña.aspx.cs">
+      <DependentUpon>DetalleCabaña.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetalleCabaña.aspx.designer.cs">
+      <DependentUpon>DetalleCabaña.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DetalleComplejo.aspx.cs">
       <DependentUpon>DetalleComplejo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="DetalleComplejo.aspx.designer.cs">
       <DependentUpon>DetalleComplejo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EliminarCabaña.aspx.cs">
+      <DependentUpon>EliminarCabaña.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EliminarCabaña.aspx.designer.cs">
+      <DependentUpon>EliminarCabaña.aspx</DependentUpon>
     </Compile>
     <Compile Include="EliminarComplejo.aspx.cs">
       <DependentUpon>EliminarComplejo.aspx</DependentUpon>

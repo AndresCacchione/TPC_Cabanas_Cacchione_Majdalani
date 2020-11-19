@@ -22,3 +22,21 @@ begin
 	end catch
 
 end
+
+create trigger tr_eliminar_cabaña on cabañas
+instead of delete
+as
+begin 
+begin try 
+begin transaction 
+declare @IdCabaña bigint 
+select @IdCabaña = Id from deleted
+update Cabañas set estado = 0 where Id=@IdCabaña
+commit transaction
+end try 
+begin catch
+rollback transaction 
+end catch
+end 
+
+
