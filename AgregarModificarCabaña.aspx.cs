@@ -15,10 +15,6 @@ namespace TPC_CacchioneMajdalani
         {
             Auxiliar = new Dominio.Cabaña();
             Auxiliar.complejo = new Dominio.Complejo();
-            long ID = Convert.ToInt64(Request.QueryString["IdComplejo"]);
-            long IDCabaña = Convert.ToInt64(Request.QueryString["IdCabaña"]);
-            Auxiliar.complejo.ID = ID;
-            Auxiliar.Id = IDCabaña;
         }
         public Dominio.Cabaña Auxiliar { get; set; }
         public void CargarFormulario()
@@ -46,6 +42,11 @@ namespace TPC_CacchioneMajdalani
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            long ID = Convert.ToInt64(Request.QueryString["IdComplejo"]);
+            long IDCabaña = Convert.ToInt64(Request.QueryString["IdCabaña"]);
+            Auxiliar.complejo.ID = ID;
+            Auxiliar.Id = IDCabaña;
+
             if (Auxiliar.Id != 0)
             {
                 List<Dominio.Cabaña> listaAux = new List<Dominio.Cabaña>();

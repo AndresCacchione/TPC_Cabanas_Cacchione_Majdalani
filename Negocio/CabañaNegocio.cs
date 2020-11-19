@@ -9,6 +9,34 @@ namespace Negocio
 {
     public class CabañaNegocio
     {
+        public void ModificarCabaña(Cabaña cabaña)
+        {
+            AccessDB Acceso = new AccessDB();
+            try
+            {
+                Acceso.SetearQuery("Update Cabañas set ImagenPortada=@Imagen, IDComplejo=@IDcomplejo, precioDiario=@precioDiario, capacidad=@capacidad, cantidadAmbientes=@cantidadAmbientes, tiempoEntreReservas=@tiempoEntreReservas, horacheckin=@horaCheckIn, horacheckout=@horaCheckOut, estado=1 where ID=@Id");
+                
+                Acceso.AgregarParametro("@Imagen", cabaña.Imagen);
+                Acceso.AgregarParametro("@IDcomplejo", cabaña.complejo.ID);
+                Acceso.AgregarParametro("@precioDiario", cabaña.PrecioDiario);
+                Acceso.AgregarParametro("@capacidad", cabaña.Capacidad);
+                Acceso.AgregarParametro("@cantidadAmbientes", cabaña.Ambientes);
+                Acceso.AgregarParametro("@tiempoEntreReservas", cabaña.TiempoEntreReservas);
+                Acceso.AgregarParametro("@horaCheckIn", cabaña.CheckIn);
+                Acceso.AgregarParametro("@horaCheckOut", cabaña.CheckOut);
+                Acceso.AgregarParametro("@ID",cabaña.Id);
+                Acceso.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Acceso.CerrarConexion();
+            }
+        }
+
         public List<Cabaña> listarCabañas()
         {
             AccessDB acceso = new AccessDB();
