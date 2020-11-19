@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Negocio;
 
+
 namespace TPC_CacchioneMajdalani
 {
     public partial class AgregarModificarCabaña : System.Web.UI.Page
@@ -14,6 +15,10 @@ namespace TPC_CacchioneMajdalani
         {
             Auxiliar = new Dominio.Cabaña();
             Auxiliar.complejo = new Dominio.Complejo();
+            long ID = Convert.ToInt64(Request.QueryString["IdComplejo"]);
+            long IDCabaña = Convert.ToInt64(Request.QueryString["IdCabaña"]);
+            Auxiliar.complejo.ID = ID;
+            Auxiliar.Id = IDCabaña;
         }
         public Dominio.Cabaña Auxiliar { get; set; }
         public void CargarFormulario()
@@ -41,52 +46,52 @@ namespace TPC_CacchioneMajdalani
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            long ID = Convert.ToInt64(Request.QueryString["IdComplejo"]);
-            Auxiliar.complejo.ID = ID;
-
-            if (Auxiliar.complejo.ID != 0)
+            if (Auxiliar.Id != 0)
             {
-                //long IDcabaña = Convert.ToInt64(Request.QueryString["IdCabaña"]);
-                ////modificar, hacer luego
-                //List<Dominio.Complejo> listaAux = new List<Dominio.Complejo>();
-                //listaAux = (List<Dominio.Complejo>)base.Session["listaComplejos"];
-                //Auxiliar = listaAux.Find(i => i.ID == ID);
-                //if (!IsPostBack)
-                //{
-                //    CargarFormulario();
-                //    BtnAgregarComplejo.Text = "Modificar Complejo";
-                //    BtnAgregarComplejo.BackColor = System.Drawing.Color.FromArgb(228, 192, 50);
-                //}
+                List<Dominio.Cabaña> listaAux = new List<Dominio.Cabaña>();
+                listaAux = (List<Dominio.Cabaña>)Session["listaCabañas"];
+                Auxiliar = listaAux.Find(i => i.Id == Auxiliar.Id);
+                
+                if (!IsPostBack)
+                {
+                    CargarFormulario();
+                    BtnAgregarCabaña.Text = "Modificar Cabaña";
+                    BtnAgregarCabaña.BackColor = System.Drawing.Color.FromArgb(228, 192, 50);
+                }
             }
-
         }
 
         protected void BtnAgregarCabaña_Click(object sender, EventArgs e)
         {
             GuardarFormulario();
             CabañaNegocio negocio = new CabañaNegocio();
-
+                    
+            List<Dominio.Cabaña> listaAux = new List<Dominio.Cabaña>();
+            listaAux = (List<Dominio.Cabaña>)Session["listaCabañas"];
+            
             try
             {
                 if (Auxiliar.Id == 0)
                 {
                     negocio.agregarCabaña(Auxiliar);
-                    //List<Dominio.Complejo> listaAux = new List<Dominio.Complejo>();
-                    //listaAux = (List<Dominio.Complejo>)base.Session["listaComplejos"];
-                    //listaAux.Add(Auxiliar);
-                    //Session["listaComplejos"] = listaAux;
-                    //Response.Redirect("Complejos.aspx");
+
+                    List<Dominio.Complejo> listaAuxComplejos = new List<Dominio.Complejo>();
+                    listaAuxComplejos = (List<Dominio.Complejo>)Session["listaComplejos"];
+                    Auxiliar.complejo = listaAuxComplejos.Find(i => i.ID == Auxiliar.complejo.ID);
+                    
+                    listaAux.Add(Auxiliar);
+                    Session["listaCabañas"] = listaAux;
+                    Response.Redirect("Cabañas.aspx?idComplejo ="+Auxiliar.complejo.ID);
                 }
-                //else
-                //{
-                //    negocio.ModificarComplejo(Auxiliar);
-                //    List<Dominio.Complejo> listaAux = new List<Dominio.Complejo>();
-                //    listaAux = (List<Dominio.Complejo>)base.Session["listaComplejos"];
-                //    listaAux.RemoveAll(item => item.ID == Auxiliar.ID);
-                //    listaAux.Add(Auxiliar);
-                //    Session["listaComplejos"] = negocio.listarComplejos();
-                //    Response.Redirect("DetalleComplejo.aspx?idComplejo=" + Auxiliar.ID);
-                //}
+                
+                else
+                {
+                    negocio.ModificarCabaña(Auxiliar);
+                    listaAux.RemoveAll(item => item.Id == Auxiliar.Id);
+                    listaAux.Add(Auxiliar);
+                    Session["listaCabañas"] = listaAux;
+                    Response.Redirect("Cabañas.aspx?idComplejo ="+Auxiliar.complejo.ID);
+                }
             }
 
             catch (Exception ex)

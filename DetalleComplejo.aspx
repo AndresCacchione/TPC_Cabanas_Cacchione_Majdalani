@@ -13,11 +13,7 @@
                                     <li><h5 class="card-title"><%=Aux.Ubicacion%></h5></li>
                                     <li><h5 class="card-title"><%=Aux.PrecioFeriado%></h5></li>
                                 </ul>
-                                
-                                
-                                
-                                
-               
+
                                 <a href="Complejos.aspx" class="btn btn-secondary mr-auto ml-auto">Volver</a>
                                 <a href="AgregarModificarComplejo.aspx?IdComplejo=<%=Aux.ID.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Modificar</a>
                                 <a href="EliminarComplejo.aspx?idComplejo=<%=Aux.ID.ToString()%>" class="btn btn-danger mr-auto ml-auto">Eliminar</a>

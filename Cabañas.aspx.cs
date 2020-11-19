@@ -39,10 +39,6 @@ namespace TPC_CacchioneMajdalani
                 }
                 ListaCabañasLocal = listaAux;
             }
-
-
-            
-          
         }
     }
 }
