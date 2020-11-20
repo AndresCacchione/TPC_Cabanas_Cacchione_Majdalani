@@ -35,7 +35,7 @@ namespace TPC_CacchioneMajdalani
                 listaAuxCabañas = (List<Dominio.Cabaña>)base.Session["listaCabañas"];
                 listaAuxCabañas.RemoveAll(i => i.Id == Aux.Id);
                 Session["listaCabañas"] = listaAuxCabañas;
-                Response.Redirect("Complejos.Aspx");
+                Response.Redirect("Cabañas.Aspx");
           }
             else
             {

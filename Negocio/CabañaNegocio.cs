@@ -9,23 +9,31 @@ namespace Negocio
 {
     public class CabañaNegocio
     {
-        public void ModificarCabaña(Cabaña cabaña)
+        public List<Imagen> ListarImagenesPorID(Int64 IDCabaña)
         {
-            AccessDB Acceso = new AccessDB();
+            AccessDB acceso = new AccessDB();
+            acceso.SetearQuery("select ID, URLImagen from ImagenesCabañas where IDCabaña="+IDCabaña.ToString());
+            acceso.EjecutarLector();
+
+            List<Imagen> ListaAux = new List<Imagen>();
+            
+            while (acceso.Lector.Read())
+            {
+                Imagen aux = new Imagen();
+                aux.ID = (Int64)acceso.Lector["ID"];
+                aux.URLImagen = (string)acceso.Lector["URLImagen"];
+                ListaAux.Add(aux);
+            }
+            return ListaAux;
+        }
+
+        public void EliminarImagen(Int64 IDImagen)
+        {
+            AccessDB acceso = new AccessDB();
             try
             {
-                Acceso.SetearQuery("Update Cabañas set ImagenPortada=@Imagen, IDComplejo=@IDcomplejo, precioDiario=@precioDiario, capacidad=@capacidad, cantidadAmbientes=@cantidadAmbientes, tiempoEntreReservas=@tiempoEntreReservas, horacheckin=@horaCheckIn, horacheckout=@horaCheckOut, estado=1 where ID=@Id");
-                
-                Acceso.AgregarParametro("@Imagen", cabaña.Imagen);
-                Acceso.AgregarParametro("@IDcomplejo", cabaña.complejo.ID);
-                Acceso.AgregarParametro("@precioDiario", cabaña.PrecioDiario);
-                Acceso.AgregarParametro("@capacidad", cabaña.Capacidad);
-                Acceso.AgregarParametro("@cantidadAmbientes", cabaña.Ambientes);
-                Acceso.AgregarParametro("@tiempoEntreReservas", cabaña.TiempoEntreReservas);
-                Acceso.AgregarParametro("@horaCheckIn", cabaña.CheckIn);
-                Acceso.AgregarParametro("@horaCheckOut", cabaña.CheckOut);
-                Acceso.AgregarParametro("@ID",cabaña.Id);
-                Acceso.EjecutarAccion();
+                acceso.SetearQuery("Delete from ImagenesCabañas where id=" + IDImagen);
+                acceso.EjecutarAccion();
             }
             catch (Exception ex)
             {
@@ -33,17 +41,68 @@ namespace Negocio
             }
             finally
             {
-                Acceso.CerrarConexion();
+                acceso.CerrarConexion();
+            }
+        }
+
+        public void AgregarImagen(string URLImagen, Int64 IDCabaña)
+        {
+            AccessDB acceso = new AccessDB();
+
+            try
+            {
+                acceso.SetearQuery("insert into ImagenesCabañas (IDCabaña, URLImagen) values (@IDCabaña, @URLImagen)");
+                acceso.AgregarParametro("@IDCabaña", IDCabaña);
+                acceso.AgregarParametro("@URLImagen", URLImagen);
+                acceso.EjecutarAccion();
+            }
+
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                acceso.CerrarConexion();
+            }
+        }
+
+        public void ModificarCabaña(Cabaña cabaña)
+        {
+            AccessDB acceso = new AccessDB();
+            try
+            {
+                acceso.SetearQuery("Update Cabañas set ImagenPortada=@Imagen, IDComplejo=@IDcomplejo, precioDiario=@precioDiario, capacidad=@capacidad, cantidadAmbientes=@cantidadAmbientes, tiempoEntreReservas=@tiempoEntreReservas, horacheckin=@horaCheckIn, horacheckout=@horaCheckOut, estado=1 where ID=@Id");
+                
+                acceso.AgregarParametro("@Imagen", cabaña.Imagen);
+                acceso.AgregarParametro("@IDcomplejo", cabaña.complejo.ID);
+                acceso.AgregarParametro("@precioDiario", cabaña.PrecioDiario);
+                acceso.AgregarParametro("@capacidad", cabaña.Capacidad);
+                acceso.AgregarParametro("@cantidadAmbientes", cabaña.Ambientes);
+                acceso.AgregarParametro("@tiempoEntreReservas", cabaña.TiempoEntreReservas);
+                acceso.AgregarParametro("@horaCheckIn", cabaña.CheckIn);
+                acceso.AgregarParametro("@horaCheckOut", cabaña.CheckOut);
+                acceso.AgregarParametro("@ID",cabaña.Id);
+                acceso.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                acceso.CerrarConexion();
             }
         }
         public void EliminarCabañaPorId(Int64 IDCabaña)
         {
 
-            AccessDB accessDB = new AccessDB();
+            AccessDB acceso = new AccessDB();
             try
             {
-                accessDB.SetearQuery("Delete from cabañas where id=" + IDCabaña);
-                accessDB.EjecutarAccion();
+                acceso.SetearQuery("Delete from cabañas where id=" + IDCabaña);
+                acceso.EjecutarAccion();
 
             }
             catch (Exception ex)
@@ -54,7 +113,7 @@ namespace Negocio
             finally
             {
 
-                accessDB.CerrarConexion();
+                acceso.CerrarConexion();
             }
 
         }
@@ -102,20 +161,20 @@ namespace Negocio
 
         public void agregarCabaña(Cabaña CabañaAgregada)
         {
-            AccessDB Acceso = new AccessDB();
+            AccessDB acceso = new AccessDB();
 
             try
             {
-                Acceso.SetearQuery("insert into cabañas (ImagenPortada, IDComplejo, precioDiario, capacidad, cantidadAmbientes, tiempoEntreReservas, horacheckin, horacheckout, estado) values (@Imagen,@IDcomplejo,@precioDiario,@capacidad,@cantidadAmbientes,@tiempoEntreReservas,@horaCheckIn,@horaCheckOut,1)");
-                Acceso.AgregarParametro("@Imagen", CabañaAgregada.Imagen);
-                Acceso.AgregarParametro("@IDcomplejo", CabañaAgregada.complejo.ID);
-                Acceso.AgregarParametro("@precioDiario", CabañaAgregada.PrecioDiario);
-                Acceso.AgregarParametro("@capacidad", CabañaAgregada.Capacidad);
-                Acceso.AgregarParametro("@cantidadAmbientes", CabañaAgregada.Ambientes);
-                Acceso.AgregarParametro("@tiempoEntreReservas", CabañaAgregada.TiempoEntreReservas);
-                Acceso.AgregarParametro("@horaCheckIn", CabañaAgregada.CheckIn);
-                Acceso.AgregarParametro("@horaCheckOut", CabañaAgregada.CheckOut);
-                Acceso.EjecutarAccion();
+                acceso.SetearQuery("insert into cabañas (ImagenPortada, IDComplejo, precioDiario, capacidad, cantidadAmbientes, tiempoEntreReservas, horacheckin, horacheckout, estado) values (@Imagen,@IDcomplejo,@precioDiario,@capacidad,@cantidadAmbientes,@tiempoEntreReservas,@horaCheckIn,@horaCheckOut,1)");
+                acceso.AgregarParametro("@Imagen", CabañaAgregada.Imagen);
+                acceso.AgregarParametro("@IDcomplejo", CabañaAgregada.complejo.ID);
+                acceso.AgregarParametro("@precioDiario", CabañaAgregada.PrecioDiario);
+                acceso.AgregarParametro("@capacidad", CabañaAgregada.Capacidad);
+                acceso.AgregarParametro("@cantidadAmbientes", CabañaAgregada.Ambientes);
+                acceso.AgregarParametro("@tiempoEntreReservas", CabañaAgregada.TiempoEntreReservas);
+                acceso.AgregarParametro("@horaCheckIn", CabañaAgregada.CheckIn);
+                acceso.AgregarParametro("@horaCheckOut", CabañaAgregada.CheckOut);
+                acceso.EjecutarAccion();
             }
 
             catch (Exception ex)
@@ -125,7 +184,7 @@ namespace Negocio
             }
             finally
             {
-                Acceso.CerrarConexion();
+                acceso.CerrarConexion();
             }
 
         }

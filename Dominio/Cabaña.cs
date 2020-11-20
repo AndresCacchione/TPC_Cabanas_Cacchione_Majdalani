@@ -18,5 +18,6 @@ namespace Dominio
          public DateTime CheckOut { get; set; }
          public bool EstadoActivo { get; set; }
          public Complejo complejo { get; set; }
+         public List<Imagen> ListaImagenes { get; set; }
     }
 }

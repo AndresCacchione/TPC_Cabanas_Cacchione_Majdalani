@@ -17,5 +17,6 @@ namespace Dominio
         public string Mail { get; set; }
         public bool EstadoActivo { get; set; }
         public decimal PrecioFeriado { get; set; }
+        public List<Imagen> ListaImagenes { get; set; }
     }
 }

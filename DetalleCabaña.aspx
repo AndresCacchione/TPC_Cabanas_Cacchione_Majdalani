@@ -1,27 +1,52 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DetalleCabaña.aspx.cs" Inherits="TPC_CacchioneMajdalani.DetalleCabaña" %>
+﻿<%@ Page Title="Detalle" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DetalleCabaña.aspx.cs" Inherits="TPC_CacchioneMajdalani.DetalleCabaña" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
               <div class="col-md-4">
                         <div class="card mt-4" style="width:20rem;" >
-                             <img src="<%=Cab.Imagen%>" class="card-img-top" alt="...">
+                             <img src="<%=CabañaAuxiliar.Imagen%>" class="card-img-top" alt="...">
                             <div class="card-body" style="background-color:#6E9038;">
-                          
                                 <ul>
-                                    <li><h5 class="card-title"><%=%></h5></li> 
-                                    <li><h5 class="card-title"><%=Aux.Mail%></h5></li>
-                                    <li><h5 class="card-title"><%=Aux.Telefono%></h5></li> 
-                                    <li><h5 class="card-title"><%=Aux.Ubicacion%></h5></li>
-                                    <li><h5 class="card-title"><%=Aux.PrecioFeriado%></h5></li>
+                                    <li><h5 class="card-title"> Complejo: <%=CabañaAuxiliar.complejo.Nombre %></h5></li> 
+                                    <li><h5 class="card-title"> Ubicación: <%=CabañaAuxiliar.complejo.Ubicacion%></h5></li>
+                                    <li><h5 class="card-title"> Cant. ambientes: <%=CabañaAuxiliar.Ambientes%></h5></li>
+                                    <li><h5 class="card-title"> Cant. personas: <%=CabañaAuxiliar.Capacidad%></h5></li> 
+                                    <li><h5 class="card-title"> Precio por día: <%=CabañaAuxiliar.PrecioDiario%></h5></li>
+                                    <li><h5 class="card-title"> Hora CheckIn: <%=CabañaAuxiliar.CheckIn%></h5></li>
+                                    <li><h5 class="card-title"> Hora Checkout: <%=CabañaAuxiliar.CheckOut%></h5></li>
                                 </ul>
 
-                                <a href="Complejos.aspx" class="btn btn-secondary mr-auto ml-auto">Volver</a>
-                                <a href="AgregarModificarComplejo.aspx?IdComplejo=<%=Aux.ID.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Modificar</a>
-                                <a href="EliminarComplejo.aspx?idComplejo=<%=Aux.ID.ToString()%>" class="btn btn-danger mr-auto ml-auto">Eliminar</a>
-                                <a href="AgregarModificarCabaña.aspx?idComplejo=<%=Aux.ID.ToString()%>" class="btn btn-success mr-auto ml-auto">Agregar Cabaña</a>
 
+                                <a href="Complejos.aspx?idComplejo=<%=CabañaAuxiliar.complejo.ID.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Volver</a>
+                                <a href="AgregarModificarCabaña.aspx?IdCabaña=<%=CabañaAuxiliar.Id.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Modificar</a>
+                                <a href="EliminarCabaña.aspx?idCabaña=<%=CabañaAuxiliar.Id.ToString()%>" class="btn btn-danger mr-auto ml-auto">Eliminar</a>
+                            
 
                                 <%-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> --%>
                             </div>
                         </div>
-                    </div>     
+
+                  <hr />
+
+                  <div class="form-group col-md-6">
+                      <label for="inputURLImagen">URL de Nueva Imagen: </label>
+                      <input type="url" class="form-control" id="URLImagen" placeholder="Ingrese URL de Imagen" runat="server">
+                  </div>
+                  <asp:Button Text="Agregar Imagen" class="btn btn-success mr-auto ml-auto" Onclick="AgregarImagen" runat="server"/>
+
+                  <div class="row align-content-md-between">
+                      <%foreach (Dominio.Imagen item in CabañaAuxiliar.ListaImagenes)
+                          {%>
+                      <div class="col-md-4">
+                          <div class="card mt-4" style="width: 20rem;">
+                              <img src="<%=item.URLImagen%>" class="card-img-top" alt="...">
+                              <div class="card-body" style="background-color: #6E9038;">
+                                  <asp:Button class="btn btn-danger mr-auto ml-auto" Text="Eliminar Imagen" OnClick="EliminarImagen" runat="server"/>
+                              </div>
+                          </div>
+                      </div>
+                      <%}
+                      %>
+                  </div>
+
+                  </div>     
 
 </asp:Content>
