@@ -27,13 +27,9 @@ namespace TPC_CacchioneMajdalani
             CabañaAuxiliar = listaAux.Find(i => i.Id == idaux);
 
             CabañaNegocio negocio = new CabañaNegocio();
+            if(Request.QueryString["idImagen"]!=null)
+                negocio.EliminarImagen(Int64.Parse(Request.QueryString["idImagen"]));
             CabañaAuxiliar.ListaImagenes = negocio.ListarImagenesPorID(CabañaAuxiliar.Id);
-        }
-
-        protected void EliminarImagen(object sender, EventArgs e)
-        {
-            CabañaNegocio negocio = new CabañaNegocio();
-            //negocio.EliminarImagen(); // necesito el ID de imagen a eliminar, esta en el item que contiene el boton que accionó el evento
         }
 
         protected void AgregarImagen(object sender, EventArgs e)
