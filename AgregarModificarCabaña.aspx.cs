@@ -77,14 +77,10 @@ namespace TPC_CacchioneMajdalani
                 if (Auxiliar.Id == 0)
                 {
                     negocio.agregarCabaña(Auxiliar);
-
-                    List<Dominio.Complejo> listaAuxComplejos = new List<Dominio.Complejo>();
-                    listaAuxComplejos = (List<Dominio.Complejo>)Session["listaComplejos"];
-                    Auxiliar.complejo = listaAuxComplejos.Find(i => i.ID == Auxiliar.complejo.ID);
-                    
+                    Auxiliar = negocio.ListarUltimaCabaña();
                     listaAux.Add(Auxiliar);
                     Session["listaCabañas"] = listaAux;
-                    Response.Redirect("Cabañas.aspx?idComplejo ="+Auxiliar.complejo.ID);
+                    Response.Redirect("DetalleCabaña.aspx?idCabaña="+Auxiliar.Id.ToString());
                 }
                 
                 else
