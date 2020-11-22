@@ -6,6 +6,13 @@
     <div>
        <%--METER TODO EN LA MISMA LINEA --%>
     <h2><%: Title %>.</h2>
+        <%if (Convert.ToInt64(Session["ComplejoActual"]) != 0)
+              { %>
+                <ul>
+                    <li><h3> Complejo: <%=ListaCabañasLocal.First().complejo.Nombre %></h3></li>
+                    <li><h3> Ubicacion: <%=ListaCabañasLocal.First().complejo.Ubicacion %> </h3></li>
+                </ul>
+            <%} %>
     <asp:TextBox ID="TxtBuscarCabaña" runat="server"></asp:TextBox>
     <asp:Button Class="btn btn-primary mr-auto ml-auto" ID="BtnBuscarCabaña" runat="server" Text="Buscar" />
     <%if (Convert.ToInt64(Request.QueryString["idComplejo"]) != 0)
@@ -41,6 +48,25 @@
                  %>
            
            </div>
+
+
+    <%foreach (Dominio.Cabaña item in ListaCabañasLocal)
+        {%>
+
+    <table class="table">
+        <tr>
+            <td><img src="<%=item.Imagen%>" class="card-img-top" alt="..." style="width:300px;"></td>
+            <td><%=item.complejo.Nombre%></td> 
+            <td><%=item.PrecioDiario%> </td>
+            <td><%=item.Capacidad%> </td>
+            <td><a href="DetalleCabaña.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-primary mr-auto ml-auto">Detalle </a></td>
+            <td><a href="#" class="btn btn-success mr-auto ml-auto">Reservar</a> </td>
+            <td><a href="AgregarModificarCabaña.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Modificar</a> </td>
+            <td><a href="EliminarCabaña.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-danger mr-auto ml-auto">Eliminar</a> </td>
+        </tr>
+    </table>
+    <%}
+    %>
 
 
 

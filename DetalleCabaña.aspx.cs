@@ -16,6 +16,8 @@ namespace TPC_CacchioneMajdalani
             CabañaAuxiliar = new Cabaña();
         }
 
+        public string StringBotonVolver { get; set; }
+
         public Cabaña CabañaAuxiliar { get; set;}
 
         protected void Page_Load(object sender, EventArgs e)
@@ -30,6 +32,16 @@ namespace TPC_CacchioneMajdalani
             if(Request.QueryString["idImagen"]!=null)
                 negocio.EliminarImagen(Int64.Parse(Request.QueryString["idImagen"]));
             CabañaAuxiliar.ListaImagenes = negocio.ListarImagenesPorID(CabañaAuxiliar.Id);
+
+            //Cargo el string del Boton Volver
+            if(Convert.ToInt64(Session["ComplejoActual"])!=0)
+            {
+                StringBotonVolver = "Cabañas.aspx?idComplejo="+ Convert.ToString(Session["ComplejoActual"]);
+            }
+            else
+            {
+                StringBotonVolver = "Cabañas.aspx";
+            }
         }
 
         protected void AgregarImagen(object sender, EventArgs e)

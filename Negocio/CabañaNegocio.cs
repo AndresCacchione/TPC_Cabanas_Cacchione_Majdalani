@@ -9,6 +9,7 @@ namespace Negocio
 {
     public class CabañaNegocio
     {
+
         public List<Imagen> ListarImagenesPorID(Int64 IDCabaña)
         {
             AccessDB acceso = new AccessDB();
@@ -186,8 +187,40 @@ namespace Negocio
             {
                 acceso.CerrarConexion();
             }
-
         }
+        public Cabaña ListarUltimaCabaña()
+        {
+            AccessDB acceso = new AccessDB();
+            Cabaña ultima = new Cabaña();
+            try
+            {
+                ComplejoNegocio negocio = new ComplejoNegocio();
+               
+                acceso.SetearQuery("select top 1 * from Cabañas where estado = 1 order by Cabañas.ID desc");
+                acceso.EjecutarLector();
+                acceso.Lector.Read();
 
+                ultima.EstadoActivo = (bool)acceso.Lector["estado"];
+                ultima.Id = (Int64)acceso.Lector["ID"];
+                ultima.PrecioDiario = (decimal)acceso.Lector["precioDiario"];
+                ultima.Capacidad = (Byte)acceso.Lector["capacidad"];
+                ultima.Ambientes = (Byte)acceso.Lector["cantidadAmbientes"];
+                ultima.TiempoEntreReservas = (DateTime)acceso.Lector["tiempoEntreReservas"];
+                ultima.CheckIn = (DateTime)acceso.Lector["horaCheckIn"];
+                ultima.CheckOut = (DateTime)acceso.Lector["horaCheckOut"];
+                ultima.Imagen = (string)acceso.Lector["imagenPortada"];
+                ultima.complejo = negocio.BuscarComplejoPorId((Int64)acceso.Lector["Idcomplejo"]); 
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                acceso.CerrarConexion();
+            }
+            return ultima;
+        }
     }
 }

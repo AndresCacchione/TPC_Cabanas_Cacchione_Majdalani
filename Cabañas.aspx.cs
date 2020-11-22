@@ -14,9 +14,9 @@ namespace TPC_CacchioneMajdalani
     {
         public List<Cabaña> ListaCabañasLocal { get; set; }
 
-
         protected void Page_Load(object sender, EventArgs e)
         {
+            ComplejoActual();
 
             CabañaNegocio negocio = new CabañaNegocio();
             ListaCabañasLocal = (List<Cabaña>)(Session["listaCabañas"]);
@@ -38,6 +38,20 @@ namespace TPC_CacchioneMajdalani
                     }
                 }
                 ListaCabañasLocal = listaAux;
+            }
+        }
+
+        void ComplejoActual()
+        {
+            Int64 complejoPorURL = new Int64();
+            complejoPorURL = Convert.ToInt64(Request.QueryString["idComplejo"]);
+            if (complejoPorURL!=0)
+            {
+                Session.Add("ComplejoActual", complejoPorURL);
+            }
+            else
+            {
+                Session["ComplejoActual"] = null;
             }
         }
     }

@@ -42,11 +42,6 @@
     </div>
 
   <asp:Button class="btn btn-success mr-auto ml-auto" id="BtnAgregarCabaña" onclick="BtnAgregarCabaña_Click" Text="Agregar" runat="server" />
-  <a href="Complejos.aspx" class="btn btn-primary mr-auto ml-auto">Volver</a>
-
-
-
-
-
+  <a href="DetalleCabaña?idCabaña=<%=Auxiliar.Id.ToString()%>" class="btn btn-primary mr-auto ml-auto">Volver</a>
 
 </asp:Content>
