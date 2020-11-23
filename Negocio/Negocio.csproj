@@ -42,9 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessDB.cs" />
-    <Compile Include="AdministradorNegocio.cs" />
     <Compile Include="CabañaNegocio.cs" />
-    <Compile Include="ClienteNegocio.cs" />
     <Compile Include="ComplejoNegocio.cs" />
     <Compile Include="CreditoNegocio.cs" />
     <Compile Include="CuentaCorrienteNegocio.cs" />
