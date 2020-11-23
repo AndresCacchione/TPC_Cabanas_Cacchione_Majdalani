@@ -46,7 +46,7 @@ namespace TPC_CacchioneMajdalani
 
         protected void AgregarImagen(object sender, EventArgs e)
         {
-            if(URLImagen.Value!=null)
+            if(URLImagen.Value!="")
             { 
                 CabañaNegocio negocio = new CabañaNegocio();
                 negocio.AgregarImagen(URLImagen.Value,CabañaAuxiliar.Id);

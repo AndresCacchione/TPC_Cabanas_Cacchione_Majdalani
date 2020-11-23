@@ -6,13 +6,13 @@
     <div>
        <%--METER TODO EN LA MISMA LINEA --%>
     <h2><%: Title %>.</h2>
-        <%if (Convert.ToInt64(Session["ComplejoActual"]) != 0)
+     <%--   <%if (Convert.ToInt64(Session["ComplejoActual"]) != 0)
               { %>
                 <ul>
                     <li><h3> Complejo: <%=ListaCabañasLocal.First().complejo.Nombre %></h3></li>
                     <li><h3> Ubicacion: <%=ListaCabañasLocal.First().complejo.Ubicacion %> </h3></li>
                 </ul>
-            <%} %>
+            <%} %>--%>
     <asp:TextBox ID="TxtBuscarCabaña" runat="server"></asp:TextBox>
     <asp:Button Class="btn btn-primary mr-auto ml-auto" ID="BtnBuscarCabaña" runat="server" Text="Buscar" />
     <%if (Convert.ToInt64(Request.QueryString["idComplejo"]) != 0)
@@ -22,7 +22,7 @@
         } %>
     </div>
     
-           <div class="row align-content-md-between">
+         <%--  <div class="row align-content-md-between">
            <%foreach (Dominio.Cabaña item in ListaCabañasLocal)
                        {%>  
                           <div class="col-md-4">
@@ -41,13 +41,13 @@
                                 <a href="AgregarModificarCabaña.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Modificar</a>
                                 <a href="EliminarCabaña.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-danger mr-auto ml-auto">Eliminar</a>
                                 <%-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> --%>
-                            </div>
+              <%--              </div>
                         </div>
                     </div>
                <%}
                  %>
            
-           </div>
+           </div>--%>
 
 
     <%foreach (Dominio.Cabaña item in ListaCabañasLocal)

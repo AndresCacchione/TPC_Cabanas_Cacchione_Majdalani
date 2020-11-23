@@ -52,7 +52,7 @@
                               <%foreach (Dominio.Imagen item in CabañaAuxiliar.ListaImagenes)
                                   {%>
                               <div class="col-md-4">
-                                  <div class="card mt-4" style="width: 20rem;">
+                                  <div class="card mt-4" style="width:20rem;">
                                       <img src="<%=item.URLImagen%>" class="card-img-top" alt="...">
                                       
                                       <div class="card-body"  style="background-color: #6E9038;">
@@ -68,7 +68,4 @@
                           </div>
                       </ContentTemplate>
                   </asp:UpdatePanel>
-
-              </div>
-
 </asp:Content>

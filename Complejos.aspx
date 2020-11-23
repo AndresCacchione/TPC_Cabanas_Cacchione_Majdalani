@@ -11,7 +11,7 @@
     </div>
     
        
-           <div class="row align-content-md-between">
+         <%--  <div class="row align-content-md-between">
            <%foreach (Dominio.Complejo item in ListaComplejosLocal)
                {%>
                     <div class="col-md-4">
@@ -31,11 +31,31 @@
                                 <a href="AgregarModificarComplejo.aspx?IdComplejo=<%=item.ID.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Modificar</a>
                                 <a href="EliminarComplejo.aspx?idComplejo=<%=item.ID.ToString()%>" class="btn btn-danger mr-auto ml-auto">Eliminar</a>
                                 <%-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> --%>
-                            </div>
+                        <%--    </div>
                         </div>
-                    </div>        
-                <%
+                    </div>    --%>    
+      <%--          <%
                }%>  
-        </div>
+        </div>--%>
    
+      <%foreach (Dominio.Complejo item in ListaComplejosLocal)
+        {%>
+
+    <table class="table">
+        <tr>
+            <td><img src="<%=item.Imagen%>" class="card-img-top" alt="..." style="width:300px;"></td>
+            <td><%=item.Nombre%></td> 
+            <td><%=item.Ubicacion%> </td>
+            <td><a href="DetalleComplejo.aspx?idComplejo=<%=item.ID.ToString()%>" class="btn btn-primary mr-auto ml-auto">Detalle</a></td>
+            <td><a href="Cabañas.aspx?idComplejo=<%=item.ID.ToString()%>" class="btn btn-primary mr-auto ml-auto">Cabañas</a></td>
+            <td><a href="AgregarModificarComplejo.aspx?IdComplejo=<%=item.ID.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Modificar</a></td>
+            <td><a href="EliminarComplejo.aspx?idComplejo=<%=item.ID.ToString()%>" class="btn btn-danger mr-auto ml-auto">Eliminar</a></td>
+        </tr>
+    </table>
+    <%}
+    %>
+
+
+
+
 </asp:Content>

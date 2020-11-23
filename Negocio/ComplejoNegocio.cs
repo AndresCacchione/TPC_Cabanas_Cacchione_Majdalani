@@ -10,6 +10,64 @@ namespace Negocio
 {
     public class ComplejoNegocio
     {
+        public List<Imagen> ListarImagenesPorID(Int64 IDComplejo)
+        {
+            AccessDB acceso = new AccessDB();
+            acceso.SetearQuery("select ID, URLImagen from ImagenesComplejos where IDComplejo=" + IDComplejo.ToString());
+            acceso.EjecutarLector();
+
+            List<Imagen> ListaAux = new List<Imagen>();
+
+            while (acceso.Lector.Read())
+            {
+                Imagen aux = new Imagen();
+                aux.ID = (Int64)acceso.Lector["ID"];
+                aux.URLImagen = (string)acceso.Lector["URLImagen"];
+                ListaAux.Add(aux);
+            }
+            return ListaAux;
+        }
+
+        public void EliminarImagen(Int64 IDImagen)
+        {
+            AccessDB acceso = new AccessDB();
+            try
+            {
+                acceso.SetearQuery("Delete from ImagenesComplejos where id=" + IDImagen);
+                acceso.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                acceso.CerrarConexion();
+            }
+        }
+
+        public void AgregarImagen(string URLImagen, Int64 IDComplejo)
+        {
+            AccessDB acceso = new AccessDB();
+
+            try
+            {
+                acceso.SetearQuery("insert into ImagenesComplejos (IDComplejo, URLImagen) values (@IDComplejo, @URLImagen)");
+                acceso.AgregarParametro("@IDComplejo", IDComplejo);
+                acceso.AgregarParametro("@URLImagen", URLImagen);
+                acceso.EjecutarAccion();
+            }
+
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                acceso.CerrarConexion();
+            }
+        }
 
         public void ModificarComplejo(Complejo Aux)
         {
