@@ -37,7 +37,7 @@
                           <%-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> --%>
                       </div>
                   </div>
-
+              </div>   
                   <hr />
                   <asp:UpdatePanel runat="server">
                       <ContentTemplate>
@@ -52,7 +52,7 @@
                               <%foreach (Dominio.Imagen item in CabañaAuxiliar.ListaImagenes)
                                   {%>
                               <div class="col-md-4">
-                                  <div class="card mt-4" style="width:20rem;">
+                                  <div class="card mt-4" style="width: 20rem;">
                                       <img src="<%=item.URLImagen%>" class="card-img-top" alt="...">
                                       
                                       <div class="card-body"  style="background-color: #6E9038;">
