@@ -7,12 +7,41 @@ using Dominio;
 
 namespace Negocio
 {
-    public class UsuarioNegocio
+   public class UsuarioNegocio
     {
+        public List<string> ListarPaises()
+        {
+            AccessDB acceso = new AccessDB();
+            List<string> ListaPaises = new List<string>();
+            try
+            {
+                acceso.SetearQuery("select Nombre from Paises");
+                acceso.EjecutarLector();
+                while (acceso.Lector.Read())
+                {
+
+                    string aux = (string)acceso.Lector["Nombre"];
+                    ListaPaises.Add(aux);
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+
+                acceso.CerrarConexion();
+            }
+            return ListaPaises;
+
+        }
         public void AgregarUsuario(Usuario NuevoUsuario)
         {
             AccessDB accessDB = new AccessDB();
-             //Aca se inserta un usuario
+            //Aca se inserta un usuario
             accessDB.SetearQuery("insert into Usuarios (nombre,contra,IdNivelAcceso,estado) values(@nombre,@contra,@IdNivelAcceso,@estado)");
             accessDB.AgregarParametro("@nombre", NuevoUsuario.NombreUsuario);
             accessDB.AgregarParametro("@contra", NuevoUsuario.Contraseña);
@@ -26,12 +55,12 @@ namespace Negocio
             accessDB.Lector.Read();
             NuevoUsuario.Id = (Int64)accessDB.Lector["ID"];
             // ACA AVERIGUAMOS ID PAIS
-            accessDB.SetearQuery("select paises.id from Paises where paises.nombre like '" + NuevoUsuario.DatosPersonales.PaisOrigen  + "'");
+            accessDB.SetearQuery("select paises.id from Paises where paises.nombre like '" + NuevoUsuario.DatosPersonales.PaisOrigen + "'");
             accessDB.EjecutarLector();
             accessDB.Lector.Read();
 
-            Int16 IdPais = new Int16(); 
-            IdPais=(Int16)accessDB.Lector["ID"];
+            Int16 IdPais = new Int16();
+            IdPais = (Int16)accessDB.Lector["ID"];
 
             //Aca se insertan los datos personales 
             accessDB.SetearQuery("insert into DatosPersonales (IdUsuario,nombre,apellido,dni,email,telefono,URLimagen,IDpais,domicilio,genero) values(@IdUsuario,@Nombre,@Apellido,@dni,@email,@telefono,@URLimagen,@idPais,@Domicilio,@genero)");
@@ -46,11 +75,6 @@ namespace Negocio
             accessDB.AgregarParametro("@genero", NuevoUsuario.DatosPersonales.Genero);
             accessDB.AgregarParametro("@idPais", IdPais);
             accessDB.EjecutarAccion();
-            
-            
-
-
-
 
         }
 
@@ -76,6 +100,7 @@ namespace Negocio
 
 
         }
+
 
 
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public abstract class Movimiento
+    public class Movimiento
     {
 
     }
