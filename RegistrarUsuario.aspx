@@ -41,11 +41,11 @@
     </div>
         <div class="form-group">
             <asp:Label ID="LblGenero" runat="server" Text="Genero"></asp:Label>
-            <asp:DropDownList CssClass="form-control" ID="DropDownGenero" runat="server">
+            <asp:DropDownList CssClass="form-control" ID="DDLGenero" runat="server">
                 <asp:ListItem Text="" />
-                <asp:ListItem Text="Masculino" />
-                <asp:ListItem Text="Femenino" />
-                <asp:ListItem Text="Otros" />
+                <asp:ListItem Text="Masculino" Value="M" />
+                <asp:ListItem Text="Femenino" Value="F"/>
+                <asp:ListItem Text="Otros" Value="O"/>
             </asp:DropDownList>
         </div>
     </div>
@@ -67,13 +67,7 @@
             </asp:DropDownList>
         </div>
 
-
-<%--  <asp:Button class="btn btn-success mr-auto ml-auto" id="BtnAgregarCabaña" onclick="BtnAgregarCabaña_Click" Text="Agregar" runat="server" />
-  <a href="DetalleCabaña?idCabaña=<%=Auxiliar.Id.ToString()%>" class="btn btn-primary mr-auto ml-auto">Volver</a>--%>
-
-
-
-
+        <asp:Button ID="btnAltaUsuario" Text="Darme de alta" class="btn btn-success mr-auto ml-auto" onclick="btnAltaUsuario_Click" runat="server" />
 
 
 </asp:Content>
