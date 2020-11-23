@@ -17,7 +17,7 @@
                                 <a href="Complejos.aspx" class="btn btn-secondary mr-auto ml-auto">Volver</a>
                                 <a href="AgregarModificarComplejo.aspx?IdComplejo=<%=Aux.ID.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Modificar</a>
                                 <a href="EliminarComplejo.aspx?idComplejo=<%=Aux.ID.ToString()%>" class="btn btn-danger mr-auto ml-auto">Eliminar</a>
-                                <a href="AgregarModificarCabaña.aspx?idComplejo=<%=Aux.ID.ToString()%>" class="btn btn-success mr-auto ml-auto">Agregar Cabaña</a>
+                            
 
 
                                 <%-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> --%>

@@ -16,6 +16,10 @@ namespace TPC_CacchioneMajdalani
         {
 
             long idaux = Convert.ToInt64(Request.QueryString["idComplejo"]);
+            if(idaux==0)
+            {
+                Response.Redirect("Complejos.aspx");
+            }
 
             List<Dominio.Complejo> listaAux = new List<Dominio.Complejo>();
             listaAux = (List<Dominio.Complejo>)base.Session["listaComplejos"];

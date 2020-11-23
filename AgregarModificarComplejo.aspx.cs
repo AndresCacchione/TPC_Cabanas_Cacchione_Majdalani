@@ -60,27 +60,28 @@ namespace TPC_CacchioneMajdalani
         {
             GuardarFormulario();
             ComplejoNegocio negocio = new ComplejoNegocio();
+            List<Dominio.Complejo> listaAux = new List<Dominio.Complejo>();
+            listaAux = (List<Dominio.Complejo>)base.Session["listaComplejos"];
 
             try
             {
                 if (Auxiliar.ID == 0)
                 {
                     negocio.AgregarComplejo(Auxiliar);
-                    List<Dominio.Complejo> listaAux = new List<Dominio.Complejo>();
-                    listaAux = (List<Dominio.Complejo>)base.Session["listaComplejos"];
+                    Auxiliar = negocio.ListarUltimoComplejo();
                     listaAux.Add(Auxiliar);
                     Session["listaComplejos"] = listaAux;
-                    Response.Redirect("Complejos.aspx");
+                    Response.Redirect("DetalleComplejo.aspx?IdComplejo=" + Auxiliar.ID.ToString());
                 }
                 else
                 {
                     negocio.ModificarComplejo(Auxiliar);
-                    List<Dominio.Complejo> listaAux = new List<Dominio.Complejo>();
-                    listaAux = (List<Dominio.Complejo>)base.Session["listaComplejos"];
+                    
                     listaAux.RemoveAll(item => item.ID == Auxiliar.ID);
                     listaAux.Add(Auxiliar);
                     Session["listaComplejos"] = negocio.listarComplejos();
-                    Response.Redirect("DetalleComplejo.aspx?idComplejo="+Auxiliar.ID);
+                    
+                    Response.Redirect("DetalleComplejo.aspx?idComplejo="+Auxiliar.ID.ToString());
                 }
             }
 

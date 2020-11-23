@@ -23,6 +23,10 @@ namespace TPC_CacchioneMajdalani
         protected void Page_Load(object sender, EventArgs e)
         {
             long idaux = Convert.ToInt64(Request.QueryString["idCabaña"]);
+            if(idaux==0)
+            {
+                Response.Redirect("Cabañas.aspx?idComplejo=" + Convert.ToString(Session["ComplejoActual"]));
+            }
 
             List<Cabaña> listaAux = new List<Cabaña>();
             listaAux = (List<Cabaña>)Session["listaCabañas"];

@@ -38,7 +38,7 @@
   </div>
 
   <asp:Button type="submit" class="btn btn-success mr-auto ml-auto" id="BtnAgregarComplejo" OnClick="BtnAgregarComplejo_Click" Text="Agregar" runat="server" />
-  <a href="Complejos.aspx" class="btn btn-primary mr-auto ml-auto">Volver</a>
+  <a href="DetalleComplejo.aspx?idComplejo=<%=Auxiliar.ID.ToString() %>" class="btn btn-primary mr-auto ml-auto">Volver</a>
     
 </form>
 </asp:Content>

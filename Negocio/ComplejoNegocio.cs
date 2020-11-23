@@ -10,6 +10,37 @@ namespace Negocio
 {
     public class ComplejoNegocio
     {
+        public Complejo ListarUltimoComplejo()
+        {
+            AccessDB acceso = new AccessDB();
+            Complejo ultimo = new Complejo();
+            try
+            {
+                acceso.SetearQuery("select top 1 * from Complejos where estado = 1 order by Complejos.ID desc");
+                acceso.EjecutarLector();
+                acceso.Lector.Read();
+                
+                ultimo.ID = (Int64)acceso.Lector["Id"];
+                ultimo.Imagen = (string)acceso.Lector["imagenPortada"];
+                ultimo.Telefono = (string)acceso.Lector["Telefono"];
+                ultimo.Ubicacion = (string)acceso.Lector["Ubicacion"];
+                ultimo.Mail = (string)acceso.Lector["Email"];
+                ultimo.EstadoActivo = (bool)acceso.Lector["Estado"];
+                ultimo.PrecioFeriado = (decimal)acceso.Lector["DiferenciaFeriado"];
+                ultimo.Nombre = (string)acceso.Lector["nombre"];
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                acceso.CerrarConexion();
+            }
+            
+            return ultimo;
+        }
+
         public List<Imagen> ListarImagenesPorID(Int64 IDComplejo)
         {
             AccessDB acceso = new AccessDB();
@@ -130,7 +161,6 @@ namespace Negocio
             {
                 accessDB.SetearQuery("Delete from complejos where id=" + IDComplejo);
                 accessDB.EjecutarAccion();
-
             }
             catch (Exception ex)
             {

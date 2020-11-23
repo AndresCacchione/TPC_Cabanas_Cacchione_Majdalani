@@ -29,21 +29,28 @@ namespace TPC_CacchioneMajdalani
         {
             if (check_eliminar.Checked)
             {
-                ComplejoNegocio auxNeg = new ComplejoNegocio();
-                auxNeg.EliminarComplejoPorId(Aux.ID);
+                try
+                {
+                    ComplejoNegocio auxNeg = new ComplejoNegocio();
+                    auxNeg.EliminarComplejoPorId(Aux.ID);
 
-                List<Dominio.Complejo> listaAuxComplejos = new List<Dominio.Complejo>();
-                listaAuxComplejos = (List<Dominio.Complejo>)base.Session["listaComplejos"];
-                listaAuxComplejos.RemoveAll(i => i.ID == Aux.ID);
-                Session["listaComplejos"] = listaAuxComplejos;
+                    List<Dominio.Complejo> listaAuxComplejos = new List<Dominio.Complejo>();
+                    listaAuxComplejos = (List<Dominio.Complejo>)Session["listaComplejos"];
+                    listaAuxComplejos.RemoveAll(i => i.ID == Aux.ID);
+                    Session["listaComplejos"] = listaAuxComplejos;              
+                }
 
-                
-              
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
                 List<Cabaña> listaAuxCabañas = new List<Cabaña>();
                 listaAuxCabañas = (List<Cabaña>)Session["listaCabañas"];
+                
                 if (listaAuxCabañas != null)
                 {  
-                listaAuxCabañas.RemoveAll(i => i.complejo.ID == Aux.ID);
+                    listaAuxCabañas.RemoveAll(i => i.complejo.ID == Aux.ID);
                     Session["listaCabañas"] = listaAuxCabañas;
                 }
                 Response.Redirect("Complejos.aspx");

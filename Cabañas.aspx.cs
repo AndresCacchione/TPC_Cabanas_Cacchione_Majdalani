@@ -43,8 +43,7 @@ namespace TPC_CacchioneMajdalani
 
         void ComplejoActual()
         {
-            Int64 complejoPorURL = new Int64();
-            complejoPorURL = Convert.ToInt64(Request.QueryString["idComplejo"]);
+            long complejoPorURL = Convert.ToInt64(Request.QueryString["idComplejo"]);
             if (complejoPorURL!=0)
             {
                 Session.Add("ComplejoActual", complejoPorURL);

@@ -45,8 +45,8 @@
                           <div class="form-group col-md-6">
                               <label for="inputURLImagen">URL de Nueva Imagen: </label>
                               <input type="url" class="form-control" id="URLImagen" placeholder="Ingrese URL de Imagen" runat="server">
+                              <asp:Button Text="Agregar Imagen" class="btn btn-success mr-auto ml-auto" OnClick="AgregarImagen" runat="server" AutoPostBack="true" />
                           </div>
-                          <asp:Button Text="Agregar Imagen" class="btn btn-success mr-auto ml-auto" OnClick="AgregarImagen" runat="server" autopostback="true" />
 
                           <div class="row align-content-md-between">
                               <%foreach (Dominio.Imagen item in CabañaAuxiliar.ListaImagenes)
