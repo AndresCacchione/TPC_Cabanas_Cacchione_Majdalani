@@ -245,7 +245,7 @@ namespace Negocio
 
             try
             {
-                access.SetearQuery("Select * from usuarios where Estado=1 order by usuarios.ID asc");
+                access.SetearQuery("Select * from usuarios u, datospersonales dat where u.Estado=1 and dat.idusuario=u.id order by usuarios.ID asc");
                 access.EjecutarLector();
                 while (access.Lector.Read())
                 {
@@ -256,16 +256,10 @@ namespace Negocio
                     if (aux.Estado)
                     {
                         aux.Id = (long)access.Lector["Id"];
-                        aux.NombreUsuario = (string)access.Lector["Nombre"];
+                        aux.NombreUsuario = (string)access.Lector["u.nombre"];
                         aux.Contraseña = (string)access.Lector["Contra"];
                         aux.NivelAcceso = (byte)access.Lector["IdNivelAcceso"];
-                    }
-
-                    access.SetearQuery("Select * from DatosPersonales Dat, Usuarios U where Dat.ID=U.ID and U.Estado=1 order by Dat.ID asc");
-                    access.EjecutarLector();
-                    if (aux.Estado)
-                    {
-                        aux.DatosPersonales.Nombre = (string)access.Lector["nombre"];
+                        aux.DatosPersonales.Nombre = (string)access.Lector["dat.nombre"];
                         aux.DatosPersonales.Apellido = (string)access.Lector["apellido"];
                         aux.DatosPersonales.DNI = (string)access.Lector["dni"];
                         aux.DatosPersonales.Email = (string)access.Lector["email"];
@@ -275,6 +269,7 @@ namespace Negocio
                         aux.DatosPersonales.Domicilio = (string)access.Lector["domicilio"];         //que recibe un short y devuelve el País correspondiente en forma de string
                         aux.DatosPersonales.Genero = (char)access.Lector["genero"];
                     }
+
                     userList.Add(aux);
                 }
 
@@ -300,16 +295,16 @@ namespace Negocio
             UsuarioNegocio Negocio = new UsuarioNegocio();
             try
             {
-                access.SetearQuery("Select * from usuarios where id=" + IdUsuario);
+                access.SetearQuery("Select * from usuarios u, datospersonales dat where dat.idusuario=u.id and id=" + IdUsuario);
                 access.EjecutarLector();
                 access.Lector.Read();
 
                 buscado.Id = (long)access.Lector["id"];
-                buscado.NombreUsuario = (string)access.Lector["Nombre"];
+                buscado.NombreUsuario = (string)access.Lector["u.Nombre"];
                 buscado.Contraseña = (string)access.Lector["Contra"];
                 buscado.Estado = (bool)access.Lector["Estado"];
                 buscado.DatosPersonales.Apellido = (string)access.Lector["Apellido"];
-                buscado.DatosPersonales.Nombre = (string)access.Lector["Nombre"];
+                buscado.DatosPersonales.Nombre = (string)access.Lector["dat.Nombre"]; //creería que ahí alcanzaría para que no exista ambiguedad en las tablas llamadas Nombre
                 buscado.DatosPersonales.DNI = (string)access.Lector["Dni"];
                 buscado.DatosPersonales.Domicilio = (string)access.Lector["Domicilio"];
                 buscado.DatosPersonales.Email = (string)access.Lector["Email"];
