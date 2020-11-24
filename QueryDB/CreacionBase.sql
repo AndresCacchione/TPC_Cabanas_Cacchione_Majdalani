@@ -1,9 +1,18 @@
---Create Database Cacchione_Majdalani_DB
---go 
---use Cacchione_Majdalani_DB
-
---------------------------------------
+Use master
 go
+
+If not exists (Select * from sys.databases where name = 'Cacchione_Majdalani_DB')
+Begin
+Create database Cacchione_Majdalani_DB
+End
+
+go
+Use Cacchione_Majdalani_DB
+go
+
+Set Dateformat 'DMY'
+go
+
 Create Table Paises(
 	ID smallint not null identity (1,1),
 	nombre varchar(50) not null 

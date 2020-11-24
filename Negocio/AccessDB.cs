@@ -16,8 +16,10 @@ namespace Negocio
         public AccessDB()
         {
             Conexion = new SqlConnection("data source=.\\SQLEXPRESS01; initial catalog=Cacchione_Majdalani_DB; integrated security=sspi");
-            Comando = new SqlCommand();
-            Comando.Connection = Conexion;
+            Comando = new SqlCommand
+            {
+                Connection = Conexion
+            };
         }
 
         public void SetearQuery(String Consulta)

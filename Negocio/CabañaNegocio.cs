@@ -20,9 +20,12 @@ namespace Negocio
             
             while (acceso.Lector.Read())
             {
-                Imagen aux = new Imagen();
-                aux.ID = (Int64)acceso.Lector["ID"];
-                aux.URLImagen = (string)acceso.Lector["URLImagen"];
+                Imagen aux = new Imagen
+                {
+                    ID = (Int64)acceso.Lector["ID"],
+                    URLImagen = (string)acceso.Lector["URLImagen"]
+                };
+
                 ListaAux.Add(aux);
             }
             return ListaAux;
@@ -84,7 +87,7 @@ namespace Negocio
                 acceso.AgregarParametro("@tiempoEntreReservas", cabaña.TiempoEntreReservas);
                 acceso.AgregarParametro("@horaCheckIn", cabaña.CheckIn);
                 acceso.AgregarParametro("@horaCheckOut", cabaña.CheckOut);
-                acceso.AgregarParametro("@ID",cabaña.Id);
+                acceso.AgregarParametro("@ID", cabaña.Id);
                 acceso.EjecutarAccion();
             }
             catch (Exception ex)
@@ -131,9 +134,11 @@ namespace Negocio
                 while(acceso.Lector.Read())
                 {
                     ComplejoNegocio negocio = new ComplejoNegocio();
-                    Cabaña aux = new Cabaña();
-                    aux.EstadoActivo = (bool)acceso.Lector["estado"];
-                    if (aux.EstadoActivo==true)
+                    Cabaña aux = new Cabaña
+                    {
+                        EstadoActivo = (bool)acceso.Lector["estado"]
+                    };
+                    if (aux.EstadoActivo)
                     { 
                     aux.Id = (Int64)acceso.Lector["ID"];
                     aux.PrecioDiario = (decimal)acceso.Lector["precioDiario"];

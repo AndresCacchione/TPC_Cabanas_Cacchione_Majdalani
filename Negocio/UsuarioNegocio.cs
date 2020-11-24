@@ -223,16 +223,48 @@ namespace Negocio
 
         public void EliminarUsuario(long IdUsuario)
         {
+            AccessDB access = new AccessDB();
+            try
+            {
+                access.SetearQuery("Delete from usuarios where id=" + IdUsuario);
+                access.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
 
+                throw ex;
+            }
+            finally
+            {
+                access.CerrarConexion();
+            }
         }
 
         public void ModificarUsuario(Usuario Usuario)
         {
+            AccessDB access = new AccessDB();
+            try
+            {
+                access.SetearQuery("update usuarios set nombre=@nombre, contra=@contra, IdNivelAcceso=@IdNivelAcceso, " +
+                    "Estado=@Estado where ID=@ID");
+                access.AgregarParametro("@nombre", Usuario.NombreUsuario);
+                access.AgregarParametro("@contra", Usuario.Contraseña);
+                access.AgregarParametro("@IdNivelAcceso", Usuario.NivelAcceso);
+                access.AgregarParametro("Estado", Usuario.Estado);
+            }
+            catch (Exception ex)
+            {
 
+                throw ex;
+            }
+            finally
+            {
+                access.CerrarConexion();
+            }
 
         }
 
-        public void ListarUsuaruios()
+        public void ListarUsuarios()
         {
 
 
@@ -240,6 +272,17 @@ namespace Negocio
 
         public void ListarUsuarioPorId(long IdUsuario)
         {
+            AccessDB access = new AccessDB();
+            try
+            {
+                access.SetearQuery("Select * from usuarios where id="+IdUsuario);
+                access.EjecutarLector();
+            }
+            catch (Exception ex)
+            {
+
+                throw Exception ex;
+            }
 
 
         }
