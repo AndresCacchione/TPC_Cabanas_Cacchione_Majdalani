@@ -20,6 +20,7 @@ namespace TPC_CacchioneMajdalani
             if (Session[Session.SessionID + "userSession"] != null)
             {
                 UsuarioActual = (Usuario)Session[Session.SessionID + "userSession"];
+                lblNombreUsuario.Text = "Usuario: " + UsuarioActual.NombreUsuario;
             }
             else
                 UsuarioActual = null;
