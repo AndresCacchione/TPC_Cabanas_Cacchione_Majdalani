@@ -135,6 +135,17 @@ namespace Negocio
             return IdPais;
         }
 
+
+        public string ListarPais(int idPais)
+        {
+            AccessDB access = new AccessDB();
+            access.SetearQuery("Select Nombre from paises where id="+idPais);
+            access.EjecutarLector();
+            access.Lector.Read();
+            string NombrePais = (string)access.Lector["Nombre"];
+            return NombrePais;
+        }
+
         public void InsertarDatosPersonales(Usuario NuevoUsuario, short IdPais)
         {
             AccessDB access = new AccessDB();
@@ -206,12 +217,22 @@ namespace Negocio
             AccessDB access = new AccessDB();
             try
             {
-                access.SetearQuery("update usuarios set nombre=@nombre, contra=@contra, IdNivelAcceso=@IdNivelAcceso, " +
-                    "Estado=@Estado where ID=@ID");
+                access.SetearQuery("update usuarios set nombre=@nombre, contra=@contra," +
+                    "Estado=@Estado where ID="+Usuario.Id);
+                
                 access.AgregarParametro("@nombre", Usuario.NombreUsuario);
                 access.AgregarParametro("@contra", Usuario.Contraseña);
-                access.AgregarParametro("@IdNivelAcceso", Usuario.NivelAcceso);
                 access.AgregarParametro("Estado", Usuario.Estado);
+                access.EjecutarAccion();
+
+                access.SetearQuery("update DatosPersonales set domicilio=@Domicilio, email=@Email, telefono=@Telefono,URLimagen=@UrlImagen " +
+                    "where ID=" + Usuario.Id);
+                access.AgregarParametro("@Domicilio", Usuario.DatosPersonales.Domicilio);
+                access.AgregarParametro("@Email", Usuario.DatosPersonales.Email);
+                access.AgregarParametro("@Telefono", Usuario.DatosPersonales.Telefono);
+                access.AgregarParametro("@UrlImagen", Usuario.DatosPersonales.UrlImagen);
+                access.EjecutarAccion();
+
             }
             catch (Exception ex)
             {
@@ -235,13 +256,29 @@ namespace Negocio
         {
             AccessDB access = new AccessDB();
             Usuario buscado = new Usuario();
+            UsuarioNegocio Negocio = new UsuarioNegocio();
             try
             {
                 access.SetearQuery("Select * from usuarios where id=" + IdUsuario);
                 access.EjecutarLector();
                 access.Lector.Read();
 
-                // guardar el usuario en buscado ----------------------------------//
+                buscado.Id = (Int64)access.Lector["id"];
+                buscado.NombreUsuario = (string)access.Lector["NombreUsuario"];
+                buscado.Contraseña = (string)access.Lector["Contraseña"];
+                buscado.Estado = (bool)access.Lector["Estado"];
+                buscado.DatosPersonales.Apellido = (byte)access.Lector["cantidadAmbientes"];
+                buscado.DatosPersonales.Nombre= (DateTime)access.Lector["tiempoEntreReservas"];
+                buscado.DatosPersonales.DNI = (DateTime)access.Lector["horaCheckIn"];
+                buscado.DatosPersonales.Domicilio = (DateTime)access.Lector["horaCheckOut"];
+                buscado.DatosPersonales.Email = (string)access.Lector["imagenPortada"];
+                buscado.DatosPersonales.Genero = (char)access.Lector["Genero"];
+                buscado.DatosPersonales.PaisOrigen = Negocio.ListarPais((short)access.Lector["IdPais"]);
+                buscado.DatosPersonales.Telefono = (string)access.Lector["imagenPortada"];
+                buscado.DatosPersonales.UrlImagen = (string)access.Lector["imagenPortada"];
+            
+
+
             }
             catch (Exception ex)
             {
