@@ -22,30 +22,36 @@ namespace TPC_CacchioneMajdalani
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            long idaux = Convert.ToInt64(Request.QueryString["idCabaña"]);
-            if (idaux == 0)
+            if (Request.QueryString["idCabaña"] != null)
             {
-                Response.Redirect("Cabañas.aspx?idComplejo=" + Convert.ToString(Session["ComplejoActual"]));
-            }
+                long idaux = Convert.ToInt64(Request.QueryString["idCabaña"]);
+                if (idaux == 0)
+                {
+                    Response.Redirect("Cabañas.aspx?idComplejo=" + Convert.ToString(Session["ComplejoActual"]));
+                }
 
-            List<Cabaña> listaAux = new List<Cabaña>();
-            listaAux = (List<Cabaña>)Session["listaCabañas"];
-            CabañaAuxiliar = listaAux.Find(i => i.Id == idaux);
+                List<Cabaña> listaAux = new List<Cabaña>();
+                listaAux = (List<Cabaña>)Session["listaCabañas"];
+                CabañaAuxiliar = listaAux.Find(i => i.Id == idaux);
 
-            CabañaNegocio negocio = new CabañaNegocio();
-            if (Request.QueryString["idImagen"] != null)
-                negocio.EliminarImagen(long.Parse(Request.QueryString["idImagen"]));
-            CabañaAuxiliar.ListaImagenes = negocio.ListarImagenesPorID(CabañaAuxiliar.Id);
+                CabañaNegocio negocio = new CabañaNegocio();
+                if (Request.QueryString["idImagen"] != null)
+                    negocio.EliminarImagen(long.Parse(Request.QueryString["idImagen"]));
+                CabañaAuxiliar.ListaImagenes = negocio.ListarImagenesPorID(CabañaAuxiliar.Id);
 
-            //Cargo el string del Boton Volver
-            if (Convert.ToInt64(Session["ComplejoActual"]) != 0)
-            {
-                StringBotonVolver = "Cabañas.aspx?idComplejo=" + Convert.ToString(Session["ComplejoActual"]);
+                //Cargo el string del Boton Volver
+                if (Convert.ToInt64(Session["ComplejoActual"]) != 0)
+                {
+                    StringBotonVolver = "Cabañas.aspx?idComplejo=" + Convert.ToString(Session["ComplejoActual"]);
+                }
+                else
+                {
+                    StringBotonVolver = "Cabañas.aspx";
+                }
             }
             else
-            {
-                StringBotonVolver = "Cabañas.aspx";
-            }
+                Response.Redirect("Cabañas.aspx"); //Lo mismo que con DetalleComplejo
+            
         }
 
         protected void AgregarImagen(object sender, EventArgs e)
