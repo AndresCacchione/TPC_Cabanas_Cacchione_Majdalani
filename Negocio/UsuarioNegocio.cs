@@ -209,13 +209,13 @@ namespace Negocio
             AccessDB access = new AccessDB();
             try
             {
-                access.SetearQuery("update usuarios set nombre=@nombre, contra=@contra," +
-                    "Estado=@Estado where ID=" + Usuario.Id);
+                //access.SetearQuery("update usuarios set nombre=@nombre, contra=@contra," + 
+                //    "Estado=@Estado where ID=" + Usuario.Id);
 
-                access.AgregarParametro("@nombre", Usuario.NombreUsuario);
-                access.AgregarParametro("@contra", Usuario.Contraseña);
-                access.AgregarParametro("Estado", Usuario.Estado);
-                access.EjecutarAccion();
+                //access.AgregarParametro("@nombre", Usuario.NombreUsuario);
+                //access.AgregarParametro("@contra", Usuario.Contraseña);
+                //access.AgregarParametro("@Estado", Usuario.Estado);
+                //access.EjecutarAccion();
 
                 access.SetearQuery("update DatosPersonales set domicilio=@Domicilio, email=@Email, telefono=@Telefono,URLimagen=@UrlImagen " +
                     "where ID=" + Usuario.Id);
