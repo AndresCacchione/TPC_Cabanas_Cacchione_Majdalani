@@ -25,14 +25,14 @@ namespace TPC_CacchioneMajdalani
                 ListaCabañasLocal = negocio.listarCabañas();
                 Session.Add("listaCabañas", ListaCabañasLocal);
             }
-            
+
             long idaux = Convert.ToInt64(Request.QueryString["idComplejo"]);
             if (idaux != 0)
             {
                 List<Cabaña> listaAux = new List<Cabaña>();
                 foreach (Dominio.Cabaña item in ListaCabañasLocal)
-                { 
-                 if(item.complejo.ID==idaux)
+                {
+                    if (item.complejo.ID == idaux)
                     {
                         listaAux.Add(item);
                     }
@@ -44,7 +44,7 @@ namespace TPC_CacchioneMajdalani
         void ComplejoActual()
         {
             long complejoPorURL = Convert.ToInt64(Request.QueryString["idComplejo"]);
-            if (complejoPorURL!=0)
+            if (complejoPorURL != 0)
             {
                 Session.Add("ComplejoActual", complejoPorURL);
             }

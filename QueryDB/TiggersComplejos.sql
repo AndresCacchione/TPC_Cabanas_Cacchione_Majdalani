@@ -1,4 +1,6 @@
 --En lugar del delete Complejos
+use Cacchione_Majdalani_DB
+go
 
 create trigger tr_eliminar_complejo on complejos
 instead of delete
@@ -22,6 +24,8 @@ begin
 	end catch
 
 end
+
+go
 
 create trigger tr_eliminar_cabaña on cabañas
 instead of delete

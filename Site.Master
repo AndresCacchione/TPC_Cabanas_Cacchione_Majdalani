@@ -46,7 +46,7 @@
         <a class="mr-4 ml-4" runat="server" style="color: #FFFFFF; font-size: xx-large;" href="~/">CaMa</a>
         <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Complejos">Complejos</a>
         <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large; " href="~/Cabañas">Cabañas</a>
-        <%if (UsuarioActual != null)
+        <%if (UsuarioActual == null)
             { %>
         <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large; " href="~/RegistrarUsuario">Registrar</a>
         <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large; " href="~/Login">Iniciar Sesión</a>

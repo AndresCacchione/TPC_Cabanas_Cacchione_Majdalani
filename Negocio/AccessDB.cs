@@ -22,7 +22,7 @@ namespace Negocio
             };
         }
 
-        public void SetearQuery(String Consulta)
+        public void SetearQuery(string Consulta)
         {
             Comando.CommandType = System.Data.CommandType.Text;
             Comando.CommandText = Consulta;
@@ -81,8 +81,8 @@ namespace Negocio
             }
         }
     }
- }
+}
 
 
 
-        
+

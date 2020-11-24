@@ -20,7 +20,7 @@ namespace TPC_CacchioneMajdalani
                 complejo = new Dominio.Complejo()
             };
         }
-        
+
         public void CargarFormulario()
         {
             Imagen.Value = Auxiliar.Imagen;
@@ -54,7 +54,7 @@ namespace TPC_CacchioneMajdalani
                 List<Dominio.Cabaña> listaAux = new List<Dominio.Cabaña>();
                 listaAux = (List<Dominio.Cabaña>)Session["listaCabañas"];
                 Auxiliar = listaAux.Find(i => i.Id == Auxiliar.Id);
-                
+
                 if (!IsPostBack)
                 {
                     CargarFormulario();
@@ -68,10 +68,10 @@ namespace TPC_CacchioneMajdalani
         {
             GuardarFormulario();
             CabañaNegocio negocio = new CabañaNegocio();
-                    
+
             List<Dominio.Cabaña> listaAux = new List<Dominio.Cabaña>();
             listaAux = (List<Dominio.Cabaña>)Session["listaCabañas"];
-            
+
             try
             {
                 if (Auxiliar.Id == 0)
@@ -80,18 +80,18 @@ namespace TPC_CacchioneMajdalani
                     Auxiliar = negocio.ListarUltimaCabaña();
                     listaAux.Add(Auxiliar);
                     Session["listaCabañas"] = listaAux;
-                    Response.Redirect("DetalleCabaña.aspx?idCabaña="+Auxiliar.Id.ToString());
+                    Response.Redirect("DetalleCabaña.aspx?idCabaña=" + Auxiliar.Id.ToString());
                 }
-                
+
                 else
                 {
                     negocio.ModificarCabaña(Auxiliar);
-                    
+
                     listaAux.RemoveAll(item => item.Id == Auxiliar.Id);
                     listaAux.Add(Auxiliar);
                     Session["listaCabañas"] = listaAux;
 
-                    Response.Redirect("Cabañas.aspx?idComplejo ="+Auxiliar.complejo.ID);
+                    Response.Redirect("Cabañas.aspx?idComplejo =" + Auxiliar.complejo.ID);
                 }
             }
 

@@ -33,21 +33,21 @@ namespace TPC_CacchioneMajdalani
                 }
                 else
                 {
-                    ListaComplejosLocal = (List < Dominio.Complejo >) Session["listaBuscados"];
+                    ListaComplejosLocal = (List<Dominio.Complejo>)Session["listaBuscados"];
                     Session["listaBuscados"] = null;
                 }
             }
-        
+
             catch (Exception ex)
             {
-                 Session.Add("Cualquier nombre", ex.ToString());
-                 Response.Redirect("Error.aspx");
+                Session.Add("Cualquier nombre", ex.ToString());
+                //Response.Redirect("Error.aspx");
             }
         }
 
         protected void BtnBuscarComplejo_Click(object sender, EventArgs e)
         {
-            if(TxtBuscarComplejo.Text.Length!=0)
+            if (TxtBuscarComplejo.Text.Length != 0)
             {
                 List<Dominio.Complejo> listaAuxBuscar = new List<Dominio.Complejo>();
                 if (Session["listaBuscados"] == null)

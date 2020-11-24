@@ -13,8 +13,8 @@ namespace Dominio
         public Cabaña Cabaña { get; set; }
         public DateTime FechaIngreso { get; set; }
         public DateTime FechaEgreso { get; set; }
-        public byte CantPersonas{ get; set; }
-        public byte Estado{ get; set;}
+        public byte CantPersonas { get; set; }
+        public byte Estado { get; set; }
         public long IdReservaOriginal { get; set; }
 
     }

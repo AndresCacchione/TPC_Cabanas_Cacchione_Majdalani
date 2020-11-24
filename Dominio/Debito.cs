@@ -8,6 +8,6 @@ namespace Dominio
 {
     public class Debito : Movimiento
     {
-        
+
     }
 }

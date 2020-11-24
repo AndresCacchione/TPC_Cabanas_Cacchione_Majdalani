@@ -60,7 +60,7 @@ namespace Negocio
             {
                 access.CerrarConexion();
             }
-        
+
             return usuario;
         }
 
@@ -69,7 +69,7 @@ namespace Negocio
             AccessDB access = new AccessDB();
 
             try
-            {               
+            {
                 access.SetearQuery("insert into Usuarios (nombre,contra,IdNivelAcceso,estado) values(@nombre,@contra,@IdNivelAcceso,@estado)");
                 access.AgregarParametro("@nombre", NuevoUsuario.NombreUsuario);
                 access.AgregarParametro("@contra", NuevoUsuario.Contraseña);
@@ -97,7 +97,7 @@ namespace Negocio
                 access.SetearQuery("select top 1 usuarios.id from Usuarios where estado = 1 order by Usuarios.ID desc");
                 access.EjecutarLector();
                 access.Lector.Read();
-                aux = (Int64)access.Lector["ID"];
+                aux = (long)access.Lector["ID"];
             }
             catch (Exception ex)
             {
@@ -114,14 +114,14 @@ namespace Negocio
         public short GetIDPais(string NombrePais)
         {
             AccessDB access = new AccessDB();
-            Int16 IdPais = new Int16();
+            short IdPais = new short();
 
             try
             {
                 access.SetearQuery("select paises.id from Paises where paises.nombre like '" + NombrePais + "'");
                 access.EjecutarLector();
                 access.Lector.Read();
-                IdPais = (Int16)access.Lector["ID"];
+                IdPais = (short)access.Lector["ID"];
             }
             catch (Exception ex)
             {
@@ -134,7 +134,7 @@ namespace Negocio
             return IdPais;
         }
 
-        public void InsertarDatosPersonales(Usuario NuevoUsuario, Int16 IdPais)
+        public void InsertarDatosPersonales(Usuario NuevoUsuario, short IdPais)
         {
             AccessDB access = new AccessDB();
             try
@@ -226,7 +226,7 @@ namespace Negocio
             Usuario buscado = new Usuario();
             try
             {
-                access.SetearQuery("Select * from usuarios where id="+IdUsuario);
+                access.SetearQuery("Select * from usuarios where id=" + IdUsuario);
                 access.EjecutarLector();
                 access.Lector.Read();
 

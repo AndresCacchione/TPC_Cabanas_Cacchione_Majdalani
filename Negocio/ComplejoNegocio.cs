@@ -19,8 +19,8 @@ namespace Negocio
                 acceso.SetearQuery("select top 1 * from Complejos where estado = 1 order by Complejos.ID desc");
                 acceso.EjecutarLector();
                 acceso.Lector.Read();
-                
-                ultimo.ID = (Int64)acceso.Lector["Id"];
+
+                ultimo.ID = (long)acceso.Lector["Id"];
                 ultimo.Imagen = (string)acceso.Lector["imagenPortada"];
                 ultimo.Telefono = (string)acceso.Lector["Telefono"];
                 ultimo.Ubicacion = (string)acceso.Lector["Ubicacion"];
@@ -37,11 +37,11 @@ namespace Negocio
             {
                 acceso.CerrarConexion();
             }
-            
+
             return ultimo;
         }
 
-        public List<Imagen> ListarImagenesPorID(Int64 IDComplejo)
+        public List<Imagen> ListarImagenesPorID(long IDComplejo)
         {
             AccessDB acceso = new AccessDB();
             acceso.SetearQuery("select ID, URLImagen from ImagenesComplejos where IDComplejo=" + IDComplejo.ToString());
@@ -51,15 +51,17 @@ namespace Negocio
 
             while (acceso.Lector.Read())
             {
-                Imagen aux = new Imagen();
-                aux.ID = (Int64)acceso.Lector["ID"];
-                aux.URLImagen = (string)acceso.Lector["URLImagen"];
+                Imagen aux = new Imagen
+                {
+                    ID = (long)acceso.Lector["ID"],
+                    URLImagen = (string)acceso.Lector["URLImagen"]
+                };
                 ListaAux.Add(aux);
             }
             return ListaAux;
         }
 
-        public void EliminarImagen(Int64 IDImagen)
+        public void EliminarImagen(long IDImagen)
         {
             AccessDB acceso = new AccessDB();
             try
@@ -77,7 +79,7 @@ namespace Negocio
             }
         }
 
-        public void AgregarImagen(string URLImagen, Int64 IDComplejo)
+        public void AgregarImagen(string URLImagen, long IDComplejo)
         {
             AccessDB acceso = new AccessDB();
 
@@ -106,7 +108,7 @@ namespace Negocio
             try
             {
                 Acceso.SetearQuery("Update Complejos set ImagenPortada=@UrlImagen, Nombre=@Nombre, Telefono=@Tel, Ubicacion=@Ubicacion, email=@Mail, Estado=1, DiferenciaFeriado=@PrecioFeriado where ID=@Id");
-                
+
                 Acceso.AgregarParametro("@UrlImagen", Aux.Imagen);
                 Acceso.AgregarParametro("@Nombre", Aux.Nombre);
                 Acceso.AgregarParametro("@Tel", Aux.Telefono);
@@ -132,14 +134,14 @@ namespace Negocio
             AccessDB Acceso = new AccessDB();
             try
             {
-            Acceso.SetearQuery("Insert into Complejos (ImagenPortada,Nombre,Telefono,Ubicacion,email,Estado,DiferenciaFeriado) values (@UrlImagen,@Nombre,@Tel,@Ubicacion,@Mail,1,@PrecioFeriado)");
-            Acceso.AgregarParametro("@UrlImagen", Aux.Imagen);
-            Acceso.AgregarParametro("@Nombre", Aux.Nombre);
-            Acceso.AgregarParametro("@Mail", Aux.Mail);
-            Acceso.AgregarParametro("@Tel", Aux.Telefono);
-            Acceso.AgregarParametro("@Ubicacion", Aux.Ubicacion);
-            Acceso.AgregarParametro("@PrecioFeriado", Aux.PrecioFeriado);
-            Acceso.EjecutarAccion();
+                Acceso.SetearQuery("Insert into Complejos (ImagenPortada,Nombre,Telefono,Ubicacion,email,Estado,DiferenciaFeriado) values (@UrlImagen,@Nombre,@Tel,@Ubicacion,@Mail,1,@PrecioFeriado)");
+                Acceso.AgregarParametro("@UrlImagen", Aux.Imagen);
+                Acceso.AgregarParametro("@Nombre", Aux.Nombre);
+                Acceso.AgregarParametro("@Mail", Aux.Mail);
+                Acceso.AgregarParametro("@Tel", Aux.Telefono);
+                Acceso.AgregarParametro("@Ubicacion", Aux.Ubicacion);
+                Acceso.AgregarParametro("@PrecioFeriado", Aux.PrecioFeriado);
+                Acceso.EjecutarAccion();
             }
             catch (Exception ex)
             {
@@ -148,12 +150,12 @@ namespace Negocio
             }
             finally
             {
-              
+
                 Acceso.CerrarConexion();
             }
         }
 
-        public void EliminarComplejoPorId(Int64 IDComplejo)
+        public void EliminarComplejoPorId(long IDComplejo)
         {
 
             AccessDB accessDB = new AccessDB();
@@ -169,13 +171,13 @@ namespace Negocio
             }
             finally
             {
-            
+
                 accessDB.CerrarConexion();
             }
-            
+
         }
 
-        public Complejo BuscarComplejoPorId(Int64 IDComplejo)
+        public Complejo BuscarComplejoPorId(long IDComplejo)
         {
             AccessDB accessDB = new AccessDB();
             Complejo aux = new Complejo();
@@ -185,7 +187,7 @@ namespace Negocio
                 accessDB.SetearQuery("Select * from complejos where estado = 1 and ID=" + IDComplejo);
                 accessDB.EjecutarLector();
                 accessDB.Lector.Read();
-                aux.ID = (Int64)accessDB.Lector["Id"];
+                aux.ID = (long)accessDB.Lector["Id"];
                 aux.Imagen = (string)accessDB.Lector["imagenPortada"];
                 aux.Telefono = (string)accessDB.Lector["Telefono"];
                 aux.Ubicacion = (string)accessDB.Lector["Ubicacion"];
@@ -195,18 +197,18 @@ namespace Negocio
                 aux.Nombre = (string)accessDB.Lector["nombre"];
             }
             catch (Exception ex)
-            { 
+            {
                 throw ex;
             }
             finally
             {
-               
+
                 accessDB.CerrarConexion();
             }
             return aux;
         }
 
-      public List<Complejo> listarComplejos()
+        public List<Complejo> listarComplejos()
         {
             AccessDB accessDB = new AccessDB();
             List<Complejo> lista = new List<Complejo>();
@@ -222,7 +224,7 @@ namespace Negocio
                     aux.EstadoActivo = (bool)accessDB.Lector["estado"];
                     if (aux.EstadoActivo == true)
                     {
-                        aux.ID = (Int64)accessDB.Lector["Id"];
+                        aux.ID = (long)accessDB.Lector["Id"];
                         aux.Imagen = (string)accessDB.Lector["imagenPortada"];
                         aux.Telefono = (string)accessDB.Lector["Telefono"];
                         aux.Ubicacion = (string)accessDB.Lector["Ubicacion"];
@@ -239,13 +241,14 @@ namespace Negocio
                 accessDB.CerrarConexion();
                 throw ex;
             }
-            finally{
-           
-            accessDB.CerrarConexion();
+            finally
+            {
+
+                accessDB.CerrarConexion();
             }
 
             return lista;
-           
+
         }
     }
 }

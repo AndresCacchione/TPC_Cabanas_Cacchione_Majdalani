@@ -17,10 +17,12 @@ namespace TPC_CacchioneMajdalani
         public Usuario UsuarioActual { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["userSession"]!=null)
+            if (Session["userSession"] != null)
             {
                 UsuarioActual = (Usuario)Session["userSession"];
             }
+            else
+                UsuarioActual = null;
         }
 
         protected void btnCerrarSesion_Click(object sender, EventArgs e)

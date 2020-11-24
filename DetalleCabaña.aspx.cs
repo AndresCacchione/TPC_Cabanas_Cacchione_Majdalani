@@ -18,12 +18,12 @@ namespace TPC_CacchioneMajdalani
 
         public string StringBotonVolver { get; set; }
 
-        public Cabaña CabañaAuxiliar { get; set;}
+        public Cabaña CabañaAuxiliar { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             long idaux = Convert.ToInt64(Request.QueryString["idCabaña"]);
-            if(idaux==0)
+            if (idaux == 0)
             {
                 Response.Redirect("Cabañas.aspx?idComplejo=" + Convert.ToString(Session["ComplejoActual"]));
             }
@@ -33,14 +33,14 @@ namespace TPC_CacchioneMajdalani
             CabañaAuxiliar = listaAux.Find(i => i.Id == idaux);
 
             CabañaNegocio negocio = new CabañaNegocio();
-            if(Request.QueryString["idImagen"]!=null)
-                negocio.EliminarImagen(Int64.Parse(Request.QueryString["idImagen"]));
+            if (Request.QueryString["idImagen"] != null)
+                negocio.EliminarImagen(long.Parse(Request.QueryString["idImagen"]));
             CabañaAuxiliar.ListaImagenes = negocio.ListarImagenesPorID(CabañaAuxiliar.Id);
 
             //Cargo el string del Boton Volver
-            if(Convert.ToInt64(Session["ComplejoActual"])!=0)
+            if (Convert.ToInt64(Session["ComplejoActual"]) != 0)
             {
-                StringBotonVolver = "Cabañas.aspx?idComplejo="+ Convert.ToString(Session["ComplejoActual"]);
+                StringBotonVolver = "Cabañas.aspx?idComplejo=" + Convert.ToString(Session["ComplejoActual"]);
             }
             else
             {
@@ -50,12 +50,12 @@ namespace TPC_CacchioneMajdalani
 
         protected void AgregarImagen(object sender, EventArgs e)
         {
-            if(URLImagen.Value!="")
-            { 
+            if (URLImagen.Value != "")
+            {
                 CabañaNegocio negocio = new CabañaNegocio();
-                negocio.AgregarImagen(URLImagen.Value,CabañaAuxiliar.Id);
+                negocio.AgregarImagen(URLImagen.Value, CabañaAuxiliar.Id);
             }
-            Response.Redirect("DetalleCabaña.aspx?idCabaña="+CabañaAuxiliar.Id);
+            Response.Redirect("DetalleCabaña.aspx?idCabaña=" + CabañaAuxiliar.Id);
         }
     }
 }

@@ -14,14 +14,14 @@ namespace TPC_CacchioneMajdalani
     public partial class AgregarModificarComplejo : System.Web.UI.Page
     {
         public Dominio.Complejo Auxiliar { get; set; }
-        
+
         public void CargarFormulario()
         {
             Imagen.Value = Auxiliar.Imagen;
             Nombre.Value = Auxiliar.Nombre;
             Email.Value = Auxiliar.Mail;
             AumentoFeriado.Value = Auxiliar.PrecioFeriado.ToString();
-            Telefono.Value =Auxiliar.Telefono;
+            Telefono.Value = Auxiliar.Telefono;
             Direccion.Value = Auxiliar.Ubicacion;
         }
 
@@ -39,8 +39,10 @@ namespace TPC_CacchioneMajdalani
         protected void Page_Load(object sender, EventArgs e)
         {
             long ID = Convert.ToInt64(Request.QueryString["IdComplejo"]);
-            Auxiliar = new Dominio.Complejo();
-            Auxiliar.ID = ID;
+            Auxiliar = new Dominio.Complejo
+            {
+                ID = ID
+            };
 
             if (Auxiliar.ID != 0)
             {
@@ -76,20 +78,20 @@ namespace TPC_CacchioneMajdalani
                 else
                 {
                     negocio.ModificarComplejo(Auxiliar);
-                    
+
                     listaAux.RemoveAll(item => item.ID == Auxiliar.ID);
                     listaAux.Add(Auxiliar);
                     Session["listaComplejos"] = negocio.listarComplejos();
-                    
-                    Response.Redirect("DetalleComplejo.aspx?idComplejo="+Auxiliar.ID.ToString());
+
+                    Response.Redirect("DetalleComplejo.aspx?idComplejo=" + Auxiliar.ID.ToString());
                 }
             }
 
             catch (Exception ex)
             {
 
-               // Response.Redirect("Error.aspx");
-                throw ex;             
+                // Response.Redirect("Error.aspx");
+                throw ex;
             }
         }
     }

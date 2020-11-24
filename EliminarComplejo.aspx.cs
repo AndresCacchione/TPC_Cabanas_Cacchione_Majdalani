@@ -16,7 +16,7 @@ namespace TPC_CacchioneMajdalani
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ComplejoNegocio negocio= new ComplejoNegocio();
+            ComplejoNegocio negocio = new ComplejoNegocio();
 
             long idaux = Convert.ToInt64(Request.QueryString["idComplejo"]);
 
@@ -37,7 +37,7 @@ namespace TPC_CacchioneMajdalani
                     List<Dominio.Complejo> listaAuxComplejos = new List<Dominio.Complejo>();
                     listaAuxComplejos = (List<Dominio.Complejo>)Session["listaComplejos"];
                     listaAuxComplejos.RemoveAll(i => i.ID == Aux.ID);
-                    Session["listaComplejos"] = listaAuxComplejos;              
+                    Session["listaComplejos"] = listaAuxComplejos;
                 }
 
                 catch (Exception ex)
@@ -47,9 +47,9 @@ namespace TPC_CacchioneMajdalani
 
                 List<Cabaña> listaAuxCabañas = new List<Cabaña>();
                 listaAuxCabañas = (List<Cabaña>)Session["listaCabañas"];
-                
+
                 if (listaAuxCabañas != null)
-                {  
+                {
                     listaAuxCabañas.RemoveAll(i => i.complejo.ID == Aux.ID);
                     Session["listaCabañas"] = listaAuxCabañas;
                 }
@@ -57,7 +57,7 @@ namespace TPC_CacchioneMajdalani
             }
             else
             {
-                if(check_eliminar.ForeColor== System.Drawing.Color.Red)
+                if (check_eliminar.ForeColor == System.Drawing.Color.Red)
                 {
                     check_eliminar.ForeColor = System.Drawing.Color.Black;
                 }

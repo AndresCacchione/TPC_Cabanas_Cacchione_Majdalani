@@ -15,10 +15,10 @@ namespace TPC_CacchioneMajdalani
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-                List<String> ListaPaises = usuarioNegocio.ListarPaises();
+                List<string> ListaPaises = usuarioNegocio.ListarPaises();
                 Session.Add("listaPaises", ListaPaises);
                 DDLPaises.DataSource = ListaPaises;
                 DDLPaises.DataBind();

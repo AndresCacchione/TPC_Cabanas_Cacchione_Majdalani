@@ -36,7 +36,7 @@ namespace TPC_CacchioneMajdalani
                 listaAuxCabañas.RemoveAll(i => i.Id == Aux.Id);
                 Session["listaCabañas"] = listaAuxCabañas;
                 Response.Redirect("Cabañas.Aspx");
-          }
+            }
             else
             {
                 if (check_eliminar.ForeColor == System.Drawing.Color.Red)

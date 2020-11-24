@@ -10,19 +10,19 @@ namespace Negocio
     public class CabañaNegocio
     {
 
-        public List<Imagen> ListarImagenesPorID(Int64 IDCabaña)
+        public List<Imagen> ListarImagenesPorID(long IDCabaña)
         {
             AccessDB acceso = new AccessDB();
-            acceso.SetearQuery("select ID, URLImagen from ImagenesCabañas where IDCabaña="+IDCabaña.ToString());
+            acceso.SetearQuery("select ID, URLImagen from ImagenesCabañas where IDCabaña=" + IDCabaña.ToString());
             acceso.EjecutarLector();
 
             List<Imagen> ListaAux = new List<Imagen>();
-            
+
             while (acceso.Lector.Read())
             {
                 Imagen aux = new Imagen
                 {
-                    ID = (Int64)acceso.Lector["ID"],
+                    ID = (long)acceso.Lector["ID"],
                     URLImagen = (string)acceso.Lector["URLImagen"]
                 };
 
@@ -31,7 +31,7 @@ namespace Negocio
             return ListaAux;
         }
 
-        public void EliminarImagen(Int64 IDImagen)
+        public void EliminarImagen(long IDImagen)
         {
             AccessDB acceso = new AccessDB();
             try
@@ -49,7 +49,7 @@ namespace Negocio
             }
         }
 
-        public void AgregarImagen(string URLImagen, Int64 IDCabaña)
+        public void AgregarImagen(string URLImagen, long IDCabaña)
         {
             AccessDB acceso = new AccessDB();
 
@@ -78,7 +78,7 @@ namespace Negocio
             try
             {
                 acceso.SetearQuery("Update Cabañas set ImagenPortada=@Imagen, IDComplejo=@IDcomplejo, precioDiario=@precioDiario, capacidad=@capacidad, cantidadAmbientes=@cantidadAmbientes, tiempoEntreReservas=@tiempoEntreReservas, horacheckin=@horaCheckIn, horacheckout=@horaCheckOut, estado=1 where ID=@Id");
-                
+
                 acceso.AgregarParametro("@Imagen", cabaña.Imagen);
                 acceso.AgregarParametro("@IDcomplejo", cabaña.complejo.ID);
                 acceso.AgregarParametro("@precioDiario", cabaña.PrecioDiario);
@@ -99,7 +99,7 @@ namespace Negocio
                 acceso.CerrarConexion();
             }
         }
-        public void EliminarCabañaPorId(Int64 IDCabaña)
+        public void EliminarCabañaPorId(long IDCabaña)
         {
 
             AccessDB acceso = new AccessDB();
@@ -131,7 +131,7 @@ namespace Negocio
             {
                 acceso.SetearQuery("select * from Cabañas where estado = 1");
                 acceso.EjecutarLector();
-                while(acceso.Lector.Read())
+                while (acceso.Lector.Read())
                 {
                     ComplejoNegocio negocio = new ComplejoNegocio();
                     Cabaña aux = new Cabaña
@@ -139,17 +139,17 @@ namespace Negocio
                         EstadoActivo = (bool)acceso.Lector["estado"]
                     };
                     if (aux.EstadoActivo)
-                    { 
-                    aux.Id = (Int64)acceso.Lector["ID"];
-                    aux.PrecioDiario = (decimal)acceso.Lector["precioDiario"];
-                    aux.Capacidad = (Byte)acceso.Lector["capacidad"];
-                    aux.Ambientes = (Byte)acceso.Lector["cantidadAmbientes"];
-                    aux.TiempoEntreReservas = (DateTime)acceso.Lector["tiempoEntreReservas"];
-                    aux.CheckIn = (DateTime)acceso.Lector["horaCheckIn"];
-                    aux.CheckOut = (DateTime)acceso.Lector["horaCheckOut"];
-                    aux.Imagen=(string)acceso.Lector["imagenPortada"];
-                    aux.complejo = negocio.BuscarComplejoPorId((Int64)acceso.Lector["Idcomplejo"]);
-                    lista.Add(aux);
+                    {
+                        aux.Id = (long)acceso.Lector["ID"];
+                        aux.PrecioDiario = (decimal)acceso.Lector["precioDiario"];
+                        aux.Capacidad = (byte)acceso.Lector["capacidad"];
+                        aux.Ambientes = (byte)acceso.Lector["cantidadAmbientes"];
+                        aux.TiempoEntreReservas = (DateTime)acceso.Lector["tiempoEntreReservas"];
+                        aux.CheckIn = (DateTime)acceso.Lector["horaCheckIn"];
+                        aux.CheckOut = (DateTime)acceso.Lector["horaCheckOut"];
+                        aux.Imagen = (string)acceso.Lector["imagenPortada"];
+                        aux.complejo = negocio.BuscarComplejoPorId((long)acceso.Lector["Idcomplejo"]);
+                        lista.Add(aux);
                     }
                 }
             }
@@ -200,21 +200,21 @@ namespace Negocio
             try
             {
                 ComplejoNegocio negocio = new ComplejoNegocio();
-               
+
                 acceso.SetearQuery("select top 1 * from Cabañas where estado = 1 order by Cabañas.ID desc");
                 acceso.EjecutarLector();
                 acceso.Lector.Read();
 
                 ultima.EstadoActivo = (bool)acceso.Lector["estado"];
-                ultima.Id = (Int64)acceso.Lector["ID"];
+                ultima.Id = (long)acceso.Lector["ID"];
                 ultima.PrecioDiario = (decimal)acceso.Lector["precioDiario"];
-                ultima.Capacidad = (Byte)acceso.Lector["capacidad"];
-                ultima.Ambientes = (Byte)acceso.Lector["cantidadAmbientes"];
+                ultima.Capacidad = (byte)acceso.Lector["capacidad"];
+                ultima.Ambientes = (byte)acceso.Lector["cantidadAmbientes"];
                 ultima.TiempoEntreReservas = (DateTime)acceso.Lector["tiempoEntreReservas"];
                 ultima.CheckIn = (DateTime)acceso.Lector["horaCheckIn"];
                 ultima.CheckOut = (DateTime)acceso.Lector["horaCheckOut"];
                 ultima.Imagen = (string)acceso.Lector["imagenPortada"];
-                ultima.complejo = negocio.BuscarComplejoPorId((Int64)acceso.Lector["Idcomplejo"]); 
+                ultima.complejo = negocio.BuscarComplejoPorId((long)acceso.Lector["Idcomplejo"]);
             }
 
             catch (Exception ex)

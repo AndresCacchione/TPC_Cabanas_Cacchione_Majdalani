@@ -32,8 +32,9 @@ namespace TPC_CacchioneMajdalani
                 }
                 else
                 {
-                    Session["Error" + Session.SessionID] = "Usuario o contraseña incorrectos.";
-                    Response.Redirect("Error.aspx");
+                    //Session["Error" + Session.SessionID] = "Usuario o contraseña incorrectos.";
+                    //Response.Redirect("Error.aspx");
+                    Response.Redirect("Login.aspx");
                 }
             }
             catch (Exception ex) //Despues vemos de hacerlo con Session y que redirija a Error.aspx
