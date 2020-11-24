@@ -28,7 +28,7 @@ namespace TPC_CacchioneMajdalani
                 if (usuario.Id != 0)
                 {
                     Session.Add("userSession", usuario);
-                    //Response.Redirect() A donde querramos que vaya
+                    Response.Redirect("Complejos.aspx");
                 }
                 else
                 {

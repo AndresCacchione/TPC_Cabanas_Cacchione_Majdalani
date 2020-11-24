@@ -42,23 +42,26 @@ namespace Negocio
             AccessDB access = new AccessDB();
             try
             {
-                access.SetearQuery("Select Id from usuarios where NombreUsuario=@NombreUsuario and Contra=@Contra");
+                access.SetearQuery("Select Id from usuarios where Nombre=@NombreUsuario and Contra=@Contra");
                 access.AgregarParametro("@NombreUsuario", usuario.NombreUsuario);
                 access.AgregarParametro("@Contra", usuario.Contraseña);
 
                 access.EjecutarLector();
-                if (access.Lector.Read())
-                {
-                    usuario.Id = (int)access.Lector["Id"];
-                }
-
-                return usuario;
+                access.Lector.Read();
+                usuario.Id = Convert.ToInt64(access.Lector["Id"]);
             }
+
             catch (Exception ex)
             {
-
                 throw ex;
             }
+
+            finally
+            {
+                access.CerrarConexion();
+            }
+        
+            return usuario;
         }
 
         public void InsertarUsuario(Usuario NuevoUsuario)
@@ -85,16 +88,16 @@ namespace Negocio
 
         }
 
-        public void GetTop1ID(Usuario NuevoUsuario)
+        public long GetIDUltimoUsuario()
         {
             AccessDB access = new AccessDB();
-
+            long aux = new long();
             try
             {
                 access.SetearQuery("select top 1 usuarios.id from Usuarios where estado = 1 order by Usuarios.ID desc");
                 access.EjecutarLector();
                 access.Lector.Read();
-                NuevoUsuario.Id = (Int64)access.Lector["ID"];
+                aux = (Int64)access.Lector["ID"];
             }
             catch (Exception ex)
             {
@@ -105,37 +108,35 @@ namespace Negocio
             {
                 access.CerrarConexion();
             }
-            
+            return aux;
         }
 
-        public void GetPaisUsuario(Usuario NuevoUsuario)
+        public short GetIDPais(string NombrePais)
         {
             AccessDB access = new AccessDB();
+            Int16 IdPais = new Int16();
 
             try
             {
-                access.SetearQuery("select paises.id from Paises where paises.nombre like '" + NuevoUsuario.DatosPersonales.PaisOrigen + "'");
+                access.SetearQuery("select paises.id from Paises where paises.nombre like '" + NombrePais + "'");
                 access.EjecutarLector();
                 access.Lector.Read();
-                Int16 IdPais = new Int16();
                 IdPais = (Int16)access.Lector["ID"];
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
             {
                 access.CerrarConexion();
             }
-
+            return IdPais;
         }
 
-        public void InsertarDatosP(Usuario NuevoUsuario, Int16 IdPais)
+        public void InsertarDatosPersonales(Usuario NuevoUsuario, Int16 IdPais)
         {
             AccessDB access = new AccessDB();
-
             try
             {
                 access.SetearQuery("insert into DatosPersonales (IdUsuario,nombre,apellido,dni,email,telefono,URLimagen,IDpais,domicilio,genero) values(@IdUsuario,@Nombre,@Apellido,@dni,@email,@telefono,@URLimagen,@idPais,@Domicilio,@genero)");
@@ -164,61 +165,10 @@ namespace Negocio
 
         public void AgregarUsuario(Usuario NuevoUsuario)
         {
-            AccessDB accessDB1 = new AccessDB();
-            AccessDB accessDB2 = new AccessDB();
-            AccessDB accessDB3 = new AccessDB();
-            AccessDB accessDB4 = new AccessDB();
-
-            try
-            {
-                //Aca se inserta un usuario
-                accessDB1.SetearQuery("insert into Usuarios (nombre,contra,IdNivelAcceso,estado) values(@nombre,@contra,@IdNivelAcceso,@estado)");
-                accessDB1.AgregarParametro("@nombre", NuevoUsuario.NombreUsuario);
-                accessDB1.AgregarParametro("@contra", NuevoUsuario.Contraseña);
-                accessDB1.AgregarParametro("@estado", NuevoUsuario.Estado);
-                accessDB1.AgregarParametro("@IdNivelAcceso", NuevoUsuario.NivelAcceso);
-                accessDB1.EjecutarAccion();
-
-                //
-                //Aca buscaMOS el usuario recien insertado y sacarle el id
-                accessDB2.SetearQuery("select top 1 usuarios.id from Usuarios where estado = 1 order by Usuarios.ID desc");
-                accessDB2.EjecutarLector();
-                accessDB2.Lector.Read();
-                NuevoUsuario.Id = (Int64)accessDB2.Lector["ID"];
-
-
-                // ACA AVERIGUAMOS ID PAIS
-                accessDB3.SetearQuery("select paises.id from Paises where paises.nombre like '" + NuevoUsuario.DatosPersonales.PaisOrigen + "'");
-                accessDB3.EjecutarLector();
-                accessDB3.Lector.Read();
-                Int16 IdPais = new Int16();
-                IdPais = (Int16)accessDB3.Lector["ID"];
-
-                //Aca se insertan los datos personales 
-                accessDB4.SetearQuery("insert into DatosPersonales (IdUsuario,nombre,apellido,dni,email,telefono,URLimagen,IDpais,domicilio,genero) values(@IdUsuario,@Nombre,@Apellido,@dni,@email,@telefono,@URLimagen,@idPais,@Domicilio,@genero)");
-                accessDB4.AgregarParametro("@IdUsuario", NuevoUsuario.Id);
-                accessDB4.AgregarParametro("@Apellido", NuevoUsuario.DatosPersonales.Apellido);
-                accessDB4.AgregarParametro("@Nombre", NuevoUsuario.DatosPersonales.Nombre);
-                accessDB4.AgregarParametro("@Domicilio", NuevoUsuario.DatosPersonales.Domicilio);
-                accessDB4.AgregarParametro("@dni", NuevoUsuario.DatosPersonales.DNI);
-                accessDB4.AgregarParametro("@email", NuevoUsuario.DatosPersonales.Email);
-                accessDB4.AgregarParametro("@telefono", NuevoUsuario.DatosPersonales.Telefono);
-                accessDB4.AgregarParametro("@URLimagen", NuevoUsuario.DatosPersonales.UrlImagen);
-                accessDB4.AgregarParametro("@genero", NuevoUsuario.DatosPersonales.Genero);
-                accessDB4.AgregarParametro("@idPais", IdPais);
-                accessDB4.EjecutarAccion();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                accessDB1.CerrarConexion();
-                accessDB2.CerrarConexion();
-                accessDB3.CerrarConexion();
-                accessDB4.CerrarConexion();
-            }
+            InsertarUsuario(NuevoUsuario);                                        // INSERTAMOS EL USUARIO
+            NuevoUsuario.Id = GetIDUltimoUsuario();                               // OBTENER ID DEL USUARIO INSERTADO PARA AGREGAR SUS DATOS PERSONALES
+            short IdPais = GetIDPais(NuevoUsuario.DatosPersonales.PaisOrigen);    // ACA AVERIGUAMOS ID PAIS
+            InsertarDatosPersonales(NuevoUsuario, IdPais);                        // AGREGAMOS DATOS PERSONALES A LA DB
         }
 
         public void EliminarUsuario(long IdUsuario)
@@ -270,21 +220,27 @@ namespace Negocio
 
         }
 
-        public void ListarUsuarioPorId(long IdUsuario)
+        public Usuario ListarUsuarioPorId(long IdUsuario)
         {
             AccessDB access = new AccessDB();
+            Usuario buscado = new Usuario();
             try
             {
                 access.SetearQuery("Select * from usuarios where id="+IdUsuario);
                 access.EjecutarLector();
+                access.Lector.Read();
+
+                // guardar el usuario en buscado ----------------------------------//
             }
             catch (Exception ex)
             {
-
-                throw Exception ex;
+                throw ex;
             }
-
-
+            finally
+            {
+                access.CerrarConexion();
+            }
+            return buscado;
         }
 
 

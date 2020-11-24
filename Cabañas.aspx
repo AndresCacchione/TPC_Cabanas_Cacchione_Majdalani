@@ -13,7 +13,7 @@
                     <li><h3> Ubicacion: <%=ListaCabañasLocal.First().complejo.Ubicacion %> </h3></li>
                 </ul>
             <%} %>--%>
-    <asp:TextBox ID="TxtBuscarCabaña" runat="server"></asp:TextBox>
+    <asp:TextBox ID="TxtBuscarCabaña" runat="server" CssClass="d-inline-flex, border-light" MaxLength="120"></asp:TextBox>
     <asp:Button Class="btn btn-primary mr-auto ml-auto" ID="BtnBuscarCabaña" runat="server" Text="Buscar" />
     <%if (Convert.ToInt64(Request.QueryString["idComplejo"]) != 0)
         { %>
