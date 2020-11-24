@@ -220,9 +220,11 @@ namespace Negocio
 
                 while (accessDB.Lector.Read())
                 {
-                    Complejo aux = new Complejo();
-                    aux.EstadoActivo = (bool)accessDB.Lector["estado"];
-                    if (aux.EstadoActivo == true)
+                    Complejo aux = new Complejo
+                    {
+                        EstadoActivo = (bool)accessDB.Lector["estado"]
+                    };
+                    if (aux.EstadoActivo)
                     {
                         aux.ID = (long)accessDB.Lector["Id"];
                         aux.Imagen = (string)accessDB.Lector["imagenPortada"];

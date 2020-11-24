@@ -9,7 +9,7 @@ namespace Dominio
 {
     public class Complejo
     {
-        public Int64 ID { get; set; }
+        public long ID { get; set; }
         public string Imagen { get; set; }
         public string Nombre { get; set; }
         public string Telefono { get; set; }

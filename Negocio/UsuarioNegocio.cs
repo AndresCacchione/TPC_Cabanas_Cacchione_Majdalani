@@ -139,7 +139,7 @@ namespace Negocio
         public string ListarPais(int idPais)
         {
             AccessDB access = new AccessDB();
-            access.SetearQuery("Select Nombre from paises where id="+idPais);
+            access.SetearQuery("Select Nombre from paises where id=" + idPais);
             access.EjecutarLector();
             access.Lector.Read();
             string NombrePais = (string)access.Lector["Nombre"];
@@ -164,13 +164,6 @@ namespace Negocio
                 access.AgregarParametro("@idPais", IdPais);
                 access.EjecutarAccion();
 
-
-
-
-
-
-
-
             }
             catch (Exception ex)
             {
@@ -185,12 +178,11 @@ namespace Negocio
 
         public void AgregarUsuario(Usuario NuevoUsuario)
         {
-            InsertarUsuario(NuevoUsuario);                                        // INSERTAMOS EL USUARIO
-            NuevoUsuario.Id = GetIDUltimoUsuario();                               // OBTENER ID DEL USUARIO INSERTADO PARA AGREGAR SUS DATOS PERSONALES
-            short IdPais = GetIDPais(NuevoUsuario.DatosPersonales.PaisOrigen);    // ACA AVERIGUAMOS ID PAIS
-            InsertarDatosPersonales(NuevoUsuario, IdPais); 
-            // AGREGAMOS DATOS PERSONALES A LA DB
-            
+            InsertarUsuario(NuevoUsuario);                                      // INSERTAMOS EL USUARIO
+            NuevoUsuario.Id = GetIDUltimoUsuario();                             // OBTENER ID DEL USUARIO INSERTADO PARA AGREGAR SUS DATOS PERSONALES
+            short IdPais = GetIDPais(NuevoUsuario.DatosPersonales.PaisOrigen);  // ACA AVERIGUAMOS ID PAIS
+            InsertarDatosPersonales(NuevoUsuario, IdPais);                      // AGREGAMOS DATOS PERSONALES A LA DB
+
         }
 
         public void EliminarUsuario(long IdUsuario)
@@ -218,8 +210,8 @@ namespace Negocio
             try
             {
                 access.SetearQuery("update usuarios set nombre=@nombre, contra=@contra," +
-                    "Estado=@Estado where ID="+Usuario.Id);
-                
+                    "Estado=@Estado where ID=" + Usuario.Id);
+
                 access.AgregarParametro("@nombre", Usuario.NombreUsuario);
                 access.AgregarParametro("@contra", Usuario.Contraseña);
                 access.AgregarParametro("Estado", Usuario.Estado);
@@ -246,9 +238,58 @@ namespace Negocio
 
         }
 
-        public void ListarUsuarios()
+        public List<Usuario> ListarUsuarios()
         {
+            AccessDB access = new AccessDB();
+            List<Usuario> userList = new List<Usuario>();
 
+            try
+            {
+                access.SetearQuery("Select * from usuarios where Estado=1 order by usuarios.ID asc");
+                access.EjecutarLector();
+                while (access.Lector.Read())
+                {
+                    Usuario aux = new Usuario
+                    {
+                        Estado = (bool)access.Lector["Estado"]
+                    };
+                    if (aux.Estado)
+                    {
+                        aux.Id = (long)access.Lector["Id"];
+                        aux.NombreUsuario = (string)access.Lector["Nombre"];
+                        aux.Contraseña = (string)access.Lector["Contra"];
+                        aux.NivelAcceso = (byte)access.Lector["IdNivelAcceso"];
+                    }
+
+                    access.SetearQuery("Select * from DatosPersonales Dat, Usuarios U where Dat.ID=U.ID and U.Estado=1 order by Dat.ID asc");
+                    access.EjecutarLector();
+                    if (aux.Estado)
+                    {
+                        aux.DatosPersonales.Nombre = (string)access.Lector["nombre"];
+                        aux.DatosPersonales.Apellido = (string)access.Lector["apellido"];
+                        aux.DatosPersonales.DNI = (string)access.Lector["dni"];
+                        aux.DatosPersonales.Email = (string)access.Lector["email"];
+                        aux.DatosPersonales.Telefono = (string)access.Lector["telefono"];
+                        aux.DatosPersonales.UrlImagen = (string)access.Lector["URLimagen"];
+                        aux.DatosPersonales.PaisOrigen = ListarPais((short)access.Lector["IDPais"]); //con el ID traido de DB, casteado, hago uso del método ListarPais,
+                        aux.DatosPersonales.Domicilio = (string)access.Lector["domicilio"];         //que recibe un short y devuelve el País correspondiente en forma de string
+                        aux.DatosPersonales.Genero = (char)access.Lector["genero"];
+                    }
+                    userList.Add(aux);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                access.CerrarConexion();
+            }
+
+            return userList;
 
         }
 
@@ -263,21 +304,19 @@ namespace Negocio
                 access.EjecutarLector();
                 access.Lector.Read();
 
-                buscado.Id = (Int64)access.Lector["id"];
-                buscado.NombreUsuario = (string)access.Lector["NombreUsuario"];
-                buscado.Contraseña = (string)access.Lector["Contraseña"];
+                buscado.Id = (long)access.Lector["id"];
+                buscado.NombreUsuario = (string)access.Lector["Nombre"];
+                buscado.Contraseña = (string)access.Lector["Contra"];
                 buscado.Estado = (bool)access.Lector["Estado"];
-                buscado.DatosPersonales.Apellido = (byte)access.Lector["cantidadAmbientes"];
-                buscado.DatosPersonales.Nombre= (DateTime)access.Lector["tiempoEntreReservas"];
-                buscado.DatosPersonales.DNI = (DateTime)access.Lector["horaCheckIn"];
-                buscado.DatosPersonales.Domicilio = (DateTime)access.Lector["horaCheckOut"];
-                buscado.DatosPersonales.Email = (string)access.Lector["imagenPortada"];
+                buscado.DatosPersonales.Apellido = (string)access.Lector["Apellido"];
+                buscado.DatosPersonales.Nombre = (string)access.Lector["Nombre"];
+                buscado.DatosPersonales.DNI = (string)access.Lector["Dni"];
+                buscado.DatosPersonales.Domicilio = (string)access.Lector["Domicilio"];
+                buscado.DatosPersonales.Email = (string)access.Lector["Email"];
                 buscado.DatosPersonales.Genero = (char)access.Lector["Genero"];
                 buscado.DatosPersonales.PaisOrigen = Negocio.ListarPais((short)access.Lector["IdPais"]);
-                buscado.DatosPersonales.Telefono = (string)access.Lector["imagenPortada"];
-                buscado.DatosPersonales.UrlImagen = (string)access.Lector["imagenPortada"];
-            
-
+                buscado.DatosPersonales.Telefono = (string)access.Lector["Telefono"];
+                buscado.DatosPersonales.UrlImagen = (string)access.Lector["URLImagen"];
 
             }
             catch (Exception ex)
@@ -290,8 +329,6 @@ namespace Negocio
             }
             return buscado;
         }
-
-
 
     }
 }

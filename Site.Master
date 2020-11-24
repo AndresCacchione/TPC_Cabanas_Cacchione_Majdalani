@@ -54,6 +54,7 @@
         {%>
         
         <label Text="Aca vendría el nombre de usuario" runat="server"></label>
+               <asp:Button Text="Modificar datos personales" ID="btnModificarDatos" CssClass="btn btn-secondary mr-auto ml-auto"" runat="server" OnClick="btnModificarDatos_Click" />
         <asp:Button Text="Cerrar Sesion" class="btn btn-outline-danger" ID="btnCerrarSesion" OnClick="btnCerrarSesion_Click" runat="server" />
         <%
         }

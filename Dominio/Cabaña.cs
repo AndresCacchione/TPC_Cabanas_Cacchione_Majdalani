@@ -8,11 +8,11 @@ namespace Dominio
 {
     public class Cabaña
     {
-        public Int64 Id { get; set; }
+        public long Id { get; set; }
         public decimal PrecioDiario { get; set; }
-        public Byte Capacidad { get; set; }
+        public byte Capacidad { get; set; }
         public string Imagen { get; set; }
-        public Byte Ambientes { get; set; }
+        public byte Ambientes { get; set; }
         public DateTime TiempoEntreReservas { get; set; }
         public DateTime CheckIn { get; set; }
         public DateTime CheckOut { get; set; }

@@ -30,5 +30,10 @@ namespace TPC_CacchioneMajdalani
             Session.Clear();
             Response.Redirect("Default.aspx");
         }
+
+        protected void btnModificarDatos_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
