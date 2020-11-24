@@ -75,6 +75,7 @@ namespace Negocio
                 access.AgregarParametro("@contra", NuevoUsuario.Contraseña);
                 access.AgregarParametro("@estado", NuevoUsuario.Estado);
                 access.AgregarParametro("@IdNivelAcceso", NuevoUsuario.NivelAcceso);
+                access.EjecutarAccion();
             }
             catch (Exception ex)
             {
@@ -151,6 +152,14 @@ namespace Negocio
                 access.AgregarParametro("@genero", NuevoUsuario.DatosPersonales.Genero);
                 access.AgregarParametro("@idPais", IdPais);
                 access.EjecutarAccion();
+
+
+
+
+
+
+
+
             }
             catch (Exception ex)
             {
@@ -168,7 +177,9 @@ namespace Negocio
             InsertarUsuario(NuevoUsuario);                                        // INSERTAMOS EL USUARIO
             NuevoUsuario.Id = GetIDUltimoUsuario();                               // OBTENER ID DEL USUARIO INSERTADO PARA AGREGAR SUS DATOS PERSONALES
             short IdPais = GetIDPais(NuevoUsuario.DatosPersonales.PaisOrigen);    // ACA AVERIGUAMOS ID PAIS
-            InsertarDatosPersonales(NuevoUsuario, IdPais);                        // AGREGAMOS DATOS PERSONALES A LA DB
+            InsertarDatosPersonales(NuevoUsuario, IdPais); 
+            // AGREGAMOS DATOS PERSONALES A LA DB
+            
         }
 
         public void EliminarUsuario(long IdUsuario)
