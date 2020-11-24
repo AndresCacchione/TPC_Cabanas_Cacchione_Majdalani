@@ -1,7 +1,6 @@
 ﻿    <%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarModificarCabaña.aspx.cs" Inherits="TPC_CacchioneMajdalani.AgregarModificarCabaña" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
      
-    <form>
   <div class="form-row">
       <div class="form-group col-md-6">
     <label for="inputPrecioDiario">Precio por dia</label>

@@ -53,3 +53,66 @@ values(4,'https://cf.bstatic.com/images/hotel/max1024x768/136/136112818.jpg')
 go
 insert into ImagenesCabañas
 values(1,'https://media-cdn.tripadvisor.com/media/photo-s/12/1c/26/7b/cabanas-del-oso.jpg')
+go
+
+insert into Paises
+values('Argentina')
+go
+insert into Paises
+values('Brasil')
+go
+insert into Paises
+values('Colombia')
+go
+insert into Paises
+values('Uruguay')
+go
+insert into Paises
+values('Perú')
+go
+insert into Paises
+values('Chile')
+go
+insert into Paises
+values('Francia')
+go
+insert into Paises
+values('Italia')
+go
+insert into Paises
+values('Holanda')
+go
+insert into Paises
+values('Inglaterra')
+go
+insert into Paises
+values('Estados Unidos')
+go
+insert into Paises
+values('Inglaterra')
+go
+insert into Paises
+values('Venezuela')
+go
+insert into Paises
+values('Australia')
+go
+insert into Paises
+values('Nueva Zelanda')
+go
+insert into Paises
+values('Sudáfrica')
+go
+insert into Paises
+values('Canadá')
+go
+
+insert into NivelesAcceso
+values('Cliente')
+go
+insert into NivelesAcceso
+values('Administrador')
+go
+insert into NivelesAcceso
+values('Visitante')
+go

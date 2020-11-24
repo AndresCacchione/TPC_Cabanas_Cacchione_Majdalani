@@ -16,7 +16,7 @@
                                 <fieldset class="group">
                                     <a href="Complejos.aspx" class="btn btn-primary mr-auto ml-auto">Volver</a>
                                     <asp:CheckBox ID="check_eliminar" Text="Eliminar" runat="server" required=""/>
-                                    <asp:Button class="btn btn-danger mr-auto ml-auto" Text="Eliminar Cabaña" runat="server" OnClick="Unnamed_Click"/>                          
+                                    <asp:Button ID="btnEliminarCab" class="btn btn-danger mr-auto ml-auto" Text="Eliminar Cabaña" runat="server" OnClick="Unnamed_Click"/>                          
                                 </fieldset>
                              </div>
                         </div>

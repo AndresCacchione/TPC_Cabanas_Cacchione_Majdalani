@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="RegistrarUsuario" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="RegistrarUsuario.aspx.cs" Inherits="TPC_CacchioneMajdalani.RegistrarUsuario" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
             
-    <form>
   <div class="form-row">
       <div class="form-group col-md-6">
     <label for="inputNombreUsuario">Nombre usuario</label>

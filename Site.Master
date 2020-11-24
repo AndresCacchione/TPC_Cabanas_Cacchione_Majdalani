@@ -47,6 +47,7 @@
         <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Complejos">Complejos</a>
         <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large; " href="~/Cabañas">Cabañas</a>
         <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large; " href="~/RegistrarUsuario">Registrar</a>
+        <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large; " href="~/Login">Iniciar Sesión</a>
           </div>
            </nav>
 
