@@ -110,6 +110,7 @@
     <Content Include="AgregarModificarCabaña.aspx" />
     <Content Include="AgregarModificarComplejo.aspx" />
     <Content Include="Cabañas.aspx" />
+    <Content Include="CabañasFavoritas.aspx" />
     <Content Include="Clientes.aspx" />
     <Content Include="Complejos.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -290,6 +291,13 @@
     </Compile>
     <Compile Include="Cabañas.aspx.designer.cs">
       <DependentUpon>Cabañas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CabañasFavoritas.aspx.cs">
+      <DependentUpon>CabañasFavoritas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CabañasFavoritas.aspx.designer.cs">
+      <DependentUpon>CabañasFavoritas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clientes.aspx.cs">
       <DependentUpon>Clientes.aspx</DependentUpon>

@@ -11,26 +11,26 @@
             <input type="password" class="form-control" id="Contraseña" placeholder="Contraseña" runat="server">
         </div>
     </div>
-   <%--  <div class="form-row">
-       <div class="form-group col-md-6">
+    <div class="form-row">
+        <div class="form-group col-md-6">
             <asp:Label ID="LblNivelAcceso" runat="server" Text="Nivel de Acceso"></asp:Label>
             <asp:DropDownList CssClass="form-control" ID="DDLNivelAcceso" runat="server">
                 <asp:ListItem Text="" />
                 <asp:ListItem Text="De la base de datos" />
                 <asp:ListItem Text="Femenino" />
-                <asp:ListItem Text="Otros"/>
+                <asp:ListItem Text="Otros" />
             </asp:DropDownList>
         </div>
-  
-     <div class="form-group col-md-6">
+
+        <div class="form-group col-md-6">
             <asp:Label ID="LblEstado" runat="server" Text="Estado"></asp:Label>
             <asp:DropDownList CssClass="form-control" ID="DDLEstado" runat="server">
                 <asp:ListItem Text="" />
                 <asp:ListItem Text="Bloquear" Value="0" />
-                <asp:ListItem Text="Activo" Value="1"/>
+                <asp:ListItem Text="Activo" Value="1" />
             </asp:DropDownList>
         </div>
-           </div>--%>
+    </div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputNombre">Nuevo Nombre</label>
@@ -61,22 +61,22 @@
             <input type="text" class="form-control" id="UrlImagen" placeholder="http/xxxx.jpg" runat="server" />
         </div>
     </div>
-     <div class="form-row ">
-    <div class="form-group col-md-6">
-        <asp:Label ID="lblPais" runat="server" Text="Nuevo Pais de Origen" />
-        <asp:DropDownList CssClass="form-control" ID="DDLPaises" runat="server">
-        </asp:DropDownList>
-    </div>
-     <div class="form-group col-md-6">
+    <div class="form-row ">
+        <div class="form-group col-md-6">
+            <asp:Label ID="lblPais" runat="server" Text="Nuevo Pais de Origen" />
+            <asp:DropDownList CssClass="form-control" ID="DDLPaises" runat="server">
+            </asp:DropDownList>
+        </div>
+        <div class="form-group col-md-6">
             <asp:Label ID="LblGenero" runat="server" Text="Genero"></asp:Label>
             <asp:DropDownList CssClass="form-control" ID="DDLGenero" runat="server">
                 <asp:ListItem Text="" />
                 <asp:ListItem Text="Masculino" Value="M" />
-                <asp:ListItem Text="Femenino" Value="F"/>
-                <asp:ListItem Text="Otros" Value="O"/>
+                <asp:ListItem Text="Femenino" Value="F" />
+                <asp:ListItem Text="Otros" Value="O" />
             </asp:DropDownList>
         </div>
-             </div>
+    </div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputDomicilio">Nuevo Domicilio</label>
