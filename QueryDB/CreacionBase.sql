@@ -414,3 +414,7 @@ Drop Table Complejos
 Drop Table NivelesAcceso
 Drop Table Paises
 */
+
+DECLARE @HashThis NVARCHAR(4000);
+SELECT @HashThis = N'456';
+SELECT  HASHBYTES('SHA2_256', CONVERT(VARCHAR(4000),@HashThis,0));

@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio;
+using System.Security.Cryptography;
 
 namespace Negocio
 {
     public class UsuarioNegocio
     {
         public List<string> ListarPaises()
-        {
+        {     
             AccessDB acceso = new AccessDB();
             List<string> ListaPaises = new List<string>();
             try
@@ -40,6 +41,7 @@ namespace Negocio
         public Usuario Login(Usuario usuario)
         {
             AccessDB access = new AccessDB();
+            usuario.Contraseña = Encrypt.GetSHA256(usuario.Contraseña);
             try
             {
                 access.SetearQuery("Select Id from usuarios where Nombre=@NombreUsuario and Contra=@Contra");
@@ -67,6 +69,7 @@ namespace Negocio
         public void InsertarUsuario(Usuario NuevoUsuario)
         {
             AccessDB access = new AccessDB();
+            NuevoUsuario.Contraseña = Encrypt.GetSHA256(NuevoUsuario.Contraseña);
 
             try
             {
