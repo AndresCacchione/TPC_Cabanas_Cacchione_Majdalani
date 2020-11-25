@@ -52,7 +52,7 @@
           <%}
         else
         {%>
-        <asp:Button Text="Modificar datos personales" ID="btnModificarDatos" CssClass="btn btn-secondary mr-auto ml-auto" runat="server" OnClick="btnModificarDatos_Click" />
+        <asp:Button Text="Modificar datos" ID="btnModificarDatos" CssClass="btn btn-secondary mr-auto ml-auto" runat="server" OnClick="btnModificarDatos_Click" />
         <asp:Label ID="lblNombreUsuario" runat="server" />
         <asp:Button Text="Cerrar Sesion" class="btn btn-danger mr-auto ml-auto" ID="btnCerrarSesion" OnClick="btnCerrarSesion_Click" runat="server" />
         <%

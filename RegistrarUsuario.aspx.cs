@@ -58,7 +58,7 @@ namespace TPC_CacchioneMajdalani
             }
             finally
             {
-                Response.Redirect("Login.aspx");
+                Response.Redirect("~/Login");
             }
         }
     }

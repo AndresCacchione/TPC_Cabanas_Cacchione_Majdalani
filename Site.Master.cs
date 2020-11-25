@@ -29,12 +29,12 @@ namespace TPC_CacchioneMajdalani
         protected void btnCerrarSesion_Click(object sender, EventArgs e)
         {
             Session.Clear();
-            Response.Redirect("Default.aspx");
+            Response.Redirect("~/Default");
         }
 
         protected void btnModificarDatos_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("~/ModificarUsuario");
         }
     }
 }
