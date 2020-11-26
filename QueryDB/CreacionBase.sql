@@ -1,6 +1,5 @@
 Use master
 go
-
 If not exists (Select * from sys.databases where name = 'Cacchione_Majdalani_DB')
 Begin
 Create database Cacchione_Majdalani_DB

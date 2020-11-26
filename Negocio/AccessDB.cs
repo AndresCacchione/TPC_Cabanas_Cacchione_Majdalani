@@ -36,10 +36,22 @@ namespace Negocio
             Comando.ExecuteNonQuery();
         }
 
-        public void SetearStoredProcedure(string sp)
+        public void EjecutarStoredProcedure(string sp)
         {
             Comando.CommandType = System.Data.CommandType.StoredProcedure;
             Comando.CommandText = sp;
+        }
+
+        public int EjecutarStoredProcedureIntReturn(string sp)
+        {
+            Comando.CommandType = System.Data.CommandType.StoredProcedure;
+            Comando.CommandText = sp;
+
+            var returnParametro = Comando.Parameters.Add("@ReturnValue", System.Data.SqlDbType.Int);
+            returnParametro.Direction = System.Data.ParameterDirection.ReturnValue;
+            Conexion.Open();
+            Comando.ExecuteNonQuery();
+            return (int)returnParametro.Value;
         }
 
         public void AgregarParametro(string nombre, object Valor)

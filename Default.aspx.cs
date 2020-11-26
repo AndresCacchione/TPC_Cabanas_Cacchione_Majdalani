@@ -17,6 +17,7 @@ namespace TPC_CacchioneMajdalani
             managementDB.SetTRInsteadOfDELComplejos();
             managementDB.SetTRInsteadOfDELCabañas();
             managementDB.CargaPaises();
+            managementDB.CargarNiveles();
         }
 	}
 }

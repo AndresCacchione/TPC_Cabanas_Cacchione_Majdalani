@@ -15,17 +15,16 @@ namespace Negocio
 			try
 			{
 				acceso.SetearQuery(@"Use master
-									go
-
+									
 									If not exists (Select * from sys.databases where name = 'Cacchione_Majdalani_DB')
 									Begin
 									Create database Cacchione_Majdalani_DB
 									End
-									go
+									
 									Use Cacchione_Majdalani_DB
-									go
+									
 									Set Dateformat 'DMY'
-									go
+									
 									IF NOT EXISTS (select * from sys.objects where name = 'PK_Paises')
 									begin
 										EXEC('
@@ -764,7 +763,7 @@ namespace Negocio
             try
             {
 				accessDB.SetearQuery(@"Use Cacchione_Majdalani_DB
-									go
+									
 									if exists (select * from sys.objects where name = 'Solicitudes')
 									Begin
 									Drop Table Solicitudes
@@ -790,5 +789,69 @@ namespace Negocio
                 throw ex;
             }
         }
+
+		private void SetearSPContarAccNiveles()
+		{
+			AccessDB accessDB = new AccessDB();
+			try
+			{
+				accessDB.SetearQuery(@"use Cacchione_Majdalani_DB
+										--drop procedure if exists SPContarNivelesAcceso
+										if not exists (Select * from sys.objects where name = 'SPContarNivelesAcceso')
+										begin
+										exec('create procedure SPContarNivelesAcceso
+										as
+										begin
+										return (select count (*) from NivelesAcceso)
+										end
+										')
+										end");
+				accessDB.EjecutarAccion();
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+		}
+		private int EjecutarSPContarAccNiveles()
+        {
+			AccessDB accessDB = new AccessDB();
+			int ret;
+            try
+            {
+				ret = accessDB.EjecutarStoredProcedureIntReturn("SPContarNivelesAcceso");
+			}
+			catch (Exception ex)
+            {
+                throw ex;
+            }
+			finally
+            {
+				accessDB.CerrarConexion();
+            }
+			return ret;
+        }
+		private void InsertarnivelesAcceso()
+        {
+			AccessDB accessDB = new AccessDB();
+            try
+            {
+				accessDB.SetearQuery(@"insert into NivelesAcceso(nombre) values('Cliente'), ('Administrador'), ('Dueño');");
+				accessDB.EjecutarAccion();
+			}
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+		public void CargarNiveles()
+        {
+			SetearSPContarAccNiveles();
+			if(EjecutarSPContarAccNiveles()==0)
+            {
+				InsertarnivelesAcceso();
+            }
+		}
 	}
 }

@@ -56,6 +56,7 @@
         <asp:Button ID="btnAFavoritas" Text="Cabañas Favoritas" CssClass="btn btn-secondary mr-auto ml-auto" runat="server" OnClick="btnAFavoritas_Click" />
         <asp:Button Text="Cerrar Sesion" class="btn btn-danger mr-auto ml-auto" ID="btnCerrarSesion" OnClick="btnCerrarSesion_Click" runat="server" />
         <asp:Label ID="lblNombreUsuario" runat="server" />
+        <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large; " href="~/Configuracion">Configuración</a>
         <%
         }
         %>
