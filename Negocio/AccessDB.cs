@@ -69,7 +69,7 @@ namespace Negocio
                 Conexion.Close();
         }
 
-        internal void EjecutarAccion()
+        public void EjecutarAccion()
         {
             try
             {
