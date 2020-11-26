@@ -17,13 +17,11 @@ namespace TPC_CacchioneMajdalani
         public Usuario UsuarioActual { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session[Session.SessionID + "userSession"] != null)
-            {
-                UsuarioActual = (Usuario)Session[Session.SessionID + "userSession"];
-                lblNombreUsuario.Text = "Usuario: " + UsuarioActual.NombreUsuario;
-            }
-            else
-                UsuarioActual = null;
+            SetearUsuarioActual();
+
+
+
+
         }
 
         protected void btnCerrarSesion_Click(object sender, EventArgs e)
@@ -35,6 +33,19 @@ namespace TPC_CacchioneMajdalani
         protected void btnModificarDatos_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/ModificarUsuario");
+        }
+
+        private void SetearUsuarioActual()
+        {
+            if (Session[Session.SessionID + "userSession"] != null)
+            {
+                UsuarioActual = (Usuario)Session[Session.SessionID + "userSession"];
+                lblNombreUsuario.Text = "Usuario: " + UsuarioActual.NombreUsuario;
+            }
+            else
+            {
+                UsuarioActual = null;
+            }
         }
     }
 }

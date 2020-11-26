@@ -28,7 +28,15 @@ namespace Negocio
             Comando.CommandText = Consulta;
         }
 
-        public void SetearSp(string sp)
+        public void SetearTrigger(string trig)
+        {
+            Comando.CommandType = System.Data.CommandType.Text;
+            Comando.CommandText = trig;
+            Conexion.Open();
+            Comando.ExecuteNonQuery();
+        }
+
+        public void SetearStoredProcedure(string sp)
         {
             Comando.CommandType = System.Data.CommandType.StoredProcedure;
             Comando.CommandText = sp;

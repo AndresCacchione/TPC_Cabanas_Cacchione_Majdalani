@@ -20,6 +20,7 @@ namespace TPC_CacchioneMajdalani
                 QuitarCabañaFavoritas();
                 ContarFavoritas();
             }
+
             catch (Exception ex)
             {
                 throw ex;
