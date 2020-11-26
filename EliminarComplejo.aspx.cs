@@ -53,7 +53,7 @@ namespace TPC_CacchioneMajdalani
                     listaAuxCabañas.RemoveAll(i => i.complejo.ID == Aux.ID);
                     Session["listaCabañas"] = listaAuxCabañas;
                 }
-                Response.Redirect("Complejos.aspx");
+                Response.Redirect("~/Complejos");
             }
             else
             {

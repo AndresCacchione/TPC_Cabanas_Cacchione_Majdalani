@@ -24,7 +24,7 @@ namespace TPC_CacchioneMajdalani
 			try
             {
 				acceso.SetearTrigger(@" use Cacchione_Majdalani_DB
-                                    go
+                                    
                                     IF NOT EXISTS (select * from sys.objects where name = 'tr_eliminar_cabaña')
                                     BEGIN
                                         EXEC ('create trigger tr_eliminar_cabaña on cabañas
@@ -62,7 +62,7 @@ namespace TPC_CacchioneMajdalani
             try
             {
 				acceso.SetearTrigger(@" use Cacchione_Majdalani_DB
-									go
+									
 									IF NOT EXISTS (select * from sys.objects where name = 'tr_eliminar_complejo')
 									BEGIN
 										EXEC ('create trigger tr_eliminar_complejo on complejos

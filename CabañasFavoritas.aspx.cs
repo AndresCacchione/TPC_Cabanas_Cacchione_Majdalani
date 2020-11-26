@@ -54,7 +54,7 @@ namespace TPC_CacchioneMajdalani
                 Response.Redirect("~/CabañasFavoritas");
             }
         }
-        
+
         private void AgregarCabañaFavoritas()
         {
             if (Request.QueryString["idCabaña"] != null)
@@ -68,8 +68,17 @@ namespace TPC_CacchioneMajdalani
                 }
 
                 List<Cabaña> ListaOriginal = (List<Cabaña>)Session["listaCabañas"];
-                ListaFavoritas.Add(ListaOriginal.Find(i => i.Id == long.Parse(Request.QueryString["idCabaña"])));
-                Session[Session.SessionID + "listaFavoritas"] = ListaFavoritas;
+                Cabaña itemAAgregar = ListaOriginal.Find(i => i.Id == long.Parse(Request.QueryString["idCabaña"]));
+                if (itemAAgregar != null)
+                {
+                    ListaFavoritas.Add(itemAAgregar);
+                    Session[Session.SessionID + "listaFavoritas"] = ListaFavoritas;
+                }
+                else
+                {
+                    Response.Redirect("~/CabañasFavoritas");
+                }
+
             }
         }
     }
