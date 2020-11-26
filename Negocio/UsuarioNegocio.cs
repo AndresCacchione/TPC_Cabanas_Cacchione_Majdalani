@@ -44,13 +44,19 @@ namespace Negocio
             usuario.Contraseña = Encrypt.GetSHA256(usuario.Contraseña);
             try
             {
-                access.SetearQuery("Select Id from usuarios where Nombre=@NombreUsuario and Contra=@Contra");
+                access.SetearQuery("Select Id from usuarios where NombreUsuario=@NombreUsuario and Contra=@Contra");
                 access.AgregarParametro("@NombreUsuario", usuario.NombreUsuario);
                 access.AgregarParametro("@Contra", usuario.Contraseña);
 
                 access.EjecutarLector();
-                access.Lector.Read();
-                usuario.Id = Convert.ToInt64(access.Lector["Id"]);
+                if(access.Lector.Read())
+                {
+                    usuario.Id = Convert.ToInt64(access.Lector["Id"]);
+                }
+                else
+                {
+                    usuario.Id = 0;
+                }
             }
 
             catch (Exception ex)
@@ -73,7 +79,7 @@ namespace Negocio
 
             try
             {
-                access.SetearQuery("insert into Usuarios (nombre,contra,IdNivelAcceso,estado) values(@nombre,@contra,@IdNivelAcceso,@estado)");
+                access.SetearQuery("insert into Usuarios (nombreUsuario,contra,IdNivelAcceso,estado) values(@nombre,@contra,@IdNivelAcceso,@estado)");
                 access.AgregarParametro("@nombre", NuevoUsuario.NombreUsuario);
                 access.AgregarParametro("@contra", NuevoUsuario.Contraseña);
                 access.AgregarParametro("@estado", NuevoUsuario.Estado);
@@ -212,7 +218,7 @@ namespace Negocio
             AccessDB access = new AccessDB();
             try
             {
-                access.SetearQuery("update usuarios set nombre=@nombre, contra=@contra," +
+                access.SetearQuery("update usuarios set nombreUsuario=@nombre, contra=@contra," +
                 "Estado=@Estado, IdNivelAcceso=@IdNivelAcceso where ID=" + Usuario.Id);
                 access.AgregarParametro("@nombre", Usuario.NombreUsuario);
                 access.AgregarParametro("@contra", Usuario.Contraseña);
@@ -286,12 +292,12 @@ namespace Negocio
                     {
                         Estado = (bool)access.Lector["Estado"],
                         Id = (long)access.Lector["Id"],
-                        NombreUsuario = (string)access.Lector["u.nombre"],
+                        NombreUsuario = (string)access.Lector["nombreUsuario"],
                         Contraseña = (string)access.Lector["Contra"],
                         NivelAcceso = (byte)access.Lector["IdNivelAcceso"],
                         DatosPersonales = new DatosPersonales
                         {
-                            Nombre = (string)access.Lector["dat.nombre"],
+                            Nombre = (string)access.Lector["nombre"],
                             Apellido = (string)access.Lector["apellido"],
                             DNI = (string)access.Lector["dni"],
                             Email = (string)access.Lector["email"],
@@ -299,7 +305,7 @@ namespace Negocio
                             UrlImagen = (string)access.Lector["URLimagen"],
                             PaisOrigen = ListarPais((short)access.Lector["IDPais"]), //con el ID traido de DB, casteado, hago uso del método ListarPais,
                             Domicilio = (string)access.Lector["domicilio"],         //que recibe un short y devuelve el País correspondiente en forma de string
-                            Genero = (char)access.Lector["genero"]
+                            Genero = (string)access.Lector["genero"]
                         }
                     };
                     userList.Add(aux);
@@ -323,20 +329,20 @@ namespace Negocio
             Usuario buscado = new Usuario();
             try
             {
-                access.SetearQuery("Select * from usuarios u, datospersonales dat where dat.idusuario=u.id and u.id=" + IdUsuario);
+                access.SetearQuery("Select * from usuarios, datospersonales where idusuario=id and id=" + IdUsuario);
                 access.EjecutarLector();
                 access.Lector.Read();
 
                 buscado.Id = (long)access.Lector["id"];
-                buscado.NombreUsuario = (string)access.Lector["u.Nombre"];
+                buscado.NombreUsuario = (string)access.Lector["NombreUsuario"];
                 buscado.Contraseña = (string)access.Lector["Contra"];
                 buscado.Estado = (bool)access.Lector["Estado"];
                 buscado.DatosPersonales.Apellido = (string)access.Lector["Apellido"];
-                buscado.DatosPersonales.Nombre = (string)access.Lector["dat.Nombre"]; //creería que ahí alcanzaría para que no exista ambiguedad en las tablas llamadas Nombre
+                buscado.DatosPersonales.Nombre = (string)access.Lector["Nombre"]; //creería que ahí alcanzaría para que no exista ambiguedad en las tablas llamadas Nombre
                 buscado.DatosPersonales.DNI = (string)access.Lector["Dni"];
                 buscado.DatosPersonales.Domicilio = (string)access.Lector["Domicilio"];
                 buscado.DatosPersonales.Email = (string)access.Lector["Email"];
-                buscado.DatosPersonales.Genero = (char)access.Lector["Genero"];
+                buscado.DatosPersonales.Genero = (string)access.Lector["genero"];
                 buscado.DatosPersonales.PaisOrigen = ListarPais((short)access.Lector["IdPais"]);
                 buscado.DatosPersonales.Telefono = (string)access.Lector["Telefono"];
                 buscado.DatosPersonales.UrlImagen = (string)access.Lector["URLImagen"];

@@ -25,8 +25,9 @@ namespace TPC_CacchioneMajdalani
                 usuario.NombreUsuario = NombreUsuario.Value;
                 usuario.Contraseña = Contraseña.Value;
                 usuario = usuarioNegocio.Login(usuario);
-                if (usuario.Id != 0)
+                if (Convert.ToInt64(usuario.Id) != 0)
                 {
+                    usuario = usuarioNegocio.ListarUsuarioPorId(usuario.Id);
                     Session.Add(Session.SessionID + "userSession", usuario);
                     //Session.Add("userSession", usuario);
                     Response.Redirect("Complejos.aspx");

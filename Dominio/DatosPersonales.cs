@@ -16,7 +16,7 @@ namespace Dominio
         public string UrlImagen { get; set; }
         public string PaisOrigen { get; set; }
         public string Domicilio { get; set; }
-        public char Genero { get; set; }
+        public string Genero { get; set; }
 
     }
 }

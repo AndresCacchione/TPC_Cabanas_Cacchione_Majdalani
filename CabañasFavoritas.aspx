@@ -7,8 +7,8 @@
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Imagen</th>
                             <th scope="col">Complejo</th>
+                            <th scope="col">Imagen</th>
                             <th scope="col">Precio Diario</th>
                             <th scope="col">Capacidad</th>
                             <th scope="col">Acción</th>
@@ -17,9 +17,9 @@
                     <%foreach (Dominio.Cabaña item in ListaFavoritas)
                         { %>
                     <tr>
-                        <th scope="row"><% = item.Imagen %> </th>
+                        <th scope="row"> <% = item.complejo.Nombre %> </th>
                         <td>
-                            <img src="<% = item.complejo.Nombre %>" style="max-width: 100px" alt="...">
+                            <img src="<% = item.complejo.Imagen %>" style="max-width: 200px" alt="...">
 
                             <th scope="row">$<% = item.PrecioDiario %></th>
 

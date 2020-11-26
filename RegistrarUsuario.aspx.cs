@@ -39,7 +39,7 @@ namespace TPC_CacchioneMajdalani
                     DNI = DNI.Value,
                     Domicilio = Domicilio.Value,
                     Email = email.Value,
-                    Genero = Convert.ToChar(DDLGenero.SelectedValue),
+                    Genero = Convert.ToString(DDLGenero.SelectedValue),
                     Nombre = Nombre.Value,
                     PaisOrigen = DDLPaises.SelectedValue,
                     Telefono = Telefono.Value,

@@ -73,7 +73,7 @@ go
 go
 Create Table Usuarios(
 Id Bigint not null identity(1,1),
-nombre varchar(50) not null,
+nombreUsuario varchar(50) not null,
 contra varchar (200) Not null,
 IdNivelAcceso tinyint not null,
 estado bit not null
@@ -85,7 +85,7 @@ Add Constraint Pk_Id_Usuarios Primary key (Id)
 
 go
 alter Table Usuarios
-Add Constraint U_Nombre_Usuarios Unique (Nombre)
+Add Constraint U_NombreUsuario_Usuarios Unique (NombreUsuario)
 go
 Alter Table Usuarios
 add Constraint Fk_IdNivelAcceso_Usuarios Foreign key (IdNivelAcceso) References NivelesAcceso(Id) 
@@ -415,6 +415,6 @@ Drop Table NivelesAcceso
 Drop Table Paises
 */
 
-DECLARE @HashThis NVARCHAR(4000);
+/*DECLARE @HashThis NVARCHAR(4000);
 SELECT @HashThis = N'456';
-SELECT  HASHBYTES('SHA2_256', CONVERT(VARCHAR(4000),@HashThis,0));
+SELECT  HASHBYTES('SHA2_256', CONVERT(VARCHAR(4000),@HashThis,0));*/

@@ -89,9 +89,6 @@ insert into Paises
 values('Estados Unidos')
 go
 insert into Paises
-values('Inglaterra')
-go
-insert into Paises
 values('Venezuela')
 go
 insert into Paises

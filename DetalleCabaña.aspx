@@ -31,7 +31,7 @@
 
                           <a href="<%=StringBotonVolver%>" class="btn btn-secondary mr-auto ml-auto">Volver</a>
                           <a href="AgregarModificarCabaña.aspx?IdCabaña=<%=CabañaAuxiliar.Id.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Modificar</a>
-                          <a href="CabañasFavoritas.aspx?IdCabaña=<%=CabañaAuxiliar.Id.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Agregar a Favoritas</a>
+                          <a href="CabañasFavoritas.aspx?idCabaña=<%=CabañaAuxiliar.Id.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Agregar a Favoritas</a>
                           <a href="EliminarCabaña.aspx?idCabaña=<%=CabañaAuxiliar.Id.ToString()%>" class="btn btn-danger mr-auto ml-auto">Eliminar</a>
 
 
