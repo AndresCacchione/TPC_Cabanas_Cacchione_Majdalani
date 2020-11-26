@@ -814,6 +814,49 @@ namespace Negocio
 				throw ex;
 			}
 		}
+		private void SetearSPContarUsuarios()
+		{
+			AccessDB accessDB = new AccessDB();
+			try
+			{
+				accessDB.SetearQuery(@"use Cacchione_Majdalani_DB
+										--drop procedure if exists SPContarUsuarios
+										if not exists (Select * from sys.objects where name = 'SPContarUsuarios')
+										begin
+										exec('create procedure SPContarUsuarios
+										as
+										begin
+										return (select count (*) from Usuarios)
+										end
+										')
+										end");
+				accessDB.EjecutarAccion();
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+		}
+		private int EjecutarSPContarUsuarios()
+		{
+			AccessDB accessDB = new AccessDB();
+			int ret;
+			try
+			{
+				ret = accessDB.EjecutarStoredProcedureIntReturn("SPContarUsuarios");
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+			finally
+			{
+				accessDB.CerrarConexion();
+			}
+			return ret;
+		}
+
 		private int EjecutarSPContarAccNiveles()
         {
 			AccessDB accessDB = new AccessDB();
@@ -845,6 +888,22 @@ namespace Negocio
                 throw ex;
             }
         }
+
+		private void InsertarUsuarios()
+		{
+			AccessDB accessDB = new AccessDB();
+			try
+			{
+				accessDB.SetearQuery(@"insert into Usuarios values('Admin','794ac92b117ed5eacaee3c6706c9024b2e44ce68d2d4b297c9ed8767a7015ca7',3,1) ");
+				accessDB.EjecutarAccion();
+				accessDB.SetearQuery(@"insert into DatosPersonales values(1,'Admin','Admin','000000000','Admin@Admin.com','00000000','1',1,'Admin','o')");
+				accessDB.EjecutarAccion();
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
 		public void CargarNiveles()
         {
 			SetearSPContarAccNiveles();
@@ -852,6 +911,15 @@ namespace Negocio
             {
 				InsertarnivelesAcceso();
             }
+		}
+
+		public void CargarUsuarios()
+		{
+			SetearSPContarUsuarios();
+			if (EjecutarSPContarUsuarios() == 0)
+			{
+				InsertarUsuarios();
+			}
 		}
 	}
 }

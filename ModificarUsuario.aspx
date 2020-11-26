@@ -84,5 +84,5 @@
         </div>
     </div>
 
-    <asp:Button ID="btnModificarDatos" Text="Actualizar datos" class="btn btn-success mr-auto ml-auto" runat="server" />
+    <asp:Button ID="btnModificarDatos" OnClick="btnModificarDatos_Click" Text="Actualizar datos" class="btn btn-success mr-auto ml-auto" runat="server" />
 </asp:Content>

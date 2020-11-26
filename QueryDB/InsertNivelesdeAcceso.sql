@@ -11,6 +11,15 @@ end
 ')
 end
 
+go
 
-
-
+if not exists(Select * from sys.objects where name = 'SPContarUsuarios')
+begin 
+exec(
+'create procedure SPContarUsuarios
+as
+begin 
+return (select count (*)from Usuarios)
+end'
+)
+end

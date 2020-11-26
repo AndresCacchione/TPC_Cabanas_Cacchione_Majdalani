@@ -72,7 +72,7 @@ namespace Negocio
             return usuario;
         }
 
-        public void InsertarUsuario(Usuario NuevoUsuario)
+        private void InsertarUsuario(Usuario NuevoUsuario)
         {
             AccessDB access = new AccessDB();
             NuevoUsuario.Contraseña = Encrypt.GetSHA256(NuevoUsuario.Contraseña);
@@ -156,7 +156,7 @@ namespace Negocio
             return NombrePais;
         }
 
-        public void InsertarDatosPersonales(Usuario NuevoUsuario, short IdPais)
+        private void InsertarDatosPersonales(Usuario NuevoUsuario, short IdPais)
         {
             AccessDB access = new AccessDB();
             try
@@ -216,7 +216,7 @@ namespace Negocio
             }
         }
 
-        public void ModificarUsuario(Usuario Usuario)
+        private void ModificarUsuario(Usuario Usuario)
         {
             AccessDB access = new AccessDB();
             try
@@ -241,7 +241,7 @@ namespace Negocio
             }
         }
 
-        public void ModificarDatosPersonales(DatosPersonales Datos, short IDpais, long IDUsuario)
+        private void ModificarDatosPersonales(DatosPersonales Datos, short IDpais, long IDUsuario)
         {
             AccessDB access = new AccessDB();
             try

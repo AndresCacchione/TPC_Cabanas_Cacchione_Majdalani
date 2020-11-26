@@ -1,4 +1,3 @@
-1) Crear Usuario Dueño cuando no existen usuarios (nivel de acceso 3).
 2) Listar usuarios (pagina y boton modificar).
 3) Modificar usuarios --> agregar el nivel de acceso en el Admin y el Dueño.
 4) Calendario: a) Investigar cómo mostrar un calendario (agregarlo en una 			pagina)
