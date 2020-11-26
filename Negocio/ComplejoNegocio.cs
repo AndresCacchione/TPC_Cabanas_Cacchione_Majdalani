@@ -107,7 +107,8 @@ namespace Negocio
             AccessDB Acceso = new AccessDB();
             try
             {
-                Acceso.SetearQuery("Update Complejos set ImagenPortada=@UrlImagen, Nombre=@Nombre, Telefono=@Tel, Ubicacion=@Ubicacion, email=@Mail, Estado=1, DiferenciaFeriado=@PrecioFeriado where ID=@Id");
+                Acceso.SetearQuery("Update Complejos set ImagenPortada=@UrlImagen, Nombre=@Nombre, Telefono=@Tel, " +
+                    "Ubicacion=@Ubicacion, email=@Mail, Estado=1, DiferenciaFeriado=@PrecioFeriado where ID=@Id");
 
                 Acceso.AgregarParametro("@UrlImagen", Aux.Imagen);
                 Acceso.AgregarParametro("@Nombre", Aux.Nombre);
@@ -134,7 +135,8 @@ namespace Negocio
             AccessDB Acceso = new AccessDB();
             try
             {
-                Acceso.SetearQuery("Insert into Complejos (ImagenPortada,Nombre,Telefono,Ubicacion,email,Estado,DiferenciaFeriado) values (@UrlImagen,@Nombre,@Tel,@Ubicacion,@Mail,1,@PrecioFeriado)");
+                Acceso.SetearQuery("Insert into Complejos (ImagenPortada, Nombre, Telefono, Ubicacion, email, Estado, " +
+                    "DiferenciaFeriado) values (@UrlImagen, @Nombre, @Tel, @Ubicacion, @Mail, 1, @PrecioFeriado)");
                 Acceso.AgregarParametro("@UrlImagen", Aux.Imagen);
                 Acceso.AgregarParametro("@Nombre", Aux.Nombre);
                 Acceso.AgregarParametro("@Mail", Aux.Mail);

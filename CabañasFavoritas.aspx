@@ -8,7 +8,6 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Complejo</th>
-                            <th scope="col">Imagen Complejo</th>
                             <th scope="col">Imagen Cabaña</th>
                             <th scope="col">Precio Diario</th>
                             <th scope="col">Capacidad</th>
@@ -22,10 +21,7 @@
                             
                         </th>
                         <td>
-                            <img src="<% = item.complejo.Imagen %>" style="width: 200px; height: inherit;" alt="...">
-
-                            <td>
-                                <img src="<% = item.Imagen %>" style="width: 200px; height: inherit;" alt="..."></td>
+                            <img src="<% = item.Imagen %>" style="width: 200px; height: inherit;" alt="...">
 
                             <th scope="row">$<% = item.PrecioDiario %></th>
 
@@ -44,7 +40,7 @@
                     </tr>
 
                 </table>
-                <td><a href="Cabañas.aspx" class="btn btn-secondary" role="button">Volver a la lista de Cabañas</a></td>
+                <td><a href="Cabañas.aspx" class="btn btn-secondary" role="button">Ir a la lista de Cabañas</a></td>
             </div>
         </div>
     </div>

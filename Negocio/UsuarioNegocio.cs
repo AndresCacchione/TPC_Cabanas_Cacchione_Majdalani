@@ -11,7 +11,7 @@ namespace Negocio
     public class UsuarioNegocio
     {
         public List<string> ListarPaises()
-        {     
+        {
             AccessDB acceso = new AccessDB();
             List<string> ListaPaises = new List<string>();
             try
@@ -49,7 +49,7 @@ namespace Negocio
                 access.AgregarParametro("@Contra", usuario.Contraseña);
 
                 access.EjecutarLector();
-                if(access.Lector.Read())
+                if (access.Lector.Read())
                 {
                     usuario.Id = Convert.ToInt64(access.Lector["Id"]);
                 }
@@ -79,7 +79,8 @@ namespace Negocio
 
             try
             {
-                access.SetearQuery("insert into Usuarios (nombreUsuario,contra,IdNivelAcceso,estado) values(@nombre,@contra,@IdNivelAcceso,@estado)");
+                access.SetearQuery("insert into Usuarios (nombreUsuario, contra, IdNivelAcceso, estado) values" +
+                    " (@nombre, @contra, @IdNivelAcceso, @estado)");
                 access.AgregarParametro("@nombre", NuevoUsuario.NombreUsuario);
                 access.AgregarParametro("@contra", NuevoUsuario.Contraseña);
                 access.AgregarParametro("@estado", NuevoUsuario.Estado);
@@ -104,7 +105,7 @@ namespace Negocio
             long aux = new long();
             try
             {
-                access.SetearQuery("select top 1 usuarios.id from Usuarios where estado = 1 order by Usuarios.ID desc");
+                access.SetearQuery("select top 1 id from Usuarios where estado = 1 order by id desc");
                 access.EjecutarLector();
                 access.Lector.Read();
                 aux = (long)access.Lector["ID"];
@@ -128,7 +129,7 @@ namespace Negocio
 
             try
             {
-                access.SetearQuery("select paises.id from Paises where paises.nombre like '" + NombrePais + "'");
+                access.SetearQuery("select id from Paises where nombre like '" + NombrePais + "'");
                 access.EjecutarLector();
                 access.Lector.Read();
                 IdPais = (short)access.Lector["ID"];
@@ -160,7 +161,9 @@ namespace Negocio
             AccessDB access = new AccessDB();
             try
             {
-                access.SetearQuery("insert into DatosPersonales (IdUsuario,nombre,apellido,dni,email,telefono,URLimagen,IDpais,domicilio,genero) values(@IdUsuario,@Nombre,@Apellido,@dni,@email,@telefono,@URLimagen,@idPais,@Domicilio,@genero)");
+                access.SetearQuery("insert into DatosPersonales (IdUsuario, nombre, apellido, dni, email, telefono," +
+                    " URLimagen, IDpais, domicilio, genero) values (@IdUsuario, @Nombre, @Apellido, @dni, @email, " +
+                    "@telefono, @URLimagen, @idPais, @Domicilio, @genero)");
                 access.AgregarParametro("@IdUsuario", NuevoUsuario.Id);
                 access.AgregarParametro("@Apellido", NuevoUsuario.DatosPersonales.Apellido);
                 access.AgregarParametro("@Nombre", NuevoUsuario.DatosPersonales.Nombre);
@@ -275,8 +278,8 @@ namespace Negocio
             short IDPais = GetIDPais(Usuario.DatosPersonales.PaisOrigen);
             ModificarDatosPersonales(Usuario.DatosPersonales, IDPais, Usuario.Id);
         }
-        
-        
+
+
         public List<Usuario> ListarUsuarios()
         {
             AccessDB access = new AccessDB();
@@ -284,7 +287,8 @@ namespace Negocio
 
             try
             {
-                access.SetearQuery("Select * from usuarios u, datospersonales dat where dat.idusuario=u.id order by usuarios.ID asc");
+                access.SetearQuery("Select * from usuarios u, datospersonales dat where dat.idusuario=u.id order by " +
+                    "usuarios.ID asc");
                 access.EjecutarLector();
                 while (access.Lector.Read())
                 {

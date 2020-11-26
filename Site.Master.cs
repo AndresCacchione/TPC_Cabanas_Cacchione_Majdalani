@@ -47,5 +47,10 @@ namespace TPC_CacchioneMajdalani
                 UsuarioActual = null;
             }
         }
+
+        protected void btnAFavoritas_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/CabañasFavoritas");
+        }
     }
 }
