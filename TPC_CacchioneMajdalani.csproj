@@ -130,6 +130,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
+    <Content Include="Mail.aspx" />
     <Content Include="ModificarUsuario.aspx" />
     <Content Include="RegistrarUsuario.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -365,6 +366,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mail.aspx.cs">
+      <DependentUpon>Mail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mail.aspx.designer.cs">
+      <DependentUpon>Mail.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModificarUsuario.aspx.cs">
       <DependentUpon>ModificarUsuario.aspx</DependentUpon>
