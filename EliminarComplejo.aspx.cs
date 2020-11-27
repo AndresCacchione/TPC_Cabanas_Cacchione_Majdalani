@@ -16,13 +16,21 @@ namespace TPC_CacchioneMajdalani
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ComplejoNegocio negocio = new ComplejoNegocio();
+            if (Request.QueryString["idComplejo"] != null)
+            {
+                ComplejoNegocio negocio = new ComplejoNegocio();
 
-            long idaux = Convert.ToInt64(Request.QueryString["idComplejo"]);
+                long idaux = Convert.ToInt64(Request.QueryString["idComplejo"]);
 
-            List<Dominio.Complejo> listaAux = new List<Dominio.Complejo>();
-            listaAux = (List<Dominio.Complejo>)base.Session["listaComplejos"];
-            Aux = listaAux.Find(i => i.ID == idaux);
+                List<Dominio.Complejo> listaAux = new List<Dominio.Complejo>();
+                listaAux = (List<Dominio.Complejo>)base.Session["listaComplejos"];
+                Aux = listaAux.Find(i => i.ID == idaux);
+            }
+            else
+            {
+                Response.Redirect("Complejos.aspx");
+            }
+
         }
 
         protected void Eliminar_Click(object sender, EventArgs e)

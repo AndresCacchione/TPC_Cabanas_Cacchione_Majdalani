@@ -111,6 +111,7 @@
     <Content Include="AgregarModificarComplejo.aspx" />
     <Content Include="Cabañas.aspx" />
     <Content Include="CabañasFavoritas.aspx" />
+    <Content Include="Calendario.aspx" />
     <Content Include="Clientes.aspx" />
     <Content Include="Complejos.aspx" />
     <Content Include="Configuracion.aspx" />
@@ -300,6 +301,13 @@
     </Compile>
     <Compile Include="CabañasFavoritas.aspx.designer.cs">
       <DependentUpon>CabañasFavoritas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Calendario.aspx.cs">
+      <DependentUpon>Calendario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Calendario.aspx.designer.cs">
+      <DependentUpon>Calendario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clientes.aspx.cs">
       <DependentUpon>Clientes.aspx</DependentUpon>

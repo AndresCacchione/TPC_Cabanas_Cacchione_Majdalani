@@ -50,7 +50,9 @@ namespace TPC_CacchioneMajdalani
                 }
             }
             else
+            {
                 Response.Redirect("Cabañas.aspx"); //Lo mismo que con DetalleComplejo
+            }
             
         }
 

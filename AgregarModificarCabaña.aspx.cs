@@ -44,6 +44,7 @@ namespace TPC_CacchioneMajdalani
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+
             long ID = Convert.ToInt64(Request.QueryString["IdComplejo"]);
             long IDCabaña = Convert.ToInt64(Request.QueryString["IdCabaña"]);
             Auxiliar.complejo.ID = ID;
@@ -54,7 +55,6 @@ namespace TPC_CacchioneMajdalani
                 List<Dominio.Cabaña> listaAux = new List<Dominio.Cabaña>();
                 listaAux = (List<Dominio.Cabaña>)Session["listaCabañas"];
                 Auxiliar = listaAux.Find(i => i.Id == Auxiliar.Id);
-
                 if (!IsPostBack)
                 {
                     CargarFormulario();
@@ -62,6 +62,7 @@ namespace TPC_CacchioneMajdalani
                     BtnAgregarCabaña.BackColor = System.Drawing.Color.FromArgb(228, 192, 50);
                 }
             }
+
         }
 
         protected void BtnAgregarCabaña_Click(object sender, EventArgs e)

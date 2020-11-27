@@ -14,13 +14,21 @@ namespace TPC_CacchioneMajdalani
         public Cabaña Aux { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            CabañaNegocio Negocio = new CabañaNegocio();
+            if (Request.QueryString["idCabaña"] != null)
+            {
+                CabañaNegocio Negocio = new CabañaNegocio();
 
-            long idaux = Convert.ToInt64(Request.QueryString["IdCabaña"]);
+                long idaux = Convert.ToInt64(Request.QueryString["IdCabaña"]);
 
-            List<Dominio.Cabaña> listaAux = new List<Dominio.Cabaña>();
-            listaAux = (List<Dominio.Cabaña>)base.Session["listaCabañas"];
-            Aux = listaAux.Find(i => i.Id == idaux);
+                List<Dominio.Cabaña> listaAux = new List<Dominio.Cabaña>();
+                listaAux = (List<Dominio.Cabaña>)base.Session["listaCabañas"];
+                Aux = listaAux.Find(i => i.Id == idaux);
+            }
+            else
+            {
+                Response.Redirect("Cabañas.aspx");
+            }
+
         }
 
         protected void Unnamed_Click(object sender, EventArgs e)
