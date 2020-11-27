@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EliminarCabaña.aspx.cs" Inherits="TPC_CacchioneMajdalani.EliminarCabaña" %>
+﻿<%@ Page Title="Eliminar Cabaña" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EliminarCabaña.aspx.cs" Inherits="TPC_CacchioneMajdalani.EliminarCabaña" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
             <h2>
          ELIMINAR

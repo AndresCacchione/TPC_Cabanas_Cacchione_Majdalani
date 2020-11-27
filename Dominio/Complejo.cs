@@ -9,6 +9,10 @@ namespace Dominio
 {
     public class Complejo
     {
+        public Complejo()
+        {
+            this.ListaImagenes = new List<Imagen>();
+        }
         public long ID { get; set; }
         public string Imagen { get; set; }
         public string Nombre { get; set; }

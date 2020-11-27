@@ -28,8 +28,8 @@ namespace TPC_CacchioneMajdalani
 
             try
             {
-                smtpClient.Send(mail);
-                Label1.Text = "Email enviado";
+                smtpClient.Send(mail); //si se usa Google Chrome, ir a https://myaccount.google.com/lesssecureapps 
+                Label1.Text = "Email enviado"; //y permitir acceso de apps menos seguras, ya que de otra manera, el email no se va a enviar
             }
             catch (Exception ex)
             {

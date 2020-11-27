@@ -1,4 +1,4 @@
-﻿<%@ Page Title="RegistrarUsuario" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="RegistrarUsuario.aspx.cs" Inherits="TPC_CacchioneMajdalani.RegistrarUsuario" %>
+﻿<%@ Page Title="Registrarse" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="RegistrarUsuario.aspx.cs" Inherits="TPC_CacchioneMajdalani.RegistrarUsuario" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
             
   <div class="form-row">

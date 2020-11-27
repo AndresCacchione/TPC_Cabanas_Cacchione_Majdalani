@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Detalle" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DetalleCabaña.aspx.cs" Inherits="TPC_CacchioneMajdalani.DetalleCabaña" %>
+﻿<%@ Page Title="Detalle Cabaña" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DetalleCabaña.aspx.cs" Inherits="TPC_CacchioneMajdalani.DetalleCabaña" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
               <div class="col-md-4">
                   <div class="card mt-4" style="width: 20rem;">

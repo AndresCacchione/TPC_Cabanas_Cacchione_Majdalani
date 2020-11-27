@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CabañasFavoritas.aspx.cs" Inherits="TPC_CacchioneMajdalani.CabañasFavoritas" %>
+﻿<%@ Page Title="Mis Cabañas Favoritas" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CabañasFavoritas.aspx.cs" Inherits="TPC_CacchioneMajdalani.CabañasFavoritas" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">

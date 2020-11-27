@@ -19,7 +19,7 @@ namespace TPC_CacchioneMajdalani
                 long idaux = Convert.ToInt64(Request.QueryString["idComplejo"]);
                 if (idaux == 0)
                 {
-                    Response.Redirect("Complejos.aspx");
+                    Response.Redirect("~/Complejos");
                 }
 
                 List<Dominio.Complejo> listaAux = new List<Dominio.Complejo>();
@@ -42,7 +42,7 @@ namespace TPC_CacchioneMajdalani
                 //}
             }
             else
-                Response.Redirect("Complejos.aspx"); //Si entran sin enviar ID, que no rompa, que redirija a complejos
+                Response.Redirect("~/Complejos"); //Si entran sin enviar ID, que no rompa, que redirija a complejos
 
         }
 

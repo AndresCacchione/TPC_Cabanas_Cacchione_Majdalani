@@ -8,6 +8,10 @@ namespace Dominio
 {
     public class Cabaña
     {
+        public Cabaña()
+        {
+            this.ListaImagenes = new List<Imagen>();
+        }
         public long Id { get; set; }
         public decimal PrecioDiario { get; set; }
         public byte Capacidad { get; set; }

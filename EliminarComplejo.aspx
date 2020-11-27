@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Eliminar Complejos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EliminarComplejo.aspx.cs" Inherits="TPC_CacchioneMajdalani.EliminarComplejo" %>
+﻿<%@ Page Title="Eliminar Complejo" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EliminarComplejo.aspx.cs" Inherits="TPC_CacchioneMajdalani.EliminarComplejo" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h2>
          ELIMINAR

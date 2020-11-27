@@ -9,9 +9,9 @@ namespace Dominio
     public class Usuario
     {
         public Usuario()
-            {
+        {
             this.DatosPersonales = new DatosPersonales();
-            }
+        }
         public long Id { get; set; }
         public string NombreUsuario { get; set; }
         public string Contraseña { get; set; }

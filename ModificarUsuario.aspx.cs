@@ -45,7 +45,7 @@ namespace TPC_CacchioneMajdalani
                 }
                 else
                 {
-                    ListaGeneros = (List<String>)Session["listaGeneros"];
+                    ListaGeneros = (List<string>)Session["listaGeneros"];
                 }
                 DDLGenero.DataSource = ListaGeneros;
                 DDLGenero.DataBind();
@@ -64,7 +64,7 @@ namespace TPC_CacchioneMajdalani
                 }
                 else
                 {
-                    ListaPaises = (List <String>)Session["listaPaises"];
+                    ListaPaises = (List<string>)Session["listaPaises"];
                 }
                 DDLPaises.DataSource = ListaPaises;
                 DDLPaises.DataBind();
@@ -76,7 +76,7 @@ namespace TPC_CacchioneMajdalani
             if (!IsPostBack)
             {
                 Dictionary<string, bool> DiccionarioNombreEstados = new Dictionary<string, bool>();
-                DiccionarioNombreEstados.Add("Activo",true);
+                DiccionarioNombreEstados.Add("Activo", true);
                 DiccionarioNombreEstados.Add("Inactivo", false);
                 DDLEstado.DataSource = DiccionarioNombreEstados;
                 DDLEstado.DataBind();
