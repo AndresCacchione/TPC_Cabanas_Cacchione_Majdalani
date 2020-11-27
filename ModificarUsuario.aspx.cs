@@ -14,10 +14,13 @@ namespace TPC_CacchioneMajdalani
         public Usuario usuario { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            CargarDDLPaises();
+            CargarDDLGeneros();
+            CargarDDLEstados();
+
+            usuario = new Usuario();
             if (!IsPostBack)
             {
-                usuario = new Usuario();
-
                 long id = Convert.ToInt64(Request.QueryString["idUsuario"]);
                 if (id != 0)
                 {
@@ -25,7 +28,59 @@ namespace TPC_CacchioneMajdalani
                     CargarInputsUsuarios();
                 }
             }
+        }
 
+        private void CargarDDLGeneros()
+        {
+            if (!IsPostBack)
+            {
+                List<string> ListaGeneros = new List<string>();
+                if (Session["listaGeneros"] == null)
+                {
+                    ListaGeneros = new List<string>();
+                    ListaGeneros.Add("F - Femenino");
+                    ListaGeneros.Add("M - Masculino");
+                    ListaGeneros.Add("O - Otros");
+                    Session.Add("listaGeneros", ListaGeneros);
+                }
+                else
+                {
+                    ListaGeneros = (List<String>)Session["listaGeneros"];
+                }
+                DDLGenero.DataSource = ListaGeneros;
+                DDLGenero.DataBind();
+            }
+        }
+
+        private void CargarDDLPaises()
+        {
+            if (!IsPostBack)
+            {
+                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                List<string> ListaPaises = usuarioNegocio.ListarPaises();
+                if (Session["listaPaises"] == null)
+                {
+                    Session.Add("listaPaises", ListaPaises);
+                }
+                else
+                {
+                    ListaPaises = (List <String>)Session["listaPaises"];
+                }
+                DDLPaises.DataSource = ListaPaises;
+                DDLPaises.DataBind();
+            }
+        }
+
+        private void CargarDDLEstados()
+        {
+            if (!IsPostBack)
+            {
+                Dictionary<string, bool> DiccionarioNombreEstados = new Dictionary<string, bool>();
+                DiccionarioNombreEstados.Add("Activo",true);
+                DiccionarioNombreEstados.Add("Inactivo", false);
+                DDLEstado.DataSource = DiccionarioNombreEstados;
+                DDLEstado.DataBind();
+            }
         }
 
         private void CargarInputsUsuarios()
@@ -48,7 +103,6 @@ namespace TPC_CacchioneMajdalani
         }
         private void GuardarInputsUsuarios()
         {
-
             usuario.NombreUsuario = NombreUsuario.Value;
             usuario.Contraseña = Contraseña.Value;
             usuario.Estado = Convert.ToBoolean(DDLEstado.SelectedValue);
@@ -62,7 +116,6 @@ namespace TPC_CacchioneMajdalani
             usuario.DatosPersonales.Genero = DDLGenero.SelectedValue;
             usuario.DatosPersonales.UrlImagen = UrlImagen.Value;
             usuario.DatosPersonales.PaisOrigen = DDLPaises.SelectedValue;
-
         }
         protected void btnModificarDatos_Click(object sender, EventArgs e)
         {

@@ -11,7 +11,7 @@ namespace TPC_CacchioneMajdalani
 {
     public partial class RegistrarUsuario : System.Web.UI.Page
     {
-        public Usuario Usuario { get; set; }
+        //public Usuario Usuario { get; set; } si buildea sin esto, borrarlo!!
 
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -16,9 +16,9 @@
             <asp:Label ID="LblNivelAcceso" runat="server" Text="Nivel de Acceso"></asp:Label>
             <asp:DropDownList CssClass="form-control" ID="DDLNivelAcceso" runat="server">
                 <asp:ListItem Text="" />
-                <asp:ListItem Text="De la base de datos" />
-                <asp:ListItem Text="Femenino" />
-                <asp:ListItem Text="Otros" />
+                <asp:ListItem Text="Cliente" Value="1" />
+                <asp:ListItem Text="Administrador" Value="2" />
+                <asp:ListItem Text="Dueño" Value="3" />
             </asp:DropDownList>
         </div>
 
@@ -26,7 +26,7 @@
             <asp:Label ID="LblEstado" runat="server" Text="Estado"></asp:Label>
             <asp:DropDownList CssClass="form-control" ID="DDLEstado" runat="server">
                 <asp:ListItem Text="" />
-                <asp:ListItem Text="Bloquear" Value="0" />
+                <asp:ListItem Text="Inactivo" Value="0" />
                 <asp:ListItem Text="Activo" Value="1" />
             </asp:DropDownList>
         </div>
@@ -70,10 +70,6 @@
         <div class="form-group col-md-6">
             <asp:Label ID="LblGenero" runat="server" Text="Genero"></asp:Label>
             <asp:DropDownList CssClass="form-control" ID="DDLGenero" runat="server">
-                <asp:ListItem Text="" />
-                <asp:ListItem Text="Masculino" Value="M" />
-                <asp:ListItem Text="Femenino" Value="F" />
-                <asp:ListItem Text="Otros" Value="O" />
             </asp:DropDownList>
         </div>
     </div>
