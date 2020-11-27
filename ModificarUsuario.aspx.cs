@@ -21,10 +21,8 @@ namespace TPC_CacchioneMajdalani
                 long id = Convert.ToInt64(Request.QueryString["idUsuario"]);
                 if (id != 0)
                 {
-
                     usuario = (Usuario)Session[Session.SessionID + "userSession"];
                     CargarInputsUsuarios();
-
                 }
             }
 
