@@ -47,14 +47,8 @@
                     </tr>
 
                     <% } %>
-                    <tr>
-                        <td style="width: 140px">Cantidad de favoritas:
-                                <asp:Label ID="lblCantidad" runat="server" />
-                        </td>
-                    </tr>
 
                 </table>
-                <td><a href="Cabañas.aspx" class="btn btn-secondary" role="button">Ir a la lista de Cabañas</a></td>
             </div>
         </div>
     </div>

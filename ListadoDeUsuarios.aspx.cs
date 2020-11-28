@@ -9,9 +9,10 @@ using Negocio;
 
 namespace TPC_CacchioneMajdalani
 {
-    public partial class ListadoDeUsuarios : System.Web.UI.Page
+    public partial class ListadoDeUsuarios : Page
     {
         public List<Usuario> UsuariosLista { get; set; }
+        public int MyProperty { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             UsuarioNegocio Negocio = new UsuarioNegocio();

@@ -108,7 +108,7 @@ namespace TPC_CacchioneMajdalani
         {
             usuario.NombreUsuario = NombreUsuario.Value;
             usuario.Contraseña = Contraseña.Value;
-            usuario.Estado = (DDLEstado.SelectedValue == "1") ? true : false;
+            usuario.Estado = DDLEstado.SelectedValue == "1";
             usuario.NivelAcceso = Convert.ToByte(DDLNivelAcceso.SelectedValue);
             usuario.DatosPersonales.Nombre = Nombre.Value;
             usuario.DatosPersonales.Apellido = Apellido.Value;

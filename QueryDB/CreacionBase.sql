@@ -120,6 +120,9 @@ add constraint FK_IDpais_DatosPersonales foreign key (IDpais) references Paises(
 alter table DatosPersonales
 add constraint UNI_dni unique (dni)
 
+alter table DatosPersonales
+add constraint UNI_Mail unique (email)
+
 
 alter table DatosPersonales
 add constraint CHK_genero check (upper(genero) in (''F'',''M'',''O''))

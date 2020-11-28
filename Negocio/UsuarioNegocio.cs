@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 namespace Negocio
 {
     public class UsuarioNegocio
-    {
+    { 
         public DataSet ListarNivelesAccesoDDL()
         {
             AccessDB acceso = new AccessDB();

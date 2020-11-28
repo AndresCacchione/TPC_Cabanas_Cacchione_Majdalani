@@ -62,6 +62,7 @@ namespace TPC_CacchioneMajdalani
             catch (Exception ex)
             {
                 throw ex;
+
             }
             finally
             {
