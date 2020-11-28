@@ -132,6 +132,8 @@ namespace Negocio
 									alter table DatosPersonales
 									add constraint FK_IDpais_DatosPersonales foreign key (IDpais) references Paises(id)
 
+									alter table DatosPersonales
+                                    add constraint UNI_Mail unique (email)
 
 									alter table DatosPersonales
 									add constraint UNI_dni unique (dni)

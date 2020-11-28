@@ -299,7 +299,7 @@ namespace Negocio
             try
             {
                 access.SetearQuery("Select * from usuarios u, datospersonales dat where dat.idusuario=u.id order by " +
-                    "usuarios.ID asc");
+                    "u.ID asc");
                 access.EjecutarLector();
                 while (access.Lector.Read())
                 {
