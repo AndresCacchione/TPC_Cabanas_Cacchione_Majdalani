@@ -6,17 +6,28 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
+using System.Data;
 
 namespace TPC_CacchioneMajdalani
 {
     public partial class ModificarUsuario : System.Web.UI.Page
     {
+        public ModificarUsuario()
+        {
+            dictNivelesAcceso = new Dictionary<string, int>();
+            dictGeneros = new Dictionary<string, int>
+            {
+                { "F", 0}, { "M", 1 }, { "O", 2 }
+            };
+        }
+
         public Usuario usuario { get; set; }
+        public Dictionary<string, int> dictNivelesAcceso { get; set; }
+        public Dictionary<string, int> dictGeneros { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             CargarDDLPaises();
-            CargarDDLGeneros();
-            CargarDDLEstados();
+            CargarDDLNivelAcceso();
 
             usuario = new Usuario();
             if (!IsPostBack)
@@ -27,28 +38,6 @@ namespace TPC_CacchioneMajdalani
                     usuario = (Usuario)Session[Session.SessionID + "userSession"];
                     CargarInputsUsuarios();
                 }
-            }
-        }
-
-        private void CargarDDLGeneros()
-        {
-            if (!IsPostBack)
-            {
-                List<string> ListaGeneros = new List<string>();
-                if (Session["listaGeneros"] == null)
-                {
-                    ListaGeneros = new List<string>();
-                    ListaGeneros.Add("F - Femenino");
-                    ListaGeneros.Add("M - Masculino");
-                    ListaGeneros.Add("O - Otros");
-                    Session.Add("listaGeneros", ListaGeneros);
-                }
-                else
-                {
-                    ListaGeneros = (List<string>)Session["listaGeneros"];
-                }
-                DDLGenero.DataSource = ListaGeneros;
-                DDLGenero.DataBind();
             }
         }
 
@@ -71,41 +60,58 @@ namespace TPC_CacchioneMajdalani
             }
         }
 
-        private void CargarDDLEstados()
+        private void CargarDDLNivelAcceso()
         {
             if (!IsPostBack)
             {
-                Dictionary<string, bool> DiccionarioNombreEstados = new Dictionary<string, bool>();
-                DiccionarioNombreEstados.Add("Activo", true);
-                DiccionarioNombreEstados.Add("Inactivo", false);
-                DDLEstado.DataSource = DiccionarioNombreEstados;
-                DDLEstado.DataBind();
+                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                DataSet aux = new DataSet();
+                if (Session["listaNivelesDDL"] == null)
+                {
+                    aux = usuarioNegocio.ListarNivelesAccesoDDL();
+                    DDLNivelAcceso.DataSource = aux;
+                    Session.Add("listaNivelesDDL", DDLNivelAcceso.DataSource);
+                }
+                else
+                {
+                    aux = (DataSet)Session["listaNivelesDDL"];
+                    DDLNivelAcceso.DataSource = aux;
+                }
+                DDLNivelAcceso.DataTextField = "nombre";
+                DDLNivelAcceso.DataValueField = "ID";
+                DDLNivelAcceso.DataBind();
+
+                int i = 0;
+                foreach (DataRow row in aux.Tables[0].Rows)
+                {
+                    dictNivelesAcceso.Add(row["id"].ToString(), i);
+                    i++;
+                }
             }
         }
 
         private void CargarInputsUsuarios()
         {
-
             NombreUsuario.Value = usuario.NombreUsuario;
             Contraseña.Value = usuario.Contraseña;
-            DDLEstado.SelectedValue = usuario.Estado.ToString();
-            DDLNivelAcceso.SelectedValue = usuario.NivelAcceso.ToString();
+            DDLEstado.SelectedIndex = usuario.Estado ? 1 : 0;
+            DDLNivelAcceso.SelectedIndex = dictNivelesAcceso[usuario.NivelAcceso.ToString()];
             Nombre.Value = usuario.DatosPersonales.Nombre;
             Apellido.Value = usuario.DatosPersonales.Apellido;
             Telefono.Value = usuario.DatosPersonales.Telefono;
             Domicilio.Value = usuario.DatosPersonales.Domicilio;
             DNI.Value = usuario.DatosPersonales.DNI;
             Email.Value = usuario.DatosPersonales.Email;
-            DDLGenero.SelectedValue = usuario.DatosPersonales.Genero;
+            DDLGenero.SelectedIndex = dictGeneros[usuario.DatosPersonales.Genero.ToUpper()];
             UrlImagen.Value = usuario.DatosPersonales.UrlImagen;
             DDLPaises.SelectedValue = usuario.DatosPersonales.PaisOrigen;
-
         }
+
         private void GuardarInputsUsuarios()
         {
             usuario.NombreUsuario = NombreUsuario.Value;
             usuario.Contraseña = Contraseña.Value;
-            usuario.Estado = Convert.ToBoolean(DDLEstado.SelectedValue);
+            usuario.Estado = (DDLEstado.SelectedValue == "1") ? true : false;
             usuario.NivelAcceso = Convert.ToByte(DDLNivelAcceso.SelectedValue);
             usuario.DatosPersonales.Nombre = Nombre.Value;
             usuario.DatosPersonales.Apellido = Apellido.Value;
@@ -122,6 +128,7 @@ namespace TPC_CacchioneMajdalani
             UsuarioNegocio Negocio = new UsuarioNegocio();
             GuardarInputsUsuarios();
             Negocio.ActualizarUsuario(usuario);
+            Response.Redirect("Default.aspx");
         }
     }
 }

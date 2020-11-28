@@ -20,6 +20,12 @@ namespace TPC_CacchioneMajdalani
             //levantar un popup y volver a confirmar de borrar todo. Podríamos poner alguna contraseña del Dueño para confirmar
             ManagementDB managementDB = new ManagementDB();
             managementDB.BorrarTablas();
+            managementDB.CrearTablasDB();
+            managementDB.SetTRInsteadOfDELComplejos();
+            managementDB.SetTRInsteadOfDELCabañas();
+            managementDB.CargaPaises();
+            managementDB.CargarNiveles();
+            managementDB.CargarUsuarios();
             Response.Redirect("~/Default"); //una vez borradas todas las tablas, en el mismo load de default se ejecuta todo (creación de tablas, SP, TR, inserts, etc)
         }
     }

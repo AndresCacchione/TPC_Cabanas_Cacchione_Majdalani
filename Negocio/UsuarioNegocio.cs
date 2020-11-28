@@ -5,11 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using Dominio;
 using System.Security.Cryptography;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Negocio
 {
     public class UsuarioNegocio
     {
+        public DataSet ListarNivelesAccesoDDL()
+        {
+            AccessDB acceso = new AccessDB();
+
+            var dataSet = new DataSet();
+            dataSet = acceso.ConsultaDDL("select * from NivelesAcceso");
+
+            return dataSet;
+        }
+
         public List<string> ListarPaises()
         {
             AccessDB acceso = new AccessDB();
@@ -247,7 +259,7 @@ namespace Negocio
             try
             {
                 access.SetearQuery("update DatosPersonales set nombre=@nombre, apellido=@apellido, dni=@dni, email=@Email, telefono=@Telefono, " +
-                "URLimagen=@UrlImagen, IDpais=@IDpais, domicilio=@Domicilio, genero=@genero where ID=" + IDUsuario);
+                "URLimagen=@UrlImagen, IDpais=@IDpais, domicilio=@Domicilio, genero=@genero where IDUsuario=" + IDUsuario);
                 access.AgregarParametro("@nombre", Datos.Nombre);
                 access.AgregarParametro("@apellido", Datos.Apellido);
                 access.AgregarParametro("@dni", Datos.DNI);
@@ -341,6 +353,7 @@ namespace Negocio
                 buscado.NombreUsuario = (string)access.Lector["NombreUsuario"];
                 buscado.Contraseña = (string)access.Lector["Contra"];
                 buscado.Estado = (bool)access.Lector["Estado"];
+                buscado.NivelAcceso = (byte)access.Lector["IdNivelAcceso"];
                 buscado.DatosPersonales.Apellido = (string)access.Lector["Apellido"];
                 buscado.DatosPersonales.Nombre = (string)access.Lector["Nombre"]; //creería que ahí alcanzaría para que no exista ambiguedad en las tablas llamadas Nombre
                 buscado.DatosPersonales.DNI = (string)access.Lector["Dni"];

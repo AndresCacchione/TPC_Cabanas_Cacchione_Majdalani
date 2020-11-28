@@ -12,13 +12,7 @@ namespace TPC_CacchioneMajdalani
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ManagementDB managementDB = new ManagementDB();
-            managementDB.CrearTablasDB();
-            managementDB.SetTRInsteadOfDELComplejos();
-            managementDB.SetTRInsteadOfDELCabañas();
-            managementDB.CargaPaises();
-            managementDB.CargarNiveles();
-            managementDB.CargarUsuarios();
+
         }
     }
 }

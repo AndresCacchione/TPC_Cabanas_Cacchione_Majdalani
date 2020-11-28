@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Negocio
 {
@@ -12,6 +13,9 @@ namespace Negocio
         public SqlDataReader Lector { get; set; }
         public SqlConnection Conexion { get; set; }
         public SqlCommand Comando { get; set; }
+        public string connectionString { get; set; }
+
+
 
         public AccessDB()
         {
@@ -20,6 +24,16 @@ namespace Negocio
             {
                 Connection = Conexion
             };
+        }
+
+        public DataSet ConsultaDDL(string Consulta)
+        {
+            var set = new DataSet();
+            using (var dataAdapter = new SqlDataAdapter(Consulta, "data source=.\\SQLEXPRESS01; initial catalog=Cacchione_Majdalani_DB; integrated security=sspi"))
+            {
+                dataAdapter.Fill(set);
+            }
+            return set;
         }
 
         public void SetearQuery(string Consulta)

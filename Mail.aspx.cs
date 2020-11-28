@@ -24,16 +24,16 @@ namespace TPC_CacchioneMajdalani
 
             MailMessage mail = new MailMessage(txtEmisor.Text, txtDestinatario.Text);
             mail.Subject = txtAsunto.Text;
-            mail.Body = txtAsunto.Text;
+            mail.Body = txtBody.Text;
 
             try
             {
                 smtpClient.Send(mail); //si se usa Google Chrome, ir a https://myaccount.google.com/lesssecureapps 
-                Label1.Text = "Email enviado"; //y permitir acceso de apps menos seguras, ya que de otra manera, el email no se va a enviar
+                Resultado.Text = "Email enviado"; //y permitir acceso de apps menos seguras, ya que de otra manera, el email no se va a enviar
             }
             catch (Exception ex)
             {
-                Label1.Text = ex.ToString();
+                Resultado.Text = ex.ToString();
             }
         }
     }
