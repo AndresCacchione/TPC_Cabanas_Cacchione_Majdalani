@@ -14,6 +14,33 @@ namespace TPC_CacchioneMajdalani
         public Dominio.Complejo Aux { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            AgregarComplejoSiExisteID();
+
+            ////Cargo el string del Boton Volver
+            //if (Convert.ToInt64(Session["ComplejoActual"]) != 0)
+            //{
+            //    StringBotonVolver = "Cabañas.aspx?idComplejo=" + Convert.ToString(Session["ComplejoActual"]);
+            //}
+            //else
+            //{
+            //    StringBotonVolver = "Cabañas.aspx";
+            //}
+
+        }
+
+        protected void AgregarImagen(object sender, EventArgs e)
+        {
+            long idaux = Convert.ToInt64(Request.QueryString["idComplejo"]);
+            if (URLImagen.Value != "")
+            {
+                ComplejoNegocio negocio = new ComplejoNegocio();
+                negocio.AgregarImagen(URLImagen.Value, idaux);
+            }
+            Response.Redirect("DetalleComplejo.aspx?idComplejo=" + Aux.ID);
+        }
+
+        private void AgregarComplejoSiExisteID()
+        {
             if (Request.QueryString["idComplejo"] != null)
             {
                 long idaux = Convert.ToInt64(Request.QueryString["idComplejo"]);
@@ -30,31 +57,11 @@ namespace TPC_CacchioneMajdalani
                 if (Request.QueryString["idImagen"] != null)
                     negocio.EliminarImagen(long.Parse(Request.QueryString["idImagen"]));
                 Aux.ListaImagenes = negocio.ListarImagenesPorID(Aux.ID);
-
-                ////Cargo el string del Boton Volver
-                //if (Convert.ToInt64(Session["ComplejoActual"]) != 0)
-                //{
-                //    StringBotonVolver = "Cabañas.aspx?idComplejo=" + Convert.ToString(Session["ComplejoActual"]);
-                //}
-                //else
-                //{
-                //    StringBotonVolver = "Cabañas.aspx";
-                //}
             }
             else
-                Response.Redirect("~/Complejos"); //Si entran sin enviar ID, que no rompa, que redirija a complejos
-
-        }
-
-        protected void AgregarImagen(object sender, EventArgs e)
-        {
-            long idaux = Convert.ToInt64(Request.QueryString["idComplejo"]);
-            if (URLImagen.Value != "")
             {
-                ComplejoNegocio negocio = new ComplejoNegocio();
-                negocio.AgregarImagen(URLImagen.Value, idaux);
+                Response.Redirect("~/Complejos"); //Si entran sin enviar ID, que no rompa, que redirija a complejos
             }
-            Response.Redirect("DetalleComplejo.aspx?idComplejo=" + Aux.ID);
         }
     }
 }

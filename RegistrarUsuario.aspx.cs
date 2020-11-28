@@ -15,15 +15,24 @@ namespace TPC_CacchioneMajdalani
         {
             if (!IsPostBack)
             {
-                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-                List<string> ListaPaises = usuarioNegocio.ListarPaises();
-                Session.Add("listaPaises", ListaPaises);
-                DDLPaises.DataSource = ListaPaises;
-                DDLPaises.DataBind();
+                CargarDDLPaises();
             }
         }
 
         protected void btnAltaUsuario_Click(object sender, EventArgs e)
+        {
+            RegistrarNuevoUsuario();
+        }
+        private void CargarDDLPaises()
+        {
+            UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+            List<string> ListaPaises = usuarioNegocio.ListarPaises();
+            Session.Add("listaPaises", ListaPaises);
+            DDLPaises.DataSource = ListaPaises;
+            DDLPaises.DataBind();
+        }
+
+        private void RegistrarNuevoUsuario()
         {
             Usuario usuario = new Usuario
             {

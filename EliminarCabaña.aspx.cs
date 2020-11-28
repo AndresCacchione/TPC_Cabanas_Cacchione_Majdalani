@@ -14,6 +14,18 @@ namespace TPC_CacchioneMajdalani
         public Cabaña Aux { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            ObtenerIDyCabañaSiExiste();
+
+        }
+
+        protected void Unnamed_Click(object sender, EventArgs e)
+        {
+            EliminarCabañaPorID();
+
+        }
+
+        private void ObtenerIDyCabañaSiExiste()
+        {
             if (Request.QueryString["idCabaña"] != null)
             {
                 CabañaNegocio Negocio = new CabañaNegocio();
@@ -28,12 +40,10 @@ namespace TPC_CacchioneMajdalani
             {
                 Response.Redirect("Cabañas.aspx");
             }
-
         }
 
-        protected void Unnamed_Click(object sender, EventArgs e)
+        private void EliminarCabañaPorID()
         {
-
             if (check_eliminar.Checked)
             {
                 CabañaNegocio auxNeg = new CabañaNegocio();
@@ -61,7 +71,6 @@ namespace TPC_CacchioneMajdalani
                     check_eliminar.ForeColor = System.Drawing.Color.Red;
                 }
             }
-
         }
     }
 }

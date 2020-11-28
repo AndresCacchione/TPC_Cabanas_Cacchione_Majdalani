@@ -68,10 +68,10 @@ namespace TPC_CacchioneMajdalani
                 }
 
                 List<Cabaña> ListaOriginal = (List<Cabaña>)Session["listaCabañas"];
-                Cabaña itemAAgregar = ListaOriginal.Find(i => i.Id == long.Parse(Request.QueryString["idCabaña"]));
-                if (itemAAgregar != null)
+                Cabaña buscada = ListaOriginal.Find(i => i.Id == long.Parse(Request.QueryString["idCabaña"]));
+                if (buscada != null)
                 {
-                    ListaFavoritas.Add(itemAAgregar);
+                    ListaFavoritas.Add(buscada);
                     Session[Session.SessionID + "listaFavoritas"] = ListaFavoritas;
                 }
                 else

@@ -15,27 +15,9 @@ namespace TPC_CacchioneMajdalani
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ComplejoNegocio negocio = new ComplejoNegocio();
-
             try
             {
-                if (Session["listaBuscados"] == null)
-                {
-                    if ((List<Dominio.Complejo>)Session["listaComplejos"] == null)
-                    {
-                        ListaComplejosLocal = negocio.listarComplejos();
-                        Session.Add("listaComplejos", ListaComplejosLocal);
-                    }
-                    else
-                    {
-                        ListaComplejosLocal = (List<Dominio.Complejo>)Session["listaComplejos"];
-                    }
-                }
-                else
-                {
-                    ListaComplejosLocal = (List<Dominio.Complejo>)Session["listaBuscados"];
-                    Session["listaBuscados"] = null;
-                }
+                CargarListaBuscadosyComplejos();
             }
 
             catch (Exception ex)
@@ -46,6 +28,11 @@ namespace TPC_CacchioneMajdalani
         }
 
         protected void BtnBuscarComplejo_Click(object sender, EventArgs e)
+        {
+            BuscarComplejo();
+        }
+
+        private void BuscarComplejo()
         {
             if (TxtBuscarComplejo.Text.Length != 0)
             {
@@ -65,6 +52,28 @@ namespace TPC_CacchioneMajdalani
             }
 
             Response.Redirect("Complejos.aspx");
+        }
+
+        private void CargarListaBuscadosyComplejos()
+        {
+            ComplejoNegocio negocio = new ComplejoNegocio();
+            if (Session["listaBuscados"] == null)
+            {
+                if ((List<Dominio.Complejo>)Session["listaComplejos"] == null)
+                {
+                    ListaComplejosLocal = negocio.listarComplejos();
+                    Session.Add("listaComplejos", ListaComplejosLocal);
+                }
+                else
+                {
+                    ListaComplejosLocal = (List<Dominio.Complejo>)Session["listaComplejos"];
+                }
+            }
+            else
+            {
+                ListaComplejosLocal = (List<Dominio.Complejo>)Session["listaBuscados"];
+                Session["listaBuscados"] = null;
+            }
         }
     }
 }

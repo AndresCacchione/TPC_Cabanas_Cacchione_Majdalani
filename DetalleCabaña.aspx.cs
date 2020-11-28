@@ -22,6 +22,22 @@ namespace TPC_CacchioneMajdalani
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            AgregarCabañaSiExisteID();
+        }
+
+        protected void AgregarImagen(object sender, EventArgs e)
+        {
+            if (URLImagen.Value != "")
+            {
+                CabañaNegocio negocio = new CabañaNegocio();
+                negocio.AgregarImagen(URLImagen.Value, CabañaAuxiliar.Id);
+            }
+            Response.Redirect("DetalleCabaña.aspx?idCabaña=" + CabañaAuxiliar.Id);
+        }
+
+        private void AgregarCabañaSiExisteID()
+        {
             if (Request.QueryString["idCabaña"] != null)
             {
                 long idaux = Convert.ToInt64(Request.QueryString["idCabaña"]);
@@ -53,17 +69,6 @@ namespace TPC_CacchioneMajdalani
             {
                 Response.Redirect("Cabañas.aspx"); //Lo mismo que con DetalleComplejo
             }
-            
-        }
-
-        protected void AgregarImagen(object sender, EventArgs e)
-        {
-            if (URLImagen.Value != "")
-            {
-                CabañaNegocio negocio = new CabañaNegocio();
-                negocio.AgregarImagen(URLImagen.Value, CabañaAuxiliar.Id);
-            }
-            Response.Redirect("DetalleCabaña.aspx?idCabaña=" + CabañaAuxiliar.Id);
         }
     }
 }

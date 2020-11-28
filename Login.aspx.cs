@@ -18,6 +18,12 @@ namespace TPC_CacchioneMajdalani
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
+            IniciarSesion();
+
+        }
+
+        private void IniciarSesion()
+        {
             UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
             Usuario usuario = new Usuario();
             try

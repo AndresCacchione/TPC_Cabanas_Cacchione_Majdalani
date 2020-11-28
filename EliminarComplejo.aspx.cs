@@ -16,6 +16,17 @@ namespace TPC_CacchioneMajdalani
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            ObtenerIDyComplejoSiExiste();
+
+        }
+
+        protected void Eliminar_Click(object sender, EventArgs e)
+        {
+            EliminarComplejoyCabañasVinculadas();
+        }
+
+        private void ObtenerIDyComplejoSiExiste()
+        {
             if (Request.QueryString["idComplejo"] != null)
             {
                 ComplejoNegocio negocio = new ComplejoNegocio();
@@ -30,10 +41,9 @@ namespace TPC_CacchioneMajdalani
             {
                 Response.Redirect("Complejos.aspx");
             }
-
         }
 
-        protected void Eliminar_Click(object sender, EventArgs e)
+        private void EliminarComplejoyCabañasVinculadas()
         {
             if (check_eliminar.Checked)
             {
