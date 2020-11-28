@@ -29,16 +29,13 @@ namespace TPC_CacchioneMajdalani
             CargarDDLPaises();
             CargarDDLNivelAcceso();
 
-            usuario = new Usuario();
-            if (!IsPostBack)
-            {
-                long id = Convert.ToInt64(Request.QueryString["idUsuario"]);
-                if (id != 0)
-                {
+            usuario = new Usuario();          
                     usuario = (Usuario)Session[Session.SessionID + "userSession"];
-                    CargarInputsUsuarios();
-                }
+            if(!IsPostBack)
+            {
+            CargarInputsUsuarios();           
             }
+            
         }
 
         private void CargarDDLPaises()
@@ -127,7 +124,17 @@ namespace TPC_CacchioneMajdalani
         {
             UsuarioNegocio Negocio = new UsuarioNegocio();
             GuardarInputsUsuarios();
-            Negocio.ActualizarUsuario(usuario);
+         
+            //if (usuario.Id != 0)
+            //{
+            //    List<Usuario> listaUsuarios = new List<Usuario>();
+            //    listaUsuarios = Negocio.ListarUsuarios();
+            //    Session.Add("listaUsuarios", listaUsuarios);
+
+
+            //}
+            Negocio.ActualizarUsuario(usuario);    
+            Session[Session.SessionID + "userSession"]= usuario;
             Response.Redirect("Default.aspx");
         }
     }

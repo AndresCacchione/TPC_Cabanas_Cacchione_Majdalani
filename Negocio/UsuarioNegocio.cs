@@ -233,8 +233,7 @@ namespace Negocio
             AccessDB access = new AccessDB();
             try
             {
-                access.SetearQuery("update usuarios set nombreUsuario=@nombre, contra=@contra," +
-                "Estado=@Estado, IdNivelAcceso=@IdNivelAcceso where ID=" + Usuario.Id);
+                access.SetearQuery("update usuarios set nombreUsuario=@nombre, contra=@contra,Estado=@Estado, IdNivelAcceso=@IdNivelAcceso where ID=" + Usuario.Id);
                 access.AgregarParametro("@nombre", Usuario.NombreUsuario);
                 access.AgregarParametro("@contra", Usuario.Contraseña);
                 access.AgregarParametro("@IdNivelAcceso", Usuario.NivelAcceso); //Solo visible para nivel acceso mayor a 10. Solo se puede modificar a sus niveles inferiores, y solo con un rango inferior al que poseen (salvo el dueño). Niveles: 0 (visitante) 10 (cliente) 20 (admin) y 30(dueño)
@@ -258,8 +257,7 @@ namespace Negocio
             AccessDB access = new AccessDB();
             try
             {
-                access.SetearQuery("update DatosPersonales set nombre=@nombre, apellido=@apellido, dni=@dni, email=@Email, telefono=@Telefono, " +
-                "URLimagen=@UrlImagen, IDpais=@IDpais, domicilio=@Domicilio, genero=@genero where IDUsuario=" + IDUsuario);
+                access.SetearQuery("update DatosPersonales set nombre=@nombre, apellido=@apellido, dni=@dni, email=@Email, telefono=@Telefono,URLimagen=@UrlImagen, IDpais=@IDpais, domicilio=@Domicilio, genero=@genero where IDUsuario=" + IDUsuario);
                 access.AgregarParametro("@nombre", Datos.Nombre);
                 access.AgregarParametro("@apellido", Datos.Apellido);
                 access.AgregarParametro("@dni", Datos.DNI);
@@ -286,6 +284,7 @@ namespace Negocio
 
         public void ActualizarUsuario(Usuario Usuario)
         {
+            Usuario.Contraseña = Encrypt.GetSHA256(Usuario.Contraseña);
             ModificarUsuario(Usuario);
             short IDPais = GetIDPais(Usuario.DatosPersonales.PaisOrigen);
             ModificarDatosPersonales(Usuario.DatosPersonales, IDPais, Usuario.Id);
