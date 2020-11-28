@@ -10,7 +10,7 @@ using System.Data;
 
 namespace TPC_CacchioneMajdalani
 {
-    public partial class ModificarUsuario : System.Web.UI.Page
+    public partial class ModificarUsuario : Page
     {
         public ModificarUsuario()
         {

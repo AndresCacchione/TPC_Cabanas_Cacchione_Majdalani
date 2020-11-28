@@ -9,7 +9,7 @@ using Negocio;
 
 namespace TPC_CacchioneMajdalani
 {
-    public partial class RegistrarUsuario : System.Web.UI.Page
+    public partial class RegistrarUsuario : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

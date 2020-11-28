@@ -8,7 +8,7 @@ using Negocio;
 
 namespace TPC_CacchioneMajdalani
 {
-    public partial class Configuracion : System.Web.UI.Page
+    public partial class Configuracion : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -16,6 +16,11 @@ namespace TPC_CacchioneMajdalani
         }
 
         protected void btnBorrar_Click(object sender, EventArgs e)
+        {
+            RestaurarValoresFabrica();
+        }
+
+        private void RestaurarValoresFabrica()
         {
             //levantar un popup y volver a confirmar de borrar todo. Podríamos poner alguna contraseña del Dueño para confirmar
             ManagementDB managementDB = new ManagementDB();

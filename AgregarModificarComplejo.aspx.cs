@@ -11,7 +11,7 @@ using Negocio;
 
 namespace TPC_CacchioneMajdalani
 {
-    public partial class AgregarModificarComplejo : System.Web.UI.Page
+    public partial class AgregarModificarComplejo : Page
     {
         public Dominio.Complejo Auxiliar { get; set; }
 
@@ -38,29 +38,17 @@ namespace TPC_CacchioneMajdalani
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            long ID = Convert.ToInt64(Request.QueryString["IdComplejo"]);
-            Auxiliar = new Dominio.Complejo
-            {
-                ID = ID
-            };
-
-            if (Auxiliar.ID != 0)
-            {
-                List<Dominio.Complejo> listaAux = new List<Dominio.Complejo>();
-                listaAux = (List<Dominio.Complejo>)base.Session["listaComplejos"];
-                Auxiliar = listaAux.Find(i => i.ID == ID);
-                if (!IsPostBack)
-                {
-                    CargarFormulario();
-                    BtnAgregarComplejo.Text = "Modificar Complejo";
-                    BtnAgregarComplejo.BackColor = System.Drawing.Color.FromArgb(228, 192, 50);
-                }
-            }
+            PageLoadAgregarModificarComp();
         }
 
         protected void BtnAgregarComplejo_Click(object sender, EventArgs e)
         {
             GuardarFormulario();
+            EventoClickbtnAgregarComp();
+        }
+
+        private void EventoClickbtnAgregarComp()
+        {
             ComplejoNegocio negocio = new ComplejoNegocio();
             List<Dominio.Complejo> listaAux = new List<Dominio.Complejo>();
             listaAux = (List<Dominio.Complejo>)base.Session["listaComplejos"];
@@ -92,6 +80,28 @@ namespace TPC_CacchioneMajdalani
 
                 // Response.Redirect("Error.aspx");
                 throw ex;
+            }
+        }
+
+        private void PageLoadAgregarModificarComp()
+        {
+            long ID = Convert.ToInt64(Request.QueryString["IdComplejo"]);
+            Auxiliar = new Dominio.Complejo
+            {
+                ID = ID
+            };
+
+            if (Auxiliar.ID != 0)
+            {
+                List<Dominio.Complejo> listaAux = new List<Dominio.Complejo>();
+                listaAux = (List<Dominio.Complejo>)base.Session["listaComplejos"];
+                Auxiliar = listaAux.Find(i => i.ID == ID);
+                if (!IsPostBack)
+                {
+                    CargarFormulario();
+                    BtnAgregarComplejo.Text = "Modificar Complejo";
+                    BtnAgregarComplejo.BackColor = System.Drawing.Color.FromArgb(228, 192, 50);
+                }
             }
         }
     }

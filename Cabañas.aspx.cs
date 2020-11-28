@@ -10,7 +10,7 @@ using Negocio;
 
 namespace TPC_CacchioneMajdalani
 {
-    public partial class Cabañas : System.Web.UI.Page
+    public partial class Cabañas : Page
     {
         public List<Cabaña> ListaCabañasLocal { get; set; }
 

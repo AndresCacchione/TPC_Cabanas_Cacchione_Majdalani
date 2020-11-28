@@ -32,8 +32,7 @@ namespace TPC_CacchioneMajdalani
 
         protected void btnModificarDatos_Click(object sender, EventArgs e)
         {
-            Usuario Usuario = new Usuario();
-            Usuario = (Usuario)Session[Session.SessionID + "userSession"];
+            Usuario Usuario = (Usuario)Session[Session.SessionID + "userSession"];
             Response.Redirect("~/ModificarUsuario?idUsuario=" + Usuario.Id.ToString());
         }
 

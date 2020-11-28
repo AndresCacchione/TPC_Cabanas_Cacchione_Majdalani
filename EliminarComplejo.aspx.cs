@@ -10,7 +10,7 @@ using Negocio;
 
 namespace TPC_CacchioneMajdalani
 {
-    public partial class EliminarComplejo : System.Web.UI.Page
+    public partial class EliminarComplejo : Page
     {
         public Dominio.Complejo Aux { get; set; }
 

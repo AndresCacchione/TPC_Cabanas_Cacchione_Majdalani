@@ -9,7 +9,7 @@ using Negocio;
 
 namespace TPC_CacchioneMajdalani
 {
-    public partial class DetalleComplejo : System.Web.UI.Page
+    public partial class DetalleComplejo : Page
     {
         public Dominio.Complejo Aux { get; set; }
         protected void Page_Load(object sender, EventArgs e)

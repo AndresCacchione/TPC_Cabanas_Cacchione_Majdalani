@@ -8,7 +8,7 @@ using Dominio;
 
 namespace TPC_CacchioneMajdalani
 {
-    public partial class CabañasFavoritas : System.Web.UI.Page
+    public partial class CabañasFavoritas : Page
     {
         public List<Cabaña> ListaFavoritas { get; set; }
         protected void Page_Load(object sender, EventArgs e)

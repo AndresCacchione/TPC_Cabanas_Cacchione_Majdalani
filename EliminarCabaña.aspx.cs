@@ -9,7 +9,7 @@ using Negocio;
 
 namespace TPC_CacchioneMajdalani
 {
-    public partial class EliminarCabaña : System.Web.UI.Page
+    public partial class EliminarCabaña : Page
     {
         public Cabaña Aux { get; set; }
         protected void Page_Load(object sender, EventArgs e)

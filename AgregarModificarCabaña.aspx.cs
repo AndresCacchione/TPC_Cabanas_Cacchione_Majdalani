@@ -5,12 +5,12 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Negocio;
-using Dominio;
+
 
 
 namespace TPC_CacchioneMajdalani
 {
-    public partial class AgregarModificarCabaña : System.Web.UI.Page
+    public partial class AgregarModificarCabaña : Page
     {
         public Dominio.Cabaña Auxiliar { get; set; }
         public AgregarModificarCabaña()
@@ -44,30 +44,18 @@ namespace TPC_CacchioneMajdalani
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            long ID = Convert.ToInt64(Request.QueryString["IdComplejo"]);
-            long IDCabaña = Convert.ToInt64(Request.QueryString["IdCabaña"]);
-            Auxiliar.complejo.ID = ID;
-            Auxiliar.Id = IDCabaña;
-
-            if (Auxiliar.Id != 0)
-            {
-                List<Dominio.Cabaña> listaAux = new List<Dominio.Cabaña>();
-                listaAux = (List<Dominio.Cabaña>)Session["listaCabañas"];
-                Auxiliar = listaAux.Find(i => i.Id == Auxiliar.Id);
-                if (!IsPostBack)
-                {
-                    CargarFormulario();
-                    BtnAgregarCabaña.Text = "Modificar Cabaña";
-                    BtnAgregarCabaña.BackColor = System.Drawing.Color.FromArgb(228, 192, 50);
-                }
-            }
+            PageLoadAgregarModificarCab();
 
         }
 
         protected void BtnAgregarCabaña_Click(object sender, EventArgs e)
         {
             GuardarFormulario();
+            EventoClickbtnAgregarCab();
+        }
+
+        private void EventoClickbtnAgregarCab()
+        {
             CabañaNegocio negocio = new CabañaNegocio();
 
             List<Dominio.Cabaña> listaAux = new List<Dominio.Cabaña>();
@@ -100,6 +88,27 @@ namespace TPC_CacchioneMajdalani
             {
                 // Response.Redirect("Error.aspx");
                 throw ex;
+            }
+        }
+
+        private void PageLoadAgregarModificarCab()
+        {
+            long ID = Convert.ToInt64(Request.QueryString["IdComplejo"]);
+            long IDCabaña = Convert.ToInt64(Request.QueryString["IdCabaña"]);
+            Auxiliar.complejo.ID = ID;
+            Auxiliar.Id = IDCabaña;
+
+            if (Auxiliar.Id != 0)
+            {
+                List<Dominio.Cabaña> listaAux = new List<Dominio.Cabaña>();
+                listaAux = (List<Dominio.Cabaña>)Session["listaCabañas"];
+                Auxiliar = listaAux.Find(i => i.Id == Auxiliar.Id);
+                if (!IsPostBack)
+                {
+                    CargarFormulario();
+                    BtnAgregarCabaña.Text = "Modificar Cabaña";
+                    BtnAgregarCabaña.BackColor = System.Drawing.Color.FromArgb(228, 192, 50);
+                }
             }
         }
     }
