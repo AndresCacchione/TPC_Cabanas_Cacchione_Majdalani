@@ -1,11 +1,16 @@
-2) Listar usuarios (pagina y boton modificar).
-3) Modificar usuarios --> agregar el nivel de acceso en el Admin y el Dueño.
-4) Calendario: a) Investigar cómo mostrar un calendario (agregarlo en una 			pagina)
+-- para aprobar: --
+1) Calendario: a) Invstigar como pintar los días disponibles, y como 		  pintar de un color los días seleccionados (rango).
 		b) Investigar el back.
-5) Cuentas Corrientes.
-6) Como mandar un mail.
-7) Reservas.
-8) Pop Ups.
-9) ultimo) Validaciones en todas partes.
-10) Si sobra tiempo: Solicitudes de cambios de reserva.
-11) Anulación de reserva.
+2) Reservas.
+3) Mercado Pago: cómo funciona (validación de reserva por parte del Admin ??).
+4) Pop Ups.
+5) ultimo) Validaciones en todas partes.
+
+-- para que quede mas cheto: --
+6) Temporadas.
+7) Si sobra tiempo: Solicitudes de cambios de reserva.
+8) Anulación de reserva.
+
+-- Nivel DIOS:--
+9) Cookies.
+10) Administrador Session.

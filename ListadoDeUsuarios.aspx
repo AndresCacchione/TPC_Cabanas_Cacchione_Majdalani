@@ -21,7 +21,7 @@
                         { %>
                     <tr>                    
                         <td style="width: 140px">
-                            <img src="<% = item.DatosPersonales.UrlImagen %>" style="width: 100px; height: inherit;" alt="...">
+                            <img src="<% = item.DatosPersonales.UrlImagen %>" style="width: 100px; height: inherit;" alt="No posee imagen cargada">
 
                             <th scope="row" style="width: 120px"><% = item.NombreUsuario %></th> 
 

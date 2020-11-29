@@ -10,32 +10,46 @@ namespace Negocio
 {
     public class ManagementEmail
     {
-        public string EnviarEmail(string emailDestinatario, string asunto, string cuerpo, string emailEmisor = "response.redirect@hotmail.com", string contraseñaEmisor = "Paomajcac")
+        public string EnviarEmails(List<string> emailsDestinatarios, string asunto, string cuerpo, string emailEmisor = "response.redirect@hotmail.com", string contraseñaEmisor = "Paomajcac")
         {
-            SmtpClient smtpClient = new SmtpClient()
+            List<string> resultados = new List<string>();
+            foreach (string EmailDestino in emailsDestinatarios)
             {
-                Credentials = new NetworkCredential(emailEmisor, contraseñaEmisor), //Acá iría el email y password usados para enviar los mails
-                DeliveryMethod = SmtpDeliveryMethod.Network
-            };
+                SmtpClient smtpClient = new SmtpClient()
+                {
+                    Credentials = new NetworkCredential(emailEmisor, contraseñaEmisor), //Acá iría el email y password usados para enviar los mails
+                    DeliveryMethod = SmtpDeliveryMethod.Network
+                };
 
-            MailMessage mail = new MailMessage(emailEmisor, emailDestinatario)
-            {
-                Subject = asunto,
-                Body = cuerpo
-            };
+                MailMessage mail = new MailMessage(emailEmisor, EmailDestino)
+                {
+                    Subject = asunto,
+                    Body = cuerpo
+                };
 
-            string Resultado;
-            try
-            {
-                smtpClient.Send(mail); //si se usa Google Chrome, ir a https://myaccount.google.com/lesssecureapps 
-                Resultado = "Email enviado"; //y permitir acceso de apps menos seguras, ya que de otra manera, el email no se va a enviar
+                string Resultado;
+                try
+                {
+                    smtpClient.Send(mail); //si se usa Google Chrome, ir a https://myaccount.google.com/lesssecureapps 
+                    Resultado = "Email enviado"; //y permitir acceso de apps menos seguras, ya que de otra manera, el email no se va a enviar
+                }
+                catch (Exception ex)
+                {
+                    Resultado = ex.ToString();
+                }
+                resultados.Add(Resultado);
             }
-            catch (Exception ex)
+            
+            string retorno;
+            if (resultados.TrueForAll(i => i != "Email enviado"))
             {
-                Resultado = ex.ToString();
+               retorno = resultados.First();
             }
-            return Resultado;
-
+            else
+            {
+                retorno = "Email enviado";
+            }
+            return retorno;
             // ESTO VA EN EL WEB CONFIG: 
             //< system.net >
             //    < mailSettings >

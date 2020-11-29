@@ -15,6 +15,33 @@ namespace TPC_CacchioneMajdalani
     {
 
         /// <summary>
+        /// InputMail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl InputMail;
+
+        /// <summary>
+        /// txtBoxAsunto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBoxAsunto;
+
+        /// <summary>
+        /// TextAreaCuerpoMail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea TextAreaCuerpoMail;
+
+        /// <summary>
         /// btnEnviarEmail control.
         /// </summary>
         /// <remarks>
