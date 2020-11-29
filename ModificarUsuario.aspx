@@ -3,12 +3,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="inputNombreUsuario">Nuevo Username</label>
-            <input type="text" class="form-control" id="NombreUsuario" placeholder="Nombre de Usuario" runat="server">
+            <label for="inputNombreUsuario">Nombre de Usuario</label>
+            <input type="text" class="form-control" id="NombreUsuario" placeholder="Nombre de Usuario" required runat="server">
         </div>
         <div class="form-group col-md-6">
-            <label for="inputContraseña">Nueva Password</label>
-            <input type="password" class="form-control" id="Contraseña" placeholder="Contraseña" runat="server">
+            <label for="inputContraseña">Contraseña</label>
+            <input type="password" class="form-control" id="Contraseña" placeholder="Contraseña" required runat="server">
         </div>
     </div>
     <div class="form-row">
@@ -28,37 +28,37 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="inputNombre">Nuevo Nombre</label>
-            <input type="text" class="form-control" id="Nombre" placeholder="Nombre" runat="server" />
+            <label for="inputNombre"> Nombre </label>
+            <input type="text" class="form-control" id="Nombre" placeholder="Nombre" required runat="server" />
         </div>
         <div class="form-group col-md-6">
-            <label for="inputApellido">Nuevo Apellido</label>
-            <input type="text" class="form-control" id="Apellido" placeholder="Apellido" runat="server" />
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputDni">Nuevo Dni</label>
-            <input type="number" class="form-control" id="DNI" placeholder="DNI" runat="server" />
-        </div>
-        <div class="form-group col-md-6">
-            <label for="inputEmail">Nuevo Correo Electrónico</label>
-            <input type="email" class="form-control" id="Email" placeholder="Email@Email.com" runat="server" />
+            <label for="inputApellido"> Apellido </label>
+            <input type="text" class="form-control" id="Apellido" placeholder="Apellido" required runat="server" />
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="inputTelefono">Nuevo Telefono</label>
-            <input type="tel" class="form-control" id="Telefono" placeholder="Numero de Telefono" runat="server" />
+            <label for="inputDni">DNI</label>
+            <input type="number" class="form-control" id="DNI" placeholder="DNI" required runat="server" />
         </div>
         <div class="form-group col-md-6">
-            <label for="inputURLimagen">Nueva Imagen de Perfil</label>
+            <label for="inputEmail">Correo Electrónico</label>
+            <input type="email" class="form-control" id="Email" placeholder="Email@Email.com" required runat="server" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputTelefono">Telefono</label>
+            <input type="tel" class="form-control" id="Telefono" placeholder="Numero de Telefono" required runat="server" />
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputURLimagen">Imagen de Perfil</label>
             <input type="text" class="form-control" id="UrlImagen" placeholder="http/xxxx.jpg" runat="server" />
         </div>
     </div>
     <div class="form-row ">
         <div class="form-group col-md-6">
-            <asp:Label ID="lblPais" runat="server" Text="Nuevo Pais de Origen" />
+            <asp:Label ID="lblPais" runat="server" Text="Pais de Origen" />
             <asp:DropDownList CssClass="form-control" ID="DDLPaises" runat="server">
             </asp:DropDownList>
         </div>
@@ -73,8 +73,8 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="inputDomicilio">Nuevo Domicilio</label>
-            <input type="text" class="form-control" id="Domicilio" placeholder="Domicilio" runat="server" />
+            <label for="inputDomicilio">Domicilio</label>
+            <input type="text" class="form-control" id="Domicilio" placeholder="Domicilio" required runat="server" />
         </div>
     </div>
 

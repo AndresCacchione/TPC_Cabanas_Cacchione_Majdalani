@@ -19,7 +19,7 @@ namespace TPC_CacchioneMajdalani
 
         protected void btnEnviarMail_Click(object sender, EventArgs e)
         {
-            SmtpClient smtpClient = new SmtpClient()
+            SmtpClient smtpClient = new SmtpClient("response.redirect@hotmail.com",25)
             {
                 Credentials = new NetworkCredential("response.redirect@hotmail.com", "Paomajcac"), //Acá iría el email y password usados para enviar los mails
                 DeliveryMethod = SmtpDeliveryMethod.Network

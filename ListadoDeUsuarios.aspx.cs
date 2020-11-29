@@ -19,8 +19,16 @@ namespace TPC_CacchioneMajdalani
             CargarDiccionarioNivelesAcceso();
             CargarDiccionarioEstados();
             UsuarioNegocio Negocio = new UsuarioNegocio();
-            UsuariosLista = Negocio.ListarUsuarios();
-            Session.Add("listaUsuarios", UsuariosLista);
+            
+            if(Session["listaUsuarios"]==null)
+            {
+                UsuariosLista = Negocio.ListarUsuarios();
+                Session.Add("listaUsuarios", UsuariosLista);
+            }
+            else
+            {
+                UsuariosLista = (List<Usuario>)Session["listaUsuarios"];
+            }
         }
         private void CargarDiccionarioEstados()
         {

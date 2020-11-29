@@ -31,6 +31,7 @@ namespace TPC_CacchioneMajdalani
             managementDB.CargaPaises();
             managementDB.CargarNiveles();
             managementDB.CargarUsuarios();
+            Session.Clear();
             Response.Redirect("~/Default"); //una vez borradas todas las tablas, en el mismo load de default se ejecuta todo (creación de tablas, SP, TR, inserts, etc)
         }
     }

@@ -28,13 +28,13 @@ add constraint UNI_nombre unique (nombre)
 
 
 Create Table NivelesAcceso(
-	ID tinyint not null identity (1,1),
+	NivelAcceso tinyint not null,
 	nombre varchar(50) not null
 )
 
 
 alter table NivelesAcceso
-add constraint PK_NivelesAcceso primary key (ID)
+add constraint PK_NivelesAcceso primary key (NivelAcceso)
 
 
 alter table NivelesAcceso
@@ -86,7 +86,7 @@ alter Table Usuarios
 Add Constraint U_NombreUsuario_Usuarios Unique (NombreUsuario)
 
 Alter Table Usuarios
-add Constraint Fk_IdNivelAcceso_Usuarios Foreign key (IdNivelAcceso) References NivelesAcceso(Id) 
+add Constraint Fk_IdNivelAcceso_Usuarios Foreign key (IdNivelAcceso) References NivelesAcceso(NivelAcceso) 
 
 ------------------------------------------------------------------------------------------
 

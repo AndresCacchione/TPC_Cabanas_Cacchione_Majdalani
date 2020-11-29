@@ -44,13 +44,13 @@ namespace Negocio
 
 
 									Create Table NivelesAcceso(
-										ID tinyint not null identity (1,1),
+										NivelAcceso tinyint not null,
 										nombre varchar(50) not null
 									)
 
 
 									alter table NivelesAcceso
-									add constraint PK_NivelesAcceso primary key (ID)
+									add constraint PK_NivelesAcceso primary key (NivelAcceso)
 
 
 									alter table NivelesAcceso
@@ -102,7 +102,7 @@ namespace Negocio
 									Add Constraint U_NombreUsuario_Usuarios Unique (NombreUsuario)
 
 									Alter Table Usuarios
-									add Constraint Fk_IdNivelAcceso_Usuarios Foreign key (IdNivelAcceso) References NivelesAcceso(Id) 
+									add Constraint Fk_IdNivelAcceso_Usuarios Foreign key (IdNivelAcceso) References NivelesAcceso(NivelAcceso) 
 
 									------------------------------------------------------------------------------------------
 
@@ -882,7 +882,7 @@ namespace Negocio
 			AccessDB accessDB = new AccessDB();
             try
             {
-				accessDB.SetearQuery(@"insert into NivelesAcceso(nombre) values('Cliente'), ('Administrador'), ('Dueño');");
+				accessDB.SetearQuery(@"insert into NivelesAcceso(NivelAcceso, nombre) values('10','Cliente'), ('20','Administrador'), ('30','Dueño');");
 				accessDB.EjecutarAccion();
 			}
             catch (Exception ex)
@@ -896,9 +896,14 @@ namespace Negocio
 			AccessDB accessDB = new AccessDB();
 			try
 			{
-				accessDB.SetearQuery(@"insert into Usuarios values('Admin','794ac92b117ed5eacaee3c6706c9024b2e44ce68d2d4b297c9ed8767a7015ca7',3,1) ");
+				accessDB.SetearQuery(@"insert into Usuarios values('Dueño','4da32e2f1eeef7bc7fe7b51110eacb016dc05155b8c704d602efc888933b2017',30,1) ");
 				accessDB.EjecutarAccion();
-				accessDB.SetearQuery(@"insert into DatosPersonales values(1,'Admin','Admin','000000000','Admin@Admin.com','00000000','1',1,'Admin','o')");
+				accessDB.SetearQuery(@"insert into DatosPersonales values(1,'Dueño','Dueño','000000000','Dueño@dueño.com','00000000','1',13,'Dueño','o')");
+				accessDB.EjecutarAccion();
+
+				accessDB.SetearQuery(@"insert into Usuarios values('Admin','794ac92b117ed5eacaee3c6706c9024b2e44ce68d2d4b297c9ed8767a7015ca7',20,1) ");
+				accessDB.EjecutarAccion();
+				accessDB.SetearQuery(@"insert into DatosPersonales values(2,'Admin','Admin','1111111111','Admin@Admin.com','00000000','1',12,'Admin','o')");
 				accessDB.EjecutarAccion();
 			}
 			catch (Exception ex)

@@ -19,7 +19,7 @@ namespace Negocio
 
             foreach (DataRow row in dataSet.Tables[0].Rows)
             {
-                aux.Add(Convert.ToByte(row["id"]), row["nombre"].ToString());
+                aux.Add(Convert.ToByte(row["NivelAcceso"]), row["nombre"].ToString());
             }
             return aux;
         }

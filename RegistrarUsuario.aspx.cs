@@ -39,7 +39,7 @@ namespace TPC_CacchioneMajdalani
                 Contraseña = Contraseña.Value,
                 NombreUsuario = NombreUsuario.Value,
                 Estado = true,
-                NivelAcceso = 1,
+                NivelAcceso = 10,
                 DatosPersonales = new DatosPersonales
                 {
                     Apellido = Apellido.Value,

@@ -14,6 +14,8 @@ namespace TPC_CacchioneMajdalani
     {
         public ModificarUsuario()
         {
+            usuario = new Usuario();
+
             dictNivelesAcceso = new Dictionary<string, int>();
             dictGeneros = new Dictionary<string, int>
             {
@@ -28,18 +30,15 @@ namespace TPC_CacchioneMajdalani
         {
             CargarDDLPaises();
             CargarDDLNivelAcceso();
-
+            CargarUsuarioAModificar();
 
             if (!IsPostBack)
             {
-                CargarUsuarioAModificar();
                 CargarInputsUsuarios();
             }
-
         }
         private void CargarUsuarioAModificar()
         {
-            usuario = new Usuario();
             long idUsuario = Convert.ToInt64(Request.QueryString["idUsuario"]);
             if (idUsuario == 0)
             {
@@ -100,13 +99,13 @@ namespace TPC_CacchioneMajdalani
                     DDLNivelAcceso.DataSource = aux;
                 }
                 DDLNivelAcceso.DataTextField = "nombre";
-                DDLNivelAcceso.DataValueField = "ID";
+                DDLNivelAcceso.DataValueField = "NivelAcceso";
                 DDLNivelAcceso.DataBind();
 
                 int i = 0;
                 foreach (DataRow row in aux.Tables[0].Rows)
                 {
-                    dictNivelesAcceso.Add(row["id"].ToString(), i);
+                    dictNivelesAcceso.Add(row["NivelAcceso"].ToString(), i);
                     i++;
                 }
             }
@@ -150,14 +149,6 @@ namespace TPC_CacchioneMajdalani
             UsuarioNegocio Negocio = new UsuarioNegocio();
             GuardarInputsUsuarios();
 
-            //if (usuario.Id != 0)
-            //{
-            //    List<Usuario> listaUsuarios = new List<Usuario>();
-            //    listaUsuarios = Negocio.ListarUsuarios();
-            //    Session.Add("listaUsuarios", listaUsuarios);
-
-
-            //}
             Negocio.ActualizarUsuario(usuario);
             Session[Session.SessionID + "userSession"] = usuario;
             Response.Redirect("Default.aspx");

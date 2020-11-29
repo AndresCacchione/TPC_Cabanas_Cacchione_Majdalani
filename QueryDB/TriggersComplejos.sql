@@ -9,7 +9,7 @@ begin
 		declare @IDPais smallint 
 
 		--Consultar si existe ya un administrador de nivel 3.
-		if((select count(*) from Usuarios where Usuarios.IdNivelAcceso=3) =0)
+		if((select count(*) from Usuarios where Usuarios.IdNivelAcceso>=30) =0)
 		begin
 			-- Insertar un Pais genérico si no hay paises cargados
 			if((select count (*) from Paises)=0)
