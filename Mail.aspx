@@ -17,6 +17,7 @@
         Cuerpo del mensaje:<br />
         <asp:TextBox ID="txtBody" runat="server" Height="150px" TextMode="MultiLine" />
         <asp:Button ID="btnEnviarMail" runat="server" OnClick="btnEnviarMail_Click" Text="Enviar Mensaje" /><br />
+        <asp:Button Text="Probando metodo Enviar mail" ID="btnMetodoEnviarMail" OnClick="btnMetodoEnviarMail_Click" runat="server" />
         <asp:Label ID="Resultado" runat="server" Text="" />
     </form>
 </body>

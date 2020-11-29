@@ -31,7 +31,7 @@
                cel: 11111111111111 
             </p>
             <p>
-               Mail: aaaaaa@aaaaaa.com.ar
+               Mail: response.redirect@hotmail.com
             </p>
         </div>
     </div>

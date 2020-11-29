@@ -49,6 +49,7 @@
     <Compile Include="DebitoNegocio.cs" />
     <Compile Include="Encrypt.cs" />
     <Compile Include="ManagementDB.cs" />
+    <Compile Include="ManagementEmail.cs" />
     <Compile Include="MovimientoNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReservaNegocio.cs" />

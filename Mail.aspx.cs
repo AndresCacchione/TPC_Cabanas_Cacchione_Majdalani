@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Net.Mail;
 using System.Net;
+using Negocio;
 
 namespace TPC_CacchioneMajdalani
 {
@@ -53,6 +54,12 @@ namespace TPC_CacchioneMajdalani
                 //        </ smtp >
                 //    </ mailSettings >
                 //</ system.net >
+        }
+
+        protected void btnMetodoEnviarMail_Click(object sender, EventArgs e)
+        {
+            ManagementEmail managementEmail = new ManagementEmail();
+            Resultado.Text = managementEmail.EnviarEmail(txtDestinatario.Text, txtAsunto.Text, txtBody.Text);
         }
     }
 }
