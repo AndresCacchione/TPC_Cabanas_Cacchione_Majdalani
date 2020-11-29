@@ -21,7 +21,7 @@
         <div class="form-group col-md-6">
             <asp:Label ID="LblEstado" runat="server" Text="Estado"></asp:Label>
             <asp:DropDownList CssClass="form-control" ID="DDLEstado" runat="server">
-                <asp:ListItem Text="Inactivo" Value="0" />
+                <asp:ListItem Text="Bloqueado" Value="0" />
                 <asp:ListItem Text="Activo" Value="1" />
             </asp:DropDownList>
         </div>

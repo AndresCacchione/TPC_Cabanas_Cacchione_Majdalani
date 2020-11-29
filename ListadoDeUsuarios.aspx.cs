@@ -12,12 +12,44 @@ namespace TPC_CacchioneMajdalani
     public partial class ListadoDeUsuarios : Page
     {
         public List<Usuario> UsuariosLista { get; set; }
-        public int MyProperty { get; set; }
+        public Dictionary<byte,string> DicNivelesAcceso { get; set; }
+        public Dictionary<bool, string> DicEstados { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            CargarDiccionarioNivelesAcceso();
+            CargarDiccionarioEstados();
             UsuarioNegocio Negocio = new UsuarioNegocio();
             UsuariosLista = Negocio.ListarUsuarios();
             Session.Add("listaUsuarios", UsuariosLista);
+        }
+        private void CargarDiccionarioEstados()
+        {
+            if (Session["DicEstados"] == null)
+            {
+                DicEstados = new Dictionary<bool, string>() 
+                {
+                    { false, "Bloqueado" },{true, "Activo" }
+                };
+                Session.Add("DicEstados", DicEstados);
+            }
+            else
+            {
+                DicEstados = (Dictionary<bool, string>)Session["DicEstados"];
+            }
+        }
+
+        private void CargarDiccionarioNivelesAcceso()
+        {
+            if(Session["DicNivelesAcceso"]==null)
+            {
+                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                DicNivelesAcceso = usuarioNegocio.ListarNivelesAcceso();
+                Session.Add("DicNivelesAcceso",DicNivelesAcceso);
+            }
+            else
+            {
+                DicNivelesAcceso = (Dictionary<byte, string>)Session["DicNivelesAcceso"];
+            }
         }
     }
 }

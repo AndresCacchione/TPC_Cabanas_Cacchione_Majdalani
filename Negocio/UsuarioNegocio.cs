@@ -12,12 +12,22 @@ namespace Negocio
 {
     public class UsuarioNegocio
     { 
+        public Dictionary<byte,string> ListarNivelesAcceso()
+        {
+            Dictionary<byte, string> aux = new Dictionary<byte, string>();
+            DataSet dataSet = ListarNivelesAccesoDDL();
+
+            foreach (DataRow row in dataSet.Tables[0].Rows)
+            {
+                aux.Add(Convert.ToByte(row["id"]), row["nombre"].ToString());
+            }
+            return aux;
+        }
+
         public DataSet ListarNivelesAccesoDDL()
         {
             AccessDB acceso = new AccessDB();
-
-            var dataSet = new DataSet();
-            dataSet = acceso.ConsultaDDL("select * from NivelesAcceso");
+            DataSet dataSet = acceso.ConsultaDDL("select * from NivelesAcceso");
 
             return dataSet;
         }

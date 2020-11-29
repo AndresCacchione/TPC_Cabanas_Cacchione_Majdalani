@@ -19,11 +19,7 @@
                     </thead>
                     <%foreach (Dominio.Usuario item in UsuariosLista)
                         { %>
-                    <tr>
-                        
-                        
-                            
-                        
+                    <tr>                    
                         <td style="width: 140px">
                             <img src="<% = item.DatosPersonales.UrlImagen %>" style="width: 100px; height: inherit;" alt="...">
 
@@ -37,9 +33,9 @@
 
                             <th scope="row" style="width: 100px"><% = item.DatosPersonales.Telefono %></th>
 
-                            <th scope="row" style="width: 60px"><% = item.NivelAcceso %></th>
+                            <th scope="row" style="width: 60px"><% = DicNivelesAcceso[item.NivelAcceso] %></th>
 
-                            <th scope="row" style="width: 60px"><% = item.Estado %></th>
+                            <th scope="row" style="width: 60px"><% = DicEstados[item.Estado] %></th>
 
                             <th scope="row"><a class="btn btn-secondary" href="ModificarUsuario.aspx?idUsuario=<% = item.Id.ToString() %>">Modificar</a></th>
 

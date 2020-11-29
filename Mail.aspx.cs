@@ -18,12 +18,14 @@ namespace TPC_CacchioneMajdalani
 
         protected void btnEnviarMail_Click(object sender, EventArgs e)
         {
-            SmtpClient smtpClient = new SmtpClient("domain.a2hosted.com", 25)//Replace domain.a2hosted.com with your own domain name. Acá habla de un dominio, tendríamos que ver la manera de saber el nuestro
+            SmtpClient smtpClient = new SmtpClient()
             {
-                Credentials = new NetworkCredential("usuario@ejemplo.com", "contraseña"), //Acá iría el email y password usados para enviar los mails
+                Credentials = new NetworkCredential("response.redirect@hotmail.com", "Paomajcac"), //Acá iría el email y password usados para enviar los mails
                 DeliveryMethod = SmtpDeliveryMethod.Network
             };
 
+            txtEmisor.Text = "response.redirect@hotmail.com";
+            txtDestinatario.Text = "cristianpaolini3@gmail.com";
             MailMessage mail = new MailMessage(txtEmisor.Text, txtDestinatario.Text)
             {
                 Subject = txtAsunto.Text,
@@ -39,6 +41,18 @@ namespace TPC_CacchioneMajdalani
             {
                 Resultado.Text = ex.ToString();
             }
+                // ESTO VA EN EL WEB CONFIG: 
+                //< system.net >
+                //    < mailSettings >
+                //        < smtp from = "response.redirect@hotmail.com" >
+                //             < network host = "smtp.live.com"
+                //             port = "25"
+                //             userName = "response.redirect@hotmail.com"
+                //             password = "Paomajcac"
+                //             enableSsl = "true" />
+                //        </ smtp >
+                //    </ mailSettings >
+                //</ system.net >
         }
     }
 }

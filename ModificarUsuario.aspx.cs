@@ -29,13 +29,38 @@ namespace TPC_CacchioneMajdalani
             CargarDDLPaises();
             CargarDDLNivelAcceso();
 
-            usuario = new Usuario();
-            usuario = (Usuario)Session[Session.SessionID + "userSession"];
+
             if (!IsPostBack)
             {
+                CargarUsuarioAModificar();
                 CargarInputsUsuarios();
             }
 
+        }
+        private void CargarUsuarioAModificar()
+        {
+            usuario = new Usuario();
+            long idUsuario = Convert.ToInt64(Request.QueryString["idUsuario"]);
+            if (idUsuario == 0)
+            {
+                usuario = (Usuario)Session[Session.SessionID + "userSession"];
+            }
+            else
+            {
+                List<Usuario> UsuariosLista = new List<Usuario>();
+                if (Session["listaUsuarios"] == null)
+                {
+                    UsuarioNegocio Negocio = new UsuarioNegocio();
+                    UsuariosLista = Negocio.ListarUsuarios();
+                    Session.Add("listaUsuarios", UsuariosLista);
+                    usuario = UsuariosLista.Find(i => i.Id == idUsuario);
+                }
+                else
+                {
+                    UsuariosLista = (List<Usuario>)Session["listaUsuarios"];
+                    usuario = UsuariosLista.Find(i => i.Id == idUsuario);
+                }
+            }
         }
 
         private void CargarDDLPaises()
