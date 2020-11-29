@@ -227,5 +227,42 @@ namespace Negocio
             }
             return ultima;
         }
+        public Cabaña ListarCabañaPorId(long idDeCabaña)
+        {
+            AccessDB acceso = new AccessDB();
+            Cabaña cabaña = new Cabaña();
+            try
+            {
+                ComplejoNegocio negocio = new ComplejoNegocio();
+
+                acceso.SetearQuery("select* from Cabañas where estado = 1 and Cabañas.ID =" + idDeCabaña);
+                acceso.EjecutarLector();
+                acceso.Lector.Read();
+
+                cabaña.EstadoActivo = (bool)acceso.Lector["estado"];
+                cabaña.Id = (long)acceso.Lector["ID"];
+                cabaña.PrecioDiario = (decimal)acceso.Lector["precioDiario"];
+                cabaña.Capacidad = (byte)acceso.Lector["capacidad"];
+                cabaña.Ambientes = (byte)acceso.Lector["cantidadAmbientes"];
+                cabaña.TiempoEntreReservas = (DateTime)acceso.Lector["tiempoEntreReservas"];
+                cabaña.CheckIn = (DateTime)acceso.Lector["horaCheckIn"];
+                cabaña.CheckOut = (DateTime)acceso.Lector["horaCheckOut"];
+                cabaña.Imagen = (string)acceso.Lector["imagenPortada"];
+                cabaña.complejo = negocio.BuscarComplejoPorId((long)acceso.Lector["Idcomplejo"]);
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                acceso.CerrarConexion();
+            }
+            return cabaña;
+        }
+
+
+
     }
 }
