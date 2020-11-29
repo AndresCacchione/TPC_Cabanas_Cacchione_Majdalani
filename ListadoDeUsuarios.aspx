@@ -19,11 +19,11 @@
                     </thead>
                     <%foreach (Dominio.Usuario item in UsuariosLista)
                         { %>
-                    <tr>                    
+                    <tr>
                         <td style="width: 140px">
                             <img src="<% = item.DatosPersonales.UrlImagen %>" style="width: 100px; height: inherit;" alt="No posee imagen cargada">
 
-                            <th scope="row" style="width: 120px"><% = item.NombreUsuario %></th> 
+                            <th scope="row" style="width: 120px"><% = item.NombreUsuario %></th>
 
                             <th scope="row" style="width: 100px"><% = item.DatosPersonales.Nombre %></th>
 
@@ -43,7 +43,6 @@
                     </tr>
 
                     <% } %>
-
                 </table>
             </div>
         </div>

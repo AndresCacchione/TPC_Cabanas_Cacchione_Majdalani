@@ -12,15 +12,15 @@ namespace TPC_CacchioneMajdalani
     public partial class ListadoDeUsuarios : Page
     {
         public List<Usuario> UsuariosLista { get; set; }
-        public Dictionary<byte,string> DicNivelesAcceso { get; set; }
+        public Dictionary<byte, string> DicNivelesAcceso { get; set; }
         public Dictionary<bool, string> DicEstados { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             CargarDiccionarioNivelesAcceso();
             CargarDiccionarioEstados();
             UsuarioNegocio Negocio = new UsuarioNegocio();
-            
-            if(Session["listaUsuarios"]==null)
+
+            if (Session["listaUsuarios"] == null)
             {
                 UsuariosLista = Negocio.ListarUsuarios();
                 Session.Add("listaUsuarios", UsuariosLista);
@@ -34,7 +34,7 @@ namespace TPC_CacchioneMajdalani
         {
             if (Session["DicEstados"] == null)
             {
-                DicEstados = new Dictionary<bool, string>() 
+                DicEstados = new Dictionary<bool, string>()
                 {
                     { false, "Bloqueado" },{true, "Activo" }
                 };
@@ -48,11 +48,11 @@ namespace TPC_CacchioneMajdalani
 
         private void CargarDiccionarioNivelesAcceso()
         {
-            if(Session["DicNivelesAcceso"]==null)
+            if (Session["DicNivelesAcceso"] == null)
             {
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 DicNivelesAcceso = usuarioNegocio.ListarNivelesAcceso();
-                Session.Add("DicNivelesAcceso",DicNivelesAcceso);
+                Session.Add("DicNivelesAcceso", DicNivelesAcceso);
             }
             else
             {

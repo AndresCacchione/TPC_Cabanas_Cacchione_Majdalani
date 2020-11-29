@@ -11,8 +11,8 @@ using System.Data.SqlClient;
 namespace Negocio
 {
     public class UsuarioNegocio
-    { 
-        public Dictionary<byte,string> ListarNivelesAcceso()
+    {
+        public Dictionary<byte, string> ListarNivelesAcceso()
         {
             Dictionary<byte, string> aux = new Dictionary<byte, string>();
             DataSet dataSet = ListarNivelesAccesoDDL();

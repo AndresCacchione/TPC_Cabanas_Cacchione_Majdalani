@@ -9,12 +9,12 @@ namespace Negocio
 {
     public class ManagementDB
     {
-		public void CrearTablasDB()
-		{
-			AccessDB acceso = new AccessDB();
-			try
-			{
-				acceso.SetearQuery(@"Use master
+        public void CrearTablasDB()
+        {
+            AccessDB acceso = new AccessDB();
+            try
+            {
+                acceso.SetearQuery(@"Use master
 									
 									If not exists (Select * from sys.databases where name = 'Cacchione_Majdalani_DB')
 									Begin
@@ -413,21 +413,21 @@ namespace Negocio
 
 									')
 									end");
-				acceso.EjecutarAccion();
-			}
-			catch (Exception ex)
-			{
+                acceso.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
 
-				throw ex;
-			}
-		}
-		public void SetTRInsteadOfDELComplejos()
-		{
-			AccessDB acceso = new AccessDB();
+                throw ex;
+            }
+        }
+        public void SetTRInsteadOfDELComplejos()
+        {
+            AccessDB acceso = new AccessDB();
 
-			try
-			{
-				acceso.SetearTrigger(@" use Cacchione_Majdalani_DB
+            try
+            {
+                acceso.SetearTrigger(@" use Cacchione_Majdalani_DB
 									
 									IF NOT EXISTS (select * from sys.objects where name = 'tr_eliminar_complejo')
 									BEGIN
@@ -452,24 +452,24 @@ namespace Negocio
 											end catch
 										end');
 									END;");
-			}
-			catch (Exception ex)
-			{
+            }
+            catch (Exception ex)
+            {
 
-				throw ex;
-			}
-			finally
-			{
-				acceso.CerrarConexion();
-			}
-		}
-		public void SetTRInsteadOfDELCabañas()
-		{
-			AccessDB acceso = new AccessDB();
+                throw ex;
+            }
+            finally
+            {
+                acceso.CerrarConexion();
+            }
+        }
+        public void SetTRInsteadOfDELCabañas()
+        {
+            AccessDB acceso = new AccessDB();
 
-			try
-			{
-				acceso.SetearTrigger(@" use Cacchione_Majdalani_DB
+            try
+            {
+                acceso.SetearTrigger(@" use Cacchione_Majdalani_DB
                                     
                                     IF NOT EXISTS (select * from sys.objects where name = 'tr_eliminar_cabaña')
                                     BEGIN
@@ -489,23 +489,23 @@ namespace Negocio
 		                                    end catch
 		                                    end ');
                                     END;");
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
-			finally
-			{
-				acceso.CerrarConexion();
-			}
-		}
-		public void CargaPaises()
-		{
-			AccessDB acceso = new AccessDB();
-			try
-			{
-				acceso.SetearQuery(@"use Cacchione_Majdalani_DB
+            finally
+            {
+                acceso.CerrarConexion();
+            }
+        }
+        public void CargaPaises()
+        {
+            AccessDB acceso = new AccessDB();
+            try
+            {
+                acceso.SetearQuery(@"use Cacchione_Majdalani_DB
 									if(select count(*) from Paises)=0
 									begin
 									insert into Paises(nombre) values 
@@ -751,20 +751,20 @@ namespace Negocio
 										('Zimbabue'),
 										('Otros Paises NCP');
 									end");
-				acceso.EjecutarAccion();
-			}
-			catch (Exception ex)
-			{
+                acceso.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
 
-				throw ex;
-			}
-		}
-		public void BorrarTablas()
+                throw ex;
+            }
+        }
+        public void BorrarTablas()
         {
-			AccessDB accessDB = new AccessDB();
+            AccessDB accessDB = new AccessDB();
             try
             {
-				accessDB.SetearQuery(@"Use Cacchione_Majdalani_DB
+                accessDB.SetearQuery(@"Use Cacchione_Majdalani_DB
 									
 									if exists (select * from sys.objects where name = 'Solicitudes')
 									Begin
@@ -784,20 +784,20 @@ namespace Negocio
 									Drop Table NivelesAcceso
 									Drop Table Paises
 									end");
-				accessDB.EjecutarAccion();
-			}
-			catch (Exception ex)
+                accessDB.EjecutarAccion();
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
 
-		private void SetearSPContarAccNiveles()
-		{
-			AccessDB accessDB = new AccessDB();
-			try
-			{
-				accessDB.SetearQuery(@"use Cacchione_Majdalani_DB
+        private void SetearSPContarAccNiveles()
+        {
+            AccessDB accessDB = new AccessDB();
+            try
+            {
+                accessDB.SetearQuery(@"use Cacchione_Majdalani_DB
 										--drop procedure if exists SPContarNivelesAcceso
 										if not exists (Select * from sys.objects where name = 'SPContarNivelesAcceso')
 										begin
@@ -808,20 +808,20 @@ namespace Negocio
 										end
 										')
 										end");
-				accessDB.EjecutarAccion();
-			}
-			catch (Exception ex)
-			{
+                accessDB.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
 
-				throw ex;
-			}
-		}
-		private void SetearSPContarUsuarios()
-		{
-			AccessDB accessDB = new AccessDB();
-			try
-			{
-				accessDB.SetearQuery(@"use Cacchione_Majdalani_DB
+                throw ex;
+            }
+        }
+        private void SetearSPContarUsuarios()
+        {
+            AccessDB accessDB = new AccessDB();
+            try
+            {
+                accessDB.SetearQuery(@"use Cacchione_Majdalani_DB
 										--drop procedure if exists SPContarUsuarios
 										if not exists (Select * from sys.objects where name = 'SPContarUsuarios')
 										begin
@@ -832,101 +832,101 @@ namespace Negocio
 										end
 										')
 										end");
-				accessDB.EjecutarAccion();
-			}
-			catch (Exception ex)
-			{
+                accessDB.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
 
-				throw ex;
-			}
-		}
-		private int EjecutarSPContarUsuarios()
-		{
-			AccessDB accessDB = new AccessDB();
-			int ret;
-			try
-			{
-				ret = accessDB.EjecutarStoredProcedureIntReturn("SPContarUsuarios");
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
-			finally
-			{
-				accessDB.CerrarConexion();
-			}
-			return ret;
-		}
-
-		private int EjecutarSPContarAccNiveles()
+                throw ex;
+            }
+        }
+        private int EjecutarSPContarUsuarios()
         {
-			AccessDB accessDB = new AccessDB();
-			int ret;
+            AccessDB accessDB = new AccessDB();
+            int ret;
             try
             {
-				ret = accessDB.EjecutarStoredProcedureIntReturn("SPContarNivelesAcceso");
-			}
-			catch (Exception ex)
+                ret = accessDB.EjecutarStoredProcedureIntReturn("SPContarUsuarios");
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
-			finally
+            finally
             {
-				accessDB.CerrarConexion();
+                accessDB.CerrarConexion();
             }
-			return ret;
+            return ret;
         }
-		private void InsertarnivelesAcceso()
+
+        private int EjecutarSPContarAccNiveles()
         {
-			AccessDB accessDB = new AccessDB();
+            AccessDB accessDB = new AccessDB();
+            int ret;
             try
             {
-				accessDB.SetearQuery(@"insert into NivelesAcceso(NivelAcceso, nombre) values('10','Cliente'), ('20','Administrador'), ('30','Dueño');");
-				accessDB.EjecutarAccion();
-			}
+                ret = accessDB.EjecutarStoredProcedureIntReturn("SPContarNivelesAcceso");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accessDB.CerrarConexion();
+            }
+            return ret;
+        }
+        private void InsertarnivelesAcceso()
+        {
+            AccessDB accessDB = new AccessDB();
+            try
+            {
+                accessDB.SetearQuery(@"insert into NivelesAcceso(NivelAcceso, nombre) values('10','Cliente'), ('20','Administrador'), ('30','Dueño');");
+                accessDB.EjecutarAccion();
+            }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
 
-		private void InsertarUsuarios()
-		{
-			AccessDB accessDB = new AccessDB();
-			try
-			{
-				accessDB.SetearQuery(@"insert into Usuarios values('Dueño','4da32e2f1eeef7bc7fe7b51110eacb016dc05155b8c704d602efc888933b2017',30,1) ");
-				accessDB.EjecutarAccion();
-				accessDB.SetearQuery(@"insert into DatosPersonales values(1,'Dueño','Dueño','000000000','Dueño@dueño.com','00000000','1',13,'Dueño','o')");
-				accessDB.EjecutarAccion();
-
-				accessDB.SetearQuery(@"insert into Usuarios values('Admin','794ac92b117ed5eacaee3c6706c9024b2e44ce68d2d4b297c9ed8767a7015ca7',20,1) ");
-				accessDB.EjecutarAccion();
-				accessDB.SetearQuery(@"insert into DatosPersonales values(2,'Admin','Admin','1111111111','Admin@Admin.com','00000000','1',12,'Admin','o')");
-				accessDB.EjecutarAccion();
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
-		}
-		public void CargarNiveles()
+        private void InsertarUsuarios()
         {
-			SetearSPContarAccNiveles();
-			if(EjecutarSPContarAccNiveles()==0)
+            AccessDB accessDB = new AccessDB();
+            try
             {
-				InsertarnivelesAcceso();
-            }
-		}
+                accessDB.SetearQuery(@"insert into Usuarios values('Dueño','4da32e2f1eeef7bc7fe7b51110eacb016dc05155b8c704d602efc888933b2017',30,1) ");
+                accessDB.EjecutarAccion();
+                accessDB.SetearQuery(@"insert into DatosPersonales values(1,'Dueño','Dueño','000000000','Dueño@dueño.com','00000000','1',13,'Dueño','o')");
+                accessDB.EjecutarAccion();
 
-		public void CargarUsuarios()
-		{
-			SetearSPContarUsuarios();
-			if (EjecutarSPContarUsuarios() == 0)
-			{
-				InsertarUsuarios();
-			}
-		}
-	}
+                accessDB.SetearQuery(@"insert into Usuarios values('Admin','794ac92b117ed5eacaee3c6706c9024b2e44ce68d2d4b297c9ed8767a7015ca7',20,1) ");
+                accessDB.EjecutarAccion();
+                accessDB.SetearQuery(@"insert into DatosPersonales values(2,'Admin','Admin','1111111111','Admin@Admin.com','00000000','1',12,'Admin','o')");
+                accessDB.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void CargarNiveles()
+        {
+            SetearSPContarAccNiveles();
+            if (EjecutarSPContarAccNiveles() == 0)
+            {
+                InsertarnivelesAcceso();
+            }
+        }
+
+        public void CargarUsuarios()
+        {
+            SetearSPContarUsuarios();
+            if (EjecutarSPContarUsuarios() == 0)
+            {
+                InsertarUsuarios();
+            }
+        }
+    }
 }

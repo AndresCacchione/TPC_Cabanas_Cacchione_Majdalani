@@ -28,11 +28,11 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="inputNombre"> Nombre </label>
+            <label for="inputNombre">Nombre </label>
             <input type="text" class="form-control" id="Nombre" placeholder="Nombre" required runat="server" />
         </div>
         <div class="form-group col-md-6">
-            <label for="inputApellido"> Apellido </label>
+            <label for="inputApellido">Apellido </label>
             <input type="text" class="form-control" id="Apellido" placeholder="Apellido" required runat="server" />
         </div>
     </div>

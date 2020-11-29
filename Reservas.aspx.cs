@@ -17,15 +17,15 @@ namespace TPC_CacchioneMajdalani
             UsuarioNegocio NegocioUsuario = new UsuarioNegocio();
             CabañaNegocio NegocioCabaña = new CabañaNegocio();
             long idCabaña = Convert.ToInt64(Request.QueryString["idCabaña"]);
-            
+
             long idUsuario = Convert.ToInt64(Request.QueryString["idUsuario"]);
 
-            reserva.Cabaña =(Cabaña)NegocioCabaña.ListarCabañaPorId(idCabaña);
-            reserva.Cliente  = (Usuario) NegocioUsuario.ListarUsuarioPorId(idUsuario);               
+            reserva.Cabaña = (Cabaña)NegocioCabaña.ListarCabañaPorId(idCabaña);
+            reserva.Cliente = (Usuario)NegocioUsuario.ListarUsuarioPorId(idUsuario);
         }
         private void CargarReserva()
         {
-         /// aca abria que cargar lo del front en la reserva
+            /// aca abria que cargar lo del front en la reserva
 
         }
 

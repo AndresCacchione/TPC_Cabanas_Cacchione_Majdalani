@@ -17,8 +17,7 @@ namespace Negocio
             {
                 SmtpClient smtpClient = new SmtpClient()
                 {
-                    Credentials = new NetworkCredential(emailEmisor, contraseñaEmisor), //Acá iría el email y password usados para enviar los mails
-                    DeliveryMethod = SmtpDeliveryMethod.Network
+                    Credentials = new NetworkCredential(emailEmisor, contraseñaEmisor),
                 };
 
                 MailMessage mail = new MailMessage(emailEmisor, EmailDestino)
@@ -39,11 +38,11 @@ namespace Negocio
                 }
                 resultados.Add(Resultado);
             }
-            
+
             string retorno;
             if (resultados.TrueForAll(i => i != "Email enviado"))
             {
-               retorno = resultados.First();
+                retorno = resultados.First();
             }
             else
             {
