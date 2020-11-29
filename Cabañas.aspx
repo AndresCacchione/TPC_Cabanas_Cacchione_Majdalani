@@ -60,7 +60,7 @@
             <td><%=item.PrecioDiario%> </td>
             <td><%=item.Capacidad%> </td>
             <td><a href="DetalleCabaña.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-primary mr-auto ml-auto">Detalle </a></td>
-            <td><a href="#" class="btn btn-success mr-auto ml-auto">Reservar</a> </td>
+            <td><a href="Reservas.aspx?idCabaña=<%=item.Id.ToString()%>&idUsuario=<%=Session[Session.SessionID+"userSession"]%>" class="btn btn-success mr-auto ml-auto">Reservar</a> </td>
             <td><a href="AgregarModificarCabaña.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Modificar</a> </td>
             <td><a href="EliminarCabaña.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-danger mr-auto ml-auto">Eliminar</a> </td>
         </tr>
