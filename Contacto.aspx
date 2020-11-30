@@ -9,7 +9,7 @@
         </div>
         <div class="form-group">
             <label for="txtBoxAsuntoMail">Motivo de contacto</label>
-            <asp:TextBox class="form-control" runat="server" id="txtBoxAsunto" MaxLength="100" required=""/>
+            <asp:TextBox class="form-control" runat="server" ID="txtBoxAsunto" MaxLength="100" required="" />
         </div>
         <div class="form-group">
             <label for="TextAreaCuerpoMail">Redactar mensaje</label>
