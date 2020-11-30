@@ -208,6 +208,64 @@ namespace Negocio
             return listaReservasNoVigentes;
         }
 
+        public void ResolverReserva(long idReserva)
+        {
+
+            Reserva buscada = ListarReservaPorId(idReserva);
+            AccessDB access = new AccessDB();
+            try
+            {
+                access.SetearQuery("update reservas set estado=@estado where id=" + idReserva);
+                access.AgregarParametro("@estado", buscada.Estado);
+                access.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                access.CerrarConexion();
+            }
+                      
+        }
+
+        public Reserva ListarReservaPorId(long idReserva)
+        {
+            UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+            CabañaNegocio cabañaNegocio = new CabañaNegocio();
+            AccessDB access = new AccessDB();
+            Reserva reserva = new Reserva();
+            try
+            {
+                access.SetearQuery("select * from reservas where Id="+idReserva);
+                access.EjecutarLector();
+                access.Lector.Read();
+                
+                reserva.Cliente = usuarioNegocio.ListarUsuarioPorId((long)access.Lector["idUsuario"]); //Capaz convenga agregar el atributo Id a la clase Reserva
+                reserva.Cabaña = cabañaNegocio.ListarCabañaPorId((long)access.Lector["idCabaña"]);
+                reserva.FechaIngreso = (DateTime)access.Lector["fechaIngreso"];
+                reserva.FechaEgreso = (DateTime)access.Lector["fechaEgreso"];
+                reserva.CantPersonas = (byte)access.Lector["cantidadPersonas"];
+                reserva.FechaCreacionReserva = (DateTime)access.Lector["fechaReserva"];
+                reserva.Importe = (decimal)access.Lector["importe"];
+                reserva.Estado = (byte)access.Lector["estado"];
+                reserva.IdReservaOriginal = (long)access.Lector["IDReservaOriginal"];
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                access.CerrarConexion();
+            }
+            return reserva;
+
+        }
+
     }
 }
 
