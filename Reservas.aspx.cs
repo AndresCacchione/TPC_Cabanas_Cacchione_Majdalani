@@ -9,7 +9,7 @@ using Negocio;
 
 namespace TPC_CacchioneMajdalani
 {
-    public partial class Reservas : System.Web.UI.Page
+    public partial class Reservas : Page
     {
         public Reserva reserva { get; set; }
 

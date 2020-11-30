@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace TPC_CacchioneMajdalani
 {
-    public partial class ModificarReserva : System.Web.UI.Page
+    public partial class ModificarReserva : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
