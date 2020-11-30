@@ -13,14 +13,6 @@ namespace Negocio
 
         //ResolverReserva(reserva.id); // Solo a este campo hay que hacer un modificar reserva (para el admin: 1 Pendiente, 2 Confirmada, 3 Rechazada, 4 Cambiada)
 
-        //ListarReservasVigentes();
-
-        //ListarReservasNoVigentes();
-
-        //ListarReservasVigentesPorUsuario(idUsuario); // Listaríamos solo las reservas que, al día de hoy, estén antes de la fecha de egreso.
-
-        //ListarReservasNoVigentesPorUsuario(idUsuario); // Listaríamos solo las reservas que, al día de hoy, estén antes de la fecha de egreso.
-
         public void InsertarReserva(Reserva reserva)
         {
             AccessDB access = new AccessDB();
@@ -56,20 +48,19 @@ namespace Negocio
             AccessDB access = new AccessDB();
             try
             {
-                access.SetearQuery("select * from reservas where fechaegreso<getdate() and idusuario=" + idUsuario);
+                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                CabañaNegocio cabañaNegocio = new CabañaNegocio();
+
+                access.SetearQuery("select * from reservas r, usuarios u, cabañas c where fechaegreso<getdate() and " +
+                    "r.idcabaña=c.id and idusuario=" + idUsuario);
                 access.EjecutarLector();
                 while (access.Lector.Read())
                 {
                     Reserva aux = new Reserva
                     {
-                        Cliente = new Usuario
-                        {
-                            Id = (long)access.Lector["idUsuario"]
-                        },
-                        Cabaña = new Cabaña
-                        {
-                            Id = (long)access.Lector["idCabaña"]
-                        },
+
+                        Cliente = usuarioNegocio.ListarUsuarioPorId(((long)access.Lector["idUsuario"])),
+                        Cabaña = cabañaNegocio.ListarCabañaPorId((long)access.Lector["idCabaña"]),
                         FechaIngreso = (DateTime)access.Lector["fechaIngreso"],
                         FechaEgreso = (DateTime)access.Lector["fechaEgreso"],
                         CantPersonas = (byte)access.Lector["cantidadPersonas"],
@@ -101,20 +92,18 @@ namespace Negocio
             AccessDB access = new AccessDB();
             try
             {
-                access.SetearQuery("select * from reservas where fechaegreso>=getdate() and idusuario=" + idUsuario);
+                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                CabañaNegocio cabañaNegocio = new CabañaNegocio();
+
+                access.SetearQuery("select * from reservas r, usuarios u, cabañas c where fechaegreso>=getdate() " +
+                    "and r.idcabaña=c.id and r.idusuario=" + idUsuario);
                 access.EjecutarLector();
                 while (access.Lector.Read())
                 {
                     Reserva aux = new Reserva
                     {
-                        Cliente = new Usuario
-                        {
-                            Id = (long)access.Lector["idUsuario"]
-                        },
-                        Cabaña = new Cabaña
-                        {
-                            Id = (long)access.Lector["idCabaña"]
-                        },
+                        Cliente = usuarioNegocio.ListarUsuarioPorId(((long)access.Lector["idUsuario"])),
+                        Cabaña = cabañaNegocio.ListarCabañaPorId((long)access.Lector["idCabaña"]),
                         FechaIngreso = (DateTime)access.Lector["fechaIngreso"],
                         FechaEgreso = (DateTime)access.Lector["fechaEgreso"],
                         CantPersonas = (byte)access.Lector["cantidadPersonas"],
@@ -145,20 +134,17 @@ namespace Negocio
             AccessDB access = new AccessDB();
             try
             {
+                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                CabañaNegocio cabañaNegocio = new CabañaNegocio();
+
                 access.SetearQuery("select * from reservas where fechaegreso<getdate()");
                 access.EjecutarLector();
                 while (access.Lector.Read())
                 {
                     Reserva aux = new Reserva
                     {
-                        Cliente = new Usuario
-                        {
-                            Id = (long)access.Lector["idUsuario"]
-                        },
-                        Cabaña = new Cabaña
-                        {
-                            Id = (long)access.Lector["idCabaña"]
-                        },
+                        Cliente = usuarioNegocio.ListarUsuarioPorId(((long)access.Lector["idUsuario"])),
+                        Cabaña = cabañaNegocio.ListarCabañaPorId((long)access.Lector["idCabaña"]),
                         FechaIngreso = (DateTime)access.Lector["fechaIngreso"],
                         FechaEgreso = (DateTime)access.Lector["fechaEgreso"],
                         CantPersonas = (byte)access.Lector["cantidadPersonas"],
@@ -188,20 +174,17 @@ namespace Negocio
             AccessDB access = new AccessDB();
             try
             {
+                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                CabañaNegocio cabañaNegocio = new CabañaNegocio();
+
                 access.SetearQuery("select * from reservas where fechaegreso>=getdate()");
                 access.EjecutarLector();
                 while (access.Lector.Read())
                 {
                     Reserva aux = new Reserva
                     {
-                        Cliente = new Usuario
-                        {
-                            Id = (long)access.Lector["idUsuario"]
-                        },
-                        Cabaña = new Cabaña
-                        {
-                            Id = (long)access.Lector["idCabaña"]
-                        },
+                        Cliente = usuarioNegocio.ListarUsuarioPorId(((long)access.Lector["idUsuario"])),
+                        Cabaña = cabañaNegocio.ListarCabañaPorId((long)access.Lector["idCabaña"]),
                         FechaIngreso = (DateTime)access.Lector["fechaIngreso"],
                         FechaEgreso = (DateTime)access.Lector["fechaEgreso"],
                         CantPersonas = (byte)access.Lector["cantidadPersonas"],
@@ -228,12 +211,4 @@ namespace Negocio
     }
 }
 
-//public DateTime FechaCreacionReserva { get; set; }
-//public Usuario Cliente { get; set; }
-//public Cabaña Cabaña { get; set; }
-//public DateTime FechaIngreso { get; set; }
-//public DateTime FechaEgreso { get; set; }
-//public byte CantPersonas { get; set; }
-//public byte Estado { get; set; }
-//public long IdReservaOriginal { get; set; }
-//public decimal Importe { get; set; }
+

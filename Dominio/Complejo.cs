@@ -11,7 +11,7 @@ namespace Dominio
     {
         public Complejo()
         {
-            this.ListaImagenes = new List<Imagen>();
+            ListaImagenes = new List<Imagen>();
         }
         public long ID { get; set; }
         public string Imagen { get; set; }

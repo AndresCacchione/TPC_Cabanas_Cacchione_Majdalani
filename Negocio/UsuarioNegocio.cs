@@ -328,8 +328,8 @@ namespace Negocio
                             Email = (string)access.Lector["email"],
                             Telefono = (string)access.Lector["telefono"],
                             UrlImagen = (string)access.Lector["URLimagen"],
-                            PaisOrigen = ListarPais((short)access.Lector["IDPais"]), //con el ID traido de DB, casteado, hago uso del método ListarPais,
-                            Domicilio = (string)access.Lector["domicilio"],         //que recibe un short y devuelve el País correspondiente en forma de string
+                            PaisOrigen = ListarPais((short)access.Lector["IDPais"]), 
+                            Domicilio = (string)access.Lector["domicilio"],         
                             Genero = (string)access.Lector["genero"]
                         }
                     };

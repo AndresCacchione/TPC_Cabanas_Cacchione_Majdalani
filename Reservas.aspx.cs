@@ -17,15 +17,16 @@ namespace TPC_CacchioneMajdalani
         {
             reserva = new Reserva();
         }
-         
+
         protected void Page_Load(object sender, EventArgs e)
         {
             long idCabaña = Convert.ToInt64(Request.QueryString["idCabaña"]);
             long idUsuario = Convert.ToInt64(Request.QueryString["idUsuario"]);
 
-            if (idUsuario != 0 && idCabaña != 0) {
+            if (idUsuario != 0 && idCabaña != 0)
+            {
                 CargarCabaña(idCabaña);
-                reserva.Cliente = (Usuario)Session[Session.SessionID + "userSession"];   
+                reserva.Cliente = (Usuario)Session[Session.SessionID + "userSession"];
             }
             else
             {
@@ -35,7 +36,7 @@ namespace TPC_CacchioneMajdalani
 
         private void CargarCabaña(long idCabaña)
         {
-            if(Session["listaCabañas"] != null)
+            if (Session["listaCabañas"] != null)
             {
                 reserva.Cabaña = ((List<Cabaña>)Session["listaCabañas"]).Find(i => i.Id == idCabaña);
             }
@@ -48,18 +49,18 @@ namespace TPC_CacchioneMajdalani
                 reserva.Cabaña = aux.Find(i => i.Id == idCabaña);
             }
         }
-                
+
 
         private void GuardarReserva()
         {
-            reserva.CantPersonas=Convert.ToByte(CantidadPersonas.Value);
-            reserva.Estado=1; //estado 1 = Pendiente, estado 2 = Confirmada, estado 3 = Cancelada
-            reserva.FechaCreacionReserva=DateTime.Today;
-            reserva.FechaEgreso=Convert.ToDateTime(FechaEgreso.Value);
+            reserva.CantPersonas = Convert.ToByte(CantidadPersonas.Value);
+            reserva.Estado = 1; //estado 1 = Pendiente, estado 2 = Confirmada, estado 3 = Cancelada
+            reserva.FechaCreacionReserva = DateTime.Today;
+            reserva.FechaEgreso = Convert.ToDateTime(FechaEgreso.Value);
             reserva.FechaIngreso = Convert.ToDateTime(FechaIngreso.Value);
             TimeSpan dateSpan = reserva.FechaEgreso - reserva.FechaIngreso;
-            reserva.Importe =dateSpan.Days * reserva.Cabaña.PrecioDiario;
-            reserva.IdReservaOriginal=0; // 0 sería null en la DB
+            reserva.Importe = dateSpan.Days * reserva.Cabaña.PrecioDiario;
+            reserva.IdReservaOriginal = 0; // 0 sería null en la DB
         }
 
         private void CargarReserva()

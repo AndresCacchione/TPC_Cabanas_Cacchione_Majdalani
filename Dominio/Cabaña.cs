@@ -10,7 +10,7 @@ namespace Dominio
     {
         public Cabaña()
         {
-            this.ListaImagenes = new List<Imagen>();
+            ListaImagenes = new List<Imagen>();
         }
         public long Id { get; set; }
         public decimal PrecioDiario { get; set; }

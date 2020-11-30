@@ -10,7 +10,7 @@ namespace Dominio
     {
         public Usuario()
         {
-            this.DatosPersonales = new DatosPersonales();
+            DatosPersonales = new DatosPersonales();
         }
         public long Id { get; set; }
         public string NombreUsuario { get; set; }
