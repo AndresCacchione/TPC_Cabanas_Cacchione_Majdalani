@@ -11,7 +11,7 @@ namespace TPC_CacchioneMajdalani
 {
 
 
-    public partial class Reservas
+    public partial class ModificarReserva
     {
 
         /// <summary>
@@ -42,6 +42,24 @@ namespace TPC_CacchioneMajdalani
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl CantidadPersonas;
 
         /// <summary>
+        /// Control FechaReserva.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl FechaReserva;
+
+        /// <summary>
+        /// Control Importe.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Importe;
+
+        /// <summary>
         /// Control Estado.
         /// </summary>
         /// <remarks>
@@ -60,12 +78,12 @@ namespace TPC_CacchioneMajdalani
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl IDReservaOriginal;
 
         /// <summary>
-        /// Control Reservar.
+        /// Control btnModificarDatos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Reservar;
+        protected global::System.Web.UI.WebControls.Button btnModificarDatos;
     }
 }

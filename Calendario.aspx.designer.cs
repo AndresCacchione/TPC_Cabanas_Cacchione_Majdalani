@@ -30,7 +30,7 @@ namespace TPC_CacchioneMajdalani
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender1;
+   /*  DESCOMENTAR PARA USAR*/   //protected global::AjaxControlToolkit.CalendarExtender CalendarExtender1;
 
         /// <summary>
         /// Calendar1 control.

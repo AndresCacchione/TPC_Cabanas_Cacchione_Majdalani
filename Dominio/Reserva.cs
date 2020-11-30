@@ -16,6 +16,7 @@ namespace Dominio
         public byte CantPersonas { get; set; }
         public byte Estado { get; set; }
         public long IdReservaOriginal { get; set; }
+        public decimal Importe { get; set; }
 
     }
 }

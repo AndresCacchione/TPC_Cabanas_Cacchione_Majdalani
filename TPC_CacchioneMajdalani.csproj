@@ -132,6 +132,7 @@
     <Content Include="Global.asax" />
     <Content Include="ListadoDeUsuarios.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="ModificarReserva.aspx" />
     <Content Include="ModificarUsuario.aspx" />
     <Content Include="RegistrarUsuario.aspx" />
     <Content Include="Reservas.aspx" />
@@ -305,7 +306,6 @@
     </Compile>
     <Compile Include="Calendario.aspx.cs">
       <DependentUpon>Calendario.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Calendario.aspx.designer.cs">
       <DependentUpon>Calendario.aspx</DependentUpon>
@@ -382,6 +382,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarReserva.aspx.cs">
+      <DependentUpon>ModificarReserva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModificarReserva.aspx.designer.cs">
+      <DependentUpon>ModificarReserva.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModificarUsuario.aspx.cs">
       <DependentUpon>ModificarUsuario.aspx</DependentUpon>
