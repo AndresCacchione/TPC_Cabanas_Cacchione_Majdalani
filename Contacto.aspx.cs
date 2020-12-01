@@ -9,7 +9,7 @@ using Dominio;
 
 namespace TPC_CacchioneMajdalani
 {
-    public partial class Contacto : System.Web.UI.Page
+    public partial class Contacto : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -903,7 +903,7 @@ namespace Negocio
 
                 accessDB.SetearQuery(@"insert into Usuarios values('Admin','794ac92b117ed5eacaee3c6706c9024b2e44ce68d2d4b297c9ed8767a7015ca7',20,1) ");
                 accessDB.EjecutarAccion();
-                accessDB.SetearQuery(@"insert into DatosPersonales values(2,'Admin','Admin','1111111111','Admin@Admin.com','00000000','1',12,'Admin','o')");
+                accessDB.SetearQuery(@"insert into DatosPersonales values(2,'Admin','Admin','1111111111','response.redirect@hotmail.com','00000000','1',12,'Admin','o')");
                 accessDB.EjecutarAccion();
             }
             catch (Exception ex)

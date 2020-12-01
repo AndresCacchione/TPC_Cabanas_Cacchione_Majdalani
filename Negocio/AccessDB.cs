@@ -19,7 +19,7 @@ namespace Negocio
 
         public AccessDB()
         {
-            Conexion = new SqlConnection("data source=.\\SQLEXPRESS; initial catalog=Cacchione_Majdalani_DB; integrated security=sspi");
+            Conexion = new SqlConnection("data source=.\\SQLEXPRESS01; initial catalog=Cacchione_Majdalani_DB; integrated security=sspi");
             Comando = new SqlCommand
             {
                 Connection = Conexion
@@ -29,7 +29,7 @@ namespace Negocio
         public DataSet ConsultaDDL(string Consulta)
         {
             var set = new DataSet();
-            using (SqlDataAdapter dataAdapter = new SqlDataAdapter(Consulta, "data source=.\\SQLEXPRESS; initial catalog=Cacchione_Majdalani_DB; integrated security=sspi"))
+            using (SqlDataAdapter dataAdapter = new SqlDataAdapter(Consulta, "data source=.\\SQLEXPRESS01; initial catalog=Cacchione_Majdalani_DB; integrated security=sspi"))
             {
                 dataAdapter.Fill(set);
             }
