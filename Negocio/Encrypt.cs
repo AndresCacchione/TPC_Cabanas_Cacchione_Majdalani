@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 
 namespace Negocio
 {
-    class Encrypt
+    public class Encrypt
     {
         public static string GetSHA256(string str)
         {

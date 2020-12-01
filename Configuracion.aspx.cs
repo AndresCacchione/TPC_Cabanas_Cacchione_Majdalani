@@ -23,7 +23,7 @@ namespace TPC_CacchioneMajdalani
         private void RestaurarValoresFabrica()
         {
             //levantar un popup y volver a confirmar de borrar todo. Podríamos poner alguna contraseña del Dueño para confirmar
-            ManagementDB managementDB = new ManagementDB();
+            ManagementDB managementDB = new ManagementDB(); //https://getbootstrap.com/docs/4.2/components/modal/ similar al pop-up, maxi nos dijo de usar este si mal no recuerdo
             managementDB.BorrarTablas();
             managementDB.CrearTablasDB();
             managementDB.SetTRInsteadOfDELComplejos();

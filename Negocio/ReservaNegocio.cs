@@ -88,7 +88,7 @@ namespace Negocio
 
         public List<Reserva> ListarReservasCaducasPorUsuario(long idUsuario)
         {
-            List<Reserva> listaCaducadasUsuario = new List<Reserva>();
+            List<Reserva> listaCaducasUsuario = new List<Reserva>();
             AccessDB access = new AccessDB();
             try
             {
@@ -114,7 +114,7 @@ namespace Negocio
                         Estado = (byte)access.Lector["estado"],
                         IdReservaOriginal = (long)access.Lector["IDReservaOriginal"]
                     };
-                    listaCaducadasUsuario.Add(aux);
+                    listaCaducasUsuario.Add(aux);
                 }
             }
             catch (Exception ex)
@@ -126,7 +126,7 @@ namespace Negocio
             {
                 access.CerrarConexion();
             }
-            return listaCaducadasUsuario;
+            return listaCaducasUsuario;
         }
 
         public List<Reserva> ListarReservasVigentes()
@@ -228,7 +228,7 @@ namespace Negocio
             finally
             {
                 access.CerrarConexion();
-            }       
+            }
         }
 
         public Reserva ListarReservaPorId(long idReserva)
@@ -239,7 +239,7 @@ namespace Negocio
             Reserva reserva = new Reserva();
             try
             {
-                access.SetearQuery("select * from reservas where Id="+idReserva);
+                access.SetearQuery("select * from reservas where Id=" + idReserva);
                 access.EjecutarLector();
                 access.Lector.Read();
 

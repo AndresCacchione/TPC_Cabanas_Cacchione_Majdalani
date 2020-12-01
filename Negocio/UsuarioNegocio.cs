@@ -328,8 +328,8 @@ namespace Negocio
                             Email = (string)access.Lector["email"],
                             Telefono = (string)access.Lector["telefono"],
                             UrlImagen = (string)access.Lector["URLimagen"],
-                            PaisOrigen = ListarPais((short)access.Lector["IDPais"]), 
-                            Domicilio = (string)access.Lector["domicilio"],         
+                            PaisOrigen = ListarPais((short)access.Lector["IDPais"]),
+                            Domicilio = (string)access.Lector["domicilio"],
                             Genero = (string)access.Lector["genero"]
                         }
                     };
@@ -364,7 +364,7 @@ namespace Negocio
                 buscado.Estado = (bool)access.Lector["Estado"];
                 buscado.NivelAcceso = (byte)access.Lector["IdNivelAcceso"];
                 buscado.DatosPersonales.Apellido = (string)access.Lector["Apellido"];
-                buscado.DatosPersonales.Nombre = (string)access.Lector["Nombre"]; //creería que ahí alcanzaría para que no exista ambiguedad en las tablas llamadas Nombre
+                buscado.DatosPersonales.Nombre = (string)access.Lector["Nombre"];
                 buscado.DatosPersonales.DNI = (string)access.Lector["Dni"];
                 buscado.DatosPersonales.Domicilio = (string)access.Lector["Domicilio"];
                 buscado.DatosPersonales.Email = (string)access.Lector["Email"];
