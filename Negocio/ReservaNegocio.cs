@@ -51,15 +51,15 @@ namespace Negocio
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 CabañaNegocio cabañaNegocio = new CabañaNegocio();
 
-                access.SetearQuery("select * from reservas r, usuarios u, cabañas c where fechaegreso<getdate() and " +
-                    "r.idcabaña=c.id and idusuario=" + idUsuario);
+                access.SetearQuery("select * from reservas where fechaegreso>=getdate() and " +
+                    "idusuario=" + idUsuario + "and (EstadoReserva != 1 or fechaingreso>=getdate())");
                 access.EjecutarLector();
                 while (access.Lector.Read())
                 {
                     Reserva aux = new Reserva
                     {
-
-                        Cliente = usuarioNegocio.ListarUsuarioPorId(((long)access.Lector["idUsuario"])),
+                        ID = (long)access.Lector["ID"],
+                        Cliente = usuarioNegocio.ListarUsuarioPorId((long)access.Lector["idUsuario"]),
                         Cabaña = cabañaNegocio.ListarCabañaPorId((long)access.Lector["idCabaña"]),
                         FechaIngreso = (DateTime)access.Lector["fechaIngreso"],
                         FechaEgreso = (DateTime)access.Lector["fechaEgreso"],
@@ -86,22 +86,24 @@ namespace Negocio
         }
 
 
-        public List<Reserva> ListarReservasNoVigentesPorUsuario(long idUsuario)
+        public List<Reserva> ListarReservasCaducasPorUsuario(long idUsuario)
         {
-            List<Reserva> listaNoVigentesUsuario = new List<Reserva>();
+            List<Reserva> listaCaducadasUsuario = new List<Reserva>();
             AccessDB access = new AccessDB();
             try
             {
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 CabañaNegocio cabañaNegocio = new CabañaNegocio();
 
-                access.SetearQuery("select * from reservas r, usuarios u, cabañas c where fechaegreso>=getdate() " +
-                    "and r.idcabaña=c.id and r.idusuario=" + idUsuario);
+                access.SetearQuery("select * from reservas" +
+                    "where (fechaegreso<getdate() or (EstadoReserva = 1 and fechaingreso<getdate())) " +
+                    "and idusuario=" + idUsuario);
                 access.EjecutarLector();
                 while (access.Lector.Read())
                 {
                     Reserva aux = new Reserva
                     {
+                        ID = (long)access.Lector["ID"],
                         Cliente = usuarioNegocio.ListarUsuarioPorId(((long)access.Lector["idUsuario"])),
                         Cabaña = cabañaNegocio.ListarCabañaPorId((long)access.Lector["idCabaña"]),
                         FechaIngreso = (DateTime)access.Lector["fechaIngreso"],
@@ -112,8 +114,7 @@ namespace Negocio
                         Estado = (byte)access.Lector["estado"],
                         IdReservaOriginal = (long)access.Lector["IDReservaOriginal"]
                     };
-
-                    listaNoVigentesUsuario.Add(aux);
+                    listaCaducadasUsuario.Add(aux);
                 }
             }
             catch (Exception ex)
@@ -125,7 +126,7 @@ namespace Negocio
             {
                 access.CerrarConexion();
             }
-            return listaNoVigentesUsuario;
+            return listaCaducadasUsuario;
         }
 
         public List<Reserva> ListarReservasVigentes()
@@ -137,12 +138,13 @@ namespace Negocio
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 CabañaNegocio cabañaNegocio = new CabañaNegocio();
 
-                access.SetearQuery("select * from reservas where fechaegreso<getdate()");
+                access.SetearQuery("select * from reservas where (EstadoReserva != 1 or fechaingreso>=getdate())");
                 access.EjecutarLector();
                 while (access.Lector.Read())
                 {
                     Reserva aux = new Reserva
                     {
+                        ID = (long)access.Lector["ID"],
                         Cliente = usuarioNegocio.ListarUsuarioPorId(((long)access.Lector["idUsuario"])),
                         Cabaña = cabañaNegocio.ListarCabañaPorId((long)access.Lector["idCabaña"]),
                         FechaIngreso = (DateTime)access.Lector["fechaIngreso"],
@@ -168,21 +170,22 @@ namespace Negocio
             return listaReservasVigentes;
         }
 
-        public List<Reserva> ListarReservasNoVigentes()
+        public List<Reserva> ListarReservasCaducas()
         {
-            List<Reserva> listaReservasNoVigentes = new List<Reserva>();
+            List<Reserva> listaReservasCaducas = new List<Reserva>();
             AccessDB access = new AccessDB();
             try
             {
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 CabañaNegocio cabañaNegocio = new CabañaNegocio();
 
-                access.SetearQuery("select * from reservas where fechaegreso>=getdate()");
+                access.SetearQuery("select * from reservas where (fechaegreso<getdate() or (EstadoReserva = 1 and fechaingreso<getdate()))");
                 access.EjecutarLector();
                 while (access.Lector.Read())
                 {
                     Reserva aux = new Reserva
                     {
+                        ID = (long)access.Lector["ID"],
                         Cliente = usuarioNegocio.ListarUsuarioPorId(((long)access.Lector["idUsuario"])),
                         Cabaña = cabañaNegocio.ListarCabañaPorId((long)access.Lector["idCabaña"]),
                         FechaIngreso = (DateTime)access.Lector["fechaIngreso"],
@@ -193,7 +196,7 @@ namespace Negocio
                         Estado = (byte)access.Lector["estado"],
                         IdReservaOriginal = (long)access.Lector["IDReservaOriginal"]
                     };
-                    listaReservasNoVigentes.Add(aux);
+                    listaReservasCaducas.Add(aux);
                 }
             }
             catch (Exception ex)
@@ -205,18 +208,16 @@ namespace Negocio
             {
                 access.CerrarConexion();
             }
-            return listaReservasNoVigentes;
+            return listaReservasCaducas;
         }
 
-        public void ResolverReserva(long idReserva)
+        public void ResolverReserva(long idReserva, byte nuevoEstado)
         {
-
-            Reserva buscada = ListarReservaPorId(idReserva);
             AccessDB access = new AccessDB();
             try
             {
                 access.SetearQuery("update reservas set estado=@estado where id=" + idReserva);
-                access.AgregarParametro("@estado", buscada.Estado);
+                access.AgregarParametro("@estado", nuevoEstado);
                 access.EjecutarAccion();
             }
             catch (Exception ex)
@@ -227,8 +228,7 @@ namespace Negocio
             finally
             {
                 access.CerrarConexion();
-            }
-                      
+            }       
         }
 
         public Reserva ListarReservaPorId(long idReserva)
@@ -242,7 +242,8 @@ namespace Negocio
                 access.SetearQuery("select * from reservas where Id="+idReserva);
                 access.EjecutarLector();
                 access.Lector.Read();
-                
+
+                reserva.ID = (long)access.Lector["ID"];
                 reserva.Cliente = usuarioNegocio.ListarUsuarioPorId((long)access.Lector["idUsuario"]); //Capaz convenga agregar el atributo Id a la clase Reserva
                 reserva.Cabaña = cabañaNegocio.ListarCabañaPorId((long)access.Lector["idCabaña"]);
                 reserva.FechaIngreso = (DateTime)access.Lector["fechaIngreso"];
@@ -251,19 +252,18 @@ namespace Negocio
                 reserva.FechaCreacionReserva = (DateTime)access.Lector["fechaReserva"];
                 reserva.Importe = (decimal)access.Lector["importe"];
                 reserva.Estado = (byte)access.Lector["estado"];
-                reserva.IdReservaOriginal = (long)access.Lector["IDReservaOriginal"];
+                reserva.IdReservaOriginal = Convert.ToInt64(access.Lector["IDReservaOriginal"]);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             finally
             {
                 access.CerrarConexion();
             }
             return reserva;
-
         }
 
     }

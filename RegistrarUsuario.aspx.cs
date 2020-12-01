@@ -58,10 +58,11 @@ namespace TPC_CacchioneMajdalani
             {
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 usuarioNegocio.AgregarUsuario(usuario);
+                usuario.Id = usuarioNegocio.GetIDUltimoUsuario();
                 usuario = usuarioNegocio.Login(usuario);
                 Session.Add(Session.SessionID + "userSession", usuario);
+                
                 Response.Redirect("~/Complejos");
-
             }
             catch (Exception ex)
             {

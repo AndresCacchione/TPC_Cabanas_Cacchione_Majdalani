@@ -8,6 +8,7 @@ namespace Dominio
 {
     public class Reserva
     {
+        public long ID { get; set; }
         public DateTime FechaCreacionReserva { get; set; }
         public Usuario Cliente { get; set; }
         public Cabaña Cabaña { get; set; }
