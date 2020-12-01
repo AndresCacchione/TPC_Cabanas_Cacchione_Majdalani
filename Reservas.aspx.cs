@@ -11,32 +11,49 @@ namespace TPC_CacchioneMajdalani
 {
     public partial class Reservas : Page
     {
-        public Reserva reserva { get; set; }
-
         public Reservas()
         {
             reserva = new Reserva();
         }
 
+        public Reserva reserva { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             long idCabaña = Convert.ToInt64(Request.QueryString["idCabaña"]);
             
-
-            if((Usuario)Session[Session.SessionID + "userSession"]==null)
+            if((Usuario)Session[Session.SessionID + "userSession"]==null || idCabaña==0)
             {
                 Response.Redirect("Login.aspx");
             }
+            
+            CargarCabaña(idCabaña);
+            reserva.Cliente = (Usuario)Session[Session.SessionID + "userSession"];
+            PrepararCalendario();
+        }
 
-            if (idCabaña != 0)
+        private void PrepararCalendario()
+        {
+            CabañaNegocio cabañaNegocio = new CabañaNegocio();
+            List<List<DateTime>> Ocupado = cabañaNegocio.ListaOcupadoPorCabaña(reserva.Cabaña.Id);
+            
+            foreach (List<DateTime>ReservasPrevias in Ocupado)
             {
-                CargarCabaña(idCabaña);
-                reserva.Cliente = (Usuario)Session[Session.SessionID + "userSession"];
+                //Código del calendario para que pinte en color rojo las que no se pueden seleccionar.
+                
+                //protected void DateRange(object sender, DayRenderEventArgs e)
+                //{
+                //    DateTime rangeStart = new DateTime(2015, 7, 4);
+                //    DateTime rangeEnd = new DateTime(2016, 3, 15);
+
+                //    if (e.Day.Date < rangeStart || e.Day.Date > rangeEnd)
+                //    {
+                //        e.Day.IsSelectable = false;
+                //        e.Cell.ForeColor = System.Drawing.Color.Gray;
+                //    }
+                //}
             }
-            else
-            {
-                Response.Redirect("Login.aspx");
-            }
+
         }
 
         private void CargarCabaña(long idCabaña)
@@ -70,7 +87,7 @@ namespace TPC_CacchioneMajdalani
 
         private void CargarReserva()
         {
-            /// aca abria que guardar lo del front en la reserva
+            /// aca habria que guardar lo del front en la reserva
 
 
         }

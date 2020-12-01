@@ -9,25 +9,67 @@ namespace Negocio
 {
     public class CabañaNegocio
     {
+        public List<List<DateTime>> ListaOcupadoPorCabaña(long idCabaña)
+        {
+            AccessDB acceso = new AccessDB();
+            List<List<DateTime>> aux = new List<List<DateTime>>();
+
+            try
+            {
+                acceso.SetearQuery("select fechaIngreso, fechaEgreso from reservas where fechaEgreso>getdate() and IDCabaña =" + idCabaña);
+                acceso.EjecutarLector();
+
+                while (acceso.Lector.Read())
+                {
+                    List<DateTime> rango = new List<DateTime>();
+                    rango.Add((DateTime)acceso.Lector["fechaIngreso"]);
+                    rango.Add((DateTime)acceso.Lector["fechaEgreso"]);
+                    aux.Add(rango);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                acceso.CerrarConexion();
+            }
+            
+            return aux;
+        }
 
         public List<Imagen> ListarImagenesPorID(long IDCabaña)
         {
             AccessDB acceso = new AccessDB();
-            acceso.SetearQuery("select ID, URLImagen from ImagenesCabañas where IDCabaña=" + IDCabaña.ToString());
-            acceso.EjecutarLector();
-
             List<Imagen> ListaAux = new List<Imagen>();
-
-            while (acceso.Lector.Read())
+            
+            try
             {
-                Imagen aux = new Imagen
+                acceso.SetearQuery("select ID, URLImagen from ImagenesCabañas where IDCabaña=" + IDCabaña.ToString());
+                acceso.EjecutarLector();
+                while (acceso.Lector.Read())
                 {
-                    ID = (long)acceso.Lector["ID"],
-                    URLImagen = (string)acceso.Lector["URLImagen"]
-                };
+                    Imagen aux = new Imagen
+                    {
+                        ID = (long)acceso.Lector["ID"],
+                        URLImagen = (string)acceso.Lector["URLImagen"]
+                    };
 
-                ListaAux.Add(aux);
+                    ListaAux.Add(aux);
+                }
             }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                acceso.CerrarConexion();
+            }
+            
             return ListaAux;
         }
 

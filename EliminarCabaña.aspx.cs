@@ -51,7 +51,6 @@ namespace TPC_CacchioneMajdalani
                     Response.Redirect("~/Cabañas");
                 }
                 Response.Redirect("~/Cabañas");
-
             }
             else
             {
