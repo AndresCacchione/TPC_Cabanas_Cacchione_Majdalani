@@ -20,11 +20,6 @@ namespace TPC_CacchioneMajdalani
 
         }
 
-        protected void Eliminar_Click(object sender, EventArgs e)
-        {
-            EliminarComplejoyCabañasVinculadas();
-        }
-
         private void ObtenerIDyComplejoSiExiste()
         {
             if (Request.QueryString["idComplejo"] != null)
@@ -84,6 +79,11 @@ namespace TPC_CacchioneMajdalani
                     check_eliminar.ForeColor = System.Drawing.Color.Red;
                 }
             }
+        }
+
+        protected void btnBorrar_Click(object sender, EventArgs e)
+        {
+            EliminarComplejoyCabañasVinculadas();
         }
     }
 }

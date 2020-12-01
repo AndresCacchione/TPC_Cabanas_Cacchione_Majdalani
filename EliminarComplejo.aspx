@@ -1,6 +1,30 @@
 ﻿<%@ Page Title="Eliminar Complejo" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EliminarComplejo.aspx.cs" Inherits="TPC_CacchioneMajdalani.EliminarComplejo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Eliminar Complejo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ¿Está seguro de borrar este complejo y sus cabañas vinculadas? Esta acción es <b>IRREVERSIBLE</b>
+                </div>
+                <div class="modal-footer">
+                    <asp:Button ID="btnBorrar" runat="server" type="button" class="btn btn-primary" Text="Confirmar" OnClick="btnBorrar_Click" />
+                    <asp:Button ID="btnCancelar" runat="server" type="button" class="btn btn-secondary" data-dismiss="modal" Text="Cancelar" />
+                </div>
+            </div>
+        </div>
+    </div>
+
     <h2>ELIMINAR
     </h2>
     <div class="col-md-4">
@@ -20,7 +44,8 @@
                 <fieldset class="group">
                     <a href="Complejos.aspx" class="btn btn-primary mr-auto ml-auto">Volver</a>
                     <asp:CheckBox ID="check_eliminar" Text="Eliminar" runat="server" required="" />
-                    <asp:Button class="btn btn-danger mr-auto ml-auto" Text="Eliminar Complejo" runat="server" OnClick="Eliminar_Click" />
+                    <button type="button" class="btn btn-danger mr-auto ml-auto" data-toggle="modal" data-target="#exampleModal">
+                        Eliminar</button>
                 </fieldset>
             </div>
         </div>
