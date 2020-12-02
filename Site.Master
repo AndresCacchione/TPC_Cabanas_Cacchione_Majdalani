@@ -4,7 +4,7 @@
 
 <html lang="es">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <%--<title> CaMa - <%: Page.Title %></title>--%>
@@ -13,12 +13,12 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
-    <link rel="shortcut icon" href="Imagenes/Icono.ico" type="image/x-icon"/>
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link rel="shortcut icon" href="Imagenes/Icono.ico" type="image/x-icon" />
     <link href="CSS/Estilos.css" rel="stylesheet" />
- </head>
+</head>
 <body>
- 
+
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -38,33 +38,38 @@
                 <asp:ScriptReference Name="WebFormsBundle" />
                 <%--Site Scripts--%>
             </Scripts>
-        </asp:ScriptManager> 
+        </asp:ScriptManager>
 
 
-            <nav class="navbar navbar-light" style="background-color: #6E9038;">
-           <div>
-        <a class="mr-4 ml-4" runat="server" style="color: #FFFFFF; font-size: xx-large;" href="~/">CaMa</a>
-        <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Complejos">Complejos</a>
-        <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large; " href="~/Cabañas">Cabañas</a>
-        <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large; " href="~/Contacto">Contáctenos</a>
-        <%if (UsuarioActual == null)
-            { %>
-            <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large; " href="~/Login">Iniciar Sesión</a>
-          <%}
-        else
-        {%>
-        <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large; " href="~/ListadoDeUsuarios">Lista de usuarios</a>
-        <asp:Button Text="Modificar datos" ID="btnModificarDatos" CssClass="btn btn-secondary mr-auto ml-auto" runat="server" OnClick="btnModificarDatos_Click" />
-        <asp:Button ID="btnAFavoritas" Text="Cabañas Favoritas" CssClass="btn btn-secondary mr-auto ml-auto" runat="server" OnClick="btnAFavoritas_Click" />
-        <asp:Button Text="Cerrar Sesion" class="btn btn-danger mr-auto ml-auto" ID="btnCerrarSesion" OnClick="btnCerrarSesion_Click" runat="server" />
-        <asp:Label ID="lblNombreUsuario" runat="server" />
-        <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large; " href="~/Configuracion">Configuración</a>
-        <%
-        }
-        %>
-
-           </div>
-           </nav>
+        <nav class="navbar navbar-light" style="background-color: #6E9038;">
+            <div>
+                <a class="mr-4 ml-4" runat="server" style="color: #FFFFFF; font-size: xx-large;" href="~/">CaMa</a>
+                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Complejos">Complejos</a>
+                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Cabañas">Cabañas</a>
+                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Contacto">Contáctenos</a>
+                <%if (UsuarioActual == null)
+                    { %>
+                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Login">Iniciar Sesión</a>
+                <%}
+                    else
+                    {%>
+                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/ListadoDeUsuarios">Lista de usuarios</a>
+                <asp:Button Text="Modificar datos" ID="btnModificarDatos" CssClass="btn btn-secondary mr-auto ml-auto" runat="server" OnClick="btnModificarDatos_Click" />
+                <%if (UsuarioActual.NivelAcceso == 10)
+                    {%>
+                <asp:Button ID="btnAFavoritas" Text="Cabañas Favoritas" CssClass="btn btn-secondary mr-auto ml-auto" runat="server" OnClick="btnAFavoritas_Click" />
+                <% } %>
+                <asp:Button Text="Cerrar Sesion" class="btn btn-danger mr-auto ml-auto" ID="btnCerrarSesion" OnClick="btnCerrarSesion_Click" runat="server" />
+                <asp:Label ID="lblNombreUsuario" runat="server" />
+                <%if (UsuarioActual.NivelAcceso >= 20)
+                    { %>
+                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Configuracion">Configuración</a>
+                <% } %>
+                <%
+                    }
+                %>
+            </div>
+        </nav>
 
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">

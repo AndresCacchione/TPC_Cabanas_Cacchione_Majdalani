@@ -16,8 +16,16 @@
                     ¿Está seguro de borrar esta cabaña? Esta acción es <b>IRREVERSIBLE</b>
                 </div>
                 <div class="modal-footer">
-                    <asp:Button ID="btnBorrar" runat="server" type="button" class="btn btn-primary" Text="Confirmar" OnClick="btnBorrar_Click"  />
+                    <%if ((Dominio.Usuario)Session[Session.SessionID + "userSession"] != null && ((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20 && ((List<Dominio.Cabaña>)base.Session["listaCabañas"]).Count() != 0)
+                        { %>
+                    <asp:Button ID="btnBorrar" runat="server" type="button" class="btn btn-primary" Text="Confirmar" OnClick="btnBorrar_Click" />
                     <asp:Button ID="btnCancelar" runat="server" type="button" class="btn btn-secondary" data-dismiss="modal" Text="Cancelar" />
+
+                    <% } %>
+                    <%else
+                        {
+                            Response.Redirect("~/Login");
+                        } %>
                 </div>
             </div>
         </div>
@@ -43,7 +51,7 @@
                     <a href="Complejos.aspx" class="btn btn-primary mr-auto ml-auto">Volver</a>
                     <asp:CheckBox ID="check_eliminar" Text="Eliminar" runat="server" required="" />
                     <button type="button" class="btn btn-danger mr-auto ml-auto" data-toggle="modal" data-target="#exampleModal">
-        Eliminar</button>
+                        Eliminar</button>
                 </fieldset>
             </div>
         </div>

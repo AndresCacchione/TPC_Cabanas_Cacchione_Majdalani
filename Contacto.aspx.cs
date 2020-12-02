@@ -21,7 +21,7 @@ namespace TPC_CacchioneMajdalani
 
         private void CargarInputMailUsuario()
         {
-            if(Session[Session.SessionID + "userSession"]!=null)
+            if (Session[Session.SessionID + "userSession"] != null)
             {
                 InputMail.Value = ((Usuario)Session[Session.SessionID + "userSession"]).DatosPersonales.Email;
             }
@@ -29,14 +29,14 @@ namespace TPC_CacchioneMajdalani
 
         protected void btnEnviarEmail_Click(object sender, EventArgs e)
         {
-            ManagementEmail managementEmail = new ManagementEmail();   
-            Resultado.Text = managementEmail.EnviarEmails(MailDestino(), txtBoxAsunto.Text, TextAreaCuerpoMail.InnerText+'\n'+InputMail.Value);
+            ManagementEmail managementEmail = new ManagementEmail();
+            Resultado.Text = managementEmail.EnviarEmails(MailDestino(), txtBoxAsunto.Text, TextAreaCuerpoMail.InnerText + '\n' + InputMail.Value);
         }
 
         private List<string> MailDestino()
         {
             UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-            if(Session["listaUsuarios"]==null)
+            if (Session["listaUsuarios"] == null)
             {
                 Session.Add("listaUsuarios", usuarioNegocio.ListarUsuarios());
             }

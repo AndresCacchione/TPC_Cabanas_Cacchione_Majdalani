@@ -10,9 +10,6 @@ namespace Negocio
     public class ReservaNegocio
     {
         //InsertarNuevaReserva(servaVieja, reservaNueva); // en modificar reserva sería InsertarNuevaReserva(servaVieja, reservaNueva) esto no cambia
-
-        //ResolverReserva(reserva.id); // Solo a este campo hay que hacer un modificar reserva (para el admin: 1 Pendiente, 2 Confirmada, 3 Rechazada, 4 Cambiada)
-
         public void InsertarReserva(Reserva reserva)
         {
             AccessDB access = new AccessDB();

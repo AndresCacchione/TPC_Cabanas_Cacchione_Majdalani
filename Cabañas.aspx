@@ -10,7 +10,7 @@
 
         <asp:TextBox ID="TxtBuscarCabaña" runat="server" CssClass="d-inline-flex, border-light" MaxLength="120"></asp:TextBox>
         <asp:Button Class="btn btn-primary mr-auto ml-auto" ID="BtnBuscarCabaña" runat="server" Text="Buscar" />
-        <%if (Convert.ToInt64(Request.QueryString["idComplejo"]) != 0)
+        <%if (Convert.ToInt64(Request.QueryString["idComplejo"]) != 0 )
             { %>
         <a href="AgregarModificarCabaña.aspx?idComplejo=<%=Convert.ToInt64(Request.QueryString["idComplejo"]).ToString()%>" class="btn btn-success mr-auto ml-auto">Agregar Cabaña</a>
         <%

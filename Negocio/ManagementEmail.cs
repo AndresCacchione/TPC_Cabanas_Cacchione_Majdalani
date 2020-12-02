@@ -39,28 +39,22 @@ namespace Negocio
                 resultados.Add(Resultado);
             }
 
-            string retorno;
-            if (resultados.TrueForAll(i => i != "Email enviado"))
-            {
-                retorno = resultados.First();
-            }
-            else
-            {
-                retorno = "Email enviado";
-            }
+            string retorno = resultados.TrueForAll(i => i != "Email enviado") ? resultados.First() : "Email enviado"; //Si son todos distintos a email enviado, asigna el primero a retorno, sino, le asigna "Email enviado"
             return retorno;
-            // ESTO VA EN EL WEB CONFIG: 
-            //< system.net >
-            //    < mailSettings >
-            //        < smtp from = "response.redirect@hotmail.com" >
-            //             < network host = "smtp.live.com"
-            //             port = "25"
-            //             userName = "response.redirect@hotmail.com"
-            //             password = "Paomajcac"
-            //             enableSsl = "true" />
-            //        </ smtp >
-            //    </ mailSettings >
-            //</ system.net >
+
         }
     }
 }
+
+// ESTO VA EN EL WEB CONFIG: 
+//< system.net >
+//    < mailSettings >
+//        < smtp from = "response.redirect@hotmail.com" >
+//             < network host = "smtp.live.com"
+//             port = "25"
+//             userName = "response.redirect@hotmail.com"
+//             password = "Paomajcac"
+//             enableSsl = "true" />
+//        </ smtp >
+//    </ mailSettings >
+//</ system.net >
