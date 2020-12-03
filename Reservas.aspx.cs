@@ -39,8 +39,10 @@ namespace TPC_CacchioneMajdalani
             
             foreach (List<DateTime>ReservasPrevias in Ocupado)
             {
+                DateTime horaIngreso = ReservasPrevias.First();
+                DateTime horaEgreso = ReservasPrevias.Last();
                 //Código del calendario para que pinte en color rojo las que no se pueden seleccionar.
-                
+
                 //protected void DateRange(object sender, DayRenderEventArgs e)
                 //{
                 //    DateTime rangeStart = new DateTime(2015, 7, 4);

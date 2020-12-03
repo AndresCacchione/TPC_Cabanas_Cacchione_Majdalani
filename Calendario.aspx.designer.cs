@@ -24,15 +24,6 @@ namespace TPC_CacchioneMajdalani
         protected global::System.Web.UI.WebControls.TextBox txtCalendarExtender;
 
         /// <summary>
-        /// CalendarExtender1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-   /*  DESCOMENTAR PARA USAR*/   //protected global::AjaxControlToolkit.CalendarExtender CalendarExtender1;
-
-        /// <summary>
         /// Calendar1 control.
         /// </summary>
         /// <remarks>

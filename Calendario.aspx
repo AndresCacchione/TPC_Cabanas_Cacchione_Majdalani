@@ -3,11 +3,6 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc3" %>
 <asp:TextBox ID="txtCalendarExtender" runat="server"></asp:TextBox> 
-    <ajaxToolkit>
-
-    </ajaxToolkit>    
-    <cc3:CalendarExtender ID="CalendarExtender1" PopupButtonID="imgPopup" runat="server" TargetControlID="txtCalendarExtender" Format="dd/MM/yyyy"> 
-        </cc3:CalendarExtender>
 
 <asp:UpdatePanel runat="server">
 <ContentTemplate>
