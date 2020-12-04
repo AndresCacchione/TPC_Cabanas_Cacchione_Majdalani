@@ -11,6 +11,9 @@ namespace TPC_CacchioneMajdalani
 {
     public partial class RegistrarUsuario : Page
     {
+        public ValidacionesNegocio valida { get; set; }
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -21,7 +24,10 @@ namespace TPC_CacchioneMajdalani
 
         protected void btnAltaUsuario_Click(object sender, EventArgs e)
         {
-            RegistrarNuevoUsuario();
+            if(Validaciones())
+            {
+                RegistrarNuevoUsuario();
+            }
         }
         private void CargarDDLPaises()
         {
@@ -30,6 +36,16 @@ namespace TPC_CacchioneMajdalani
             Session.Add("listaPaises", ListaPaises);
             DDLPaises.DataSource = ListaPaises;
             DDLPaises.DataBind();
+        }
+
+        private bool Validaciones()
+        {
+            ValidacionesNegocio valida = new ValidacionesNegocio();
+            RegularExpressionValidator1.Enabled = valida.ValidarEmail(txtemail.Text);
+
+
+
+            return Page.IsValid; 
         }
 
         private void RegistrarNuevoUsuario()

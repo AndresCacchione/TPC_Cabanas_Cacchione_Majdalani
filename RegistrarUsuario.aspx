@@ -50,6 +50,10 @@
         <div class="form-group col-md-6">
             <label for="inputEmail">Correo Electronico</label>
             <input type="email" class="form-control" id="email" placeholder="Email@Email.com" required runat="server">
+            <asp:TextBox class="form-control" id="txtemail" placeholder="Email@Email.com" required="" runat="server" />
+        <asp:RegularExpressionValidator ControlToValidate="txtemail" ID="RegularExpressionValidator1" runat="server" ErrorMessage="El Email ingresado no es válido">   
+        </asp:RegularExpressionValidator>
+            
         </div>
     </div>
 
@@ -85,6 +89,5 @@
     </div>
 
     <asp:Button ID="btnAltaUsuario" Text="Darme de alta" class="btn btn-success mr-auto ml-auto" OnClick="btnAltaUsuario_Click" runat="server" />
-
 
 </asp:Content>
