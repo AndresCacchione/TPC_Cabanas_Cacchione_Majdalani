@@ -73,6 +73,11 @@ namespace Negocio
             Comando.Parameters.AddWithValue(nombre, Valor);
         }
 
+        public void AgregarParametroSP(string nombre, object Valor, SqlDbType tipoDato)
+        {
+            Comando.Parameters.Add(nombre, tipoDato).Value = Valor;
+        }
+
         public void EjecutarLector()
         {
             try

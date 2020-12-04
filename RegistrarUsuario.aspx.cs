@@ -57,17 +57,24 @@ namespace TPC_CacchioneMajdalani
             try
             {
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-                usuarioNegocio.AgregarUsuario(usuario);
-                usuario.Id = usuarioNegocio.GetIDUltimoUsuario();
-                usuario = usuarioNegocio.Login(usuario);
-                Session.Add(Session.SessionID + "userSession", usuario);
+                if(usuarioNegocio.InsertarUsuario(usuario))
+                {
+                    //usuario.Id = usuarioNegocio.GetIDUltimoUsuario();
+                    usuario = usuarioNegocio.Login(usuario);
+                    usuario = usuarioNegocio.ListarUsuarioPorId(usuario.Id);
+                    Session.Add(Session.SessionID + "userSession", usuario);
+
+                    Response.Redirect("~/Complejos");
+                }
+                else
+                {
+                    //agregar modal o label
+                }
                 
-                Response.Redirect("~/Complejos");
             }
             catch (Exception ex)
             {
                 throw ex;
-
             }
         }
     }

@@ -9,6 +9,58 @@ namespace Negocio
 {
     public class ManagementDB
     {
+		public void CrearSPIngresarUsuario()
+        {
+			AccessDB acceso = new AccessDB();
+            try
+            {
+				acceso.SetearQuery(@"if not exists (select * from sys.objects where name = 'spAgregarUsuario')
+									begin
+									use Cacchione_Majdalani_DB
+									exec('create PROCEDURE spAgregarUsuario(
+									@nombreUsuario varchar(50),
+									@contra varchar(200),
+									@idNivelAcceso tinyint,
+									@nombre varchar(50),
+									@apellido varchar(50),
+									@dni varchar(50),
+									@email varchar(100),
+									@telefono varchar(20),
+									@URLimagen varchar(500),
+									@idpais smallint,
+									@domicilio varchar(150),
+									@genero char
+									)
+									AS
+										BEGIN
+										declare @resultado bit = 1
+											BEGIN TRANSACTION
+												BEGIN TRY
+												-- Generamos el usuario
+												INSERT INTO Usuarios(nombreUsuario,contra,IdNivelAcceso,estado) VALUES (@nombreUsuario, @contra, @idNivelAcceso,1)
+												-- Generamos la cuenta del usuario
+												DECLARE @idUsuarioDatospersonales BIGINT
+												SET @idUsuarioDatospersonales = SCOPE_IDENTITY()
+	
+												INSERT INTO DatosPersonales(IdUsuario, nombre, apellido,dni, email, telefono, URLimagen,IDpais,domicilio,genero) VALUES (@idUsuarioDatospersonales,@nombre,@apellido,@dni,@email,@telefono,@URLimagen,@idpais,@domicilio,@genero)
+			
+											COMMIT TRANSACTION
+												END TRY
+											BEGIN CATCH
+											set @resultado = 0
+											ROLLBACK TRANSACTION
+	
+											END CATCH 
+										return @resultado
+										END')
+									end");
+				acceso.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public void CrearTablasDB()
         {
             AccessDB acceso = new AccessDB();
@@ -417,7 +469,6 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }

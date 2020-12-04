@@ -71,7 +71,9 @@ namespace Negocio
                 access.AgregarParametro("@Contra", usuario.Contraseña);
 
                 access.EjecutarLector();
-                if (access.Lector.Read())
+                access.Lector.Read();
+                
+                if(access.Lector.HasRows)
                 {
                     usuario.Id = Convert.ToInt64(access.Lector["Id"]);
                 }
@@ -94,20 +96,32 @@ namespace Negocio
             return usuario;
         }
 
-        private void InsertarUsuario(Usuario NuevoUsuario)
+        public bool InsertarUsuario(Usuario NuevoUsuario)
         {
             AccessDB access = new AccessDB();
-            NuevoUsuario.Contraseña = Encrypt.GetSHA256(NuevoUsuario.Contraseña);
+            string AuxContraseña = Encrypt.GetSHA256(NuevoUsuario.Contraseña);
+            short IdPais = GetIDPais(NuevoUsuario.DatosPersonales.PaisOrigen);
 
+            bool retorno = true;
             try
             {
-                access.SetearQuery("insert into Usuarios (nombreUsuario, contra, IdNivelAcceso, estado) values" +
-                    " (@nombre, @contra, @IdNivelAcceso, @estado)");
-                access.AgregarParametro("@nombre", NuevoUsuario.NombreUsuario);
-                access.AgregarParametro("@contra", NuevoUsuario.Contraseña);
-                access.AgregarParametro("@estado", NuevoUsuario.Estado);
-                access.AgregarParametro("@IdNivelAcceso", NuevoUsuario.NivelAcceso);
-                access.EjecutarAccion();
+                access.AgregarParametroSP("@nombreusuario", NuevoUsuario.NombreUsuario, SqlDbType.VarChar);
+                access.AgregarParametroSP("@contra", AuxContraseña, SqlDbType.VarChar);
+                access.AgregarParametroSP("@IdNivelAcceso", NuevoUsuario.NivelAcceso, SqlDbType.TinyInt);
+                access.AgregarParametroSP("@Nombre", NuevoUsuario.DatosPersonales.Nombre, SqlDbType.VarChar);
+                access.AgregarParametroSP("@Apellido", NuevoUsuario.DatosPersonales.Apellido, SqlDbType.VarChar);
+                access.AgregarParametroSP("@dni", NuevoUsuario.DatosPersonales.DNI, SqlDbType.VarChar);
+                access.AgregarParametroSP("@email", NuevoUsuario.DatosPersonales.Email, SqlDbType.VarChar);
+                access.AgregarParametroSP("@telefono", NuevoUsuario.DatosPersonales.Telefono, SqlDbType.VarChar);
+                access.AgregarParametroSP("@URLimagen", NuevoUsuario.DatosPersonales.UrlImagen, SqlDbType.VarChar);
+                access.AgregarParametroSP("@idPais", IdPais, SqlDbType.SmallInt);   
+                access.AgregarParametroSP("@Domicilio", NuevoUsuario.DatosPersonales.Domicilio, SqlDbType.VarChar);
+                access.AgregarParametroSP("@genero", NuevoUsuario.DatosPersonales.Genero, SqlDbType.Char);
+
+                if (access.EjecutarStoredProcedureIntReturn("spAgregarUsuario") == 0)
+                {
+                    retorno = false;
+                }
             }
             catch (Exception ex)
             {
@@ -118,7 +132,7 @@ namespace Negocio
             {
                 access.CerrarConexion();
             }
-
+            return retorno;
         }
 
         public long GetIDUltimoUsuario()
@@ -178,46 +192,6 @@ namespace Negocio
             return NombrePais;
         }
 
-        private void InsertarDatosPersonales(Usuario NuevoUsuario, short IdPais)
-        {
-            AccessDB access = new AccessDB();
-            try
-            {
-                access.SetearQuery("insert into DatosPersonales (IdUsuario, nombre, apellido, dni, email, telefono," +
-                    " URLimagen, IDpais, domicilio, genero) values (@IdUsuario, @Nombre, @Apellido, @dni, @email, " +
-                    "@telefono, @URLimagen, @idPais, @Domicilio, @genero)");
-                access.AgregarParametro("@IdUsuario", NuevoUsuario.Id);
-                access.AgregarParametro("@Apellido", NuevoUsuario.DatosPersonales.Apellido);
-                access.AgregarParametro("@Nombre", NuevoUsuario.DatosPersonales.Nombre);
-                access.AgregarParametro("@Domicilio", NuevoUsuario.DatosPersonales.Domicilio);
-                access.AgregarParametro("@dni", NuevoUsuario.DatosPersonales.DNI);
-                access.AgregarParametro("@email", NuevoUsuario.DatosPersonales.Email);
-                access.AgregarParametro("@telefono", NuevoUsuario.DatosPersonales.Telefono);
-                access.AgregarParametro("@URLimagen", NuevoUsuario.DatosPersonales.UrlImagen);
-                access.AgregarParametro("@genero", NuevoUsuario.DatosPersonales.Genero);
-                access.AgregarParametro("@idPais", IdPais);
-                access.EjecutarAccion();
-
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            finally
-            {
-                access.CerrarConexion();
-            }
-        }
-
-        public void AgregarUsuario(Usuario NuevoUsuario)
-        {
-            InsertarUsuario(NuevoUsuario);                                      // INSERTAMOS EL USUARIO
-            NuevoUsuario.Id = GetIDUltimoUsuario();                             // OBTENER ID DEL USUARIO INSERTADO PARA AGREGAR SUS DATOS PERSONALES
-            short IdPais = GetIDPais(NuevoUsuario.DatosPersonales.PaisOrigen);  // ACA AVERIGUAMOS ID PAIS
-            InsertarDatosPersonales(NuevoUsuario, IdPais);                      // AGREGAMOS DATOS PERSONALES A LA DB
-
-        }
 
         public void EliminarUsuario(long IdUsuario)
         {
@@ -281,7 +255,6 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
 
@@ -289,7 +262,6 @@ namespace Negocio
             {
                 access.CerrarConexion();
             }
-
         }
 
         public void ActualizarUsuario(Usuario Usuario)

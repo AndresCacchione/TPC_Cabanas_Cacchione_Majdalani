@@ -30,6 +30,7 @@ namespace TPC_CacchioneMajdalani
             {
                 usuario.NombreUsuario = NombreUsuario.Value;
                 usuario.Contraseña = Contraseña.Value;
+             
                 usuario = usuarioNegocio.Login(usuario);
                 if (Convert.ToInt64(usuario.Id) != 0)
                 {

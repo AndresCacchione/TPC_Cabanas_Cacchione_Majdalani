@@ -26,6 +26,7 @@ namespace TPC_CacchioneMajdalani
             ManagementDB managementDB = new ManagementDB(); //https://getbootstrap.com/docs/4.2/components/modal/ similar al pop-up, maxi nos dijo de usar este si mal no recuerdo
             managementDB.BorrarTablas();
             managementDB.CrearTablasDB();
+            managementDB.CrearSPIngresarUsuario();
             managementDB.SetTRInsteadOfDELComplejos();
             managementDB.SetTRInsteadOfDELCabañas();
             managementDB.CargaPaises();
