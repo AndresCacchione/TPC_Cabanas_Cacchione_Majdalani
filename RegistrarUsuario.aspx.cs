@@ -12,7 +12,7 @@ namespace TPC_CacchioneMajdalani
     public partial class RegistrarUsuario : Page
     {
         public ValidacionesNegocio valida { get; set; }
-
+        public Usuario UsuarioActual { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,9 +24,16 @@ namespace TPC_CacchioneMajdalani
 
         protected void btnAltaUsuario_Click(object sender, EventArgs e)
         {
-            if(Validaciones())
+            if (Validaciones())
             {
                 RegistrarNuevoUsuario();
+            }
+            else
+            {
+                exampleModalLabel.InnerText = "Error al ingresar los datos";
+                modalbody.InnerText = "Datos Incorrectos. Verifique sus ingresos";
+                btnAgregar.Text = "Reintentar";
+                btnCancelar.Text = "Cancelar Alta";
             }
         }
         private void CargarDDLPaises()
@@ -41,16 +48,15 @@ namespace TPC_CacchioneMajdalani
         private bool Validaciones()
         {
             ValidacionesNegocio valida = new ValidacionesNegocio();
-            RegularExpressionValidator1.Enabled = valida.ValidarEmail(txtemail.Text);
+            //= valida.ValidarEmail(txtemail.Text);
 
 
-
-            return Page.IsValid; 
+            return Page.IsValid;
         }
 
         private void RegistrarNuevoUsuario()
         {
-            Usuario usuario = new Usuario
+            UsuarioActual = new Usuario
             {
                 Contraseña = Contraseña.Value,
                 NombreUsuario = NombreUsuario.Value,
@@ -70,28 +76,44 @@ namespace TPC_CacchioneMajdalani
                 }
             };
 
+            exampleModalLabel.InnerText = "Confirmación de alta de Usuario";
+            modalbody.InnerText = CargarConfirmacionModal();
+        }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
             try
             {
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-                if(usuarioNegocio.InsertarUsuario(usuario))
+                if (usuarioNegocio.InsertarUsuario(UsuarioActual))
                 {
-                    //usuario.Id = usuarioNegocio.GetIDUltimoUsuario();
-                    usuario = usuarioNegocio.Login(usuario);
-                    usuario = usuarioNegocio.ListarUsuarioPorId(usuario.Id);
-                    Session.Add(Session.SessionID + "userSession", usuario);
+                    UsuarioActual = usuarioNegocio.Login(UsuarioActual);
+                    UsuarioActual = usuarioNegocio.ListarUsuarioPorId(UsuarioActual.Id);
+                    Session.Add(Session.SessionID + "userSession", UsuarioActual);
 
                     Response.Redirect("~/Complejos");
                 }
-                else
-                {
-                    //agregar modal o label
-                }
-                
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+        }
+
+        private string CargarConfirmacionModal()
+        {
+            string retorno = @"Datos ingresados: " + '\n'+
+                              "Nombre Usuario: " + NombreUsuario.Value + '\n' +
+                              "Nombre: " + Nombre.Value + '\n' +
+                              "Apellido: " + Apellido.Value + '\n' +
+                              "DNI: " + DNI.Value + '\n' +
+                              "Correo Electrónico: " + email.Value + '\n' +
+                              "Teléfono: " + Telefono.Value + '\n' +
+                              "Género: " + DDLGenero.SelectedValue + '\n' +
+                              "Imagen de perfil: " + UrlImagen.Value + '\n' +
+                              "Domicilio: " + Domicilio.Value + '\n' +
+                              "Pais de origen: " + DDLPaises.SelectedValue;
+            return retorno;
         }
     }
 }
