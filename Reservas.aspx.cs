@@ -17,6 +17,7 @@ namespace TPC_CacchioneMajdalani
         }
 
         public Reserva reserva { get; set; }
+        public Dictionary<string, DateTime> Fechas { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -169,18 +170,31 @@ Mail              : {reserva.Cliente.DatosPersonales.Email}
 
         protected void Calendar1_SelectionChanged(object sender, EventArgs e)
         {
-            //Get the Selected Date from Calendar
-            DateTime startDate = Calendar1.SelectedDate;
-            //Add 10 days to the selected date and set it as end date
-            //Change the number 10 as per your need
-            DateTime endDate = startDate.AddDays(0);
-            //Get the difference between both date in days
-            TimeSpan dateSpan = endDate.Date - startDate.Date;
+            if (Fechas["fechaIngreso"] == null)
+            {
+                Fechas.Add("fechaIngreso", Calendar1.SelectedDate);
+            }
+            else if (Calendar1.SelectedDate < Fechas["fechaIngreso"])
+            {
+                if (Fechas["fechaEgreso"] == null)
+                {
+                    Fechas.Add("fechaEgreso", Fechas["FechaIngreso"]);
+                    Fechas["fechaIngreso"] = Calendar1.SelectedDate;
+                }
+                else
+                {
+                    Fechas["fechaIngreso"] = Calendar1.SelectedDate;
 
-            for (int i = 0; i <= dateSpan.Days; i++)
-                //set the dates as selected in calendar
-                //Here it will set 10 days as selected from currently selected date
-                Calendar1.SelectedDates.Add(startDate.AddDays(i));
+                }
+            }
+            else if (Fechas["fechaEgreso"] == null)
+            {
+                Fechas.Add("fechaEgreso", Calendar1.SelectedDate);
+            }
+            else if (Calendar1.SelectedDate > Fechas["fechaEgreso"])
+            {
+                Fechas["fechaEgreso"] = Calendar1.SelectedDate;
+            }
         }
 
         protected void Calendar1_Load(object sender, EventArgs e)
@@ -194,6 +208,43 @@ Mail              : {reserva.Cliente.DatosPersonales.Email}
             //        e.Cell.ForeColor = System.Drawing.Color.Gray;
             //    }
             //}
+        }
+
+        protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
+        {
+            CabañaNegocio cabañaNegocio = new CabañaNegocio();
+            List<List<DateTime>> Ocupado = cabañaNegocio.ListaOcupadoPorCabaña(reserva.Cabaña.Id);
+
+            foreach (List<DateTime> ReservasPrevias in Ocupado)
+            {
+                DateTime fechaIngreso = ReservasPrevias.First();
+                DateTime fechaEgreso = ReservasPrevias.Last();
+
+                if (e.Day.Date < DateTime.Now)
+                {
+                    e.Day.IsSelectable = false;
+                    e.Cell.BackColor = System.Drawing.Color.LightGray;
+                    e.Cell.ForeColor = System.Drawing.Color.Gray;
+                }
+                else if (e.Day.Date < fechaEgreso && e.Day.Date >= fechaIngreso)
+                {
+                    e.Day.IsSelectable = false;
+                    e.Cell.ForeColor = System.Drawing.Color.Red;
+                    e.Cell.Text = e.Cell.Text + "Reservado";
+                    if (e.Day.IsToday)
+                    {
+                        e.Cell.BackColor = System.Drawing.Color.Blue;
+                    }
+                    else
+                    {
+                        e.Cell.BackColor = System.Drawing.Color.LightGray;
+                    }
+                }
+                else if (e.Day.IsToday)
+                {
+                    e.Cell.BackColor = System.Drawing.Color.LightSkyBlue;
+                }
+            }
         }
     }
 }
