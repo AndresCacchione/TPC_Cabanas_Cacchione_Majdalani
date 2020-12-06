@@ -53,8 +53,8 @@
                 <%}
                     else
                     {%>
-                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/ListadoDeUsuarios">Lista de usuarios</a>
                 <asp:Button Text="Modificar datos" ID="btnModificarDatos" CssClass="btn btn-secondary mr-auto ml-auto" runat="server" OnClick="btnModificarDatos_Click" />
+                
                 <%if (UsuarioActual.NivelAcceso == 10)
                     {%>
                 <asp:Button ID="btnAFavoritas" Text="Cabañas Favoritas" CssClass="btn btn-secondary mr-auto ml-auto" runat="server" OnClick="btnAFavoritas_Click" />
@@ -63,6 +63,8 @@
                 <asp:Label ID="lblNombreUsuario" runat="server" />
                 <%if (UsuarioActual.NivelAcceso >= 20)
                     { %>
+                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/ListadoDeUsuarios">Lista de usuarios</a>
+                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="AdministradoresDeComplejos.aspx?IDUsuario=<%=ConvertToLong(UsuarioActual.Id).ToString() %>">Lista Administradores</a>
                 <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Configuracion">Configuración</a>
                 <% } %>
                 <%

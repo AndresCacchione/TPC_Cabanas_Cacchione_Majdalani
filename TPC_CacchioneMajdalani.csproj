@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdministradoresDeComplejos.aspx" />
     <Content Include="AgregarModificarCabaña.aspx" />
     <Content Include="AgregarModificarComplejo.aspx" />
     <Content Include="Cabañas.aspx" />
@@ -274,6 +275,13 @@
     <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdministradoresDeComplejos.aspx.cs">
+      <DependentUpon>AdministradoresDeComplejos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministradoresDeComplejos.aspx.designer.cs">
+      <DependentUpon>AdministradoresDeComplejos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AgregarModificarCabaña.aspx.cs">
       <DependentUpon>AgregarModificarCabaña.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

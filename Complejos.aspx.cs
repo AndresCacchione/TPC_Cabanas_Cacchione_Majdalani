@@ -12,9 +12,11 @@ namespace TPC_CacchioneMajdalani
     public partial class Complejo : Page
     {
         public List<Dominio.Complejo> ListaComplejosLocal { get; set; }
+        public Usuario UsuarioActual { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            CargarUsuario();
             try
             {
                 CargarListaBuscadosyComplejos();
@@ -24,6 +26,34 @@ namespace TPC_CacchioneMajdalani
             {
                 Session.Add("Cualquier nombre", ex.ToString());
                 //Response.Redirect("Error.aspx");
+            }
+        }
+
+        private void CargarUsuario()
+        {
+            List<Usuario> UsuariosLista = new List<Usuario>();
+            if (Session["listaUsuarios"] == null)
+            {
+                UsuarioNegocio Negocio = new UsuarioNegocio();
+                UsuariosLista = Negocio.ListarUsuarios();
+                Session.Add("listaUsuarios", UsuariosLista);
+            }
+            else
+            {
+                UsuariosLista = (List<Usuario>)Session["listaUsuarios"];
+            }
+            
+            if (Session[Session.SessionID + "userSession"] != null)
+            {
+                UsuarioActual = (Usuario)Session[Session.SessionID + "userSession"];
+            }
+            else
+            {
+                UsuarioActual = new Usuario()
+                {
+                    Id = 0,
+                    NivelAcceso = 0
+                };
             }
         }
 
