@@ -2,10 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <asp:TextBox ID="txtCalendarExtender" runat="server"></asp:TextBox>
-
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
+            
             <asp:label runat="server" id="LblCalendario"></asp:label>
 
             <asp:Calendar OnDayRender="Calendar1_DayRender" ID="Calendar1" OnSelectionChanged="Calendar1_SelectionChanged" runat="server" BackColor="#FFCCCC" BorderColor="Black" BorderStyle="Double" CellSpacing="2" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="258px" NextPrevFormat="ShortMonth" Width="915px" BorderWidth="2px" CaptionAlign="Top" CellPadding="10" FirstDayOfWeek="Monday" SelectionMode="DayWeekMonth" ShowGridLines="True">

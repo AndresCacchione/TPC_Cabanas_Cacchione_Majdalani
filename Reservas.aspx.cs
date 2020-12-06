@@ -80,7 +80,6 @@ namespace TPC_CacchioneMajdalani
 
         private void GuardarReserva()
         {
-           
                 reserva.CantPersonas = Convert.ToByte(CantidadDePersonas.Text);
                 reserva.Estado = 1; //estado 1 = Pendiente, estado 2 = Confirmada, estado 3 = Cancelada
                 reserva.FechaCreacionReserva = DateTime.Today;
@@ -88,13 +87,12 @@ namespace TPC_CacchioneMajdalani
                 reserva.FechaIngreso = Convert.ToDateTime(FechaDeIngreso.Text);
                 TimeSpan dateSpan = reserva.FechaEgreso - reserva.FechaIngreso;
                 reserva.Importe = dateSpan.Days * reserva.Cabaña.PrecioDiario;
-                reserva.IdReservaOriginal = 0; // 0 sería null en la DB
-            
+                reserva.IdReservaOriginal = 0; // 0 sería null en la DB  
         }
 
         private void CargarReserva()
         {
-            /// aca habria que guardar lo del front en la reserva
+            /// aca habria que guardar lo del front en la reserva cuando se modifique una reserva
 
 
         }
@@ -195,20 +193,7 @@ Mail              : {reserva.Cliente.DatosPersonales.Email}
             }
             else if (Calendar1.SelectedDate < Fechas["fechaIngreso"])
             {
-                if (!Fechas.ContainsKey("fechaEgreso"))
-                {
-                    Fechas.Add("fechaEgreso", Fechas["fechaIngreso"].Date);
                     Fechas["fechaIngreso"] = Calendar1.SelectedDate;
-                }
-                else
-                {
-                    Fechas["fechaIngreso"] = Calendar1.SelectedDate;
-
-                }
-            }
-            else if (!Fechas.ContainsKey("fechaEgreso"))
-            {
-                Fechas.Add("fechaEgreso", Calendar1.SelectedDate);
             }
             else if (Calendar1.SelectedDate > Fechas["fechaEgreso"])
             {
@@ -219,13 +204,9 @@ Mail              : {reserva.Cliente.DatosPersonales.Email}
             {
                 Calendar1.SelectedDates.SelectRange(Fechas["fechaIngreso"], Fechas["fechaEgreso"]);
             }
-            else if (Fechas.Keys.Count() == 1)
-            {
-                Calendar1.SelectedDate = Fechas.First().Value;
-            }
+
             Session.Add("fechasDelCalendario", Fechas);
-            //if (Fechas["fechaIngreso"] < Fechas["fechaEgreso"])
-            //{ }
+
             CargarTextBoxsFechas();
             GuardarReserva();
             importes.Text = reserva.Importe.ToString();

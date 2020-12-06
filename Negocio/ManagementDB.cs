@@ -20,50 +20,37 @@ namespace Negocio
 									use Cacchione_Majdalani_DB
 									exec('
 									create PROCEDURE spAgregarReserva(
-									@IdCabaña bigint,
-									@IdUsuario bigint,
-									@FechaIngreso date,
-									@FechaEgreso date,
-									@CantPersonas tinyint,
-									@FechaReserva date,
-									@Importe money,
-									@Estado tinyint,
-									@IdReservaOriginal bigint
-									)
-									AS
-										BEGIN
-										declare @resultado bit = 1
-											BEGIN TRANSACTION
-												BEGIN TRY
-												-- Generamos La reserva
-												insert into reservas values(@IdCabaña, @IdUsuario, @FechaIngreso, @FechaEgreso, @CantPersonas, @FechaReserva, @Importe, @Estado, @IdReservaOriginal)
-												if ((select count(id) from Reservas where @FechaIngreso < fechaIngreso and @FechaEgreso> fechaEgreso) > 0)
-												begin
+										@IdCabaña bigint,
+										@IdUsuario bigint,
+										@FechaIngreso date,
+										@FechaEgreso date,
+										@CantPersonas tinyint,
+										@FechaReserva date,
+										@Importe money,
+										@Estado tinyint,
+										@IdReservaOriginal bigint
+										)
+										AS
+											BEGIN
+											declare @resultado bit = 1
+													BEGIN TRY
+													if ((select count(*) from Reservas where (fechaIngreso>=@FechaIngreso and fechaIngreso<=@FechaEgreso) or (fechaEgreso>=@FechaIngreso and fechaEgreso<=@FechaEgreso)) > 0)
+													begin
+													set @resultado = 0
+													end
+													else
+													begin
+													insert into reservas values(@IdCabaña, @IdUsuario, @FechaIngreso, @FechaEgreso, @CantPersonas, @FechaReserva, @Importe, @Estado, @IdReservaOriginal)
+													end
+													END TRY
+
+												BEGIN CATCH
 												set @resultado = 0
-												end
-											COMMIT TRANSACTION
-												END TRY
-
-											BEGIN CATCH
-											set @resultado = 0
-											END CATCH
-
-
-											if (@resultado = 0)
-					begin
-					rollback transaction
-					end
-
-
-									return @resultado
-
-
-									END	')
-
+												END CATCH
+												return @resultado
+											END	')
 									end");
 				acceso.EjecutarAccion();
-
-
 
 			}
 			catch (Exception ex)

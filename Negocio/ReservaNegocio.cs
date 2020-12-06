@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio;
+using System.Data;
 
 namespace Negocio
 {
@@ -16,16 +17,15 @@ namespace Negocio
             bool retorno = true;
             try
             {
-                access.SetearQuery("insert into reservas values(@IdCabaña,@IdUsuario,@FechaIngreso,@FechaEgreso,@CantPersonas,@FechaReserva,@Importe,@Estado,@IdReservaOriginal)");
-                access.AgregarParametro("@IdCabaña", reserva.Cabaña.Id);
-                access.AgregarParametro("@IdUsuario", reserva.Cliente.Id);
-                access.AgregarParametro("@CantPersonas", reserva.CantPersonas);
-                access.AgregarParametro("@Estado", reserva.Estado);
-                access.AgregarParametro("@FechaReserva", reserva.FechaCreacionReserva); // esto no cambia nunca
-                access.AgregarParametro("@FechaEgreso", reserva.FechaEgreso);
-                access.AgregarParametro("@Importe", reserva.Importe);
-                access.AgregarParametro("@FechaIngreso", reserva.FechaIngreso);
-                access.AgregarParametro("@IdReservaOriginal", reserva.IdReservaOriginal);
+                access.AgregarParametroSP("@IdCabaña", reserva.Cabaña.Id, SqlDbType.BigInt);
+                access.AgregarParametroSP("@IdUsuario", reserva.Cliente.Id, SqlDbType.BigInt);
+                access.AgregarParametroSP("@FechaIngreso", reserva.FechaIngreso.ToShortDateString(), SqlDbType.Date);
+                access.AgregarParametroSP("@FechaEgreso", reserva.FechaEgreso.ToShortDateString(), SqlDbType.Date);
+                access.AgregarParametroSP("@CantPersonas", reserva.CantPersonas, SqlDbType.TinyInt);
+                access.AgregarParametroSP("@FechaReserva", reserva.FechaCreacionReserva.ToShortDateString(), SqlDbType.Date); // esto no cambia nunca
+                access.AgregarParametroSP("@Importe", reserva.Importe, SqlDbType.Money);
+                access.AgregarParametroSP("@Estado", reserva.Estado, SqlDbType.TinyInt);
+                access.AgregarParametroSP("@IdReservaOriginal", reserva.IdReservaOriginal, SqlDbType.BigInt);
                 if (access.EjecutarStoredProcedureIntReturn("spAgregarReserva") == 0)
                 {
                     retorno = false;
@@ -33,7 +33,6 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
