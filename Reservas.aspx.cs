@@ -23,8 +23,7 @@ namespace TPC_CacchioneMajdalani
         protected void Page_Load(object sender, EventArgs e)
         {
             CargarDiccionarioFechas();
-            CargarTextBoxsFechas();
-
+            CantidadDePersonas.Text = "1";
             long idCabaña = Convert.ToInt64(Request.QueryString["idCabaña"]);
 
             if ((Usuario)Session[Session.SessionID + "userSession"] == null || idCabaña == 0)
@@ -40,11 +39,13 @@ namespace TPC_CacchioneMajdalani
         {
             if (Fechas.Keys.Contains("fechaIngreso"))
             {
-                FechaDeIngreso.Text = Fechas["fechaIngreso"].ToString();
+                HoraIngreso.Text = reserva.Cabaña.CheckIn.TimeOfDay.ToString();
+                FechaDeIngreso.Text = Fechas["fechaIngreso"].ToShortDateString();
             }
             if (Fechas.Keys.Contains("fechaEgreso"))
             {
-                FechaDeIngreso.Text = Fechas["fechaEgreso"].ToString();
+                HoraEgreso.Text = reserva.Cabaña.CheckOut.TimeOfDay.ToString();
+                FechaDeEgreso.Text = Fechas["fechaEgreso"].ToShortDateString();
             }
         }
 
@@ -53,7 +54,6 @@ namespace TPC_CacchioneMajdalani
             if (Session["fechasDelCalendario"] == null)
             {
                 Session.Add("fechasDelCalendario", Fechas);
-
             }
             else
             {
@@ -80,14 +80,16 @@ namespace TPC_CacchioneMajdalani
 
         private void GuardarReserva()
         {
-            reserva.CantPersonas = Convert.ToByte(CantidadPersonas.Value);
-            reserva.Estado = 1; //estado 1 = Pendiente, estado 2 = Confirmada, estado 3 = Cancelada
-            reserva.FechaCreacionReserva = DateTime.Today;
-            reserva.FechaEgreso = Convert.ToDateTime(FechaDeEgreso.Text);
-            reserva.FechaIngreso = Convert.ToDateTime(FechaDeIngreso.Text);
-            TimeSpan dateSpan = reserva.FechaEgreso - reserva.FechaIngreso;
-            reserva.Importe = dateSpan.Days * reserva.Cabaña.PrecioDiario;
-            reserva.IdReservaOriginal = 0; // 0 sería null en la DB
+           
+                reserva.CantPersonas = Convert.ToByte(CantidadDePersonas.Text);
+                reserva.Estado = 1; //estado 1 = Pendiente, estado 2 = Confirmada, estado 3 = Cancelada
+                reserva.FechaCreacionReserva = DateTime.Today;
+                reserva.FechaEgreso = Convert.ToDateTime(FechaDeEgreso.Text);
+                reserva.FechaIngreso = Convert.ToDateTime(FechaDeIngreso.Text);
+                TimeSpan dateSpan = reserva.FechaEgreso - reserva.FechaIngreso;
+                reserva.Importe = dateSpan.Days * reserva.Cabaña.PrecioDiario;
+                reserva.IdReservaOriginal = 0; // 0 sería null en la DB
+            
         }
 
         private void CargarReserva()
@@ -170,20 +172,26 @@ Mail              : {reserva.Cliente.DatosPersonales.Email}
         {
             Calendar1.SelectedDates.Clear();
             Session.Remove("fechasDelCalendario");
+            FechaDeIngreso.Text = null;
+            FechaDeEgreso.Text = null;
+            HoraEgreso.Text = null;
+            HoraIngreso.Text = null;
+            CantidadDePersonas.Text = null;
+            Importe.Value = null;
         }
 
         protected void Calendar1_SelectionChanged(object sender, EventArgs e)
         {
-
             if (!Fechas.ContainsKey("fechaIngreso"))
             {
                 Fechas.Add("fechaIngreso", Calendar1.SelectedDate);
+                Fechas.Add("fechaEgreso", Fechas["fechaIngreso"].Date.AddDays(1));
             }
             else if (Calendar1.SelectedDate < Fechas["fechaIngreso"])
             {
                 if (!Fechas.ContainsKey("fechaEgreso"))
                 {
-                    Fechas.Add("fechaEgreso", Fechas["FechaIngreso"].Date);
+                    Fechas.Add("fechaEgreso", Fechas["fechaIngreso"].Date);
                     Fechas["fechaIngreso"] = Calendar1.SelectedDate;
                 }
                 else
@@ -210,6 +218,9 @@ Mail              : {reserva.Cliente.DatosPersonales.Email}
                 Calendar1.SelectedDate = Fechas.First().Value;
             }
             Session.Add("fechasDelCalendario", Fechas);
+            CargarTextBoxsFechas();
+            GuardarReserva();
+            Importe.Value = reserva.Importe.ToString();
         }
 
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)

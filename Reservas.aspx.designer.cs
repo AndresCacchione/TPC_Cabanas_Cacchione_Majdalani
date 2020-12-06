@@ -51,6 +51,15 @@ namespace TPC_CacchioneMajdalani
         protected global::System.Web.UI.WebControls.TextBox FechaDeIngreso;
 
         /// <summary>
+        /// HoraIngreso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox HoraIngreso;
+
+        /// <summary>
         /// FechaDeEgreso control.
         /// </summary>
         /// <remarks>
@@ -60,13 +69,31 @@ namespace TPC_CacchioneMajdalani
         protected global::System.Web.UI.WebControls.TextBox FechaDeEgreso;
 
         /// <summary>
-        /// CantidadPersonas control.
+        /// HoraEgreso control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl CantidadPersonas;
+        protected global::System.Web.UI.WebControls.TextBox HoraEgreso;
+
+        /// <summary>
+        /// CantidadDePersonas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox CantidadDePersonas;
+
+        /// <summary>
+        /// Importe control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Importe;
 
         /// <summary>
         /// Reservar control.

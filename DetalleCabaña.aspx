@@ -22,10 +22,10 @@
                         <h5 class="card-title">Precio por día: <%=CabañaAuxiliar.PrecioDiario%></h5>
                     </li>
                     <li>
-                        <h5 class="card-title">Hora CheckIn: <%=CabañaAuxiliar.CheckIn%></h5>
+                        <h5 class="card-title">Hora CheckIn: <%=CabañaAuxiliar.CheckIn.TimeOfDay%></h5>
                     </li>
                     <li>
-                        <h5 class="card-title">Hora Checkout: <%=CabañaAuxiliar.CheckOut%></h5>
+                        <h5 class="card-title">Hora Checkout: <%=CabañaAuxiliar.CheckOut.TimeOfDay%></h5>
                     </li>
                 </ul>
 
