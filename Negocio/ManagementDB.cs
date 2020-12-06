@@ -9,6 +9,72 @@ namespace Negocio
 {
     public class ManagementDB
     {
+
+		public void CrearSpAgregarReserva()
+        {
+			AccessDB acceso = new AccessDB();
+			try
+			{
+				acceso.SetearQuery(@"if not exists(select * from sys.objects where name = 'spAgregarReserva')
+									begin
+									use Cacchione_Majdalani_DB
+									exec('
+									create PROCEDURE spAgregarReserva(
+									@IdCabaña bigint,
+									@IdUsuario bigint,
+									@FechaIngreso date,
+									@FechaEgreso date,
+									@CantPersonas tinyint,
+									@FechaReserva date,
+									@Importe money,
+									@Estado tinyint,
+									@IdReservaOriginal bigint
+									)
+									AS
+										BEGIN
+										declare @resultado bit = 1
+											BEGIN TRANSACTION
+												BEGIN TRY
+												-- Generamos La reserva
+												insert into reservas values(@IdCabaña, @IdUsuario, @FechaIngreso, @FechaEgreso, @CantPersonas, @FechaReserva, @Importe, @Estado, @IdReservaOriginal)
+												if ((select count(id) from Reservas where @FechaIngreso < fechaIngreso and @FechaEgreso> fechaEgreso) > 0)
+												begin
+												set @resultado = 0
+												end
+											COMMIT TRANSACTION
+												END TRY
+
+											BEGIN CATCH
+											set @resultado = 0
+											END CATCH
+
+
+											if (@resultado = 0)
+					begin
+					rollback transaction
+					end
+
+
+									return @resultado
+
+
+									END	')
+
+									end");
+				acceso.EjecutarAccion();
+
+
+
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+
+
+        }
+
 		public void CrearSPIngresarUsuario()
         {
 			AccessDB acceso = new AccessDB();

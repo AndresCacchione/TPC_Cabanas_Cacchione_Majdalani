@@ -104,20 +104,26 @@ namespace TPC_CacchioneMajdalani
             //RESERVA
             ReservaNegocio NegocioReserva = new ReservaNegocio();
             GuardarReserva();
-            NegocioReserva.InsertarReserva(reserva);
+          bool inserto = NegocioReserva.InsertarReserva(reserva);
             //ENVIO DE MAIL AL USUARIO QUE RESERVO Y AL ADMINISTRADOR PARA QUE 
+            if (inserto)
+            {
+                ManagementEmail managementEmail = new ManagementEmail();
 
-            ManagementEmail managementEmail = new ManagementEmail();
-
-            //DESPUES DE MANAGEMENT EMAIL INSERTAR POP UP
-            //Envio mail a los admins
-            managementEmail.EnviarEmails(MailDestino2(), "Alta de Reserva (Verficar pago)", CuerpoMail2());
-            //Mail de cliente
-            List<string> EmailCliente = new List<string>();
-            EmailCliente.Add(reserva.Cliente.DatosPersonales.Email);
-            /// SETEARLE AL ADMINISTRADOR EL MAIL DEL COMPLEJO QUE ADMINISTRA
-            managementEmail.EnviarEmails(EmailCliente, "Enviar comprobante de pago AL MAIL COMPLEJO", CuerpoMail2());
-            Response.Redirect("Default.aspx");
+                //DESPUES DE MANAGEMENT EMAIL INSERTAR POP UP
+                //Envio mail a los admins
+                managementEmail.EnviarEmails(MailDestino2(), "Alta de Reserva (Verficar pago)", CuerpoMail2());
+                //Mail de cliente
+                List<string> EmailCliente = new List<string>();
+                EmailCliente.Add(reserva.Cliente.DatosPersonales.Email);
+                /// SETEARLE AL ADMINISTRADOR EL MAIL DEL COMPLEJO QUE ADMINISTRA
+                managementEmail.EnviarEmails(EmailCliente, "Enviar comprobante de pago AL MAIL COMPLEJO", CuerpoMail2());
+                Response.Redirect("Default.aspx");
+            }
+            else 
+            {
+               LblCalendario.Text = "Verifique los datos ingresados ";       
+            }
         }
 
         private string CuerpoMail2()
@@ -177,7 +183,7 @@ Mail              : {reserva.Cliente.DatosPersonales.Email}
             HoraEgreso.Text = null;
             HoraIngreso.Text = null;
             CantidadDePersonas.Text = null;
-            Importe.Value = null;
+            importes.Text = null;
         }
 
         protected void Calendar1_SelectionChanged(object sender, EventArgs e)
@@ -218,9 +224,11 @@ Mail              : {reserva.Cliente.DatosPersonales.Email}
                 Calendar1.SelectedDate = Fechas.First().Value;
             }
             Session.Add("fechasDelCalendario", Fechas);
+            //if (Fechas["fechaIngreso"] < Fechas["fechaEgreso"])
+            //{ }
             CargarTextBoxsFechas();
             GuardarReserva();
-            Importe.Value = reserva.Importe.ToString();
+            importes.Text = reserva.Importe.ToString();
         }
 
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)

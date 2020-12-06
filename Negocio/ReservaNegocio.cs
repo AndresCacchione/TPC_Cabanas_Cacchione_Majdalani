@@ -10,9 +10,10 @@ namespace Negocio
     public class ReservaNegocio
     {
         //InsertarNuevaReserva(servaVieja, reservaNueva); // en modificar reserva sería InsertarNuevaReserva(servaVieja, reservaNueva) esto no cambia
-        public void InsertarReserva(Reserva reserva)
+        public bool InsertarReserva(Reserva reserva)
         {
             AccessDB access = new AccessDB();
+            bool retorno = true;
             try
             {
                 access.SetearQuery("insert into reservas values(@IdCabaña,@IdUsuario,@FechaIngreso,@FechaEgreso,@CantPersonas,@FechaReserva,@Importe,@Estado,@IdReservaOriginal)");
@@ -25,7 +26,10 @@ namespace Negocio
                 access.AgregarParametro("@Importe", reserva.Importe);
                 access.AgregarParametro("@FechaIngreso", reserva.FechaIngreso);
                 access.AgregarParametro("@IdReservaOriginal", reserva.IdReservaOriginal);
-                access.EjecutarAccion();
+                if (access.EjecutarStoredProcedureIntReturn("spAgregarReserva") == 0)
+                {
+                    retorno = false;
+                }
             }
             catch (Exception ex)
             {
@@ -36,6 +40,7 @@ namespace Negocio
             {
                 access.CerrarConexion();
             }
+            return retorno;
 
         }
 

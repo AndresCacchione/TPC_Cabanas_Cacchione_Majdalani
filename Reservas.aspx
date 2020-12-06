@@ -6,6 +6,8 @@
 
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
+            <asp:label runat="server" id="LblCalendario"></asp:label>
+
             <asp:Calendar OnDayRender="Calendar1_DayRender" ID="Calendar1" OnSelectionChanged="Calendar1_SelectionChanged" runat="server" BackColor="#FFCCCC" BorderColor="Black" BorderStyle="Double" CellSpacing="2" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="258px" NextPrevFormat="ShortMonth" Width="915px" BorderWidth="2px" CaptionAlign="Top" CellPadding="10" FirstDayOfWeek="Monday" SelectionMode="DayWeekMonth" ShowGridLines="True">
                 <DayHeaderStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" Height="8pt" HorizontalAlign="Center" VerticalAlign="Middle" />
                 <DayStyle BackColor="#66FF66" HorizontalAlign="Center" VerticalAlign="Middle" />
@@ -44,31 +46,17 @@
             </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="inputCantPersonas">Cantidad de personas</label>
+                <label>Cantidad de personas</label>
             <asp:TextBox AutoPostBack="true" runat="server" type="number" class="form-control" id="CantidadDePersonas" placeholder="Cantidad" required=""/>
         </div>
         <div class="form-group col-md-6">
-            <label for="inputImporte">Importe </label>
-            <input type="number" class="form-control" id="Importe" placeholder="$1.000" required runat="server" />
-            
+                       <label>Importe</label>
+                     <asp:TextBox ReadOnly="true" AutoPostBack="true" ID="importes" class="form-control" type="text" runat="server" />
+     
         </div>
     </div>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <div class="form-row">
-        
-        <div class="form-group col-md-6">
-            <label for="inputEstado">Estado </label>
-            <%--        <input type="text" class="form-control" id="Estado" placeholder="Estado" required runat="server" />
-            --%>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputIdReservaOriginal">ID reserva original</label>
-            <%--       <input type="number" class="form-control" id="IDReservaOriginal" placeholder="ID Reserva Original" required runat="server" />
-            --%>
-        </div>
-    </div>
+  
     <asp:Button ID="Reservar" OnClick="Reservar_Click" Text="Reservar" class="btn btn-success mr-auto ml-auto" runat="server" />
 </asp:Content>
