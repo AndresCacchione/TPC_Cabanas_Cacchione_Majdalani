@@ -42,22 +42,22 @@ namespace TPC_CacchioneMajdalani
         protected global::System.Web.UI.WebControls.Button BotonBorrarSeleccion;
 
         /// <summary>
-        /// FechaIngreso control.
+        /// FechaDeIngreso control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl FechaIngreso;
+        protected global::System.Web.UI.WebControls.TextBox FechaDeIngreso;
 
         /// <summary>
-        /// FechaEgreso control.
+        /// FechaDeEgreso control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl FechaEgreso;
+        protected global::System.Web.UI.WebControls.TextBox FechaDeEgreso;
 
         /// <summary>
         /// CantidadPersonas control.

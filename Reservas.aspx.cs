@@ -14,6 +14,7 @@ namespace TPC_CacchioneMajdalani
         public Reservas()
         {
             reserva = new Reserva();
+            Fechas = new Dictionary<string, DateTime>();
         }
 
         public Reserva reserva { get; set; }
@@ -21,40 +22,42 @@ namespace TPC_CacchioneMajdalani
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            CargarDiccionarioFechas();
+            CargarTextBoxsFechas();
+
             long idCabaña = Convert.ToInt64(Request.QueryString["idCabaña"]);
-            
-            if((Usuario)Session[Session.SessionID + "userSession"]==null || idCabaña==0)
+
+            if ((Usuario)Session[Session.SessionID + "userSession"] == null || idCabaña == 0)
             {
                 Response.Redirect("Login.aspx");
             }
-            
+
             CargarCabaña(idCabaña);
             reserva.Cliente = (Usuario)Session[Session.SessionID + "userSession"];
-            PrepararCalendario();
         }
 
-        private void PrepararCalendario()
+        private void CargarTextBoxsFechas()
         {
-            CabañaNegocio cabañaNegocio = new CabañaNegocio();
-            List<List<DateTime>> Ocupado = cabañaNegocio.ListaOcupadoPorCabaña(reserva.Cabaña.Id);
-            
-            foreach (List<DateTime>ReservasPrevias in Ocupado)
+            if (Fechas.Keys.Contains("fechaIngreso"))
             {
-                DateTime horaIngreso = ReservasPrevias.First();
-                DateTime horaEgreso = ReservasPrevias.Last();
-                //Código del calendario para que pinte en color rojo las que no se pueden seleccionar.
+                FechaDeIngreso.Text = Fechas["fechaIngreso"].ToString();
+            }
+            if (Fechas.Keys.Contains("fechaEgreso"))
+            {
+                FechaDeIngreso.Text = Fechas["fechaEgreso"].ToString();
+            }
+        }
 
-                //protected void DateRange(object sender, DayRenderEventArgs e)
-                //{
-                //    DateTime rangeStart = new DateTime(2015, 7, 4);
-                //    DateTime rangeEnd = new DateTime(2016, 3, 15);
+        private void CargarDiccionarioFechas()
+        {
+            if (Session["fechasDelCalendario"] == null)
+            {
+                Session.Add("fechasDelCalendario", Fechas);
 
-                //    if (e.Day.Date < rangeStart || e.Day.Date > rangeEnd)
-                //    {
-                //        e.Day.IsSelectable = false;
-                //        e.Cell.ForeColor = System.Drawing.Color.Gray;
-                //    }
-                //}
+            }
+            else
+            {
+                Fechas = (Dictionary<string, DateTime>)Session["fechasDelCalendario"];
             }
         }
 
@@ -80,8 +83,8 @@ namespace TPC_CacchioneMajdalani
             reserva.CantPersonas = Convert.ToByte(CantidadPersonas.Value);
             reserva.Estado = 1; //estado 1 = Pendiente, estado 2 = Confirmada, estado 3 = Cancelada
             reserva.FechaCreacionReserva = DateTime.Today;
-            reserva.FechaEgreso = Convert.ToDateTime(FechaEgreso.Value);
-            reserva.FechaIngreso = Convert.ToDateTime(FechaIngreso.Value);
+            reserva.FechaEgreso = Convert.ToDateTime(FechaDeEgreso.Text);
+            reserva.FechaIngreso = Convert.ToDateTime(FechaDeIngreso.Text);
             TimeSpan dateSpan = reserva.FechaEgreso - reserva.FechaIngreso;
             reserva.Importe = dateSpan.Days * reserva.Cabaña.PrecioDiario;
             reserva.IdReservaOriginal = 0; // 0 sería null en la DB
@@ -98,27 +101,27 @@ namespace TPC_CacchioneMajdalani
         {
             //RESERVA
             ReservaNegocio NegocioReserva = new ReservaNegocio();
-            GuardarReserva();     
+            GuardarReserva();
             NegocioReserva.InsertarReserva(reserva);
             //ENVIO DE MAIL AL USUARIO QUE RESERVO Y AL ADMINISTRADOR PARA QUE 
-            
+
             ManagementEmail managementEmail = new ManagementEmail();
-            
+
             //DESPUES DE MANAGEMENT EMAIL INSERTAR POP UP
             //Envio mail a los admins
-            managementEmail.EnviarEmails(MailDestino2(),"Alta de Reserva (Verficar pago)", CuerpoMail2());
+            managementEmail.EnviarEmails(MailDestino2(), "Alta de Reserva (Verficar pago)", CuerpoMail2());
             //Mail de cliente
             List<string> EmailCliente = new List<string>();
             EmailCliente.Add(reserva.Cliente.DatosPersonales.Email);
             /// SETEARLE AL ADMINISTRADOR EL MAIL DEL COMPLEJO QUE ADMINISTRA
-            managementEmail.EnviarEmails(EmailCliente,"Enviar comprobante de pago AL MAIL COMPLEJO", CuerpoMail2());
+            managementEmail.EnviarEmails(EmailCliente, "Enviar comprobante de pago AL MAIL COMPLEJO", CuerpoMail2());
             Response.Redirect("Default.aspx");
         }
 
         private string CuerpoMail2()
         {
             string CuerpoMail;
-            CuerpoMail =$@"Datos de la reserva
+            CuerpoMail = $@"Datos de la reserva
 Fecha de la Creacion de la reserva : {reserva.FechaCreacionReserva} 
 Fecha de inicio de la reserva      : dia {reserva.FechaIngreso} - hora checkin {reserva.Cabaña.CheckIn}
 Fecha de fin de la reserva         : dia {reserva.FechaEgreso} - hora checkout {reserva.Cabaña.CheckOut}
@@ -139,11 +142,11 @@ Dni               : {reserva.Cliente.DatosPersonales.DNI}
 Telefono          : {reserva.Cliente.DatosPersonales.Telefono}
 Mail              : {reserva.Cliente.DatosPersonales.Email}
 ";
-        
+
 
             return CuerpoMail;
 
-        } 
+        }
 
         private List<string> MailDestino2()
         {
@@ -166,19 +169,21 @@ Mail              : {reserva.Cliente.DatosPersonales.Email}
         protected void BotonBorrarSeleccion_Click(object sender, EventArgs e)
         {
             Calendar1.SelectedDates.Clear();
+            Session.Remove("fechasDelCalendario");
         }
 
         protected void Calendar1_SelectionChanged(object sender, EventArgs e)
         {
-            if (Fechas["fechaIngreso"] == null)
+
+            if (!Fechas.ContainsKey("fechaIngreso"))
             {
                 Fechas.Add("fechaIngreso", Calendar1.SelectedDate);
             }
             else if (Calendar1.SelectedDate < Fechas["fechaIngreso"])
             {
-                if (Fechas["fechaEgreso"] == null)
+                if (!Fechas.ContainsKey("fechaEgreso"))
                 {
-                    Fechas.Add("fechaEgreso", Fechas["FechaIngreso"]);
+                    Fechas.Add("fechaEgreso", Fechas["FechaIngreso"].Date);
                     Fechas["fechaIngreso"] = Calendar1.SelectedDate;
                 }
                 else
@@ -187,7 +192,7 @@ Mail              : {reserva.Cliente.DatosPersonales.Email}
 
                 }
             }
-            else if (Fechas["fechaEgreso"] == null)
+            else if (!Fechas.ContainsKey("fechaEgreso"))
             {
                 Fechas.Add("fechaEgreso", Calendar1.SelectedDate);
             }
@@ -195,19 +200,16 @@ Mail              : {reserva.Cliente.DatosPersonales.Email}
             {
                 Fechas["fechaEgreso"] = Calendar1.SelectedDate;
             }
-        }
 
-        protected void Calendar1_Load(object sender, EventArgs e)
-        {
-            //{
-            //    DateTime rangeStart = new DateTime(2020, 7, 4);
-            //    DateTime rangeEnd = new DateTime(2020, 3, 15);
-            //    if (e.Day.Date < rangeStart || e.Day.Date > rangeEnd)
-            //    {
-            //        e.Day.IsSelectable = false;
-            //        e.Cell.ForeColor = System.Drawing.Color.Gray;
-            //    }
-            //}
+            if (Fechas.Keys.Count() == 2)
+            {
+                Calendar1.SelectedDates.SelectRange(Fechas["fechaIngreso"], Fechas["fechaEgreso"]);
+            }
+            else if (Fechas.Keys.Count() == 1)
+            {
+                Calendar1.SelectedDate = Fechas.First().Value;
+            }
+            Session.Add("fechasDelCalendario", Fechas);
         }
 
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)

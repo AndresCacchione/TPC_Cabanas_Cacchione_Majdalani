@@ -29,18 +29,19 @@
     
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="inputFechaIngreso">Fecha de Ingreso</label>
-            <input type="date" class="form-control" id="FechaIngreso" placeholder="DD/MM/AAAA" required runat="server">
+            <label>Fecha de Ingreso</label>
+            <asp:TextBox readonly="true" type="date" class="form-control" id="FechaDeIngreso" runat="server" />
+
         </div>
         <div class="form-group col-md-6">
-            <label for="inputFechaEgreso">Fecha de Egreso</label>
-            <input type="date" class="form-control" id="FechaEgreso" placeholder="DD/MM/AAAA" required runat="server">
+            <label>Fecha de Egreso</label>
+            <asp:TextBox runat="server" readonly="true" type="date" class="form-control" id="FechaDeEgreso" />
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputCantPersonas">Cantidad de personas</label>
-            <input type="number" class="form-control" id="CantidadPersonas" placeholder="Cantidad" required runat="server">
+            <input type="number" class="form-control" id="CantidadPersonas" placeholder="Cantidad" runat="server">
         </div>
 
         <div class="form-group col-md-6">
