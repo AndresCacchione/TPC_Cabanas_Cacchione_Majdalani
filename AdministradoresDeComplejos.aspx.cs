@@ -11,7 +11,12 @@ namespace TPC_CacchioneMajdalani
 {
     public partial class AdministradoresDeComplejos : Page
     {
+        public AdministradoresDeComplejos()
+        {
+            ComplejoNegocio = new ComplejoNegocio();
+        }
         public List<Administrador> ListaAdministradores { get; set; }
+        public ComplejoNegocio ComplejoNegocio { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             CargarAdministradores();

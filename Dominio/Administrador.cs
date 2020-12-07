@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Administrador : Usuario
+    public class Administrador
     {
+        public Administrador()
+        {
+            usuario = new Usuario();
+        }
+        public Usuario usuario { get; set; }
         public long IDComplejo { get; set; }
     }
 }

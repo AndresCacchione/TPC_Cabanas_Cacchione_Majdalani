@@ -28,13 +28,13 @@ namespace TPC_CacchioneMajdalani
             {
                 RegistrarNuevoUsuario();
             }
-            else
-            {
-                exampleModalLabel.InnerText = "Error al ingresar los datos";
-                modalbody.InnerText = "Datos Incorrectos. Verifique sus ingresos";
-                btnAgregar.Text = "Reintentar";
-                btnCancelar.Text = "Cancelar Alta";
-            }
+            //else
+            //{
+            //    exampleModalLabel.InnerText = "Error al ingresar los datos";
+            //    modalbody.InnerText = "Datos Incorrectos. Verifique sus ingresos";
+            //    btnAgregar.Text = "Reintentar";
+            //    btnCancelar.Text = "Cancelar Alta";
+            //}
         }
         private void CargarDDLPaises()
         {
@@ -76,8 +76,8 @@ namespace TPC_CacchioneMajdalani
                 }
             };
 
-            exampleModalLabel.InnerText = "Confirmación de alta de Usuario";
-            modalbody.InnerText = CargarConfirmacionModal();
+            //exampleModalLabel.InnerText = "Confirmación de alta de Usuario";
+            //modalbody.InnerText = CargarConfirmacionModal();
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
@@ -100,20 +100,20 @@ namespace TPC_CacchioneMajdalani
             }
         }
 
-        private string CargarConfirmacionModal()
-        {
-            string retorno = @"Datos ingresados: " + '\n' +
-                              "Nombre Usuario: " + NombreUsuario.Value + '\n' +
-                              "Nombre: " + Nombre.Value + '\n' +
-                              "Apellido: " + Apellido.Value + '\n' +
-                              "DNI: " + DNI.Value + '\n' +
-                              "Correo Electrónico: " + email.Value + '\n' +
-                              "Teléfono: " + Telefono.Value + '\n' +
-                              "Género: " + DDLGenero.SelectedValue + '\n' +
-                              "Imagen de perfil: " + UrlImagen.Value + '\n' +
-                              "Domicilio: " + Domicilio.Value + '\n' +
-                              "Pais de origen: " + DDLPaises.SelectedValue;
-            return retorno;
-        }
+        //private string CargarConfirmacionModal()
+        //{
+        //    string retorno = @"Datos ingresados: " + '\n' +
+        //                      "Nombre Usuario: " + NombreUsuario.Value + '\n' +
+        //                      "Nombre: " + Nombre.Value + '\n' +
+        //                      "Apellido: " + Apellido.Value + '\n' +
+        //                      "DNI: " + DNI.Value + '\n' +
+        //                      "Correo Electrónico: " + email.Value + '\n' +
+        //                      "Teléfono: " + Telefono.Value + '\n' +
+        //                      "Género: " + DDLGenero.SelectedValue + '\n' +
+        //                      "Imagen de perfil: " + UrlImagen.Value + '\n' +
+        //                      "Domicilio: " + Domicilio.Value + '\n' +
+        //                      "Pais de origen: " + DDLPaises.SelectedValue;
+        //    return retorno;
+        //}
     }
 }

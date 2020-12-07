@@ -22,9 +22,13 @@ namespace Negocio
                 acceso.EjecutarLector();
                 while (acceso.Lector.Read())
                 {
+  
                     Administrador aux = new Administrador();
-                    aux = (Administrador)ListarUsuarioPorId((long)acceso.Lector["IDUsuario"]);
-                    aux.IDComplejo = (long)acceso.Lector["IDComplejo"];
+                    aux.usuario =ListarUsuarioPorId((long)acceso.Lector["IDUsuario"]);
+                    if(!acceso.Lector.IsDBNull(1))
+                    {
+                        aux.IDComplejo = (long)acceso.Lector["IDComplejo"];
+                    }
                     ListaAdministradores.Add(aux);
                 }
             }

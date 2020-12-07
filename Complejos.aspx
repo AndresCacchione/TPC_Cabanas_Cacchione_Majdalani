@@ -8,7 +8,7 @@
         <h2><%: Title %>.</h2>
         <asp:TextBox ID="TxtBuscarComplejo" CssClass="d-inline-flex, border-light" MaxLength="120" runat="server"></asp:TextBox>
         <asp:Button Class="btn btn-primary mr-auto ml-auto" OnClick="BtnBuscarComplejo_Click" ID="BtnBuscarComplejo" runat="server" Text="Buscar" />
-         <%if (Session[Session.SessionID + "userSession"] != null && ((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20 && ((List<Dominio.Cabaña>)Session["listaCabañas"]).Count() != 0)
+         <%if (Session[Session.SessionID + "userSession"] != null && ((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20)
                 { %>
         <a href="AgregarModificarComplejo.aspx" class="btn btn-success mr-auto ml-auto">Agregar</a>
       

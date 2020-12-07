@@ -14,11 +14,10 @@ namespace Negocio
 			AccessDB access = new AccessDB();
             try
             {
-				access.SetearQuery(@"use Cacchione_Majdalani_DB
-									go
+				access.SetearQuery(@"
 									if not exists(select * from sys.objects where name = 'VW_AdministradoresPorComplejo')
 									begin
-									exec('create view VW_AdministradoresPorComplejo
+									exec('Create view VW_AdministradoresPorComplejo
 										as
 										select u.Id IDUsuario, Co.ID IDComplejo 
 										from Usuarios u 

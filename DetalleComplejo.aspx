@@ -15,7 +15,7 @@
                                 </ul>
 
                                 <a href="Complejos.aspx" class="btn btn-secondary mr-auto ml-auto">Volver</a>
-                                 <%if (Session[Session.SessionID + "userSession"] != null && ((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20 && ((List<Dominio.Cabaña>)Session["listaCabañas"]).Count() != 0)
+                                 <%if (Session[Session.SessionID + "userSession"] != null && ((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20)
                 { %>
            
                                 <a href="AgregarModificarComplejo.aspx?IdComplejo=<%=Aux.ID.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Modificar</a>
@@ -33,7 +33,7 @@
                       <ContentTemplate>
 
                           <div class="form-group col-md-6">
-                        <%if (Session[Session.SessionID + "userSession"] != null && ((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20 && ((List<Dominio.Cabaña>)Session["listaCabañas"]).Count() != 0)
+                        <%if (Session[Session.SessionID + "userSession"] != null && ((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20 )
                 { %>
                               <label for="inputURLImagen">URL de Nueva Imagen: </label>
                               <input type="url" class="form-control" id="URLImagen" placeholder="Ingrese URL de Imagen" runat="server">
@@ -51,7 +51,7 @@
                                       <img src="<%=item.URLImagen%>" class="card-img-top" alt="...">
                                       
                                       <div class="card-body"  style="background-color: #6E9038;">
-                                            <%if (Session[Session.SessionID + "userSession"] != null && ((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20 && ((List<Dominio.Cabaña>)Session["listaCabañas"]).Count() != 0)
+                                            <%if (Session[Session.SessionID + "userSession"] != null && ((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20)
                 { %>
                                           <a href="DetalleComplejo?idComplejo=<%=Aux.ID.ToString()%>&idImagen=<%=item.ID.ToString() %>" class="btn btn-danger mr-auto ml-auto" >Eliminar Imagen</a> 
             <% } %>

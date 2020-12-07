@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="modal fade" id="ModalError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <%-- <div class="modal fade" id="ModalError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--%>
 
 
     <div class="form-row">
@@ -86,6 +86,6 @@
         <asp:DropDownList CssClass="form-control" ID="DDLPaises" runat="server">
         </asp:DropDownList>
     </div>
-    <asp:Button ID="btnAltaUsuario" Text="Darme de alta" data-toggle="modal" data-target="#ModalError" class="btn btn-success mr-auto ml-auto" OnClick="btnAltaUsuario_Click" runat="server" />
+    <asp:Button ID="btnAltaUsuario" Text="Darme de alta" class="btn btn-success mr-auto ml-auto" OnClick="btnAltaUsuario_Click" runat="server" />
 
 </asp:Content>
