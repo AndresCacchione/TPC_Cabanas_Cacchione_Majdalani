@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administrador.cs" />
     <Compile Include="Cabaña.cs" />
     <Compile Include="Complejo.cs" />
     <Compile Include="Credito.cs" />

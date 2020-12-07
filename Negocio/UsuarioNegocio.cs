@@ -12,6 +12,33 @@ namespace Negocio
 {
     public class UsuarioNegocio
     {
+        public List<Administrador> ListarAdministradores(byte NivelAccesoSolicitante)
+        {
+            AccessDB acceso = new AccessDB();
+            List<Administrador> ListaAdministradores = new List<Administrador>();
+            try
+            {
+                acceso.SetearQuery("select * from VW_AdministradoresPorComplejo");
+                acceso.EjecutarLector();
+                while (acceso.Lector.Read())
+                {
+                    Administrador aux = new Administrador();
+                    aux = (Administrador)ListarUsuarioPorId((long)acceso.Lector["IDUsuario"]);
+                    aux.IDComplejo = (long)acceso.Lector["IDComplejo"];
+                    ListaAdministradores.Add(aux);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                acceso.CerrarConexion();
+            }
+            return ListaAdministradores;
+        }
+
         public Dictionary<byte, string> ListarNivelesAcceso()
         {
             Dictionary<byte, string> aux = new Dictionary<byte, string>();

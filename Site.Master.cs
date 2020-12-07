@@ -18,10 +18,6 @@ namespace TPC_CacchioneMajdalani
         protected void Page_Load(object sender, EventArgs e)
         {
             SetearUsuarioActual();
-
-
-
-
         }
 
         protected void btnCerrarSesion_Click(object sender, EventArgs e)
