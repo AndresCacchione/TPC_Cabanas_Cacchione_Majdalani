@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarModificarComplejo.aspx.cs" Inherits="TPC_CacchioneMajdalani.AgregarModificarComplejo" %>
+﻿<%@ Page Title="Agregar/Modificar Complejo" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarModificarComplejo.aspx.cs" Inherits="TPC_CacchioneMajdalani.AgregarModificarComplejo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 

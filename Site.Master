@@ -50,10 +50,16 @@
                 <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Cabañas">Cabañas</a>
                 <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Contacto">Contáctenos</a>
                 <% } %>
+                <%if (UsuarioActual != null && UsuarioActual.NivelAcceso >= 20)
+                    { %>
+                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/ListadoDeUsuarios">Lista de usuarios</a>
+                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="AdministradoresDeComplejos.aspx?IDUsuario=<%=ConvertToLong(UsuarioActual.Id).ToString() %>">Lista Administradores</a>
+                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Configuracion">Configuración</a>
+                <% } %>
                 <%if (UsuarioActual == null)
                     { %>
                 <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Login">Iniciar Sesión</a>
-                <%} 
+                <%}
                     else
                     {%>
                 <asp:Button Text="Modificar datos" ID="btnModificarDatos" CssClass="btn btn-secondary mr-auto ml-auto" runat="server" OnClick="btnModificarDatos_Click" />
@@ -64,12 +70,7 @@
                 <% } %>
                 <asp:Button Text="Cerrar Sesion" class="btn btn-danger mr-auto ml-auto" ID="btnCerrarSesion" OnClick="btnCerrarSesion_Click" runat="server" />
                 <asp:Label ID="lblNombreUsuario" runat="server" />
-                <%if (UsuarioActual.NivelAcceso >= 20)
-                    { %>
-                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/ListadoDeUsuarios">Lista de usuarios</a>
-                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="AdministradoresDeComplejos.aspx?IDUsuario=<%=ConvertToLong(UsuarioActual.Id).ToString() %>">Lista Administradores</a>
-                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Configuracion">Configuración</a>
-                <% } %>
+
                 <%
                     }
                 %>
