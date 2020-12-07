@@ -80,14 +80,14 @@ namespace TPC_CacchioneMajdalani
 
         private void GuardarReserva()
         {
-                reserva.CantPersonas = Convert.ToByte(CantidadDePersonas.Text);
-                reserva.Estado = 1; //estado 1 = Pendiente, estado 2 = Confirmada, estado 3 = Cancelada
-                reserva.FechaCreacionReserva = DateTime.Today;
-                reserva.FechaEgreso = Convert.ToDateTime(FechaDeEgreso.Text);
-                reserva.FechaIngreso = Convert.ToDateTime(FechaDeIngreso.Text);
-                TimeSpan dateSpan = reserva.FechaEgreso - reserva.FechaIngreso;
-                reserva.Importe = dateSpan.Days * reserva.Cabaña.PrecioDiario;
-                reserva.IdReservaOriginal = 0; // 0 sería null en la DB  
+            reserva.CantPersonas = Convert.ToByte(CantidadDePersonas.Text);
+            reserva.Estado = 1; //estado 1 = Pendiente, estado 2 = Confirmada, estado 3 = Cancelada
+            reserva.FechaCreacionReserva = DateTime.Today;
+            reserva.FechaEgreso = Convert.ToDateTime(FechaDeEgreso.Text);
+            reserva.FechaIngreso = Convert.ToDateTime(FechaDeIngreso.Text);
+            TimeSpan dateSpan = reserva.FechaEgreso - reserva.FechaIngreso;
+            reserva.Importe = dateSpan.Days * reserva.Cabaña.PrecioDiario;
+            reserva.IdReservaOriginal = 0; // 0 sería null en la DB  
         }
 
         private void CargarReserva()
@@ -102,7 +102,7 @@ namespace TPC_CacchioneMajdalani
             //RESERVA
             ReservaNegocio NegocioReserva = new ReservaNegocio();
             GuardarReserva();
-          bool inserto = NegocioReserva.InsertarReserva(reserva);
+            bool inserto = NegocioReserva.InsertarReserva(reserva);
             //ENVIO DE MAIL AL USUARIO QUE RESERVO Y AL ADMINISTRADOR PARA QUE 
             if (inserto)
             {
@@ -118,9 +118,9 @@ namespace TPC_CacchioneMajdalani
                 managementEmail.EnviarEmails(EmailCliente, "Enviar comprobante de pago AL MAIL COMPLEJO", CuerpoMail2());
                 Response.Redirect("Default.aspx");
             }
-            else 
+            else
             {
-               LblCalendario.Text = "Verifique los datos ingresados ";       
+                LblCalendario.Text = "Verifique los datos ingresados ";
             }
         }
 
@@ -193,7 +193,7 @@ Mail              : {reserva.Cliente.DatosPersonales.Email}
             }
             else if (Calendar1.SelectedDate < Fechas["fechaIngreso"])
             {
-                    Fechas["fechaIngreso"] = Calendar1.SelectedDate;
+                Fechas["fechaIngreso"] = Calendar1.SelectedDate;
             }
             else if (Calendar1.SelectedDate > Fechas["fechaEgreso"])
             {

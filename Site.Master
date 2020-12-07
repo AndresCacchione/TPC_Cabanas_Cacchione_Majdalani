@@ -43,18 +43,21 @@
 
         <nav class="navbar navbar-light" style="background-color: #6E9038;">
             <div>
+                <% if (UsuarioActual == null || UsuarioActual.NivelAcceso == 10)
+                    { %>
                 <a class="mr-4 ml-4" runat="server" style="color: #FFFFFF; font-size: xx-large;" href="~/">CaMa</a>
                 <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Complejos">Complejos</a>
                 <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Cabañas">Cabañas</a>
                 <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Contacto">Contáctenos</a>
+                <% } %>
                 <%if (UsuarioActual == null)
                     { %>
                 <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Login">Iniciar Sesión</a>
-                <%}
+                <%} 
                     else
                     {%>
                 <asp:Button Text="Modificar datos" ID="btnModificarDatos" CssClass="btn btn-secondary mr-auto ml-auto" runat="server" OnClick="btnModificarDatos_Click" />
-                
+
                 <%if (UsuarioActual.NivelAcceso == 10)
                     {%>
                 <asp:Button ID="btnAFavoritas" Text="Cabañas Favoritas" CssClass="btn btn-secondary mr-auto ml-auto" runat="server" OnClick="btnAFavoritas_Click" />

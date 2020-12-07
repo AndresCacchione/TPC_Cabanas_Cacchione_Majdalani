@@ -102,7 +102,7 @@ namespace TPC_CacchioneMajdalani
 
         private string CargarConfirmacionModal()
         {
-            string retorno = @"Datos ingresados: " + '\n'+
+            string retorno = @"Datos ingresados: " + '\n' +
                               "Nombre Usuario: " + NombreUsuario.Value + '\n' +
                               "Nombre: " + Nombre.Value + '\n' +
                               "Apellido: " + Apellido.Value + '\n' +
