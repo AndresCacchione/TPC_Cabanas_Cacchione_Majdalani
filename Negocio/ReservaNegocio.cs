@@ -182,8 +182,11 @@ namespace Negocio
 
                 access.SetearQuery("select * from reservas where (fechaegreso<getdate() or (EstadoReserva = 1 and fechaingreso<getdate()))");
                 access.EjecutarLector();
+                
+              
                 while (access.Lector.Read())
                 {
+      
                     Reserva aux = new Reserva
                     {
                         ID = (long)access.Lector["ID"],

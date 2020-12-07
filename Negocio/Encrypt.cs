@@ -18,6 +18,7 @@ namespace Negocio
             for (int i = 0; i < stream.Length; i++) sb.AppendFormat("{0:x2}", stream[i]);
             return sb.ToString();
         }
+
         // SE USA DE ESTA FORMA string cadenaEncriptada = Encrypt.GetSha256("patito");
 
     }

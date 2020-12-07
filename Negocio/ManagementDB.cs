@@ -45,7 +45,7 @@ namespace Negocio
 									begin
 									use Cacchione_Majdalani_DB
 									exec('
-									create PROCEDURE spAgregarReserva(
+									create ROCEDURE spAgregarReserva(
 										@IdCabaña bigint,
 										@IdUsuario bigint,
 										@FechaIngreso date,
@@ -60,7 +60,7 @@ namespace Negocio
 											BEGIN
 											declare @resultado bit = 1
 													BEGIN TRY
-													if ((select count(*) from Reservas where (fechaIngreso>=@FechaIngreso and fechaIngreso<=@FechaEgreso) or (fechaEgreso>=@FechaIngreso and fechaEgreso<=@FechaEgreso)) > 0)
+													if (select count(*) from Reservas where ((fechaIngreso>=@FechaIngreso and fechaIngreso<=@FechaEgreso) or (fechaEgreso>=@FechaIngreso and fechaEgreso<=@FechaEgreso)or (getdate()>@FechaIngreso) or (getdate()>@fechaEgreso))and IdCabaña = @IdCabaña )>0	
 													begin
 													set @resultado = 0
 													end
@@ -69,7 +69,6 @@ namespace Negocio
 													insert into reservas values(@IdCabaña, @IdUsuario, @FechaIngreso, @FechaEgreso, @CantPersonas, @FechaReserva, @Importe, @Estado, @IdReservaOriginal)
 													end
 													END TRY
-
 												BEGIN CATCH
 												set @resultado = 0
 												END CATCH

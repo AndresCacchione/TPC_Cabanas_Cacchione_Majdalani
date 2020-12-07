@@ -51,7 +51,8 @@
                   <%if (UsuarioActual == null || UsuarioActual.NivelAcceso >= 10)
                     {%>
                 <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Complejos">Complejos</a>
-                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Cabañas">Cabañas</a>
+                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Cabañas">Cabañas</a>              
+                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/VerReservas">Reservas</a>
              
                 <% }%>
                 <%if (UsuarioActual != null && UsuarioActual.NivelAcceso >= 20)
