@@ -53,7 +53,7 @@ namespace Negocio
                 CabañaNegocio cabañaNegocio = new CabañaNegocio();
 
                 access.SetearQuery("select * from reservas where fechaegreso>=getdate() and " +
-                    "idusuario=" + idUsuario + "and (EstadoReserva != 1 or fechaingreso>=getdate())");
+                    "idusuario=" + idUsuario + "and (estado != 1 or fechaingreso>=getdate())");
                 access.EjecutarLector();
                 while (access.Lector.Read())
                 {
@@ -97,7 +97,7 @@ namespace Negocio
                 CabañaNegocio cabañaNegocio = new CabañaNegocio();
 
                 access.SetearQuery("select * from reservas" +
-                    "where (fechaegreso<getdate() or (EstadoReserva = 1 and fechaingreso<getdate())) " +
+                    "where (fechaegreso<getdate() or (estado = 1 and fechaingreso<getdate())) " +
                     "and idusuario=" + idUsuario);
                 access.EjecutarLector();
                 while (access.Lector.Read())
@@ -130,7 +130,7 @@ namespace Negocio
             return listaCaducasUsuario;
         }
 
-        public List<Reserva> ListarReservasVigentes()
+        public List<Reserva> ListarReservasVigentesPorEstado(byte estado)
         {
             List<Reserva> listaReservasVigentes = new List<Reserva>();
             AccessDB access = new AccessDB();
@@ -139,7 +139,7 @@ namespace Negocio
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 CabañaNegocio cabañaNegocio = new CabañaNegocio();
 
-                access.SetearQuery("select * from reservas where (EstadoReserva != 1 or fechaingreso>=getdate())");
+                access.SetearQuery("select * from reservas where (estado != 1 or fechaingreso>=getdate()) and estado=" + estado.ToString());
                 access.EjecutarLector();
                 while (access.Lector.Read())
                 {
@@ -171,7 +171,7 @@ namespace Negocio
             return listaReservasVigentes;
         }
 
-        public List<Reserva> ListarReservasCaducas()
+        public List<Reserva> ListarReservasCaducasPorEstado(byte estado)
         {
             List<Reserva> listaReservasCaducas = new List<Reserva>();
             AccessDB access = new AccessDB();
@@ -180,10 +180,9 @@ namespace Negocio
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 CabañaNegocio cabañaNegocio = new CabañaNegocio();
 
-                access.SetearQuery("select * from reservas where (fechaegreso<getdate() or (EstadoReserva = 1 and fechaingreso<getdate()))");
+                access.SetearQuery("select * from reservas where (fechaegreso<getdate() or (estado = 1 and fechaingreso<getdate()) and estado="+estado.ToString()+")");
                 access.EjecutarLector();
-                
-              
+                      
                 while (access.Lector.Read())
                 {
       
