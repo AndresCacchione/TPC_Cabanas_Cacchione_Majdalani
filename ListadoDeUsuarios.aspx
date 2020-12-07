@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ListadoDeUsuarios.aspx.cs" Inherits="TPC_CacchioneMajdalani.ListadoDeUsuarios" %>
+﻿<%@ Page Title="Lista de Usuarios" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ListadoDeUsuarios.aspx.cs" Inherits="TPC_CacchioneMajdalani.ListadoDeUsuarios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">

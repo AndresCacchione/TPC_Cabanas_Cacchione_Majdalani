@@ -52,7 +52,7 @@
         <div class="form-group col-md-6">
             <label for="inputEmail">Correo Electronico</label>
             <input type="email" class="form-control" id="email" placeholder="Email@Email.com" required runat="server">
-           <%-- <asp:TextBox class="form-control" id="txtemail" placeholder="Email@Email.com" required="" runat="server" />  --%> 
+            <%-- <asp:TextBox class="form-control" id="txtemail" placeholder="Email@Email.com" required="" runat="server" />  --%>
         </div>
     </div>
 

@@ -1,6 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ModificarReserva.aspx.cs" Inherits="TPC_CacchioneMajdalani.ModificarReserva" %>
+﻿<%@ Page Title="Modificar Reserva" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ModificarReserva.aspx.cs" Inherits="TPC_CacchioneMajdalani.ModificarReserva" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-      <div class="form-row">
+    <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputFechaIngreso">Fecha de Ingreso</label>
             <input type="date" class="form-control" id="FechaIngreso" placeholder="DD/MM/AAAA" required runat="server">
@@ -14,7 +15,6 @@
         <div class="form-group col-md-6">
             <label for="inputCantPersonas">Cantidad de personas</label>
             <input type="number" class="form-control" id="CantidadPersonas" placeholder="Cantidad" required runat="server">
-
         </div>
 
         <div class="form-group col-md-6">
@@ -36,7 +36,7 @@
         <div class="form-group col-md-6">
             <label for="inputIdReservaOriginal">ID reserva original</label>
             <input type="number" class="form-control" id="IDReservaOriginal" placeholder="ID Reserva Original" required runat="server" />
-        </div>    
+        </div>
     </div>
     <asp:Button ID="btnModificarDatos" OnClick="btnModificarDatos_Click" Text="Actualizar datos" class="btn btn-success mr-auto ml-auto" runat="server" />
 </asp:Content>

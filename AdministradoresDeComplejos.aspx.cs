@@ -9,7 +9,7 @@ using Negocio;
 
 namespace TPC_CacchioneMajdalani
 {
-    public partial class AdministradoresDeComplejos : System.Web.UI.Page
+    public partial class AdministradoresDeComplejos : Page
     {
         public List<Administrador> ListaAdministradores { get; set; }
         protected void Page_Load(object sender, EventArgs e)
