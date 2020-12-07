@@ -24,10 +24,27 @@ namespace TPC_CacchioneMajdalani
 
         protected void btnAltaUsuario_Click(object sender, EventArgs e)
         {
-            if (Validaciones())
+            RegistrarNuevoUsuario();
+            try
             {
-                RegistrarNuevoUsuario();
+                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                if (usuarioNegocio.InsertarUsuario(UsuarioActual))
+                {
+                    UsuarioActual = usuarioNegocio.Login(UsuarioActual);
+                    UsuarioActual = usuarioNegocio.ListarUsuarioPorId(UsuarioActual.Id);
+                    Session.Add(Session.SessionID + "userSession", UsuarioActual);
+
+                    Response.Redirect("~/Complejos");
+                }
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            //if (Validaciones())
+            //{
+            //    RegistrarNuevoUsuario();
+            //}
             //else
             //{
             //    exampleModalLabel.InnerText = "Error al ingresar los datos";
@@ -82,22 +99,7 @@ namespace TPC_CacchioneMajdalani
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-                if (usuarioNegocio.InsertarUsuario(UsuarioActual))
-                {
-                    UsuarioActual = usuarioNegocio.Login(UsuarioActual);
-                    UsuarioActual = usuarioNegocio.ListarUsuarioPorId(UsuarioActual.Id);
-                    Session.Add(Session.SessionID + "userSession", UsuarioActual);
-
-                    Response.Redirect("~/Complejos");
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            
         }
 
         //private string CargarConfirmacionModal()
