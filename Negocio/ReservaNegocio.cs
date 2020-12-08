@@ -105,7 +105,7 @@ namespace Negocio
                     Reserva aux = new Reserva
                     {
                         ID = (long)access.Lector["ID"],
-                        Cliente = usuarioNegocio.ListarUsuarioPorId(((long)access.Lector["idUsuario"])),
+                        Cliente = usuarioNegocio.ListarUsuarioPorId((long)access.Lector["idUsuario"]),
                         Cabaña = cabañaNegocio.ListarCabañaPorId((long)access.Lector["idCabaña"]),
                         FechaIngreso = (DateTime)access.Lector["fechaIngreso"],
                         FechaEgreso = (DateTime)access.Lector["fechaEgreso"],
@@ -180,12 +180,12 @@ namespace Negocio
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 CabañaNegocio cabañaNegocio = new CabañaNegocio();
 
-                access.SetearQuery("select * from reservas where (fechaegreso<getdate() or (estado = 1 and fechaingreso<getdate()) and estado="+estado.ToString()+")");
+                access.SetearQuery("select * from reservas where (fechaegreso<getdate() or (estado = 1 and fechaingreso<getdate()) and estado=" + estado.ToString() + ")");
                 access.EjecutarLector();
-                      
+
                 while (access.Lector.Read())
                 {
-      
+
                     Reserva aux = new Reserva
                     {
                         ID = (long)access.Lector["ID"],

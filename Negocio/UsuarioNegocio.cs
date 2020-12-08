@@ -22,10 +22,12 @@ namespace Negocio
                 acceso.EjecutarLector();
                 while (acceso.Lector.Read())
                 {
-  
-                    Administrador aux = new Administrador();
-                    aux.usuario =ListarUsuarioPorId((long)acceso.Lector["IDUsuario"]);
-                    if(!acceso.Lector.IsDBNull(1))
+
+                    Administrador aux = new Administrador
+                    {
+                        usuario = ListarUsuarioPorId((long)acceso.Lector["IDUsuario"])
+                    };
+                    if (!acceso.Lector.IsDBNull(1))
                     {
                         aux.IDComplejo = (long)acceso.Lector["IDComplejo"];
                     }
@@ -103,8 +105,8 @@ namespace Negocio
 
                 access.EjecutarLector();
                 access.Lector.Read();
-                
-                if(access.Lector.HasRows)
+
+                if (access.Lector.HasRows)
                 {
                     usuario.Id = Convert.ToInt64(access.Lector["Id"]);
                 }
@@ -145,7 +147,7 @@ namespace Negocio
                 access.AgregarParametroSP("@email", NuevoUsuario.DatosPersonales.Email, SqlDbType.VarChar);
                 access.AgregarParametroSP("@telefono", NuevoUsuario.DatosPersonales.Telefono, SqlDbType.VarChar);
                 access.AgregarParametroSP("@URLimagen", NuevoUsuario.DatosPersonales.UrlImagen, SqlDbType.VarChar);
-                access.AgregarParametroSP("@idPais", IdPais, SqlDbType.SmallInt);   
+                access.AgregarParametroSP("@idPais", IdPais, SqlDbType.SmallInt);
                 access.AgregarParametroSP("@Domicilio", NuevoUsuario.DatosPersonales.Domicilio, SqlDbType.VarChar);
                 access.AgregarParametroSP("@genero", NuevoUsuario.DatosPersonales.Genero, SqlDbType.Char);
 

@@ -13,7 +13,7 @@ namespace TPC_CacchioneMajdalani
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            lblErrorLogin.Visible = false;
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -30,7 +30,7 @@ namespace TPC_CacchioneMajdalani
             {
                 usuario.NombreUsuario = NombreUsuario.Value;
                 usuario.Contraseña = Contraseña.Value;
-             
+
                 usuario = usuarioNegocio.Login(usuario);
                 if (Convert.ToInt64(usuario.Id) != 0)
                 {
@@ -43,7 +43,8 @@ namespace TPC_CacchioneMajdalani
                 {
                     //Session["Error" + Session.SessionID] = "Usuario o contraseña incorrectos.";
                     //Response.Redirect("Error.aspx");
-                    Response.Redirect("~/Login");
+                    lblErrorLogin.Visible = true; //Tenemos que ver como hacer para que no aparezca visible al darle F5...
+
                 }
             }
             catch (Exception ex) //Despues vemos de hacerlo con Session y que redirija a Error.aspx
@@ -53,5 +54,6 @@ namespace TPC_CacchioneMajdalani
                 throw ex;
             }
         }
+
     }
 }

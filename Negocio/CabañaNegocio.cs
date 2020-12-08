@@ -36,7 +36,7 @@ namespace Negocio
             {
                 acceso.CerrarConexion();
             }
-            
+
             return aux;
         }
 
@@ -44,7 +44,7 @@ namespace Negocio
         {
             AccessDB acceso = new AccessDB();
             List<Imagen> ListaAux = new List<Imagen>();
-            
+
             try
             {
                 acceso.SetearQuery("select ID, URLImagen from ImagenesCabañas where IDCabaña=" + IDCabaña.ToString());
@@ -69,7 +69,7 @@ namespace Negocio
             {
                 acceso.CerrarConexion();
             }
-            
+
             return ListaAux;
         }
 

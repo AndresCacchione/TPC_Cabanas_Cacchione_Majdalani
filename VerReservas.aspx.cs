@@ -18,7 +18,10 @@ namespace TPC_CacchioneMajdalani
         public List<Reserva> ListaDeReservas { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            CargarReservas();
+            if (Session[Session.SessionID + "userSession"] != null) //Si no está logueado, que redirija al login
+                CargarReservas();
+            else
+                Response.Redirect("~/Login");
 
         }
 
@@ -28,7 +31,7 @@ namespace TPC_CacchioneMajdalani
             {
                 case ("Pendientes"):
                     {
-                        if(DDLReservaVigencia.SelectedItem.Text=="Vigente")
+                        if (DDLReservaVigencia.SelectedItem.Text == "Vigente")
                         {
                             ListarReservasVigentes(1);
                         }
@@ -70,7 +73,7 @@ namespace TPC_CacchioneMajdalani
         private void ListarReservasCaducas(byte estado)
         {
             ReservaNegocio NegocioReserva = new ReservaNegocio();
-            if (Session["ListaDeReservasCaducas"+estado.ToString()] == null)
+            if (Session["ListaDeReservasCaducas" + estado.ToString()] == null)
             {
                 ListaDeReservas = NegocioReserva.ListarReservasCaducasPorEstado(estado);
                 Session.Add("ListaDeReservasCaducas" + estado.ToString(), ListaDeReservas);
