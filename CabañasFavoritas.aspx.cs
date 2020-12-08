@@ -18,7 +18,6 @@ namespace TPC_CacchioneMajdalani
                 CargaListaFavoritas();
                 AgregarCabañaFavoritas();
                 QuitarCabañaFavoritas();
-                ContarFavoritas();
             }
 
             catch (Exception ex)
@@ -29,7 +28,7 @@ namespace TPC_CacchioneMajdalani
 
         public string ContarFavoritas()
         {
-            return ((List<Cabaña>)Session[Session.SessionID + "listaFavoritas"]).Count().ToString();
+            return (((List<Cabaña>)Session[Session.SessionID + "listaFavoritas"]).Count().ToString());
         }
 
         private void CargaListaFavoritas()

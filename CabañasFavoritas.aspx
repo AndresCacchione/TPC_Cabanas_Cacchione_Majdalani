@@ -36,7 +36,7 @@
                     <tr>
                         <td>
                             <button type="button" class="btn btn-primary">
-                                Cantidad de favoritas <span class="badge badge-light"><%ContarFavoritas() %></span>
+                                Cantidad de favoritas <span class="badge badge-light"> <%=ContarFavoritas() %> </span>
                             </button>
                         </td>
                     </tr>

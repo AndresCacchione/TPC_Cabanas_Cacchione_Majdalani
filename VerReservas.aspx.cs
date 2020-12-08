@@ -22,11 +22,12 @@ namespace TPC_CacchioneMajdalani
                 CargarReservas();
             else
                 Response.Redirect("~/Login");
-
         }
 
         private void CargarReservas()
         {
+            DDLReservaEstados.SelectedIndex= Convert.ToInt32(Request.QueryString["IndexEstados"]);
+            DDLReservaVigencia.SelectedIndex= Convert.ToInt32(Request.QueryString["IndexVigencia"]);
             switch (DDLReservaEstados.SelectedItem.Text)
             {
                 case ("Pendientes"):
@@ -98,16 +99,16 @@ namespace TPC_CacchioneMajdalani
             }
         }
 
-
-
         protected void DDLReservaEstados_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CargarReservas();
+            string IndexVigencia = Convert.ToString(Request.QueryString["IndexVigencia"]);
+            Response.Redirect("VerReservas.aspx?IndexEstados=" + DDLReservaEstados.SelectedIndex + "&?IndexVigencia="+ IndexVigencia);
         }
 
         protected void DDLReservaVigencia_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CargarReservas();
+            string IndexEstados = Convert.ToString(Request.QueryString["IndexEstados"]);
+            Response.Redirect("VerReservas.aspx?IndexEstados=" + IndexEstados + "&?IndexVigencia=" + DDLReservaVigencia.SelectedIndex);
         }
     }
 }
