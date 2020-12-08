@@ -27,9 +27,9 @@ namespace TPC_CacchioneMajdalani
             }
         }
 
-        private void ContarFavoritas()
+        public string ContarFavoritas()
         {
-            lblCantidad.Text = ((List<Cabaña>)Session[Session.SessionID + "listaFavoritas"]).Count().ToString();
+            return ((List<Cabaña>)Session[Session.SessionID + "listaFavoritas"]).Count().ToString();
         }
 
         private void CargaListaFavoritas()

@@ -34,8 +34,10 @@
 
                     <% } %>
                     <tr>
-                        <td>Cantidad de favoritas:
-                                <asp:Label ID="lblCantidad" runat="server" />
+                        <td>
+                            <button type="button" class="btn btn-primary">
+                                Cantidad de favoritas <span class="badge badge-light"><%ContarFavoritas() %></span>
+                            </button>
                         </td>
                     </tr>
 

@@ -36,18 +36,15 @@ namespace TPC_CacchioneMajdalani
                 {
                     usuario = usuarioNegocio.ListarUsuarioPorId(usuario.Id);
                     Session.Add(Session.SessionID + "userSession", usuario);
-                    //Session.Add("userSession", usuario);
                     Response.Redirect("~/Complejos");
                 }
                 else
                 {
-                    //Session["Error" + Session.SessionID] = "Usuario o contraseña incorrectos.";
-                    //Response.Redirect("Error.aspx");
                     lblErrorLogin.Visible = true; //Tenemos que ver como hacer para que no aparezca visible al darle F5...
 
                 }
             }
-            catch (Exception ex) //Despues vemos de hacerlo con Session y que redirija a Error.aspx
+            catch (Exception ex)
             {
                 //Session["Error" + Session.SessionID] = ex.ToString();
                 //Response.Redirect("Error.aspx");

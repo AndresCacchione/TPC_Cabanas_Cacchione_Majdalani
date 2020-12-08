@@ -42,7 +42,7 @@ namespace TPC_CacchioneMajdalani
             }
             List<Usuario> listaUsuarios = (List<Usuario>)Session["listaUsuarios"];
 
-            List<Usuario> listaAdmin = listaUsuarios.FindAll(i => i.NivelAcceso >= 20); //20 es el nivel de acceso del admin
+            List<Usuario> listaAdmin = listaUsuarios.FindAll(i => i.NivelAcceso >= 20);
             byte minAcceso = listaAdmin.Min(i => i.NivelAcceso);
             listaAdmin = listaAdmin.FindAll(i => i.NivelAcceso == minAcceso);
 

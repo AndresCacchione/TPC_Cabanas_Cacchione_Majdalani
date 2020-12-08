@@ -9,7 +9,7 @@ using Negocio;
 
 namespace TPC_CacchioneMajdalani
 {
-    public partial class VerReservas : System.Web.UI.Page
+    public partial class VerReservas : Page
     {
         public VerReservas()
         {
