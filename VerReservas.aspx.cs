@@ -33,14 +33,18 @@ namespace TPC_CacchioneMajdalani
 
         private void CargarReservas()
         {
-            DDLReservaEstados.SelectedIndex = Convert.ToInt32(Request.QueryString["IndexEstados"]);
-            DDLReservaVigencia.SelectedIndex = Convert.ToInt32(Request.QueryString["IndexVigencia"]);
+                        
+                DDLReservaEstados.SelectedIndex = Convert.ToInt32(Request.QueryString["IndexEstados"]);
+                DDLReservaVigencia.SelectedIndex = Convert.ToInt32(Request.QueryString["IndexVigencia"]);
 
+            
             switch (DDLReservaEstados.SelectedItem.Text)
             {
+                case (""):
+                    break;
                 case ("Pendientes"):
                     {
-                        if (DDLReservaVigencia.SelectedItem.Text == "Vigente")
+                            if (DDLReservaVigencia.SelectedItem.Text=="Vigente")
                         {
                             if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso == 10)
                             {
@@ -53,8 +57,8 @@ namespace TPC_CacchioneMajdalani
                             }
 
                         }
-                        else
-                        {
+                        if(DDLReservaVigencia.SelectedItem.Text == "Caduca")
+                        { 
                             if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso == 10)
                             {
                                 ListarReservasPorUsuarioCaducas(Convert.ToInt64(((Dominio.Usuario)Session[Session.SessionID + "userSession"]).Id), 1);
@@ -74,7 +78,7 @@ namespace TPC_CacchioneMajdalani
                         {
                             ListarReservasVigentes(2);
                         }
-                        else
+                        if (DDLReservaVigencia.SelectedItem.Text == "Caduca")
                         {
                             ListarReservasCaducas(2);
                         }
@@ -86,7 +90,7 @@ namespace TPC_CacchioneMajdalani
                         {
                             ListarReservasVigentes(3);
                         }
-                        else
+                        if (DDLReservaVigencia.SelectedItem.Text == "Caduca")
                         {
                             ListarReservasCaducas(3);
                         }
@@ -111,6 +115,20 @@ namespace TPC_CacchioneMajdalani
                 ListaDeReservas = (List<Reserva>)Session["ListaDeReservasPorUsuarioVigente" + estado.ToString()];
             }
         }
+        private void ListarReservasPorUsuarioCaducas(long id, byte estado)
+        {
+            ReservaNegocio NegocioReserva = new ReservaNegocio();
+            if (Session["ListaDeReservasPorUsuarioCaducas" + estado.ToString()] == null)
+            {
+                ListaDeReservas = NegocioReserva.ListarReservasCaducasPorUsuario(id,estado);
+                Session.Add("ListaDeReservasPorUsuarioCaducas" + estado.ToString(), ListaDeReservas);
+            }
+            else
+            {
+                ListaDeReservas = (List<Reserva>)Session["ListaDeReservasPorUsuarioCaducas" + estado.ToString()];
+            }
+        }
+
 
         private void ListarReservasCaducas(byte estado)
         {
@@ -140,19 +158,20 @@ namespace TPC_CacchioneMajdalani
             }
         }
 
-        protected void DDLReservaEstados_SelectedIndexChanged(object sender, EventArgs e)
+        protected void DDLReservaVigencia_TextChanged(object sender, EventArgs e)
         {
-            string IndexVigencia = Convert.ToString(Request.QueryString["IndexVigencia"]);
-            Response.Redirect("VerReservas.aspx?IndexEstados=" + DDLReservaEstados.SelectedIndex + "&?IndexVigencia=" + IndexVigencia);
+            string IndexEstados = Convert.ToString(DDLReservaEstados.SelectedIndex);
+            string IndexVigencia = Convert.ToString(DDLReservaVigencia.SelectedIndex);
+            Response.Redirect("VerReservas.aspx?IndexEstados=" + IndexEstados + "&?IndexVigencia=" + IndexVigencia);
+
         }
 
-        protected void DDLReservaVigencia_SelectedIndexChanged(object sender, EventArgs e)
+        protected void DDLReservaEstados_TextChanged(object sender, EventArgs e)
         {
-            string IndexEstados = Convert.ToString(Request.QueryString["IndexEstados"]);
-            Response.Redirect("VerReservas.aspx?IndexEstados=" + IndexEstados + "&?IndexVigencia=" + DDLReservaVigencia.SelectedIndex);
+            string IndexEstados = Convert.ToString(DDLReservaEstados.SelectedIndex);
+            string IndexVigencia = Convert.ToString( DDLReservaVigencia.SelectedIndex);
+            Response.Redirect("VerReservas.aspx?IndexEstados=" + IndexEstados + "&?IndexVigencia=" +IndexVigencia);
+
         }
-
-
-
     }
 }

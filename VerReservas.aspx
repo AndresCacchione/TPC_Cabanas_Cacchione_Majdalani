@@ -2,19 +2,20 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-
-    <asp:DropDownList OnSelectedIndexChanged="DDLReservaEstados_SelectedIndexChanged" ID="DDLReservaEstados" runat="server">
+    <asp:UpdatePanel runat="server">
+        <ContentTemplate>   
+    <asp:DropDownList AutoPostBack="true" OnTextChanged="DDLReservaEstados_TextChanged" ID="DDLReservaEstados" runat="server">
         <asp:ListItem Text="Pendientes" Value="1" />
         <asp:ListItem Text="Confirmadas" Value="2" />
         <asp:ListItem Text="Canceladas" Value="3" />
     </asp:DropDownList>
-
-   
-    <asp:DropDownList OnSelectedIndexChanged="DDLReservaVigencia_SelectedIndexChanged" ID="DDLReservaVigencia" runat="server">
+    <asp:DropDownList AutoPostBack="true" OnTextChanged="DDLReservaVigencia_TextChanged"  ID="DDLReservaVigencia" runat="server">
         <asp:ListItem Text="Vigente" Value="1" />
         <asp:ListItem Text="Caduca" Value="2" />
     </asp:DropDownList>
 
+        </ContentTemplate>
+    </asp:UpdatePanel>
 
     <div class="container">
         <div class="row">
