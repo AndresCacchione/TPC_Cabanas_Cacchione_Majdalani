@@ -111,5 +111,29 @@ namespace TPC_CacchioneMajdalani
                 }
             }
         }
+
+        private void ValidarTiempo()
+        {
+            TimeSpan input = new TimeSpan();
+            if (VCTiempoEntreReservas.ControlToValidate !=null)
+            {
+            input = TimeSpan.Parse(VCTiempoEntreReservas.ControlToValidate);
+            }
+            else
+            {
+                VCTiempoEntreReservas.IsValid = false;
+                return;
+            }
+            
+            if(input >= TimeSpan.Parse("00:00:00")  && input <= TimeSpan.Parse("23:59:59"))
+            {
+                VCTiempoEntreReservas.IsValid=true;
+            }
+            else
+            {
+                VCTiempoEntreReservas.IsValid = false;
+            }
+        }
+
     }
 }

@@ -24,6 +24,15 @@ namespace TPC_CacchioneMajdalani
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl PrecioDiario;
 
         /// <summary>
+        /// VPrecioDiario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator VPrecioDiario;
+
+        /// <summary>
         /// TiempoEntreReservas control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace TPC_CacchioneMajdalani
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl TiempoEntreReservas;
+
+        /// <summary>
+        /// VCTiempoEntreReservas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator VCTiempoEntreReservas;
 
         /// <summary>
         /// Capacidad control.

@@ -6,10 +6,12 @@
         <div class="form-group col-md-6">
             <label for="inputPrecioDiario">Precio por dia</label>
             <input type="number" class="form-control" id="PrecioDiario" placeholder="$ 1.000.000.000" required runat="server">
+            <asp:RangeValidator ID="VPrecioDiario" SetFocusOnError="true" ErrorMessage="El precio debe ser mayor a 0" ControlToValidate="PrecioDiario" MinimumValue="1" runat="server" ForeColor="Red" Type="Integer" />
         </div>
         <div class="form-group col-md-6">
             <label for="inputTiempoEntreReservas">Tiempo entre reservas (%)</label>
             <input type="time" class="form-control" id="TiempoEntreReservas" placeholder="HH-MM-SS" required runat="server">
+            <asp:CustomValidator  ID="VCTiempoEntreReservas" SetFocusOnError="true" ErrorMessage="El tiempo debe ser entre 00:00 y 23:59" ControlToValidate="TiempoEntreReservas" runat="server" />
         </div>
 
     </div>
