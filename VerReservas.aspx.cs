@@ -18,22 +18,33 @@ namespace TPC_CacchioneMajdalani
         public List<Reserva> ListaDeReservas { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session[Session.SessionID + "userSession"] != null) //Si no está logueado, que redirija al login
-                CargarReservas();
-            else
-                Response.Redirect("~/Login");
+            if (!IsPostBack)
+            {
+                if (Session[Session.SessionID + "userSession"] != null) //Si no está logueado, que redirija al login
+                { CargarReservas(); }
+                else
+                { 
+                    Response.Redirect("~/Login");
+            }
+            }
         }
 
         private void CargarReservas()
         {
-            DDLReservaEstados.SelectedIndex= Convert.ToInt32(Request.QueryString["IndexEstados"]);
-            DDLReservaVigencia.SelectedIndex= Convert.ToInt32(Request.QueryString["IndexVigencia"]);
+            DDLReservaEstados.SelectedIndex = Convert.ToInt32(Request.QueryString["IndexEstados"]);
+            DDLReservaVigencia.SelectedIndex = Convert.ToInt32(Request.QueryString["IndexVigencia"]);
+           
             switch (DDLReservaEstados.SelectedItem.Text)
             {
                 case ("Pendientes"):
                     {
                         if (DDLReservaVigencia.SelectedItem.Text == "Vigente")
                         {
+                            if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso == 10)
+                            {
+                                ListarReservasPorUsusarioVigentes(Convert.ToInt64(((Dominio.Usuario)Session[Session.SessionID + "userSession"]).Id), 1);
+                            }
+
                             ListarReservasVigentes(1);
                         }
                         else
@@ -71,6 +82,20 @@ namespace TPC_CacchioneMajdalani
             }
         }
 
+        private void ListarReservasPorUsusarioVigentes(long id, byte estado)
+        {
+            ReservaNegocio NegocioReserva = new ReservaNegocio();
+            if (Session["ListaDeReservasPorUsuarioVigente" + estado.ToString()] == null)
+            {
+                ListaDeReservas = NegocioReserva.ListarReservasVigentesPorUsuario(id);
+                Session.Add("ListaDeReservasPorUsuarioVigente" + estado.ToString(), ListaDeReservas);
+            }
+            else
+            {
+                ListaDeReservas = (List<Reserva>)Session["ListaDeReservasPorUsuarioVigente" + estado.ToString()];
+            }
+        }
+
         private void ListarReservasCaducas(byte estado)
         {
             ReservaNegocio NegocioReserva = new ReservaNegocio();
@@ -102,7 +127,7 @@ namespace TPC_CacchioneMajdalani
         protected void DDLReservaEstados_SelectedIndexChanged(object sender, EventArgs e)
         {
             string IndexVigencia = Convert.ToString(Request.QueryString["IndexVigencia"]);
-            Response.Redirect("VerReservas.aspx?IndexEstados=" + DDLReservaEstados.SelectedIndex + "&?IndexVigencia="+ IndexVigencia);
+            Response.Redirect("VerReservas.aspx?IndexEstados=" + DDLReservaEstados.SelectedIndex + "&?IndexVigencia=" + IndexVigencia);
         }
 
         protected void DDLReservaVigencia_SelectedIndexChanged(object sender, EventArgs e)
@@ -110,5 +135,8 @@ namespace TPC_CacchioneMajdalani
             string IndexEstados = Convert.ToString(Request.QueryString["IndexEstados"]);
             Response.Redirect("VerReservas.aspx?IndexEstados=" + IndexEstados + "&?IndexVigencia=" + DDLReservaVigencia.SelectedIndex);
         }
+
+        
+
     }
 }

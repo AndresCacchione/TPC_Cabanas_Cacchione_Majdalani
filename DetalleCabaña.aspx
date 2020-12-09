@@ -31,7 +31,10 @@
 
 
                 <a href="<%=StringBotonVolver%>" class="btn btn-secondary mr-auto ml-auto">Volver</a>
+                    <%if ((Dominio.Usuario)Session[Session.SessionID + "userSession"] != null && ((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso == 10 )
+                    { %>
                 <a href="CabañasFavoritas.aspx?idCabaña=<%=CabañaAuxiliar.Id.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Agregar a Favoritas</a>
+                <% } %>
                 <%if ((Dominio.Usuario)Session[Session.SessionID + "userSession"] != null && ((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20 )
                     { %>
                 <a href="AgregarModificarCabaña.aspx?IdCabaña=<%=CabañaAuxiliar.Id.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Modificar</a>
