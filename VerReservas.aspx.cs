@@ -21,11 +21,13 @@ namespace TPC_CacchioneMajdalani
             if (!IsPostBack)
             {
                 if (Session[Session.SessionID + "userSession"] != null) //Si no está logueado, que redirija al login
-                { CargarReservas(); }
+                {
+                    CargarReservas();
+                }
                 else
-                { 
+                {
                     Response.Redirect("~/Login");
-            }
+                }
             }
         }
 
@@ -33,7 +35,7 @@ namespace TPC_CacchioneMajdalani
         {
             DDLReservaEstados.SelectedIndex = Convert.ToInt32(Request.QueryString["IndexEstados"]);
             DDLReservaVigencia.SelectedIndex = Convert.ToInt32(Request.QueryString["IndexVigencia"]);
-           
+
             switch (DDLReservaEstados.SelectedItem.Text)
             {
                 case ("Pendientes"):
@@ -42,14 +44,27 @@ namespace TPC_CacchioneMajdalani
                         {
                             if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso == 10)
                             {
-                                ListarReservasPorUsusarioVigentes(Convert.ToInt64(((Dominio.Usuario)Session[Session.SessionID + "userSession"]).Id), 1);
+                                ListarReservasPorUsuarioVigentes(Convert.ToInt64(((Dominio.Usuario)Session[Session.SessionID + "userSession"]).Id), 1);
+                            }
+                            else if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20)
+                            {
+                                ListarReservasVigentes(1);
+
                             }
 
-                            ListarReservasVigentes(1);
                         }
                         else
                         {
-                            ListarReservasCaducas(1);
+                            if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso == 10)
+                            {
+                                ListarReservasPorUsuarioCaducas(Convert.ToInt64(((Dominio.Usuario)Session[Session.SessionID + "userSession"]).Id), 1);
+                            }
+                            else if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20)
+                            {
+                                ListarReservasCaducas(1);
+
+                            }
+                            
                         }
                     }
                     break;
@@ -78,11 +93,12 @@ namespace TPC_CacchioneMajdalani
                     }
                     break;
                 default:
+                    { Response.Redirect("Default.aspx"); }
                     break;
             }
         }
 
-        private void ListarReservasPorUsusarioVigentes(long id, byte estado)
+        private void ListarReservasPorUsuarioVigentes(long id, byte estado)
         {
             ReservaNegocio NegocioReserva = new ReservaNegocio();
             if (Session["ListaDeReservasPorUsuarioVigente" + estado.ToString()] == null)
@@ -136,7 +152,7 @@ namespace TPC_CacchioneMajdalani
             Response.Redirect("VerReservas.aspx?IndexEstados=" + IndexEstados + "&?IndexVigencia=" + DDLReservaVigencia.SelectedIndex);
         }
 
-        
+
 
     }
 }
