@@ -96,9 +96,7 @@ namespace Negocio
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 CabañaNegocio cabañaNegocio = new CabañaNegocio();
 
-                access.SetearQuery("select * from reservas" +
-                    "where (fechaegreso<getdate() or (estado ="+Estado+"  and fechaEgreso<getdate())) " +
-                    "and idusuario=" + idUsuario);
+                access.SetearQuery("select * from reservas where (fechaingreso<getdate() or (estado =1 and fechaingreso<getdate())) and idusuario=" + idUsuario);
                 access.EjecutarLector();
                 while (access.Lector.Read())
                 {

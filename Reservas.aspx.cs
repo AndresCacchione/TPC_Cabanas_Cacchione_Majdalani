@@ -23,7 +23,6 @@ namespace TPC_CacchioneMajdalani
         protected void Page_Load(object sender, EventArgs e)
         {
             CargarDiccionarioFechas();
-            CantidadDePersonas.Text = "1";
             long idCabaña = Convert.ToInt64(Request.QueryString["idCabaña"]);
 
             if ((Usuario)Session[Session.SessionID + "userSession"] == null || idCabaña == 0)
@@ -80,7 +79,10 @@ namespace TPC_CacchioneMajdalani
 
         private void GuardarReserva()
         {
-            reserva.CantPersonas = Convert.ToByte(CantidadDePersonas.Text);
+            if (CantidadDePersonas.Text != "")
+            {
+                reserva.CantPersonas = Convert.ToByte(CantidadDePersonas.Text);
+            }
             reserva.Estado = 1; //estado 1 = Pendiente, estado 2 = Confirmada, estado 3 = Cancelada
             reserva.FechaCreacionReserva = DateTime.Today;
             reserva.FechaEgreso = Convert.ToDateTime(FechaDeEgreso.Text);

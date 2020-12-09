@@ -47,7 +47,8 @@
         <div class="form-group col-md-6">
                 <label>Cantidad de personas</label>
             <asp:TextBox AutoPostBack="true" runat="server" type="number" class="form-control" id="CantidadDePersonas" placeholder="Cantidad" required=""/>
-        </div>
+            <asp:RangeValidator ID="VCantPersonas" ErrorMessage="Ingreso Invalido" SetFocusOnError="true" ControlToValidate="CantidadDePersonas" MinimumValue="1" MaximumValue=""  ForeColor="Red" Font-Bold="true"  runat="server" />
+            </div>
         <div class="form-group col-md-6">
                        <label>Importe</label>
                      <asp:TextBox ReadOnly="true" AutoPostBack="true" ID="importes" class="form-control" type="text" runat="server" />
