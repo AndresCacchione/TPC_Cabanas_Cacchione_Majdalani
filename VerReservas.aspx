@@ -10,12 +10,6 @@
                 <asp:ListItem Text="Canceladas" Value="3" />
             </asp:DropDownList>
 
-
-        </ContentTemplate>
-    </asp:UpdatePanel>
-
-    <asp:UpdatePanel runat="server">
-        <ContentTemplate>
             <asp:DropDownList AutoPostBack="true" OnTextChanged="DDLReservaVigencia_TextChanged" ID="DDLReservaVigencia" runat="server">
                 <asp:ListItem Text="Vigente" Value="1" />
                 <asp:ListItem Text="Caduca" Value="2" />

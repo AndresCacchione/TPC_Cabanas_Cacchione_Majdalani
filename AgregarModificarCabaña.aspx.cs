@@ -50,12 +50,18 @@ namespace TPC_CacchioneMajdalani
 
         protected void BtnAgregarCabaña_Click(object sender, EventArgs e)
         {
-            GuardarFormulario();
-            EventoClickbtnAgregarCab();
+            //Page.Validate();
+            //if (Page.IsValid)
+            //{
+                GuardarFormulario();
+                EventoClickbtnAgregarCab();
+            //}
+
         }
 
         private void EventoClickbtnAgregarCab()
         {
+
             CabañaNegocio negocio = new CabañaNegocio();
 
             List<Dominio.Cabaña> listaAux = new List<Dominio.Cabaña>();
@@ -112,28 +118,26 @@ namespace TPC_CacchioneMajdalani
             }
         }
 
-        private void ValidarTiempo()
+        protected void ValidadorTiempoEntre_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            TimeSpan input = new TimeSpan();
-            if (VCTiempoEntreReservas.ControlToValidate !=null)
+            //https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.webcontrols.customvalidator.clientvalidationfunction?view=netframework-4.8
+            try
             {
-            input = TimeSpan.Parse(VCTiempoEntreReservas.ControlToValidate);
+                TimeSpan TiempoAValidar = (Convert.ToDateTime(TiempoEntreReservas.Value)).TimeOfDay;
+                TimeSpan Tiempominimo = new TimeSpan(0, 0, 0);
+                if (TiempoAValidar > Tiempominimo)
+                {
+                    ValidadorTiempoEntre.IsValid = true;
+                }
+                else
+                {
+                    ValidadorTiempoEntre.IsValid = false;
+                }
             }
-            else
+            catch (Exception)
             {
-                VCTiempoEntreReservas.IsValid = false;
-                return;
-            }
-            
-            if(input >= TimeSpan.Parse("00:00:00")  && input <= TimeSpan.Parse("23:59:59"))
-            {
-                VCTiempoEntreReservas.IsValid=true;
-            }
-            else
-            {
-                VCTiempoEntreReservas.IsValid = false;
+                Response.Redirect(Request.RawUrl);                
             }
         }
-
     }
 }
