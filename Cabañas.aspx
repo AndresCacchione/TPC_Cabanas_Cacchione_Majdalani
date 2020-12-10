@@ -1,8 +1,7 @@
 ﻿<%@ Page Title="Cabañas" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Cabañas.aspx.cs" Inherits="TPC_CacchioneMajdalani.Cabañas" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
-    <hr />
+                <hr />
 
     <div>
 
@@ -18,26 +17,58 @@
     </div>
 
 
-    <%foreach (Dominio.Cabaña item in ListaCabañasLocal)
-        {%>
 
-    <table class="table">
-        <tr>
-            <td>
-                <img src="<%=item.Imagen%>" class="card-img-top" alt="..." style="width: 300px;"></td>
-            <td><%=item.complejo.Nombre%></td>
-            <td><%=item.PrecioDiario%> </td>
-            <td><%=item.Capacidad%> </td>
-            <td><a href="DetalleCabaña.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-primary mr-auto ml-auto">Detalle </a></td>
-            <td><a href="Reservas.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-success mr-auto ml-auto">Reservar</a> </td>
-            <%if (Session[Session.SessionID + "userSession"] != null && ((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20)
+
+     <div class="container">
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" style="width: 300px">Imagen Cabaña</th>
+                            <th scope="col" style="width: 100px">Complejo</th>
+                            <th scope="col" style="width: 100px">Precio por dia</th>
+                            <th scope="col" style="width: 100px">Capacidad</th>
+                            <th scope="col" style="width: 100px"></th>
+                            <th scope="col" style="width: 60px"></th>
+                            <th scope="col" style="width: 60px"></th>
+                            <th scope="col" style="width: 60px"></th>
+                        </tr>
+                    </thead>
+                    <%foreach (Dominio.Cabaña item in ListaCabañasLocal)
+                        { %>
+                    <tr>
+                        <td style="width: 300px">
+                            <img src="<% = item.Imagen %>" style="width: 300px; height: inherit;" alt="No posee imagen cargada">
+
+                            <th scope="row" style="width: 120px"><% = item.complejo.Nombre %></th>
+
+                            <th scope="row" style="width: 100px"><% = item.PrecioDiario %></th>
+
+                            <th scope="row" style="width: 100px"><% = item.Capacidad %></th>
+
+                            <th scope="row" style="width: 100px"><a href="DetalleCabaña.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-primary mr-auto ml-auto">Detalle </a></th>
+
+                            <th scope="row" style="width: 100px"><a href="Reservas.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-success mr-auto ml-auto">Reservar</a></th>
+                                <%if (Session[Session.SessionID + "userSession"] != null && ((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20)
                 { %>
-            <td><a href="AgregarModificarCabaña.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Modificar</a> </td>
-            <td><a href="EliminarCabaña.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-danger mr-auto ml-auto">Eliminar</a> </td>
+                       <th scope="row" style="width: 60px"><a href="AgregarModificarCabaña.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Modificar</a> </th>
+
+                            <th scope="row" style="width: 60px"><a href="EliminarCabaña.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-danger mr-auto ml-auto">Eliminar</a> </th>
+
+
 
             <% } %>
-        </tr>
-    </table>
-    <%}
-    %>
+                       
+                       
+
+                        </td>
+                    </tr>
+
+                    <% } %>
+                </table>
+            </div>
+        </div>
+    </div>
+
 </asp:Content>

@@ -38,15 +38,8 @@ namespace TPC_CacchioneMajdalani
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["idComplejo"] != null)
-            {
                 PageLoadAgregarModificarComp();
-            }
-            else
-            {
-                Response.Redirect("~/Default");
-            }
-            
+                    
         }
 
         protected void BtnAgregarComplejo_Click(object sender, EventArgs e)
