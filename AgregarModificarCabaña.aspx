@@ -20,27 +20,35 @@
         <div class="form-group col-md-6">
             <label for="inputCapacidad">Capacidad</label>
             <input type="number" class="form-control" id="Capacidad" placeholder="Cantidad de personas" required runat="server">
+            <asp:comparevalidator errormessage="La cantidad debe ser positiva" Operator="GreaterThan" Type="Integer" Display="Dynamic"
+                ValueToCompare="0" controltovalidate="Capacidad" ForeColor="Red" runat="server" />
+
         </div>
         <div class="form-group col-md-6">
             <label for="inputCheckIn">Hora Recepcion</label>
             <input type="time" class="form-control" id="CheckIn" placeholder="HH-MM-SS" required runat="server">
+            <asp:CustomValidator ID="ValidadorHrRecepcion" ErrorMessage="La hora de recepción debe ser positiva" ControlToValidate="CheckIn" OnServerValidate="" runat="server" />
+
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputAmbientes">Ambientes</label>
             <input type="number" class="form-control" id="Ambientes" placeholder="Cantidad de Ambientes" required runat="server">
+            <asp:CompareValidator ErrorMessage="La cantidad de ambientes debe ser positiva" ControlToValidate="Ambientes"
+                Operator="GreaterThan" ValueToCompare="0" Type="Integer" Display="Dynamic" ForeColor="Red" runat="server" />
         </div>
         <div class="form-group col-md-6">
             <label for="inputCheckOut">Hora Salida</label>
             <input type="time" class="form-control" id="CheckOut" placeholder="HH-MM-SS" required runat="server">
+            <asp:CustomValidator ID="ValidadorHrSalida" ErrorMessage="errormessage" ControlToValidate="CheckOut" OnServerValidate="" runat="server" />
         </div>
     </div>
 
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputImagen">URL de la Imagen</label>
-            <input type="url" class="form-control" id="Imagen" placeholder="URL de la imagen" required runat="server">
+            <input type="url" pattern="https?://.+" class="form-control" id="Imagen" placeholder="URL de la imagen" required runat="server">
         </div>
     </div>
 

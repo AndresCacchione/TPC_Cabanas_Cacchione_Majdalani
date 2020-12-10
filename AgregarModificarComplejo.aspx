@@ -11,7 +11,7 @@
             <div class="form-group col-md-6">
                 <label for="inputImagen">URL de la Imagen</label>
 
-                <input type="url" class="form-control" id="Imagen" name="Imagen" placeholder="URL de la imagen" required runat="server">
+                <input type="url" pattern="https?://.+" class="form-control" id="Imagen" name="Imagen" placeholder="URL de la imagen" required runat="server">
             </div>
         </div>
         <div class="form-row">
