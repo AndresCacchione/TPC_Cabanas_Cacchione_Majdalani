@@ -155,13 +155,14 @@ namespace TPC_CacchioneMajdalani
         {
             string CuerpoMail;
             CuerpoMail = $@"Datos de la reserva
-Fecha de la Creacion de la reserva : {reserva.FechaCreacionReserva} 
-Fecha de inicio de la reserva      : dia {reserva.FechaIngreso} - hora checkin {reserva.Cabaña.CheckIn}
-Fecha de fin de la reserva         : dia {reserva.FechaEgreso} - hora checkout {reserva.Cabaña.CheckOut}
+Fecha de la Creacion de la reserva : {reserva.FechaCreacionReserva.ToShortDateString()} 
+Fecha de inicio de la reserva      : dia {reserva.FechaIngreso.ToShortDateString()} - hora checkin {reserva.Cabaña.CheckIn.TimeOfDay}
+Fecha de fin de la reserva         : dia {reserva.FechaEgreso.ToShortDateString()} - hora checkout {reserva.Cabaña.CheckOut.TimeOfDay}
 
 Complejo: {reserva.Cabaña.complejo.Nombre}
 Direccion del complejo:{reserva.Cabaña.complejo.Ubicacion}
-Telefono: {reserva.Cabaña.complejo.Telefono} Mail: {reserva.Cabaña.complejo.Mail}
+Telefono Complejo: {reserva.Cabaña.complejo.Telefono} Mail Complejo: {reserva.Cabaña.complejo.Mail}
+
 foto del complejo: {reserva.Cabaña.complejo.Imagen}
 foto de la cabaña: {reserva.Cabaña.Imagen}
   
