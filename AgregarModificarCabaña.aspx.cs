@@ -44,7 +44,15 @@ namespace TPC_CacchioneMajdalani
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            PageLoadAgregarModificarCab();
+            if (Request.QueryString["idCabaña"]!=null)
+            {
+                PageLoadAgregarModificarCab();
+            }
+            else
+            {
+                Response.Redirect("Default.aspx");
+            }
+            
 
         }
 

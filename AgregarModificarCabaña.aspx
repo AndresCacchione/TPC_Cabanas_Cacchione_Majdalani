@@ -27,7 +27,7 @@
         <div class="form-group col-md-6">
             <label for="inputCheckIn">Hora Recepcion</label>
             <input type="time" class="form-control" id="CheckIn" placeholder="HH-MM-SS" required runat="server">
-            <asp:CustomValidator ID="ValidadorHrRecepcion" ErrorMessage="La hora de recepción debe ser positiva" ControlToValidate="CheckIn" OnServerValidate="" runat="server" />
+<%--            <asp:CustomValidator ID="ValidadorHrRecepcion" ErrorMessage="La hora de recepción debe ser positiva" ControlToValidate="CheckIn" OnServerValidate="" runat="server" />--%>
 
         </div>
     </div>
@@ -41,7 +41,7 @@
         <div class="form-group col-md-6">
             <label for="inputCheckOut">Hora Salida</label>
             <input type="time" class="form-control" id="CheckOut" placeholder="HH-MM-SS" required runat="server">
-            <asp:CustomValidator ID="ValidadorHrSalida" ErrorMessage="errormessage" ControlToValidate="CheckOut" OnServerValidate="" runat="server" />
+<%--            <asp:CustomValidator ID="ValidadorHrSalida" ErrorMessage="errormessage" ControlToValidate="CheckOut" OnServerValidate="" runat="server" />--%>
         </div>
     </div>
 

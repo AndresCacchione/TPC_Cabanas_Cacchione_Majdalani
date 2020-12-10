@@ -119,18 +119,7 @@ namespace TPC_CacchioneMajdalani
                     EmailCliente.Add(reserva.Cliente.DatosPersonales.Email);
                     /// SETEARLE AL ADMINISTRADOR EL MAIL DEL COMPLEJO QUE ADMINISTRA
                     managementEmail.EnviarEmails(EmailCliente, "Enviar comprobante de pago AL MAIL COMPLEJO", CuerpoMail2());
-                    Session.Remove("ListaDeReservasPorUsuarioVigente1");
-                    Session.Remove("ListaDeReservasPorUsuarioVigente2");
-                    Session.Remove("ListaDeReservasPorUsuarioVigente3");
-                    Session.Remove("ListaDeReservasPorUsuarioCaducas1");
-                    Session.Remove("ListaDeReservasPorUsuarioCaducas2");
-                    Session.Remove("ListaDeReservasPorUsuarioCaducas3");
-                    Session.Remove("ListaDeReservasCaducas1");
-                    Session.Remove("ListaDeReservasCaducas2");
-                    Session.Remove("ListaDeReservasCaducas3");
-                    Session.Remove("ListaDeReservasVigentes1");
-                    Session.Remove("ListaDeReservasVigentes2");
-                    Session.Remove("ListaDeReservasVigentes3");
+                    EliminarSesionDeReservas();
                     Response.Redirect("VerReservas.aspx");
                 }
                 else
@@ -146,7 +135,22 @@ namespace TPC_CacchioneMajdalani
             }
 
         }
+        public void EliminarSesionDeReservas()
+        {
+            Session.Remove("ListaDeReservasPorUsuarioVigente1");
+            Session.Remove("ListaDeReservasPorUsuarioVigente2");
+            Session.Remove("ListaDeReservasPorUsuarioVigente3");
+            Session.Remove("ListaDeReservasPorUsuarioCaducas1");
+            Session.Remove("ListaDeReservasPorUsuarioCaducas2");
+            Session.Remove("ListaDeReservasPorUsuarioCaducas3");
+            Session.Remove("ListaDeReservasCaducas1");
+            Session.Remove("ListaDeReservasCaducas2");
+            Session.Remove("ListaDeReservasCaducas3");
+            Session.Remove("ListaDeReservasVigentes1");
+            Session.Remove("ListaDeReservasVigentes2");
+            Session.Remove("ListaDeReservasVigentes3"); 
 
+        }
         private string CuerpoMail2()
         {
             string CuerpoMail;

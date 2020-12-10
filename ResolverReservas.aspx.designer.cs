@@ -11,25 +11,34 @@ namespace TPC_CacchioneMajdalani
 {
 
 
-    public partial class VerReservas
+    public partial class ResolverReservas
     {
 
         /// <summary>
-        /// Control DDLReservaEstados.
+        /// Control btnConfirmada.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLReservaEstados;
+        protected global::System.Web.UI.WebControls.Button btnConfirmada;
 
         /// <summary>
-        /// Control DDLReservaVigencia.
+        /// Control btnCancelada.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLReservaVigencia;
+        protected global::System.Web.UI.WebControls.Button btnCancelada;
+
+        /// <summary>
+        /// Control Button2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button2;
     }
 }
