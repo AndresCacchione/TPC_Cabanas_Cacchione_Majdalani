@@ -43,7 +43,7 @@ namespace Negocio
 
         }
 
-        public List<Reserva> ListarReservasVigentesPorUsuario(long idUsuario,byte Estado)
+        public List<Reserva> ListarReservasVigentesPorUsuario(long idUsuario, byte Estado)
         {
             List<Reserva> listaVigentesUsuario = new List<Reserva>();
             AccessDB access = new AccessDB();
@@ -53,7 +53,7 @@ namespace Negocio
                 CabañaNegocio cabañaNegocio = new CabañaNegocio();
 
                 access.SetearQuery("select * from reservas where fechaingreso>=getdate() and " +
-                    "idusuario=" + idUsuario + "and estado=" + Estado );
+                    "idusuario=" + idUsuario + "and estado=" + Estado);
                 access.EjecutarLector();
                 while (access.Lector.Read())
                 {
@@ -96,7 +96,7 @@ namespace Negocio
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 CabañaNegocio cabañaNegocio = new CabañaNegocio();
 
-                access.SetearQuery("select * from reservas where fechaingreso<=getdate() and idusuario=" + idUsuario + " and estado="+ Estado );
+                access.SetearQuery("select * from reservas where fechaingreso<=getdate() and idusuario=" + idUsuario + " and estado=" + Estado);
                 access.EjecutarLector();
                 while (access.Lector.Read())
                 {
@@ -265,6 +265,53 @@ namespace Negocio
                 access.CerrarConexion();
             }
             return reserva;
+        }
+
+        public void ModificarEstadoReserva(Reserva reserva)
+        {
+            AccessDB access = new AccessDB();
+            try
+            {
+                access.SetearQuery("update Reservas set estado=@estado where Id=" + reserva.ID);
+                access.AgregarParametro("@estado", reserva.Estado);
+                access.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                access.CerrarConexion();
+            }
+        }
+
+        public void ModificarReserva(Reserva reserva)
+        {
+            AccessDB access = new AccessDB();
+            try
+            {
+                access.SetearQuery("update Reservas set fechaIngreso=@fechaIngreso, fechaEgreso=@fechaEgreso, cantidadPersonas=@cantidadPersonas, " +
+                    "fechaReserva=@fechaReserva, importe=@importe, estado=@estado, IdReservaOriginal=@IdReservaOriginal where Id=@Id");
+                access.AgregarParametro("@fechaIngreso", reserva.FechaIngreso);
+                access.AgregarParametro("@fechaEgreso", reserva.FechaEgreso);
+                access.AgregarParametro("@cantidadPersonas", reserva.CantPersonas);
+                access.AgregarParametro("@fechaReserva", reserva.FechaCreacionReserva);
+                access.AgregarParametro("@importe", reserva.Importe);
+                access.AgregarParametro("@estado", reserva.Estado);
+                access.AgregarParametro("@IdReservaOriginal", reserva.IdReservaOriginal);
+                access.AgregarParametro("@Id", reserva.ID);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                access.CerrarConexion();
+            }
         }
 
     }

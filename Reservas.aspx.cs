@@ -22,17 +22,17 @@ namespace TPC_CacchioneMajdalani
 
         protected void Page_Load(object sender, EventArgs e)
         {
-                        
-                CargarDiccionarioFechas();
-                long idCabaña = Convert.ToInt64(Request.QueryString["idCabaña"]);
 
-                if ((Usuario)Session[Session.SessionID + "userSession"] == null || idCabaña == 0)
-                {
-                    Response.Redirect("Login.aspx");
-                }
-                 CargarCabaña(idCabaña); 
-                reserva.Cliente = (Usuario)Session[Session.SessionID + "userSession"];
-            
+            CargarDiccionarioFechas();
+            long idCabaña = Convert.ToInt64(Request.QueryString["idCabaña"]);
+
+            if ((Usuario)Session[Session.SessionID + "userSession"] == null || idCabaña == 0)
+            {
+                Response.Redirect("Login.aspx");
+            }
+            CargarCabaña(idCabaña);
+            reserva.Cliente = (Usuario)Session[Session.SessionID + "userSession"];
+
         }
 
         private void CargarTextBoxsFechas()
@@ -80,7 +80,7 @@ namespace TPC_CacchioneMajdalani
 
         private void GuardarReserva()
         {
-            
+
             reserva.Estado = 1; //estado 1 = Pendiente, estado 2 = Confirmada, estado 3 = Cancelada
             reserva.FechaCreacionReserva = DateTime.Today;
             reserva.FechaEgreso = Convert.ToDateTime(FechaDeEgreso.Text);
@@ -103,7 +103,7 @@ namespace TPC_CacchioneMajdalani
             ReservaNegocio NegocioReserva = new ReservaNegocio();
             GuardarReserva();
             reserva.CantPersonas = Convert.ToByte(CantidadDePersonas.Text);
-            if (reserva.CantPersonas <= reserva.Cabaña.Capacidad && reserva.CantPersonas>0)
+            if (reserva.CantPersonas <= reserva.Cabaña.Capacidad && reserva.CantPersonas > 0)
             {
                 bool inserto = NegocioReserva.InsertarReserva(reserva);
                 //ENVIO DE MAIL AL USUARIO QUE RESERVO Y AL ADMINISTRADOR PARA QUE 
@@ -138,12 +138,13 @@ namespace TPC_CacchioneMajdalani
                     LblCalendario.Text = "Verifique los datos ingresados ";
                 }
             }
-            else {
+            else
+            {
 
                 LblCalendario.Text = "Verifique la cantidad de personas ";
 
             }
-           
+
         }
 
         private string CuerpoMail2()

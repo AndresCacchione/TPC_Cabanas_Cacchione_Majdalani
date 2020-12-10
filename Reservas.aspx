@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdatePanel runat="server">
-        <ContentTemplate>
+        <contenttemplate>
 
             <asp:Label runat="server" ID="LblCalendario"></asp:Label>
 
@@ -48,6 +48,6 @@
             </div>
 
     <asp:Button ID="Reservar" OnClick="Reservar_Click" Text="Reservar" class="btn btn-success mr-auto ml-auto" runat="server" />
-        </ContentTemplate>
+        </contenttemplate>
     </asp:UpdatePanel>
 </asp:Content>
