@@ -45,11 +45,11 @@ namespace Negocio
 									begin
 									use Cacchione_Majdalani_DB
 									exec('
-									create PROCEDURE spAgregarReserva(
+									create pROCEDURE spAgregarReserva(
 										@IdCabaña bigint,
 										@IdUsuario bigint,
-										@FechaIngreso date,
-										@FechaEgreso date,
+										@FechaIngreso date, 
+										@FechaEgreso date, 
 										@CantPersonas tinyint,
 										@FechaReserva date,
 										@Importe money,
@@ -60,8 +60,8 @@ namespace Negocio
 											BEGIN
 											declare @resultado bit = 1
 													BEGIN TRY
-													if (select count(*) from Reservas where ((fechaIngreso>=@FechaIngreso and fechaIngreso<=@FechaEgreso) or
-															(fechaEgreso>=@FechaIngreso and fechaEgreso<=@FechaEgreso))and IdCabaña = @IdCabaña )>0	
+													if (select count(*) from Reservas where ((fechaIngreso>=@FechaIngreso and fechaIngreso<=(dateadd(day,-1,@FechaEgreso)) or
+															((dateadd(day,-1,fechaEgreso))>=@FechaIngreso and (dateadd(day,-1,fechaEgreso))<=(dateadd(day,-1,@FechaEgreso)))))and IdCabaña = @IdCabaña)>0
 													begin
 													set @resultado = 0
 													end
@@ -74,7 +74,8 @@ namespace Negocio
 												set @resultado = 0
 												END CATCH
 												return @resultado
-											END	')
+											END
+											')
 									end");
 				acceso.EjecutarAccion();
 
