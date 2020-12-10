@@ -479,3 +479,33 @@ if not exists (select * from sys.objects where name = 'spAgregarReserva')
 
 
 
+alter pROCEDURE spAgregarReserva(
+										@IdCabaña bigint,
+										@IdUsuario bigint,
+										@FechaIngreso date,
+										@FechaEgreso date,
+										@CantPersonas tinyint,
+										@FechaReserva date,
+										@Importe money,
+										@Estado tinyint,
+										@IdReservaOriginal bigint
+										)
+										AS
+											BEGIN
+											declare @resultado bit = 1
+													BEGIN TRY
+													if (select count(*) from Reservas where ((fechaIngreso>=@FechaIngreso and fechaIngreso<=@FechaEgreso) or
+															(fechaEgreso>=@FechaIngreso and fechaEgreso<=@FechaEgreso))and IdCabaña = @IdCabaña )>0	
+													begin
+													set @resultado = 0
+													end
+													else
+													begin
+													insert into reservas values(@IdCabaña, @IdUsuario, @FechaIngreso, @FechaEgreso, @CantPersonas, @FechaReserva, @Importe, @Estado, @IdReservaOriginal)
+													end
+													END TRY
+												BEGIN CATCH
+												set @resultado = 0
+												END CATCH
+												return @resultado
+											END	

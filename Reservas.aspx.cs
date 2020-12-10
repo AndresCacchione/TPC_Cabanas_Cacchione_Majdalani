@@ -22,16 +22,17 @@ namespace TPC_CacchioneMajdalani
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            CargarDiccionarioFechas();
-            long idCabaña = Convert.ToInt64(Request.QueryString["idCabaña"]);
+                        
+                CargarDiccionarioFechas();
+                long idCabaña = Convert.ToInt64(Request.QueryString["idCabaña"]);
 
-            if ((Usuario)Session[Session.SessionID + "userSession"] == null || idCabaña == 0)
-            {
-                Response.Redirect("Login.aspx");
-            }
-
-            CargarCabaña(idCabaña);
-            reserva.Cliente = (Usuario)Session[Session.SessionID + "userSession"];
+                if ((Usuario)Session[Session.SessionID + "userSession"] == null || idCabaña == 0)
+                {
+                    Response.Redirect("Login.aspx");
+                }
+                 CargarCabaña(idCabaña); 
+                reserva.Cliente = (Usuario)Session[Session.SessionID + "userSession"];
+            
         }
 
         private void CargarTextBoxsFechas()
@@ -79,10 +80,7 @@ namespace TPC_CacchioneMajdalani
 
         private void GuardarReserva()
         {
-            if (CantidadDePersonas.Text != "")
-            {
-                reserva.CantPersonas = Convert.ToByte(CantidadDePersonas.Text);
-            }
+            
             reserva.Estado = 1; //estado 1 = Pendiente, estado 2 = Confirmada, estado 3 = Cancelada
             reserva.FechaCreacionReserva = DateTime.Today;
             reserva.FechaEgreso = Convert.ToDateTime(FechaDeEgreso.Text);
@@ -101,30 +99,39 @@ namespace TPC_CacchioneMajdalani
 
         protected void Reservar_Click(object sender, EventArgs e)
         {
-            
             //RESERVA
             ReservaNegocio NegocioReserva = new ReservaNegocio();
             GuardarReserva();
-            bool inserto = NegocioReserva.InsertarReserva(reserva);
-            //ENVIO DE MAIL AL USUARIO QUE RESERVO Y AL ADMINISTRADOR PARA QUE 
-            if (inserto)
+            reserva.CantPersonas = Convert.ToByte(CantidadDePersonas.Text);
+            if (reserva.CantPersonas <= reserva.Cabaña.Capacidad && reserva.CantPersonas>0)
             {
-                ManagementEmail managementEmail = new ManagementEmail();
+                bool inserto = NegocioReserva.InsertarReserva(reserva);
+                //ENVIO DE MAIL AL USUARIO QUE RESERVO Y AL ADMINISTRADOR PARA QUE 
+                if (inserto)
+                {
+                    ManagementEmail managementEmail = new ManagementEmail();
 
-                //DESPUES DE MANAGEMENT EMAIL INSERTAR POP UP
-                //Envio mail a los admins
-                managementEmail.EnviarEmails(MailDestino2(), "Alta de Reserva (Verficar pago)", CuerpoMail2());
-                //Mail de cliente
-                List<string> EmailCliente = new List<string>();
-                EmailCliente.Add(reserva.Cliente.DatosPersonales.Email);
-                /// SETEARLE AL ADMINISTRADOR EL MAIL DEL COMPLEJO QUE ADMINISTRA
-                managementEmail.EnviarEmails(EmailCliente, "Enviar comprobante de pago AL MAIL COMPLEJO", CuerpoMail2());
-                Response.Redirect("Default.aspx");
+                    //DESPUES DE MANAGEMENT EMAIL INSERTAR POP UP
+                    //Envio mail a los admins
+                    managementEmail.EnviarEmails(MailDestino2(), "Alta de Reserva (Verficar pago)", CuerpoMail2());
+                    //Mail de cliente
+                    List<string> EmailCliente = new List<string>();
+                    EmailCliente.Add(reserva.Cliente.DatosPersonales.Email);
+                    /// SETEARLE AL ADMINISTRADOR EL MAIL DEL COMPLEJO QUE ADMINISTRA
+                    managementEmail.EnviarEmails(EmailCliente, "Enviar comprobante de pago AL MAIL COMPLEJO", CuerpoMail2());
+                    Response.Redirect("VerReservas.aspx");
+                }
+                else
+                {
+                    LblCalendario.Text = "Verifique los datos ingresados ";
+                }
             }
-            else
-            {
-                LblCalendario.Text = "Verifique los datos ingresados ";
+            else {
+
+                LblCalendario.Text = "Verifique la cantidad de personas ";
+
             }
+           
         }
 
         private string CuerpoMail2()
@@ -211,6 +218,7 @@ Mail              : {reserva.Cliente.DatosPersonales.Email}
             Session.Add("fechasDelCalendario", Fechas);
 
             CargarTextBoxsFechas();
+
             GuardarReserva();
             importes.Text = reserva.Importe.ToString();
         }

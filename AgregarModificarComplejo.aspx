@@ -33,6 +33,7 @@
                 <label for="inputAumentoFeriado">Aumento Feriado (%)</label>
 
                 <input type="number" class="form-control" id="AumentoFeriado" placeholder="XXX (%)" required runat="server">
+                <asp:CompareValidator ErrorMessage="El aumento por feriado debe ser mayor o igual a cero" ControlToValidate="AumentoFeriado" Operator="GreaterThanEqual" ValueToCompare="0" ForeColor="Red" runat="server" />
             </div>
         </div>
         <div class="form-group">

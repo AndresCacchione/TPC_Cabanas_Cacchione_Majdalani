@@ -61,20 +61,21 @@
                             <th scope="row" style="width: 100px"><% = item.CantPersonas %></th>
 
                             <th scope="row" style="width: 60px"><% = item.Importe%></th>
-                                           <%if (Session[Session.SessionID + "userSession"] != null && ((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20)
-                  { %>
-                             <%if (item.Estado == 1) { %><th scope="row" style="width: 60px"> <a href="ModificarReserva.aspx?idReserva=<%=item.ID.ToString()%>&Estado<%=item.Estado %>" class="btn btn-warning mr-auto ml-auto">Pendiente</a>  </th><%} %>
-                             <%if (item.Estado == 2) { %><th scope="row" style="width: 60px"> <a href="ModificarReserva.aspx?idReserva=<%=item.ID.ToString()%>&Estado<%=item.Estado %>" class="btn btn-success mr-auto ml-auto">Confirmada</a> </th><%} %>
-                             <%if (item.Estado == 3) { %><th scope="row" style="width: 60px"> <a href="ModificarReserva.aspx?idReserva=<%=item.ID.ToString()%>&Estado<%=item.Estado %>" class="btn btn-danger mr-auto ml-auto">Cancelada</a>  </th><%} %>
+                              <%if (Session[Session.SessionID + "userSession"] != null && ((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20)
+                            { %>
+                                      <%if (item.Estado == 1) { %><th scope="row" style="width: 60px"> <a href="ModificarReserva.aspx?idReserva=<%=item.ID.ToString()%>&Estado<%=item.Estado %>" class="btn btn-warning mr-auto ml-auto">Pendiente</a>  </th><%} %>
+                                      <%if (item.Estado == 2) { %><th scope="row" style="width: 60px"> <a href="ModificarReserva.aspx?idReserva=<%=item.ID.ToString()%>&Estado<%=item.Estado %>" class="btn btn-success mr-auto ml-auto">Confirmada</a> </th><%} %>
+                                      <%if (item.Estado == 3) { %><th scope="row" style="width: 60px"> <a href="ModificarReserva.aspx?idReserva=<%=item.ID.ToString()%>&Estado<%=item.Estado %>" class="btn btn-danger mr-auto ml-auto">Cancelada</a>  </th><%} %>
+                                 <th scope="row" style="width: 60px"> <a href="ModificarReserva.aspx?idReserva=<%=item.ID.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Modificar</a>  </th>
                             <%} %>
 
                               <%if (Session[Session.SessionID + "userSession"] != null && ((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso == 10)
                                   { %>
-                                 <%if (item.Estado == 1) { %><th scope="row" style="width: 60px">  <asp:Button  class="btn btn-warning mr-auto ml-auto" Text="Pendiente" runat="server" /> </th><%} %>
-                             <%if (item.Estado == 2) { %><th scope="row" style="width: 60px">      <asp:Button  class="btn btn-success mr-auto ml-auto" Text="Confirmada" runat="server" /> </th><%} %>
-                             <%if (item.Estado == 3) { %><th scope="row" style="width: 60px">      <asp:Button  class="btn btn-danger mr-auto ml-auto" Text="Cancelada" runat="server" />  </th><%} %>
+                                      <%if (item.Estado == 1) { %><th scope="row" style="width: 60px">      <asp:Button  class="btn btn-warning mr-auto ml-auto" Text="Pendiente" runat="server" /> </th><%} %>
+                                      <%if (item.Estado == 2) { %><th scope="row" style="width: 60px">      <asp:Button  class="btn btn-success mr-auto ml-auto" Text="Confirmada" runat="server" /> </th><%} %>
+                                      <%if (item.Estado == 3) { %><th scope="row" style="width: 60px">      <asp:Button  class="btn btn-danger mr-auto ml-auto" Text="Cancelada" runat="server" />  </th><%} %>
+                     
                            
-
                             <%} %>
                             </td>
                     </tr>

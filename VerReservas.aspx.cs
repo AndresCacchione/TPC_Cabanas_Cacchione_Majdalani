@@ -211,5 +211,10 @@ namespace TPC_CacchioneMajdalani
         {
             Response.Redirect("VerReservas.aspx?IndexEstados=" + Convert.ToString(DDLReservaEstados.SelectedIndex) + "&IndexVigencia=" + Convert.ToString(DDLReservaVigencia.SelectedIndex));
         }
+
+        protected void BtnCancelarReservaPorUsuario_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

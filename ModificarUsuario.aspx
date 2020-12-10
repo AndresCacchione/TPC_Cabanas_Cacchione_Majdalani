@@ -40,6 +40,7 @@
         <div class="form-group col-md-6">
             <label for="inputDni">DNI</label>
             <input type="number" class="form-control" id="DNI" placeholder="DNI" required runat="server" />
+            <asp:CompareValidator ErrorMessage="El DNI ingresado no es válido" ControlToValidate="DNI" Operator="GreaterThanEqual" ValueToCompare="1000000" ForeColor="Red" runat="server" />
         </div>
         <div class="form-group col-md-6">
             <label for="inputEmail">Correo Electrónico</label>
