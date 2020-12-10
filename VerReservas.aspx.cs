@@ -11,9 +11,14 @@ namespace TPC_CacchioneMajdalani
 {
     public partial class VerReservas : Page
     {
+        public Dictionary<string,int> EstadosDeReserva { get; set; }
         public VerReservas()
         {
             ListaDeReservas = new List<Reserva>();
+            EstadosDeReserva = new Dictionary<string, int>()
+            {
+                {"Vigente",1 },{"Caduca",2 },{"Cancelada",3 }
+            };   
         }
         public List<Reserva> ListaDeReservas { get; set; }
         protected void Page_Load(object sender, EventArgs e)
@@ -72,14 +77,35 @@ namespace TPC_CacchioneMajdalani
                     }
                     break;
                 case ("Confirmadas"):
-                    {
+                    { 
                         if (DDLReservaVigencia.SelectedItem.Text == "Vigente")
                         {
-                            ListarReservasVigentes(2);
+                            if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso == 10)
+                            {
+                                ListarReservasPorUsuarioVigentes(Convert.ToInt64(((Dominio.Usuario)Session[Session.SessionID + "userSession"]).Id), 2);
+                            }
+
+                            else if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20)
+                            {
+                                ListarReservasVigentes(2);
+
+                            }
+
+ 
                         }
                         if (DDLReservaVigencia.SelectedItem.Text == "Caduca")
                         {
-                            ListarReservasCaducas(2);
+                            if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso == 10)
+                            {
+                                ListarReservasPorUsuarioCaducas(Convert.ToInt64(((Dominio.Usuario)Session[Session.SessionID + "userSession"]).Id), 2);
+                            }
+
+                            else if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20)
+                            {
+                                ListarReservasCaducas(2);
+
+                            }
+
                         }
                     }
                     break;
@@ -87,11 +113,29 @@ namespace TPC_CacchioneMajdalani
                     {
                         if (DDLReservaVigencia.SelectedItem.Text == "Vigente")
                         {
-                            ListarReservasVigentes(3);
+                            if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso == 10)
+                            {
+                                ListarReservasPorUsuarioVigentes(Convert.ToInt64(((Dominio.Usuario)Session[Session.SessionID + "userSession"]).Id), 3);
+                            }
+
+                            else if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20)
+                            {
+                                ListarReservasVigentes(3);
+
+                            }
                         }
                         if (DDLReservaVigencia.SelectedItem.Text == "Caduca")
                         {
-                            ListarReservasCaducas(3);
+                            if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso == 10)
+                            {
+                                ListarReservasPorUsuarioCaducas(Convert.ToInt64(((Dominio.Usuario)Session[Session.SessionID + "userSession"]).Id), 3);
+                            }
+
+                            else if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20)
+                            {
+                                ListarReservasCaducas(3);
+
+                            }
                         }
                     }
                     break;
@@ -106,7 +150,7 @@ namespace TPC_CacchioneMajdalani
             ReservaNegocio NegocioReserva = new ReservaNegocio();
             if (Session["ListaDeReservasPorUsuarioVigente" + estado.ToString()] == null)
             {
-                ListaDeReservas = NegocioReserva.ListarReservasVigentesPorUsuario(id);
+                ListaDeReservas = NegocioReserva.ListarReservasVigentesPorUsuario(id,estado);
                 Session.Add("ListaDeReservasPorUsuarioVigente" + estado.ToString(), ListaDeReservas);
             }
             else

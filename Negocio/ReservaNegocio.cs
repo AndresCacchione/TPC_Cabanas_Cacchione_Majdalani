@@ -43,7 +43,7 @@ namespace Negocio
 
         }
 
-        public List<Reserva> ListarReservasVigentesPorUsuario(long idUsuario)
+        public List<Reserva> ListarReservasVigentesPorUsuario(long idUsuario,byte Estado)
         {
             List<Reserva> listaVigentesUsuario = new List<Reserva>();
             AccessDB access = new AccessDB();
@@ -52,8 +52,8 @@ namespace Negocio
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 CabañaNegocio cabañaNegocio = new CabañaNegocio();
 
-                access.SetearQuery("select * from reservas where fechaegreso>=getdate() and " +
-                    "idusuario=" + idUsuario + "and (estado != 1 or fechaingreso>=getdate())");
+                access.SetearQuery("select * from reservas where fechaingreso>=getdate() and " +
+                    "idusuario=" + idUsuario + "and estado=" + Estado );
                 access.EjecutarLector();
                 while (access.Lector.Read())
                 {
@@ -96,7 +96,7 @@ namespace Negocio
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 CabañaNegocio cabañaNegocio = new CabañaNegocio();
 
-                access.SetearQuery("select * from reservas where (fechaingreso<getdate() or (estado =1 and fechaingreso<getdate())) and idusuario=" + idUsuario);
+                access.SetearQuery("select * from reservas where fechaingreso<=getdate() and idusuario=" + idUsuario + " and estado="+ Estado );
                 access.EjecutarLector();
                 while (access.Lector.Read())
                 {
@@ -137,7 +137,7 @@ namespace Negocio
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 CabañaNegocio cabañaNegocio = new CabañaNegocio();
 
-                access.SetearQuery("select * from reservas where (estado != 1 or fechaingreso>=getdate()) and estado=" + estado.ToString());
+                access.SetearQuery("select * from reservas where fechaingreso>=getdate() and estado=" + estado);
                 access.EjecutarLector();
                 while (access.Lector.Read())
                 {
@@ -178,7 +178,7 @@ namespace Negocio
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 CabañaNegocio cabañaNegocio = new CabañaNegocio();
 
-                access.SetearQuery("select * from reservas where (fechaegreso<getdate() or (estado = 1 and fechaingreso<getdate()) and estado=" + estado.ToString() + ")");
+                access.SetearQuery("select * from reservas where fechaingreso<=getdate() and estado=" + estado);
                 access.EjecutarLector();
 
                 while (access.Lector.Read())
