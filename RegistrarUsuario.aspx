@@ -2,27 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-   <%-- <div class="modal fade" id="ModalError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" runat="server">Error en crear usuario</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div id="modalbody" class="" runat="server">
-                    Verifique los datos ingresados.
-                </div>
-                <div class="modal-footer">
-                    <asp:Button ID="btnAgregar" runat="server" type="button" class="btn btn-primary" Text="Confirmar" OnClick="btnAgregar_Click" />
-                    <asp:Button ID="btnCancelar" runat="server" type="button" class="btn btn-secondary" data-dismiss="modal" Text="Cancelar" />
-                </div>
-            </div>
-        </div>
-    </div>--%>
-
-
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputNombreUsuario">Nombre usuario</label>
@@ -31,6 +10,8 @@
         <div class="form-group col-md-6">
             <label for="inputContraseña">Contraseña</label>
             <input type="password" class="form-control" id="Contraseña" placeholder="Contraseña" required runat="server">
+            <asp:RegularExpressionValidator ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$" ErrorMessage="La contraseña debe contener mínimo 8 caracteres, incluidos una mayuscula, una miníscula, y al menos un número" 
+                ControlToValidate="Contraseña" ForeColor="Red" runat="server" />
         </div>
 
     </div>
@@ -38,17 +19,22 @@
         <div class="form-group col-md-6">
             <label for="inputNombre">Nombre</label>
             <input type="text" class="form-control" id="Nombre" placeholder="Nombre" required runat="server">
+            <asp:RegularExpressionValidator ErrorMessage="El nombre debe contener solo letras" 
+                ValidationExpression="^[0-9A-Za-z ]+$" ForeColor="Red" ControlToValidate="Nombre" runat="server" />
+            <asp:RequiredFieldValidator ErrorMessage="Completar campo" forecolor="Red" ControlToValidate="Nombre" runat="server" />
         </div>
         <div class="form-group col-md-6">
             <label for="inputApellido">Apellido</label>
             <input type="text" class="form-control" id="Apellido" placeholder="Apellido" required runat="server">
+            <asp:RegularExpressionValidator ErrorMessage="El apellido debe contener solo letras" 
+                ValidationExpression="^[0-9A-Za-z ]+$" ForeColor="Red" ControlToValidate="Apellido" runat="server" />
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputDni">Dni</label>
             <input type="number" class="form-control" id="DNI" placeholder="Numero DNI" required runat="server">
-            <asp:CompareValidator ErrorMessage="El DNI ingresado no es válido" Operator="GreaterThanEqual" ValueToCompare="1000000" ForeColor="Red" ControlToValidate="DNI" runat="server" />
+<%--            <asp:RegularExpressionValidator ErrorMessage="DNI longitud minima 6 caracteres, solo numeros" ValidationExpression="(^[1-9]\d).{6,}$" ForeColor="Red" ControlToValidate="DNI" runat="server" />--%>
         </div>
         <div class="form-group col-md-6">
             <label for="inputEmail">Correo Electronico</label>
