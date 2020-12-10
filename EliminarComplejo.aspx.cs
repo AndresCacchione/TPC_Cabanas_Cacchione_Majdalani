@@ -34,7 +34,7 @@ namespace TPC_CacchioneMajdalani
             }
             else
             {
-                Response.Redirect("Complejos.aspx");
+                Response.Redirect("~/Complejos");
             }
         }
 

@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdatePanel runat="server">
-        <contenttemplate>
+        <ContentTemplate>
 
             <asp:Label runat="server" ID="LblCalendario"></asp:Label>
 
@@ -17,7 +17,7 @@
                 <TodayDayStyle BackColor="#999999" ForeColor="SkyBlue" Font-Bold="true" HorizontalAlign="Center" VerticalAlign="Middle" />
                 <WeekendDayStyle HorizontalAlign="Center" VerticalAlign="Middle" />
             </asp:Calendar>
-            
+
             <asp:Button Text="Borrar selección" ID="BotonBorrarSeleccion" OnClick="BotonBorrarSeleccion_Click" runat="server" />
 
             <div class="form-row">
@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-    <asp:Button ID="Reservar" OnClick="Reservar_Click" Text="Reservar" class="btn btn-success mr-auto ml-auto" runat="server" />
-        </contenttemplate>
+            <asp:Button ID="Reservar" OnClick="Reservar_Click" Text="Reservar" class="btn btn-success mr-auto ml-auto" runat="server" />
+        </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

@@ -28,7 +28,7 @@ namespace TPC_CacchioneMajdalani
 
             if ((Usuario)Session[Session.SessionID + "userSession"] == null || idCabaña == 0)
             {
-                Response.Redirect("Login.aspx");
+                Response.Redirect("~/Login");
             }
             CargarCabaña(idCabaña);
             reserva.Cliente = (Usuario)Session[Session.SessionID + "userSession"];
@@ -120,7 +120,7 @@ namespace TPC_CacchioneMajdalani
                     /// SETEARLE AL ADMINISTRADOR EL MAIL DEL COMPLEJO QUE ADMINISTRA
                     managementEmail.EnviarEmails(EmailCliente, "Enviar comprobante de pago AL MAIL COMPLEJO", CuerpoMail2());
                     EliminarSesionDeReservas();
-                    Response.Redirect("VerReservas.aspx");
+                    Response.Redirect("~/VerReservas");
                 }
                 else
                 {

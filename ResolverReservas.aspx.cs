@@ -9,7 +9,7 @@ using Negocio;
 
 namespace TPC_CacchioneMajdalani
 {
-    public partial class ResolverReservas : System.Web.UI.Page
+    public partial class ResolverReservas : Page
     {
         public ResolverReservas()
         {
@@ -50,7 +50,7 @@ namespace TPC_CacchioneMajdalani
             ReservaNegocio NegocioReserva = new ReservaNegocio();
             NegocioReserva.ResolverReserva(Reserva.ID, 2);
             EliminarSesionDeReservas();
-            Response.Redirect("VerReservas.aspx");
+            Response.Redirect("~/VerReservas");
         }
 
         protected void btnCancelada_Click(object sender, EventArgs e)
@@ -58,7 +58,7 @@ namespace TPC_CacchioneMajdalani
             ReservaNegocio NegocioReserva = new ReservaNegocio();
             NegocioReserva.ResolverReserva(Reserva.ID, 3);
             EliminarSesionDeReservas();
-            Response.Redirect("VerReservas.aspx");
+            Response.Redirect("~/VerReservas");
         }
         public void EliminarSesionDeReservas()
         {

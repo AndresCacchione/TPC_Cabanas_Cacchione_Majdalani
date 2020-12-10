@@ -28,14 +28,22 @@ namespace TPC_CacchioneMajdalani
         public Dictionary<string, int> dictGeneros { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            CargarDDLPaises();
-            CargarDDLNivelAcceso();
-            CargarUsuarioAModificar();
-
-            if (!IsPostBack)
+            if (Request.QueryString["idUsuario"] != null)
             {
-                CargarInputsUsuarios();
+                CargarDDLPaises();
+                CargarDDLNivelAcceso();
+                CargarUsuarioAModificar();
+
+                if (!IsPostBack)
+                {
+                    CargarInputsUsuarios();
+                }
             }
+            else
+            {
+                Response.Redirect("~/Default");
+            }
+            
         }
         private void CargarUsuarioAModificar()
         {

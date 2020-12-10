@@ -40,7 +40,7 @@ namespace TPC_CacchioneMajdalani
                 }
                 else
                 {
-                    lblErrorLogin.Visible = true; //Tenemos que ver como hacer para que no aparezca visible al darle F5...
+                    lblErrorLogin.Visible = true; 
 
                 }
             }
