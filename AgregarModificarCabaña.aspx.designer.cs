@@ -33,15 +33,6 @@ namespace TPC_CacchioneMajdalani
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl TiempoEntreReservas;
 
         /// <summary>
-        /// ValidadorTiempoEntre control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator ValidadorTiempoEntre;
-
-        /// <summary>
         /// Capacidad control.
         /// </summary>
         /// <remarks>

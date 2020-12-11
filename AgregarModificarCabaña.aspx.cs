@@ -44,30 +44,30 @@ namespace TPC_CacchioneMajdalani
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["idCabaña"]!=null)
+
+            long ID = Convert.ToInt64(Request.QueryString["idComplejo"]);
+            long IDCabaña = Convert.ToInt64(Request.QueryString["idCabaña"]);
+            Auxiliar.complejo.ID = ID;
+            Auxiliar.Id = IDCabaña;
+
+            if (Auxiliar.Id != 0)
             {
-                PageLoadAgregarModificarCab();
+                List<Dominio.Cabaña> listaAux = new List<Dominio.Cabaña>();
+                listaAux = (List<Dominio.Cabaña>)Session["listaCabañas"];
+                Auxiliar = listaAux.Find(i => i.Id == Auxiliar.Id);
+                if (!IsPostBack)
+                {
+                    CargarFormulario();
+                    BtnAgregarCabaña.Text = "Modificar Cabaña";
+                    BtnAgregarCabaña.BackColor = System.Drawing.Color.FromArgb(228, 192, 50);
+                }
             }
-            if(Session[Session.SessionID + "userSession"] == null)
-            {
-                Response.Redirect("Login.aspx");
-            }
+
         }
 
         protected void BtnAgregarCabaña_Click(object sender, EventArgs e)
         {
-            //Page.Validate();
-            //if (Page.IsValid)
-            //{
-                GuardarFormulario();
-                EventoClickbtnAgregarCab();
-            //}
-
-        }
-
-        private void EventoClickbtnAgregarCab()
-        {
-
+            GuardarFormulario();
             CabañaNegocio negocio = new CabañaNegocio();
 
             List<Dominio.Cabaña> listaAux = new List<Dominio.Cabaña>();
@@ -92,7 +92,7 @@ namespace TPC_CacchioneMajdalani
                     listaAux.Add(Auxiliar);
                     Session["listaCabañas"] = listaAux;
 
-                    Response.Redirect("Cabañas.aspx?idComplejo =" + Auxiliar.complejo.ID);
+                    Response.Redirect("Cabañas.aspx?idComplejo=" + Auxiliar.complejo.ID);
                 }
             }
 
@@ -102,54 +102,5 @@ namespace TPC_CacchioneMajdalani
                 throw ex;
             }
         }
-
-        private void PageLoadAgregarModificarCab()
-        {
-            Int64 ID = new Int64();
-            ID = Convert.ToInt64(Request.QueryString["idComplejo"]);
-            long IDCabaña = Convert.ToInt64(Request.QueryString["IdCabaña"]);
-            if(ID==0)
-            {
-                Response.Redirect("Complejos.aspx");
-            }
-            Auxiliar.complejo.ID = ID;
-            Auxiliar.Id = IDCabaña;
-
-            if (Auxiliar.Id != 0)
-            {
-                List<Dominio.Cabaña> listaAux = new List<Dominio.Cabaña>();
-                listaAux = (List<Dominio.Cabaña>)Session["listaCabañas"];
-                Auxiliar = listaAux.Find(i => i.Id == Auxiliar.Id);
-                if (!IsPostBack)
-                {
-                    CargarFormulario();
-                    BtnAgregarCabaña.Text = "Modificar Cabaña";
-                    BtnAgregarCabaña.BackColor = System.Drawing.Color.FromArgb(228, 192, 50);
-                }
-            }
-        }
-
-        protected void ValidadorTiempoEntre_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            //https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.webcontrols.customvalidator.clientvalidationfunction?view=netframework-4.8
-            try
-            {
-                TimeSpan TiempoAValidar = (Convert.ToDateTime(TiempoEntreReservas.Value)).TimeOfDay;
-                TimeSpan Tiempominimo = new TimeSpan(0, 0, 0);
-                if (TiempoAValidar > Tiempominimo)
-                {
-                    ValidadorTiempoEntre.IsValid = true;
-                }
-                else
-                {
-                    ValidadorTiempoEntre.IsValid = false;
-                }
-            }
-            catch (Exception)
-            {
-                Response.Redirect(Request.RawUrl);
-            }
-        }
-
     }
 }
