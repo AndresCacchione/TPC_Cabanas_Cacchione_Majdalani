@@ -12,6 +12,7 @@
                 <label for="inputImagen">URL de la Imagen</label>
 
                 <input type="url" pattern="https?://.+" class="form-control" id="Imagen" name="Imagen" placeholder="URL de la imagen" required runat="server">
+
             </div>
         </div>
         <div class="form-row">

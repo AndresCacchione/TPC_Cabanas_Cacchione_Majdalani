@@ -49,6 +49,10 @@ namespace TPC_CacchioneMajdalani
             long IDCabaña = Convert.ToInt64(Request.QueryString["idCabaña"]);
             Auxiliar.complejo.ID = ID;
             Auxiliar.Id = IDCabaña;
+            if (Session[Session.SessionID + "userSession"] == null)
+            {
+                Response.Redirect("~/Login");
+            }
 
             if (Auxiliar.Id != 0)
             {
@@ -100,6 +104,28 @@ namespace TPC_CacchioneMajdalani
             {
                 // Response.Redirect("Error.aspx");
                 throw ex;
+            }
+        }
+
+        protected void ValidadorTiempoEntre_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            //https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.webcontrols.customvalidator.clientvalidationfunction?view=netframework-4.8
+            try
+            {
+                TimeSpan TiempoAValidar = (Convert.ToDateTime(TiempoEntreReservas.Value)).TimeOfDay;
+                TimeSpan Tiempominimo = new TimeSpan(0, 0, 0);
+                if (TiempoAValidar > Tiempominimo)
+                {
+                    ValidadorTiempoEntre.IsValid = true;
+                }
+                else
+                {
+                    ValidadorTiempoEntre.IsValid = false;
+                }
+            }
+            catch (Exception)
+            {
+                Response.Redirect(Request.RawUrl);
             }
         }
     }
