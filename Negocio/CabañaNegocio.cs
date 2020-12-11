@@ -16,7 +16,7 @@ namespace Negocio
 
             try
             {
-                acceso.SetearQuery("select fechaIngreso, fechaEgreso from reservas where fechaEgreso>getdate() and IDCabaña =" + idCabaña);
+                acceso.SetearQuery("select fechaIngreso, fechaEgreso from reservas where fechaEgreso>getdate() and estado < 3 and IDCabaña =" + idCabaña);
                 acceso.EjecutarLector();
 
                 while (acceso.Lector.Read())

@@ -228,10 +228,10 @@ Mail              : {reserva.Cliente.DatosPersonales.Email}
                 Fechas["fechaEgreso"] = Calendar1.SelectedDate;
             }
 
-            if (Fechas.Keys.Count() == 2)
-            {
+            //if (Fechas.Keys.Count() == 2)
+            //{
                 Calendar1.SelectedDates.SelectRange(Fechas["fechaIngreso"], Fechas["fechaEgreso"]);
-            }
+            //}
 
             Session.Add("fechasDelCalendario", Fechas);
 

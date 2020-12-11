@@ -48,12 +48,10 @@ namespace TPC_CacchioneMajdalani
             {
                 PageLoadAgregarModificarCab();
             }
-            else
+            if(Session[Session.SessionID + "userSession"] == null)
             {
-                Response.Redirect("~/Default");
+                Response.Redirect("Login.aspx");
             }
-            
-
         }
 
         protected void BtnAgregarCabaña_Click(object sender, EventArgs e)
@@ -107,8 +105,13 @@ namespace TPC_CacchioneMajdalani
 
         private void PageLoadAgregarModificarCab()
         {
-            long ID = Convert.ToInt64(Request.QueryString["IdComplejo"]);
+            Int64 ID = new Int64();
+            ID = Convert.ToInt64(Request.QueryString["idComplejo"]);
             long IDCabaña = Convert.ToInt64(Request.QueryString["IdCabaña"]);
+            if(ID==0)
+            {
+                Response.Redirect("Complejos.aspx");
+            }
             Auxiliar.complejo.ID = ID;
             Auxiliar.Id = IDCabaña;
 
@@ -144,7 +147,7 @@ namespace TPC_CacchioneMajdalani
             }
             catch (Exception)
             {
-                Response.Redirect(Request.RawUrl);                
+                Response.Redirect(Request.RawUrl);
             }
         }
 
