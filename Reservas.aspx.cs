@@ -244,7 +244,15 @@ Mail              : {reserva.Cliente.DatosPersonales.Email}
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
         {
             CabañaNegocio cabañaNegocio = new CabañaNegocio();
+            
             List<List<DateTime>> Ocupado = cabañaNegocio.ListaOcupadoPorCabaña(reserva.Cabaña.Id);
+
+            //Parche para inicializar la lista con algún item y que entre en el foreach
+            if (Ocupado.Count==0)
+            {
+                List<DateTime> aux = new List<DateTime>{Convert.ToDateTime("01/01/2000")};
+                Ocupado.Add(aux);
+            }
 
             foreach (List<DateTime> ReservasPrevias in Ocupado)
             {
