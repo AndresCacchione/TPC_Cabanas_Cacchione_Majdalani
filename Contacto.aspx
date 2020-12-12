@@ -4,7 +4,7 @@
 
     <form>
         <div class="form-group">
-            <label for="InputMail">Tu dirección de email de respuesta</label>
+            <label class="letra" for="InputMail">Tu dirección de email de respuesta</label>
             <input type="email" class="form-control" id="InputMail" placeholder="mail@mail.com" runat="server" required>
         </div>
         <div class="form-group">

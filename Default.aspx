@@ -9,10 +9,10 @@
     <div class="row">
         <div class="col-md-4">
             <h2>Diseñadores y desarrolladores</h2>
-            <p>
+            <p class="letra">
                 Majdalani Jeronimo. 
             </p>
-            <p>
+            <p class="letra">
                 Cacchione Andres Omar.
             </p>
         </div>

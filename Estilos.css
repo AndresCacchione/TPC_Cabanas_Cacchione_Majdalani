@@ -149,3 +149,7 @@ border-collapse: collapse;
 .lg-flex-flow-column-nowrap {
   flex-flow: column nowrap;
 }
+
+.letra {
+  font-size: large;
+}
