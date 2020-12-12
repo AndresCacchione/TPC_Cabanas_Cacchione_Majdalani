@@ -9,6 +9,39 @@ namespace Negocio
 {
     public class ManagementDB
     {
+		public void CrearSPCargarTablaDeTablas()
+        {
+			AccessDB access = new AccessDB();
+            try
+            {
+				access.SetearQuery(@"
+									if not exists(select * from sys.objects where name = 'CargarTablas')
+									begin
+									exec('create procedure CargarTablas
+									as
+									BEGIN
+									declare @IDtabla bigint
+									set @IDtabla = isnull((select top 1 IDTabla from Tablas order by IDTabla desc),0)
+									while((select COUNT(*) from sys.tables where object_id > @IDtabla)>0)
+										begin
+										declare @IdNuevaTabla bigint
+										declare @NombreTabla varchar(100)
+										select top 1 @IdNuevaTabla= object_id, @NombreTabla=name from sys.tables where object_id > @IDtabla
+										insert into Tablas values (@IdNuevaTabla, @NombreTabla)
+										set @IDtabla = @IdNuevaTabla
+										end
+									END
+									')
+									end");
+				access.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+		}
+
 		public void CrearVistaAdministradoresPorComplejo()
         {
 			AccessDB access = new AccessDB();
@@ -544,6 +577,20 @@ namespace Negocio
 
 									alter table Solicitudes
 									add constraint FK_IDReservaNueva_Solicitudes foreign key (IDReservaNueva) references Reservas(id)
+									
+									---------------------------------------
+									
+
+									create table Tablas(
+										IDTabla bigint not null,
+										Nombre varchar(100) not null
+									)
+									
+									alter table Tablas
+									add constraint PK_Tablas primary key (IDTabla)
+									
+									alter table Tablas
+									add constraint UNI_Nombre_Tablas unique(Nombre)
 
 									')
 									end");
@@ -901,6 +948,7 @@ namespace Negocio
 									
 									if exists (select * from sys.objects where name = 'Solicitudes')
 									Begin
+									Drop Table Tablas
 									Drop Table Solicitudes
 									Drop Table Debitos
 									Drop Table Reservas

@@ -24,6 +24,7 @@ namespace TPC_CacchioneMajdalani
         {
             //levantar un popup y volver a confirmar de borrar todo. Podríamos poner alguna contraseña del Dueño para confirmar
             ManagementDB managementDB = new ManagementDB(); //https://getbootstrap.com/docs/4.2/components/modal/ similar al pop-up, maxi nos dijo de usar este si mal no recuerdo
+            AccessDB access = new AccessDB();
             managementDB.BorrarTablas();
             managementDB.CrearTablasDB();
             managementDB.CrearSPIngresarUsuario();
@@ -34,6 +35,8 @@ namespace TPC_CacchioneMajdalani
             managementDB.CargarUsuarios();
             managementDB.CrearVistaAdministradoresPorComplejo();
             managementDB.CrearSpAgregarReserva();
+            managementDB.CrearSPCargarTablaDeTablas();
+            access.EjecutarStoredProcedure("CargarTablas");
             Session.Clear();
             Response.Redirect("~/Default"); //una vez borradas todas las tablas, en el mismo load de default se ejecuta todo (creación de tablas, SP, TR, inserts, etc)
         }

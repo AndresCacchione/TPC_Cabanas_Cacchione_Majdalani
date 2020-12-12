@@ -1,9 +1,7 @@
 -- para aprobar: --
-1) Calendario: a) Invstigar como pintar los días disponibles, y como 		  pintar de un color los días seleccionados (rango).
-		b) Investigar el back.
-2) Reservas.
-3) Mercado Pago: cómo funciona (validación de reserva por parte del Admin ??).
-4) Pop Ups.
+2) Reservas: agregar atributo con varchar indicando quien la aceptó o quien la rechazó y en caso de rechazo el motivo. string = "ID Admin: " + usuario.id.tostring + usuaio.nombreusuario + motivo.text
+4) Modals que disparan otros modals (cuando se quieren borrar los datos, que salten minimo 2 o 3 modals, con una frase tipo "¿Está seguro?"), asi hay mas "seguridad",
+y le varias posibilidades al administrador actual de confirmar ese pedido.
 5) ultimo) Validaciones en todas partes.
 
 -- para que quede mas cheto: --
@@ -11,6 +9,15 @@
 7) Si sobra tiempo: Solicitudes de cambios de reserva.
 8) Anulación de reserva.
 
--- Nivel DIOS:--
-9) Cookies.
-10) Administrador Session.
+
+En líneas generales hablamos de la funcionalidad de trackeo de los movimientos de los Administradores (creación, modificación, eliminación de cabañas, complejos, reservas, etc), y un listado donde indique la actividad de cada Administrador por fecha (funcionalidad para el dueño, por ejemplo). Habría que poder listar por administrador y por rango de fechas. Diría qué cambio hizo y en qué reserva, complejo, cabaña, etc y el motivo por el cual hizo ese cambio. Para esto crearíamos 2 tablas nuevas en la DB, con sus procedimientos correspondientes. También veríamos de agregar modals y triggers para dar de baja complejos y consultar qué quiere hacer el ejecutor con las reservas afectadas (todo esto quedaría registrado en la tabla de seguimientos o trackeo de actividad del administrador).
+Del lado del front, mejoraríamos... todo jaja! Todo lo que podamos, diseño, ubicación, colores, etc dentro del tiempo que tenemos.
+
+Parecen tareas que nos llevarían más de dos días, pero bueno, ambos tenemos más el objetivo de dejar el trabajo presentable aunque se nos vaya el tiempo y no lleguemos a mejorar nuestra nota.
+
+Las tablas que crearíamos serían:
+image.png
+También deberíamos darle uso a la parte de solicitudes de cambio de reservas, para que esta idea cobre real sentido, y agregarle una columna de descripción a la solicitud del cambio de reserva (para que el Cliente dé sus razones para pedir ese cambio).
+Por otro lado, también deberíamos agregar al complejo el mail del administrador de menor rango, para gestionar las reservas y los contactos de los clientes, así como los avisos de las nuevas solicitudes de los clientes. Para esto necesitamos hacer funcional la parte de setear el nivel de prioridad de los administradores y su complejo asociado por parte del administrador de mayor rango o del dueño.
+Se nos ocurren mil cosas, el tiempo es lo que falta.
+Otra opción de mejora sería la implementación de temporadas (tenemos la tabla en la DB también, sin usar), con la cual el cliente pagaría más o menos por las reservas según la fecha en que reserva, y setearíamos el % de diferencia. El seteo de temporadas lo tenemos por complejo. Podríamos pintar el calendario con distintos colores según la temporada en que se encuentre, para visualizar el cambio de temporada de una forma más intuitiva. El administrador del complejo debería setear las temporadas y los % de diferencia sobre el precio plano.
