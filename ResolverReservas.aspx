@@ -49,6 +49,10 @@
             </div>
         </div>
     </div>
+    <div class="form-group">
+        <label for="txtBoxMotivoCambio">Motivo cambio de estado:</label>
+        <asp:TextBox CssClass="form-control" runat="server" id="txtBoxMotivoCambio" MaxLength="255" required=""/>
+    </div>
                <%if(Convert.ToByte(Request.QueryString["Estado"])==1){ %>
     <asp:Button ID="btnConfirmada" Onclick="btnConfirmada_Click" class="btn btn-success mr-auto ml-auto" Text="Confirmada" runat="server" />
     <asp:Button ID="btnCancelada" OnClick="btnCancelada_Click" class="btn btn-danger mr-auto ml-auto" Text="Cancelada" runat="server" />

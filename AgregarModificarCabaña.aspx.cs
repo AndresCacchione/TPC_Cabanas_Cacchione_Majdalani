@@ -102,7 +102,7 @@ namespace TPC_CacchioneMajdalani
 
             catch (Exception ex)
             {
-                // Response.Redirect("Error.aspx");
+
                 throw ex;
             }
         }

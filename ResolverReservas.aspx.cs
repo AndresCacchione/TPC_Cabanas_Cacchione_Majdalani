@@ -13,24 +13,30 @@ namespace TPC_CacchioneMajdalani
     {
         public ResolverReservas()
         {
-           
+
             Reserva = new Reserva()
             {
-            Cliente = new Usuario(),
+                Cliente = new Usuario(),
                 Cabaña = new Cabaña()
             };
+            Administrador = new Administrador();
         }
+        public Administrador Administrador { get; set; }
+        public Complejo Complejo { get; set; }
         public Reserva Reserva { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session[Session.SessionID + "userSession"] != null ) //Si no está logueado, que redirija al login
+            if (Session[Session.SessionID + "userSession"] != null) //Si no está logueado, que redirija al login
             {
+
                 if (Request.QueryString["idReserva"] != null)
                 {
                     long IdReserva = Convert.ToInt64(Request.QueryString["idReserva"]);
                     // byte estado = Convert.ToByte(Request.QueryString["Estado"]);
                     ReservaNegocio NegocioReserva = new ReservaNegocio();
                     Reserva = NegocioReserva.ListarReservaPorId(IdReserva);
+                    Administrador.usuario = (Usuario)Session[Session.SessionID + "userSession"];
+
                 }
                 else
                 {
@@ -39,14 +45,15 @@ namespace TPC_CacchioneMajdalani
             }
             else
             {
-                Response.Redirect("~/Default");
+                Response.Redirect("~/Login");
             }
-          
+
 
         }
 
         protected void btnConfirmada_Click(object sender, EventArgs e)
         {
+            Seguimiento seguimiento = new Seguimiento();
             ReservaNegocio NegocioReserva = new ReservaNegocio();
             NegocioReserva.ResolverReserva(Reserva.ID, 2);
             EliminarSesionDeReservas();
@@ -56,6 +63,7 @@ namespace TPC_CacchioneMajdalani
         protected void btnCancelada_Click(object sender, EventArgs e)
         {
             ReservaNegocio NegocioReserva = new ReservaNegocio();
+
             NegocioReserva.ResolverReserva(Reserva.ID, 3);
             EliminarSesionDeReservas();
             Response.Redirect("~/VerReservas");
