@@ -54,6 +54,7 @@ namespace Negocio
         {
             Comando.CommandType = CommandType.StoredProcedure;
             Comando.CommandText = sp;
+            EjecutarAccion();
         }
 
         public int EjecutarStoredProcedureIntReturn(string sp)

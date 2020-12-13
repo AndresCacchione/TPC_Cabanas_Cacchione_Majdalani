@@ -107,26 +107,26 @@ namespace TPC_CacchioneMajdalani
             }
         }
 
-        protected void ValidadorTiempoEntre_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            //https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.webcontrols.customvalidator.clientvalidationfunction?view=netframework-4.8
-            try
-            {
-                TimeSpan TiempoAValidar = (Convert.ToDateTime(TiempoEntreReservas.Value)).TimeOfDay;
-                TimeSpan Tiempominimo = new TimeSpan(0, 0, 0);
-                if (TiempoAValidar > Tiempominimo)
-                {
-                    ValidadorTiempoEntre.IsValid = true;
-                }
-                else
-                {
-                    ValidadorTiempoEntre.IsValid = false;
-                }
-            }
-            catch (Exception)
-            {
-                Response.Redirect(Request.RawUrl);
-            }
-        }
+        //protected void ValidadorTiempoEntre_ServerValidate(object source, ServerValidateEventArgs args)
+        //{
+        //    //https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.webcontrols.customvalidator.clientvalidationfunction?view=netframework-4.8
+        //    try
+        //    {
+        //        TimeSpan TiempoAValidar = (Convert.ToDateTime(TiempoEntreReservas.Value)).TimeOfDay;
+        //        TimeSpan Tiempominimo = new TimeSpan(0, 0, 0);
+        //        if (TiempoAValidar > Tiempominimo)
+        //        {
+        //            ValidadorTiempoEntre.IsValid = true;
+        //        }
+        //        else
+        //        {
+        //            ValidadorTiempoEntre.IsValid = false;
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        Response.Redirect(Request.RawUrl);
+        //    }
+        //}
     }
 }

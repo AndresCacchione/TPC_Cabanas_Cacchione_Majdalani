@@ -3,8 +3,8 @@ go
 
 create table Seguimientos(
 	IDSeguimiento bigint not null identity(1,1),
-	IDAdmin bigint not null,
-	IDCliente bigint not null,
+	IDAdmin bigint null,
+	IDCliente bigint null,
 	Fecha date not null,
 	IDTabla bigint not null,
 	IDTablaAnterior bigint not null,
@@ -16,7 +16,7 @@ alter table Seguimientos
 add constraint PK_Seguimientos primary key(IDSeguimiento)
 go
 alter table Seguimientos
-add constraint FK_IDAdmin_Administradores_x_Complejo foreign key(IDAdmin) references Usuarios(ID)
+add constraint FK_IDAdmin_Usuarios foreign key(IDAdmin) references Usuarios(ID)
 go
 alter table Seguimientos
 add constraint FK_IDCliente_Usuarios foreign key(IDCliente) references Usuarios(ID)
@@ -24,15 +24,13 @@ go
 alter table Seguimientos
 add constraint FK_IDTabla_Tablas foreign key(IDTabla) references Tablas(IDTabla)
 go
-alter table Seguimientos
-add constraint FK_IDTablaAnterior_Tablas foreign key(IDTablaAnterior) references Tablas(IDTabla)
-
+alter table seguimientos
+add constraint CHK_SEGUIMIENTOS_IDNULL check (IDAdmin is not null or IDCliente is not null)
 go
 
 create procedure spCargarSeguimiento(
 	@IDAdmin bigint,
 	@IDCliente bigint,
-	@Fecha date,
 	@IDTabla bigint,
 	@IDTablaAnterior bigint,
 	@IDTablaNuevo bigint,
@@ -41,26 +39,37 @@ create procedure spCargarSeguimiento(
 as
 BEGIN
 begin try
-if @IDAdmin not in(select ID from Usuarios) or @IDAdmin is null
-begin
-raiserror('ID de administrador no válido', 16, 1)
-end
-if @IDCliente not in(select ID from Usuarios) or @IDCliente is null
-begin
-raiserror('ID de cliente no válido', 16, 1)
-end
-if @IDTabla not in(select IDTabla from Tablas) or @IDTabla is null
-begin
-raiserror('ID de tabla no válido', 16, 1)
-end
-if @IDTablaAnterior not in(select IDTabla from Tablas) or @IDTablaAnterior is null
+if @IDTablaAnterior not in(case when ((select t.Nombre from Tablas t where @IDTabla=t.IDTabla)='Reservas') then  
+							(select ID from Reservas)
+							when ((select t.Nombre from Tablas t where @IDTabla=t.IDTabla)='Complejos') then  
+							(select ID from Complejos)
+							when ((select t.Nombre from Tablas t where @IDTabla=t.IDTabla)='Cabañas') then  
+							(select ID from Cabañas)
+							when ((select t.Nombre from Tablas t where @IDTabla=t.IDTabla)='Clientes') then
+							(select Id from Usuarios where IdNivelAcceso < 20)
+							end)
+or @IDTablaAnterior is null
+or @IDTablaNuevo not in(case when ((select t.Nombre from Tablas t where @IDTabla=t.IDTabla)='Reservas') then  
+							(select ID from Reservas)
+							when ((select t.Nombre from Tablas t where @IDTabla=t.IDTabla)='Complejos') then  
+							(select ID from Complejos)
+							when ((select t.Nombre from Tablas t where @IDTabla=t.IDTabla)='Cabañas') then  
+							(select ID from Cabañas)
+							when ((select t.Nombre from Tablas t where @IDTabla=t.IDTabla)='Clientes') then
+							(select Id from Usuarios where IdNivelAcceso < 20)
+							end)
 begin
 raiserror('ID de tabla anterior no válido', 16, 1)
 end
-insert into Seguimientos values (@IDAdmin,@IDCliente,@Fecha,@IDTabla,@IDTablaAnterior,@IDTablaNuevo,@Motivo)
+
+insert into Seguimientos values (@IDAdmin,@IDCliente,GETDATE(),@IDTabla,@IDTablaAnterior,@IDTablaNuevo,@Motivo)
 end try
 
 begin catch
 print error_message()
 end catch
 END
+
+exec spCargarSeguimiento null, null, 1194487334, 1, null, 'prueba complejo'
+
+select * from Tablas

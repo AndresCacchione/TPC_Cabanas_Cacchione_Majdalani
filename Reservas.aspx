@@ -39,6 +39,7 @@
                     <label>Cantidad de personas</label>
                     <asp:TextBox AutoPostBack="true" runat="server" type="number" class="form-control" ID="CantidadDePersonas" placeholder="Cantidad" required="" />
                     <asp:RangeValidator ErrorMessage="Ingreso inválido" MinimumValue="1" Type="Integer" MaximumValue="250" ControlToValidate="CantidadDePersonas" ForeColor="Red" runat="server" />
+                    <asp:Label ID="lblMaximoPersonas" Text="Máximo de personas: <% %>" runat="server" />
                 </div>
                 <div class="form-group col-md-6">
                     <label>Importe</label>
@@ -47,7 +48,7 @@
                 </div>
             </div>
 
-            <asp:Button ID="Reservar" OnClick="Reservar_Click" Text="Reservar" class="btn btn-success mr-auto ml-auto" runat="server" />
+            <asp:Button AutoPostBack="true" ID="Reservar" OnClick="Reservar_Click" Text="Reservar" class="btn btn-success mr-auto ml-auto" runat="server" />
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

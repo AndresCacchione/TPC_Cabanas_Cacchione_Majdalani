@@ -31,6 +31,7 @@ namespace TPC_CacchioneMajdalani
                 Response.Redirect("~/Login");
             }
             CargarCabaña(idCabaña);
+            lblMaximoPersonas.Text = "Cantidad máxima de personas: " + reserva.Cabaña.Capacidad.ToString(); 
             reserva.Cliente = (Usuario)Session[Session.SessionID + "userSession"];
 
         }
@@ -100,38 +101,45 @@ namespace TPC_CacchioneMajdalani
         protected void Reservar_Click(object sender, EventArgs e)
         {
             //RESERVA
-            ReservaNegocio NegocioReserva = new ReservaNegocio();
-            GuardarReserva();
-            reserva.CantPersonas = Convert.ToByte(CantidadDePersonas.Text);
-            if (reserva.CantPersonas <= reserva.Cabaña.Capacidad && reserva.CantPersonas > 0)
+            if (FechaDeIngreso.Text != "" && FechaDeEgreso.Text != "")
             {
-                bool inserto = NegocioReserva.InsertarReserva(reserva);
-                //ENVIO DE MAIL AL USUARIO QUE RESERVO Y AL ADMINISTRADOR PARA QUE 
-                if (inserto)
+                ReservaNegocio NegocioReserva = new ReservaNegocio();
+                GuardarReserva();
+                reserva.CantPersonas = Convert.ToByte(CantidadDePersonas.Text);
+                if (reserva.CantPersonas <= reserva.Cabaña.Capacidad && reserva.CantPersonas > 0)
                 {
-                    ManagementEmail managementEmail = new ManagementEmail();
+                    bool inserto = NegocioReserva.InsertarReserva(reserva);
+                    //ENVIO DE MAIL AL USUARIO QUE RESERVO Y AL ADMINISTRADOR PARA QUE 
+                    if (inserto)
+                    {
+                        ManagementEmail managementEmail = new ManagementEmail();
 
-                    //DESPUES DE MANAGEMENT EMAIL INSERTAR POP UP
-                    //Envio mail a los admins
-                    managementEmail.EnviarEmails(MailDestino2(), "Alta de Reserva (Verficar pago)", CuerpoMail2());
-                    //Mail de cliente
-                    List<string> EmailCliente = new List<string>();
-                    EmailCliente.Add(reserva.Cliente.DatosPersonales.Email);
-                    /// SETEARLE AL ADMINISTRADOR EL MAIL DEL COMPLEJO QUE ADMINISTRA
-                    managementEmail.EnviarEmails(EmailCliente, "Enviar comprobante de pago AL MAIL COMPLEJO", CuerpoMail2());
-                    EliminarSesionDeReservas();
-                    Response.Redirect("~/VerReservas");
+                        //DESPUES DE MANAGEMENT EMAIL INSERTAR POP UP
+                        //Envio mail a los admins
+                        managementEmail.EnviarEmails(MailDestino2(), "Alta de Reserva (Verficar pago)", CuerpoMail2());
+                        //Mail de cliente
+                        List<string> EmailCliente = new List<string>();
+                        EmailCliente.Add(reserva.Cliente.DatosPersonales.Email);
+                        /// SETEARLE AL ADMINISTRADOR EL MAIL DEL COMPLEJO QUE ADMINISTRA
+                        managementEmail.EnviarEmails(EmailCliente, "Enviar comprobante de pago AL MAIL COMPLEJO", CuerpoMail2());
+                        EliminarSesionDeReservas();
+                        Response.Redirect("~/VerReservas");
+                    }
+                    else
+                    {
+                        LblCalendario.Text = "Verifique los datos ingresados ";
+                    }
                 }
                 else
                 {
-                    LblCalendario.Text = "Verifique los datos ingresados ";
+
+                    LblCalendario.Text = "Verifique la cantidad de personas ";
+
                 }
             }
             else
             {
-
-                LblCalendario.Text = "Verifique la cantidad de personas ";
-
+                LblCalendario.Text = "Seleccione las fechas del calendario";
             }
 
         }
@@ -148,8 +156,8 @@ namespace TPC_CacchioneMajdalani
             Session.Remove("ListaDeReservasCaducas3");
             Session.Remove("ListaDeReservasVigentes1");
             Session.Remove("ListaDeReservasVigentes2");
-            Session.Remove("ListaDeReservasVigentes3"); 
-
+            Session.Remove("ListaDeReservasVigentes3");
+            Session.Remove("fechasDelCalendario");
         }
         private string CuerpoMail2()
         {
@@ -230,7 +238,7 @@ Mail              : {reserva.Cliente.DatosPersonales.Email}
 
             //if (Fechas.Keys.Count() == 2)
             //{
-                Calendar1.SelectedDates.SelectRange(Fechas["fechaIngreso"], Fechas["fechaEgreso"]);
+            Calendar1.SelectedDates.SelectRange(Fechas["fechaIngreso"], Fechas["fechaEgreso"]);
             //}
 
             Session.Add("fechasDelCalendario", Fechas);
@@ -244,13 +252,13 @@ Mail              : {reserva.Cliente.DatosPersonales.Email}
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
         {
             CabañaNegocio cabañaNegocio = new CabañaNegocio();
-            
+
             List<List<DateTime>> Ocupado = cabañaNegocio.ListaOcupadoPorCabaña(reserva.Cabaña.Id);
 
             //Parche para inicializar la lista con algún item y que entre en el foreach
-            if (Ocupado.Count==0)
+            if (Ocupado.Count == 0)
             {
-                List<DateTime> aux = new List<DateTime>{Convert.ToDateTime("01/01/2000")};
+                List<DateTime> aux = new List<DateTime> { Convert.ToDateTime("01/01/2000") };
                 Ocupado.Add(aux);
             }
 

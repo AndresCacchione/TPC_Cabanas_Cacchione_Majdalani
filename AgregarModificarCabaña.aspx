@@ -9,8 +9,8 @@
         </div>
         <div class="form-group col-md-6">
             <label for="inputTiempoEntreReservas">Tiempo entre reservas (%)</label>
-            <input type="time" class="form-control" id="TiempoEntreReservas" placeholder="HH-MM-SS" required runat="server">
-            <asp:CustomValidator ID="ValidadorTiempoEntre" OnServerValidate="ValidadorTiempoEntre_ServerValidate" ErrorMessage="El tiempo entre reservas debe ser positivo" ControlToValidate="TiempoEntreReservas" runat="server" />
+            <input type="time" class="form-control" id="TiempoEntreReservas" placeholder="HH-MM" required runat="server">
+<%--            <asp:CustomValidator ID="ValidadorTiempoEntre" OnServerValidate="ValidadorTiempoEntre_ServerValidate" ErrorMessage="El tiempo entre reservas debe ser positivo" ControlToValidate="TiempoEntreReservas" runat="server" />--%>
         </div>
 
     </div>
@@ -23,7 +23,7 @@
         </div>
         <div class="form-group col-md-6">
             <label for="inputCheckIn">Hora Recepcion</label>
-            <input type="time" class="form-control" id="CheckIn" placeholder="HH-MM-SS" required runat="server">
+            <input type="time" class="form-control" id="CheckIn" placeholder="HH-MM" required runat="server">
         </div>
     </div>
     <div class="form-row">
@@ -35,7 +35,7 @@
         </div>
         <div class="form-group col-md-6">
             <label for="inputCheckOut">Hora Salida</label>
-            <input type="time" class="form-control" id="CheckOut" placeholder="HH-MM-SS" required runat="server">
+            <input type="time" class="form-control" id="CheckOut" placeholder="HH-MM" required runat="server">
         </div>
     </div>
 

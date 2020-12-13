@@ -12,7 +12,9 @@ alter table Tablas
 add constraint UNI_Nombre_Tablas unique(Nombre)
 go
 
-create procedure CargarTablas
+if not exists(select * from sys.objects where name = 'CargarTablas')
+begin
+exec('create procedure CargarTablas
 as
 BEGIN
 declare @IDtabla bigint
@@ -26,5 +28,7 @@ while((select COUNT(*) from sys.tables where object_id > @IDtabla)>0)
 	set @IDtabla = @IdNuevaTabla
 	end
 END
+')
+end
 
 exec CargarTablas
