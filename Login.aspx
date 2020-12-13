@@ -11,11 +11,11 @@
         <input type="password" class="form-control" id="Contraseña" placeholder="Contraseña" required runat="server">
     </div>
 
+    <p>
+        <asp:Label Font-Bold="true" Font-Size="Medium" ID="lblErrorLogin" ForeColor="Red" Visible="false" Text="Usuario y/o contraseña incorrectos" runat="server" />
+    </p>
     <asp:Button ID="btnLogin" Text="Iniciar Sesión" runat="server" class="btn btn-success mr-auto ml-auto" OnClick="btnLogin_Click" />
     <a href="RegistrarUsuario.aspx" class="btn btn-success mr-auto ml-auto">Registrarse</a>
     <div>
-        <p>
-            <asp:Label Font-Bold="true" Font-Size="Medium" ID="lblErrorLogin" Visible="false" Text="Usuario y/o contraseña incorrectos" runat="server" />
-        </p>
     </div>
 </asp:Content>

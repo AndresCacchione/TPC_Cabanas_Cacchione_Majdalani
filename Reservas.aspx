@@ -48,7 +48,7 @@
                 </div>
             </div>
 
-            <asp:Button AutoPostBack="true" ID="Reservar" OnClick="Reservar_Click" Text="Reservar" class="btn btn-success mr-auto ml-auto" runat="server" />
         </ContentTemplate>
     </asp:UpdatePanel>
+            <asp:Button ID="Reservar" OnClick="Reservar_Click" Text="Reservar" class="btn btn-success mr-auto ml-auto" runat="server" />
 </asp:Content>

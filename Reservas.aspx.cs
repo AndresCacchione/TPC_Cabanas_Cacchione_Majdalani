@@ -22,7 +22,6 @@ namespace TPC_CacchioneMajdalani
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             CargarDiccionarioFechas();
             long idCabaña = Convert.ToInt64(Request.QueryString["idCabaña"]);
 

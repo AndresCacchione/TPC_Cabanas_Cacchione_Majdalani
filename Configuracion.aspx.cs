@@ -37,6 +37,7 @@ namespace TPC_CacchioneMajdalani
             managementDB.CrearSpAgregarReserva();
             managementDB.CrearSPCargarTablaDeTablas();
             access.EjecutarStoredProcedure("CargarTablas");
+            managementDB.CrearSPInsertarSeguimiento();
             Session.Clear();
             Response.Redirect("~/Default"); //una vez borradas todas las tablas, en el mismo load de default se ejecuta todo (creación de tablas, SP, TR, inserts, etc)
         }
