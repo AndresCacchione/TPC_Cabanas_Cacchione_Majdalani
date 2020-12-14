@@ -73,6 +73,10 @@ end catch
 END')
 end
 
-exec spCargarSeguimiento 1, null, 359008360, 1, null, 'prueba complejo'
+
+
+exec spCargarSeguimiento 2, 2, 1111011039, 1, null, 'Motivo: safdasdfasdfasdfasdfasdfCambio en Reserva.Estado anterior: 1Estado actualizado: 3 .- Administrador:Admin, Cliente:Admin,  ID Tabla Anterior:1'
 
 select * from Seguimientos
+
+select * from tablas

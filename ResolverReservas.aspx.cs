@@ -20,9 +20,15 @@ namespace TPC_CacchioneMajdalani
                 Cabaña = new Cabaña()
             };
             Administrador = new Administrador();
+            Seguimiento = new Seguimiento();
+            //{
+            //    IDTablaNuevo = null,
+            //    IDAdmin = null,
+            //    IDCliente = null
+            //};
         }
         public Administrador Administrador { get; set; }
-        public Complejo Complejo { get; set; }
+        public Seguimiento Seguimiento { get; set; }
         public Reserva Reserva { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -47,27 +53,18 @@ namespace TPC_CacchioneMajdalani
             {
                 Response.Redirect("~/Login");
             }
-
-
         }
 
         protected void btnConfirmada_Click(object sender, EventArgs e)
         {
-            Seguimiento seguimiento = new Seguimiento();
             ReservaNegocio NegocioReserva = new ReservaNegocio();
+            txtMotivo.Text = "Confirmación alta.";
+            GuardarFormularioSeguimiento(2);
             NegocioReserva.ResolverReserva(Reserva.ID, 2);
             EliminarSesionDeReservas();
             Response.Redirect("~/VerReservas");
         }
 
-        protected void btnCancelada_Click(object sender, EventArgs e)
-        {
-            ReservaNegocio NegocioReserva = new ReservaNegocio();
-
-            NegocioReserva.ResolverReserva(Reserva.ID, 3);
-            EliminarSesionDeReservas();
-            Response.Redirect("~/VerReservas");
-        }
         public void EliminarSesionDeReservas()
         {
             Session.Remove("ListaDeReservasPorUsuarioVigente1");
@@ -82,7 +79,28 @@ namespace TPC_CacchioneMajdalani
             Session.Remove("ListaDeReservasVigentes1");
             Session.Remove("ListaDeReservasVigentes2");
             Session.Remove("ListaDeReservasVigentes3");
+        }
 
+        public void GuardarFormularioSeguimiento(byte nuevoEstado)
+        {
+            SeguimientoNegocio seguimientoNegocio = new SeguimientoNegocio();
+            Seguimiento.IDAdmin = ((Usuario)Session[Session.SessionID + "userSession"]).Id;
+            Seguimiento.IDCliente = Reserva.Cliente.Id;
+            Seguimiento.IDTabla = seguimientoNegocio.GetIDTabla("Reservas");
+            Seguimiento.IDTablaAnterior = Reserva.ID;
+            Seguimiento.Motivo = "Motivo: "+ txtMotivo.Text + "Cambio en Reserva." + "Estado anterior: "+ Reserva.Estado +
+                "Estado actualizado: "+nuevoEstado.ToString() + " .- Administrador:" + Administrador.usuario.NombreUsuario +
+                ", Cliente:" + Reserva.Cliente.NombreUsuario + ", " + " ID Tabla Anterior:" + Seguimiento.IDTablaAnterior;
+            seguimientoNegocio.GuardarSeguimiento(Seguimiento);
+        }
+
+        protected void btnCancelarReserva_Click(object sender, EventArgs e)
+        {
+            ReservaNegocio NegocioReserva = new ReservaNegocio();
+            GuardarFormularioSeguimiento(3);
+            NegocioReserva.ResolverReserva(Reserva.ID, 3);
+            EliminarSesionDeReservas();
+            Response.Redirect("~/VerReservas");
         }
     }
 }

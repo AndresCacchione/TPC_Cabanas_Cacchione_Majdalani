@@ -50,19 +50,40 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="txtBoxMotivoCambio">Motivo cambio de estado:</label>
-        <asp:TextBox CssClass="form-control" runat="server" id="txtBoxMotivoCambio" MaxLength="255" required=""/>
+ 
     </div>
                <%if(Convert.ToByte(Request.QueryString["Estado"])==1){ %>
     <asp:Button ID="btnConfirmada" Onclick="btnConfirmada_Click" class="btn btn-success mr-auto ml-auto" Text="Confirmada" runat="server" />
-    <asp:Button ID="btnCancelada" OnClick="btnCancelada_Click" class="btn btn-danger mr-auto ml-auto" Text="Cancelada" runat="server" />
+    <asp:Button ID="btnCanceladaPendiente" data-toggle="modal" data-target="#modalCancelar" class="btn btn-danger mr-auto ml-auto" Text="Cancelada" runat="server" />
                   <%} %>
             <%if(Convert.ToByte(Request.QueryString["Estado"])==2){ %>
-    <asp:Button ID="Button2" OnClick="btnCancelada_Click" class="btn btn-danger mr-auto ml-auto" Text="Cancelada" runat="server" />
+    <asp:Button ID="btnCanceladaConfirmada" data-toggle="modal" data-target="#modalCancelar" class="btn btn-danger mr-auto ml-auto" Text="Cancelada" runat="server" />
                   <%} %>
                    <%if(Convert.ToByte(Request.QueryString["Estado"])==3){ %>
     <p>No se puede modificar el Estado de la Reserva </p>
     <%} %>
+
+        <div class="modal fade" id="modalCancelar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Motivo de la cancelación </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <asp:TextBox TextMode="MultiLine" runat="server" id="txtMotivo"/>
+                    <asp:RequiredFieldValidator ErrorMessage="Motivo requerido" ControlToValidate="txtMotivo" ForeColor="Red" runat="server" />                        
+                    <asp:RegularExpressionValidator ErrorMessage="Describir motivo entre 20 y 100 caracteres" ControlToValidate="txtMotivo" ValidationExpression=".{20,100}$" runat="server" />
+                </div>
+                <div class="modal-footer">
+                    <asp:Button ID="btnCancelarReserva" runat="server" type="button" class="btn btn-primary" Text="Confirmar cancelación" OnClick="btnCancelarReserva_Click" />
+                    <asp:Button ID="btnCancelar" runat="server" type="button" class="btn btn-secondary" data-dismiss="modal" Text="Volver" />
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 </asp:Content>

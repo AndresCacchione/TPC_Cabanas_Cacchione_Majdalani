@@ -21,3 +21,4 @@ C:\Users\jeronimo\Desktop\Nueva carpeta\TPC_Cabanas_Cacchione_Majdalani\Dominio\
 C:\Users\jeronimo\Desktop\Nueva carpeta\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
 C:\Users\jeronimo\Desktop\Nueva carpeta\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Debug\Dominio.dll
 C:\Users\jeronimo\Desktop\Nueva carpeta\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Debug\Dominio.pdb
+C:\Users\Andres\OneDrive\Documentos\GitHub\TPC - Cabañas\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Debug\Dominio.csprojAssemblyReference.cache

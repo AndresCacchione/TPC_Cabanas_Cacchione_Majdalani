@@ -15,15 +15,6 @@ namespace TPC_CacchioneMajdalani
     {
 
         /// <summary>
-        /// txtBoxMotivoCambio control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBoxMotivoCambio;
-
-        /// <summary>
         /// btnConfirmada control.
         /// </summary>
         /// <remarks>
@@ -33,21 +24,48 @@ namespace TPC_CacchioneMajdalani
         protected global::System.Web.UI.WebControls.Button btnConfirmada;
 
         /// <summary>
-        /// btnCancelada control.
+        /// btnCanceladaPendiente control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelada;
+        protected global::System.Web.UI.WebControls.Button btnCanceladaPendiente;
 
         /// <summary>
-        /// Button2 control.
+        /// btnCanceladaConfirmada control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button btnCanceladaConfirmada;
+
+        /// <summary>
+        /// txtMotivo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMotivo;
+
+        /// <summary>
+        /// btnCancelarReserva control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelarReserva;
+
+        /// <summary>
+        /// btnCancelar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelar;
     }
 }
