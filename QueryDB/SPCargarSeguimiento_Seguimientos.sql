@@ -75,7 +75,7 @@ end
 
 
 
-exec spCargarSeguimiento 2, 2, 1111011039, 1, null, 'Motivo: safdasdfasdfasdfasdfasdfCambio en Reserva.Estado anterior: 1Estado actualizado: 3 .- Administrador:Admin, Cliente:Admin,  ID Tabla Anterior:1'
+exec spCargarSeguimiento 2, 2, 1378819974, 1, null, 'Motivo: safdasdfasdfasdfasdfasdfCambio en Reserva.Estado anterior: 1Estado actualizado: 3 .- Administrador:Admin, Cliente:Admin,  ID Tabla Anterior:1'
 
 select * from Seguimientos
 

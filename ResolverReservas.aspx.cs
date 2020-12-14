@@ -55,16 +55,6 @@ namespace TPC_CacchioneMajdalani
             }
         }
 
-        protected void btnConfirmada_Click(object sender, EventArgs e)
-        {
-            ReservaNegocio NegocioReserva = new ReservaNegocio();
-            txtMotivo.Text = "Confirmación alta.";
-            GuardarFormularioSeguimiento(2);
-            NegocioReserva.ResolverReserva(Reserva.ID, 2);
-            EliminarSesionDeReservas();
-            Response.Redirect("~/VerReservas");
-        }
-
         public void EliminarSesionDeReservas()
         {
             Session.Remove("ListaDeReservasPorUsuarioVigente1");
@@ -99,6 +89,16 @@ namespace TPC_CacchioneMajdalani
             ReservaNegocio NegocioReserva = new ReservaNegocio();
             GuardarFormularioSeguimiento(3);
             NegocioReserva.ResolverReserva(Reserva.ID, 3);
+            EliminarSesionDeReservas();
+            Response.Redirect("~/VerReservas");
+        }
+
+        protected void btnConfirmada_Click(object sender, EventArgs e)
+        {
+            ReservaNegocio NegocioReserva = new ReservaNegocio();
+            txtMotivo.Text = "Confirmación alta.";
+            GuardarFormularioSeguimiento(2);
+            NegocioReserva.ResolverReserva(Reserva.ID, 2);
             EliminarSesionDeReservas();
             Response.Redirect("~/VerReservas");
         }

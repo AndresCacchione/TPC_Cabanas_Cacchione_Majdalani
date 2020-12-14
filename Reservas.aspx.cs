@@ -15,11 +15,12 @@ namespace TPC_CacchioneMajdalani
         {
             reserva = new Reserva();
             Fechas = new Dictionary<string, DateTime>();
+            ListaReservas = new List<Reserva>();
         }
 
         public Reserva reserva { get; set; }
         public Dictionary<string, DateTime> Fechas { get; set; }
-
+        public List<Reserva> ListaReservas { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             CargarDiccionarioFechas();
@@ -30,7 +31,7 @@ namespace TPC_CacchioneMajdalani
                 Response.Redirect("~/Login");
             }
             CargarCabaña(idCabaña);
-            lblMaximoPersonas.Text = "Cantidad máxima de personas: " + reserva.Cabaña.Capacidad.ToString(); 
+            lblMaximoPersonas.Text = "Cantidad máxima de personas: " + reserva.Cabaña.Capacidad.ToString();
             reserva.Cliente = (Usuario)Session[Session.SessionID + "userSession"];
 
         }
@@ -123,6 +124,19 @@ namespace TPC_CacchioneMajdalani
                         managementEmail.EnviarEmails(EmailCliente, "Enviar comprobante de pago AL MAIL COMPLEJO", CuerpoMail2());
                         EliminarSesionDeReservas();
                         Response.Redirect("~/VerReservas");
+                        if (ListaReservas == null)
+                        {
+                            Session.Add("listaReservas", ListaReservas);
+                            ListaReservas.Add(reserva);
+                            Session["listaReservas"] = ListaReservas;
+                        }
+                        else
+                        {
+                            ListaReservas = (List<Reserva>)Session["listaReservas"];
+                            ListaReservas.Add(reserva);
+                            Session["listaReservas"] = ListaReservas;
+                        }
+
                     }
                     else
                     {

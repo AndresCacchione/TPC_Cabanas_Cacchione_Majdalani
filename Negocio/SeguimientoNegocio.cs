@@ -19,7 +19,7 @@ namespace Negocio
                 access.AgregarParametroSP("@IDCliente", seguimiento.IDCliente, SqlDbType.BigInt);
                 access.AgregarParametroSP("@IDTabla", seguimiento.IDTabla, SqlDbType.BigInt);
                 access.AgregarParametroSP("@IDTablaAnterior", seguimiento.IDTablaAnterior, SqlDbType.BigInt);
-                access.AgregarParametroSP("@IDTablaNuevo", seguimiento.IDTablaNuevo, SqlDbType.BigInt);
+                access.AgregarParametroSP("@IDTablaNuevo", DBNull.Value, SqlDbType.BigInt);
                 access.AgregarParametroSP("@Motivo", seguimiento.Motivo, SqlDbType.VarChar);
                 access.EjecutarStoredProcedure("spCargarSeguimiento");
             }
