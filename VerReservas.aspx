@@ -1,23 +1,34 @@
 ﻿<%@ Page Title="VerReservas" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="VerReservas.aspx.cs" Inherits="TPC_CacchioneMajdalani.VerReservas" %>
 
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+<link href="Estilos.css" rel="stylesheet" />
 
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
-            <asp:DropDownList AutoPostBack="true" OnTextChanged="DDLReservaEstados_TextChanged" ID="DDLReservaEstados" runat="server">
-                <asp:ListItem Text="Pendientes" Value="1" />
-                <asp:ListItem Text="Confirmadas" Value="2" />
-                <asp:ListItem Text="Canceladas" Value="3" />
-            </asp:DropDownList>
-
-            <asp:DropDownList AutoPostBack="true" OnTextChanged="DDLReservaVigencia_TextChanged" ID="DDLReservaVigencia" runat="server">
-                <asp:ListItem Text="Vigente" Value="1" />
-                <asp:ListItem Text="Caduca" Value="2" />
-            </asp:DropDownList>
-        
+            <div class="row" style="padding:2%"> 
+                <div style="margin:0% 0% 0% 20%">
+                <asp:DropDownList CssClass="form-control" AutoPostBack="true" OnTextChanged="DDLReservaEstados_TextChanged" ID="DDLReservaEstados" runat="server">
+                    <asp:ListItem Text="Pendientes" Value="1" />
+                    <asp:ListItem Text="Confirmadas" Value="2" />
+                    <asp:ListItem Text="Canceladas" Value="3" />
+                </asp:DropDownList>
+                </div>
+                <div style="margin:0% 0% 0% 30%">   
+                <asp:DropDownList CssClass="form-control" AutoPostBack="true" OnTextChanged="DDLReservaVigencia_TextChanged" ID="DDLReservaVigencia" runat="server">
+                    <asp:ListItem Text="Vigente" Value="1" />
+                    <asp:ListItem Text="Caduca" Value="2" />
+                </asp:DropDownList>
+                </div>
+            </div>
    </ContentTemplate>
     </asp:UpdatePanel>
-    <div class="container">
+    
+    <%if (ListaDeReservas.Count() == 0)
+        {%>
+    <asp:Label CssClass="labelAdvertisement" Text="Sin resultados, intente con otra opción de las listas" runat="server" />
+    <%} %>
+    <div class="container" style="padding:2%">
         <div class="row">
             <div class="col">
                 <table class="table">
@@ -61,31 +72,23 @@
                             <th scope="row" style="width: 100px"><% = item.CantPersonas %></th>
 
                             <th scope="row" style="width: 60px"><% = item.Importe%></th>
-                              <%if (Session[Session.SessionID + "userSession"] != null && ((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20)
+                              <%if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso >= 20)
                             { %>
                                       <%if (item.Estado == 1) { %><th scope="row" style="width: 60px"> <a href="ResolverReservas.aspx?idReserva=<%=item.ID.ToString()%>&Estado=<%=item.Estado %>" class="btn btn-warning mr-auto ml-auto">Pendiente</a>  </th><%} %>
                                       <%if (item.Estado == 2) { %><th scope="row" style="width: 60px"> <a href="ResolverReservas.aspx?idReserva=<%=item.ID.ToString()%>&Estado=<%=item.Estado %>" class="btn btn-success mr-auto ml-auto">Confirmada</a> </th><%} %>
                                       <%if (item.Estado == 3) { %><th scope="row" style="width: 60px"> <a href="ResolverReservas.aspx?idReserva=<%=item.ID.ToString()%>&Estado=<%=item.Estado %>" class="btn btn-danger mr-auto ml-auto">Cancelada</a>  </th><%} %>
                                  <th scope="row" style="width: 60px"> <a href="ModificarReserva.aspx?idReserva=<%=item.ID.ToString()%>" class="btn btn-secondary mr-auto ml-auto">Modificar</a>  </th>
-                            <%} %>
-
-                              <%if (Session[Session.SessionID + "userSession"] != null && ((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso == 10)
+                            <%} 
+                                else
                                   { %>
                                       <%if (item.Estado == 1) { %><th scope="row" style="width: 60px">       <button type="button" class="btn btn-warning mr-auto ml-auto"> Pendiente</button> </th><%} %>
                                       <%if (item.Estado == 2) { %><th scope="row" style="width: 60px">        <button type="button" class="btn btn-success mr-auto ml-auto"> Confirmada</button> </th><%} %>
                                       <%if (item.Estado == 3) { %><th scope="row" style="width: 60px">        <button type="button" class="btn btn-danger mr-auto ml-auto"> Cancelada</button> </th><%} %>
-                             
-                           
                             <%} %>
                             </td>
                     </tr>
 
-                    <% }
-                        else
-                        {
-                    %>
-                    <asp:Label Text="Sin resultados, intente con otra opción de las listas" runat="server" />
-                    <%} %>
+                         <% } %>
                 </table>
             </div>
         </div>

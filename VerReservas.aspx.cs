@@ -172,7 +172,6 @@ namespace TPC_CacchioneMajdalani
             }
         }
 
-
         private void ListarReservasCaducas(byte estado)
         {
             ReservaNegocio NegocioReserva = new ReservaNegocio();
@@ -204,17 +203,11 @@ namespace TPC_CacchioneMajdalani
         protected void DDLReservaVigencia_TextChanged(object sender, EventArgs e)
         {
             Response.Redirect("VerReservas.aspx?IndexEstados=" + Convert.ToString(DDLReservaEstados.SelectedIndex) + "&IndexVigencia=" + Convert.ToString(DDLReservaVigencia.SelectedIndex)); 
-        
         }
 
         protected void DDLReservaEstados_TextChanged(object sender, EventArgs e)
         {
             Response.Redirect("VerReservas.aspx?IndexEstados=" + Convert.ToString(DDLReservaEstados.SelectedIndex) + "&IndexVigencia=" + Convert.ToString(DDLReservaVigencia.SelectedIndex));
-        }
-
-        protected void BtnCancelarReservaPorUsuario_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

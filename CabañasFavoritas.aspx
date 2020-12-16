@@ -27,7 +27,10 @@
 
                             <th scope="row"><% = item.Capacidad %></th>
 
-                            <th scope="row"><a class="btn btn-danger mr-auto ml-auto" href="CabañasFavoritas.aspx?idQuitar=<% = item.Id.ToString() %>">Eliminar</a></th>
+                            <th scope="row">
+                                <a class="btn btn-danger mr-auto ml-auto" href="CabañasFavoritas.aspx?idQuitar=<% = item.Id.ToString() %>">Eliminar</a>
+                                <a href="Reservas.aspx?idCabaña=<%=item.Id.ToString() %>" class="btn btn-success mr-auto ml-auto">Reservar</a>
+                            </th>
 
                         </td>
                     </tr>

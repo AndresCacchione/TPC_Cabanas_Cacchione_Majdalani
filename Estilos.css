@@ -15,8 +15,17 @@ body {
     font: 11px Tahoma;
     /*color: #929292;*/
 }
+
+.labelAdvertisement {
+    padding: 0% 0% 0% 27%;
+    color: saddlebrown;
+    font-weight: 700;
+    font-size: 1.5em;
+}
+
+
 .standout {
-  color: red;
+    color: red;
 }
 .emphasized {
   font-style: italic;
