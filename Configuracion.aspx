@@ -1,10 +1,12 @@
 ﻿<%@ Page Title="Vaciar la Base de Datos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Configuracion.aspx.cs" Inherits="TPC_CacchioneMajdalani.Configuracion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
-    <button type="button" class="btn btn-danger mr-auto ml-auto" data-toggle="modal" data-target="#exampleModal">
+    <div class="container" style="padding: 20% 0% 0% 45%">
+            <button type="button" class="btn btn-danger mr-auto ml-auto" data-toggle="modal" data-target="#exampleModal">
         Borrar Datos</button>
     <!-- Button trigger modal -->
+    </div>
+
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

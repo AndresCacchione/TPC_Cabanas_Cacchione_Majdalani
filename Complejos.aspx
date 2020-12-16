@@ -22,13 +22,13 @@
 
     <%foreach (Dominio.Complejo item in ListaComplejosLocal)
         {%>
-
-    <table class="table">
+    <div class="container" style="padding:2% 0 0 0">
+            <table class="table">
         <tr>
             <td>
                 <img src="<%=item.Imagen%>" class="card-img-top" alt="..." style="width: 300px;"></td>
-            <td><%=item.Nombre%></td>
-            <td><%=item.Ubicacion%> </td>
+            <td style="font-size: medium; font-weight: 600;"><%=item.Nombre%></td>
+            <td style="font-size: medium; font-weight: 600;"><%=item.Ubicacion%> </td>
             <td><a href="DetalleComplejo.aspx?idComplejo=<%=item.ID.ToString()%>" class="btn btn-primary mr-auto ml-auto">Detalle</a></td>
             <td><a href="Cabañas.aspx?idComplejo=<%=item.ID.ToString()%>" class="btn btn-primary mr-auto ml-auto">Cabañas</a></td>
             <%if (UsuarioActual != null && UsuarioActual.NivelAcceso >= 20 && ((List<Dominio.Complejo>)Session["listaComplejos"]).Count() != 0)
@@ -39,6 +39,8 @@
             <% } %>
         </tr>
     </table>
+    </div>
+
     <%}
     %>
 </asp:Content>

@@ -27,21 +27,21 @@
             <div class="container-calendario-cuerpo" style="padding: 2% 0% 0% 7%">
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>Fecha de Ingreso</label>
+                        <label style="font-size: small; font-weight: 600;">Fecha de Ingreso</label>
                         <asp:TextBox MaxLength="10" AutoPostBack="true" ReadOnly="true" type="text" class="form-control" ID="FechaDeIngreso" runat="server" />
-                        <label>Hora de Checkin</label>
+                        <label style="font-size: small; font-weight: 600;">Hora de Checkin</label>
                         <asp:TextBox ReadOnly="true" AutoPostBack="true" ID="HoraIngreso" class="form-control" type="text" runat="server" />
-                        <label>Cantidad de personas</label>
+                        <label style="font-size: small; font-weight: 600;">Cantidad de personas</label>
                         <asp:TextBox AutoPostBack="true" runat="server" type="number" class="form-control" ID="CantidadDePersonas" placeholder="Cantidad" />
                         <asp:RangeValidator ErrorMessage="Ingreso inválido" MinimumValue="1" Type="Integer" MaximumValue="250" ControlToValidate="CantidadDePersonas" ForeColor="Red" runat="server" />
-                        <asp:Label ID="lblMaximoPersonas" runat="server" />
+                        <asp:Label style="font-size: small; font-weight: 600;" ID="lblMaximoPersonas" runat="server" />
                     </div>
                     <div class="form-group col-md-6">
-                        <label>Fecha de Egreso</label>
+                        <label style="font-size: small; font-weight: 600;">Fecha de Egreso</label>
                         <asp:TextBox MaxLength="10" AutoPostBack="true" ReadOnly="true" runat="server" type="text" class="form-control" ID="FechaDeEgreso" />
-                        <label>Hora de Checkout</label>
+                        <label style="font-size: small; font-weight: 600;">Hora de Checkout</label>
                         <asp:TextBox ReadOnly="true" AutoPostBack="true" ID="HoraEgreso" class="form-control" type="text" runat="server" />
-                        <label>Importe</label>
+                        <label style="font-size: small; font-weight: 600;">Importe</label>
                         <asp:TextBox ReadOnly="true" AutoPostBack="true" ID="importes" class="form-control" type="text" runat="server" />
                     </div>
                 </div>

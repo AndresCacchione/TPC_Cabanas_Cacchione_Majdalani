@@ -11,14 +11,14 @@ namespace TPC_CacchioneMajdalani
 {
     public partial class VerReservas : Page
     {
-        public Dictionary<string,int> EstadosDeReserva { get; set; }
+        public Dictionary<string, int> EstadosDeReserva { get; set; }
         public VerReservas()
         {
             ListaDeReservas = new List<Reserva>();
             EstadosDeReserva = new Dictionary<string, int>()
             {
                 {"Vigente",1 },{"Caduca",2 },{"Cancelada",3 }
-            };   
+            };
         }
         public List<Reserva> ListaDeReservas { get; set; }
         protected void Page_Load(object sender, EventArgs e)
@@ -48,9 +48,9 @@ namespace TPC_CacchioneMajdalani
                     break;
                 case ("Pendientes"):
                     {
-                            if (DDLReservaVigencia.SelectedItem.Text=="Vigente")
-                            {
-                            if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso == 10)
+                        if (DDLReservaVigencia.SelectedItem.Text == "Vigente")
+                        {
+                            if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso < 20)
                             {
                                 ListarReservasPorUsuarioVigentes(Convert.ToInt64(((Dominio.Usuario)Session[Session.SessionID + "userSession"]).Id), 1);
                             }
@@ -60,10 +60,10 @@ namespace TPC_CacchioneMajdalani
 
                             }
 
-                            }
-                        if(DDLReservaVigencia.SelectedItem.Text == "Caduca")
-                        { 
-                            if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso == 10)
+                        }
+                        if (DDLReservaVigencia.SelectedItem.Text == "Caduca")
+                        {
+                            if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso < 20)
                             {
                                 ListarReservasPorUsuarioCaducas(Convert.ToInt64(((Dominio.Usuario)Session[Session.SessionID + "userSession"]).Id), 1);
                             }
@@ -72,15 +72,15 @@ namespace TPC_CacchioneMajdalani
                                 ListarReservasCaducas(1);
 
                             }
-                            
+
                         }
                     }
                     break;
                 case ("Confirmadas"):
-                    { 
+                    {
                         if (DDLReservaVigencia.SelectedItem.Text == "Vigente")
                         {
-                            if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso == 10)
+                            if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso < 20)
                             {
                                 ListarReservasPorUsuarioVigentes(Convert.ToInt64(((Dominio.Usuario)Session[Session.SessionID + "userSession"]).Id), 2);
                             }
@@ -91,11 +91,11 @@ namespace TPC_CacchioneMajdalani
 
                             }
 
- 
+
                         }
                         if (DDLReservaVigencia.SelectedItem.Text == "Caduca")
                         {
-                            if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso == 10)
+                            if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso < 20)
                             {
                                 ListarReservasPorUsuarioCaducas(Convert.ToInt64(((Dominio.Usuario)Session[Session.SessionID + "userSession"]).Id), 2);
                             }
@@ -113,7 +113,7 @@ namespace TPC_CacchioneMajdalani
                     {
                         if (DDLReservaVigencia.SelectedItem.Text == "Vigente")
                         {
-                            if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso == 10)
+                            if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso < 20)
                             {
                                 ListarReservasPorUsuarioVigentes(Convert.ToInt64(((Dominio.Usuario)Session[Session.SessionID + "userSession"]).Id), 3);
                             }
@@ -126,7 +126,7 @@ namespace TPC_CacchioneMajdalani
                         }
                         if (DDLReservaVigencia.SelectedItem.Text == "Caduca")
                         {
-                            if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso == 10)
+                            if (((Dominio.Usuario)Session[Session.SessionID + "userSession"]).NivelAcceso < 20)
                             {
                                 ListarReservasPorUsuarioCaducas(Convert.ToInt64(((Dominio.Usuario)Session[Session.SessionID + "userSession"]).Id), 3);
                             }
@@ -150,7 +150,7 @@ namespace TPC_CacchioneMajdalani
             ReservaNegocio NegocioReserva = new ReservaNegocio();
             if (Session["ListaDeReservasPorUsuarioVigente" + estado.ToString()] == null)
             {
-                ListaDeReservas = NegocioReserva.ListarReservasVigentesPorUsuario(id,estado);
+                ListaDeReservas = NegocioReserva.ListarReservasVigentesPorUsuario(id, estado);
                 Session.Add("ListaDeReservasPorUsuarioVigente" + estado.ToString(), ListaDeReservas);
             }
             else
@@ -163,7 +163,7 @@ namespace TPC_CacchioneMajdalani
             ReservaNegocio NegocioReserva = new ReservaNegocio();
             if (Session["ListaDeReservasPorUsuarioCaducas" + estado.ToString()] == null)
             {
-                ListaDeReservas = NegocioReserva.ListarReservasCaducasPorUsuario(id,estado);
+                ListaDeReservas = NegocioReserva.ListarReservasCaducasPorUsuario(id, estado);
                 Session.Add("ListaDeReservasPorUsuarioCaducas" + estado.ToString(), ListaDeReservas);
             }
             else
@@ -202,7 +202,7 @@ namespace TPC_CacchioneMajdalani
 
         protected void DDLReservaVigencia_TextChanged(object sender, EventArgs e)
         {
-            Response.Redirect("VerReservas.aspx?IndexEstados=" + Convert.ToString(DDLReservaEstados.SelectedIndex) + "&IndexVigencia=" + Convert.ToString(DDLReservaVigencia.SelectedIndex)); 
+            Response.Redirect("VerReservas.aspx?IndexEstados=" + Convert.ToString(DDLReservaEstados.SelectedIndex) + "&IndexVigencia=" + Convert.ToString(DDLReservaVigencia.SelectedIndex));
         }
 
         protected void DDLReservaEstados_TextChanged(object sender, EventArgs e)

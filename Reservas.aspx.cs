@@ -31,7 +31,7 @@ namespace TPC_CacchioneMajdalani
                 Response.Redirect("~/Login");
             }
             CargarCabaña(idCabaña);
-            lblMaximoPersonas.Text = "Cantidad máxima de personas: " + reserva.Cabaña.Capacidad.ToString();
+            lblMaximoPersonas.Text = "Límite de personas: " + reserva.Cabaña.Capacidad.ToString();
             reserva.Cliente = (Usuario)Session[Session.SessionID + "userSession"];
 
         }

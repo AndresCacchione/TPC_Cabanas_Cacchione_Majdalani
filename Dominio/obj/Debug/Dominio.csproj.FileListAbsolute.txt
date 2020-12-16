@@ -4,12 +4,6 @@ C:\Users\jeronimo\Desktop\Cabañas\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\D
 C:\Users\jeronimo\Desktop\Cabañas\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
 C:\Users\jeronimo\Desktop\Cabañas\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Debug\Dominio.dll
 C:\Users\jeronimo\Desktop\Cabañas\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Debug\Dominio.pdb
-C:\Users\Cristian Paolini\source\repos\TPC_Cabanas_Cacchione_Majdalani\Dominio\bin\Debug\Dominio.dll
-C:\Users\Cristian Paolini\source\repos\TPC_Cabanas_Cacchione_Majdalani\Dominio\bin\Debug\Dominio.pdb
-C:\Users\Cristian Paolini\source\repos\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Debug\Dominio.csprojAssemblyReference.cache
-C:\Users\Cristian Paolini\source\repos\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
-C:\Users\Cristian Paolini\source\repos\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Debug\Dominio.dll
-C:\Users\Cristian Paolini\source\repos\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Debug\Dominio.pdb
 C:\Users\jeronimo\Desktop\Nueva carpeta\TPC_Cabanas_Cacchione_Majdalani\Dominio\bin\Debug\Dominio.dll
 C:\Users\jeronimo\Desktop\Nueva carpeta\TPC_Cabanas_Cacchione_Majdalani\Dominio\bin\Debug\Dominio.pdb
 C:\Users\jeronimo\Desktop\Nueva carpeta\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Debug\Dominio.csprojAssemblyReference.cache
@@ -22,3 +16,8 @@ C:\Users\Andres\OneDrive\Documentos\GitHub\TPC - Cabañas\TPC_Cabanas_Cacchione_
 C:\Users\Andres\OneDrive\Documentos\GitHub\TPC - Cabañas\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
 C:\Users\Andres\OneDrive\Documentos\GitHub\TPC - Cabañas\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Debug\Dominio.dll
 C:\Users\Andres\OneDrive\Documentos\GitHub\TPC - Cabañas\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Debug\Dominio.pdb
+C:\Users\Cristian Paolini\source\repos\TPC_Cabanas_Cacchione_Majdalani\Dominio\bin\Debug\Dominio.dll
+C:\Users\Cristian Paolini\source\repos\TPC_Cabanas_Cacchione_Majdalani\Dominio\bin\Debug\Dominio.pdb
+C:\Users\Cristian Paolini\source\repos\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\Cristian Paolini\source\repos\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Debug\Dominio.dll
+C:\Users\Cristian Paolini\source\repos\TPC_Cabanas_Cacchione_Majdalani\Dominio\obj\Debug\Dominio.pdb

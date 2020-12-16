@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ResolverReservas.aspx.cs" Inherits="TPC_CacchioneMajdalani.ResolverReservas" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container">
+    <div class="container" style="padding: 2% 0% 0% 0%">
         <div class="row">
             <div class="col">
                 <table class="table">

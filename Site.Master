@@ -43,20 +43,18 @@
 
         <nav class="navbar navbar-light" style="background-color: #6E9038;">
             <div>
-                <% if (UsuarioActual == null || UsuarioActual.NivelAcceso == 10)
+                <% if (UsuarioActual == null || UsuarioActual.NivelAcceso < 20)
                     { %>
                 <a class="mr-4 ml-4" runat="server" style="color: #FFFFFF; font-size: xx-large;" href="~/">CaMa</a>
-                     <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Contacto">Contáctenos</a>
-                <% } %>
-                  <%if (UsuarioActual == null || UsuarioActual.NivelAcceso >= 10)
-                    {%>
+                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Contacto">Contáctenos</a>
                 <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Complejos">Complejos</a>
-                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Cabañas">Cabañas</a>              
+                <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/Cabañas">Cabañas</a>  
+                <% } %>
+            
               <%if (UsuarioActual != null)
                   {%>
                 <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/VerReservas">Reservas</a>
                 <%} %>
-                <% }%>
                 <%if (UsuarioActual != null && UsuarioActual.NivelAcceso >= 20)
                     { %>
                 <a class="mr-2 ml-2" runat="server" style="color: #FFFFFF; font-size: x-large;" href="~/ListadoDeUsuarios">Lista de usuarios</a>
@@ -71,12 +69,12 @@
                     {%>
                 <asp:Button Text="Modificar datos" ID="btnModificarDatos" CssClass="btn btn-secondary mr-auto ml-auto" runat="server" OnClick="btnModificarDatos_Click" />
 
-                <%if (UsuarioActual.NivelAcceso == 10)
+                <%if (UsuarioActual.NivelAcceso < 20)
                     {%>
                 <asp:Button ID="btnAFavoritas" Text="Cabañas Favoritas" CssClass="btn btn-secondary mr-auto ml-auto" runat="server" OnClick="btnAFavoritas_Click" />
                 <% } %>
                 <asp:Button Text="Cerrar Sesion" class="btn btn-danger mr-auto ml-auto" ID="btnCerrarSesion" OnClick="btnCerrarSesion_Click" runat="server" />
-                <asp:Label ID="lblNombreUsuario" runat="server" />
+                <asp:Label style="font-size: small; font-weight: 600;" ID="lblNombreUsuario" runat="server" />
 
                 <%
                     }

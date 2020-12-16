@@ -19,7 +19,7 @@
 
 
 
-     <div class="container">
+     <div class="container" style="padding:2% 0 0 0">
         <div class="row">
             <div class="col">
                 <table class="table">
@@ -41,11 +41,11 @@
                         <td style="width: 300px">
                             <img src="<% = item.Imagen %>" style="width: 300px; height: inherit;" alt="No posee imagen cargada">
 
-                            <th scope="row" style="width: 120px"><% = item.complejo.Nombre %></th>
+                            <th scope="row" style="width: 120px; font-size: small; font-weight: 600;"><% = item.complejo.Nombre %></th>
 
-                            <th scope="row" style="width: 100px"><% = item.PrecioDiario %></th>
+                            <th scope="row" style="width: 100px; font-size: small; font-weight: 600;">$<% = item.PrecioDiario %></th>
 
-                            <th scope="row" style="width: 100px"><% = item.Capacidad %></th>
+                            <th scope="row" style="width: 100px; font-size: small; font-weight: 600;"><% = item.Capacidad %> personas</th>
 
                             <th scope="row" style="width: 100px"><a href="DetalleCabaña.aspx?idCabaña=<%=item.Id.ToString()%>" class="btn btn-primary mr-auto ml-auto">Detalle </a></th>
 
