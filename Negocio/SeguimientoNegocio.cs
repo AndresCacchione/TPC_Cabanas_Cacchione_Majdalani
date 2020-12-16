@@ -15,11 +15,37 @@ namespace Negocio
             AccessDB access = new AccessDB();
             try
             {
-                access.AgregarParametroSP("@IDAdmin", seguimiento.IDAdmin, SqlDbType.BigInt);
-                access.AgregarParametroSP("@IDCliente", seguimiento.IDCliente, SqlDbType.BigInt);
+                if (seguimiento.IDAdmin == null)
+                {
+                    access.AgregarParametroSP("@IDAdmin", DBNull.Value, SqlDbType.BigInt);
+
+                }
+                else
+                {
+                    access.AgregarParametroSP("@IDAdmin", seguimiento.IDAdmin, SqlDbType.BigInt);
+                }
+                if (seguimiento.IDCliente == null)
+                {
+                    access.AgregarParametroSP("@IDCliente", DBNull.Value, SqlDbType.BigInt);
+
+                }
+                else
+                {
+                    access.AgregarParametroSP("@IDCliente", seguimiento.IDCliente, SqlDbType.BigInt);
+
+                }
                 access.AgregarParametroSP("@IDTabla", seguimiento.IDTabla, SqlDbType.BigInt);
                 access.AgregarParametroSP("@IDTablaAnterior", seguimiento.IDTablaAnterior, SqlDbType.BigInt);
-                access.AgregarParametroSP("@IDTablaNuevo", DBNull.Value, SqlDbType.BigInt);
+                if (seguimiento.IDTablaNuevo == null)
+                {
+                    access.AgregarParametroSP("@IDTablaNuevo", DBNull.Value, SqlDbType.BigInt);
+
+                }
+                else
+                {
+                    access.AgregarParametroSP("@IDTablaNuevo", seguimiento.IDTablaNuevo, SqlDbType.BigInt);
+
+                }
                 access.AgregarParametroSP("@Motivo", seguimiento.Motivo, SqlDbType.VarChar);
                 access.EjecutarStoredProcedure("spCargarSeguimiento");
             }
@@ -36,12 +62,12 @@ namespace Negocio
             try
             {
                 accessDB.SetearQuery("select IDTabla from tablas where nombre = @nombre");
-                accessDB.AgregarParametro("@nombre",nombreTabla);
+                accessDB.AgregarParametro("@nombre", nombreTabla);
                 accessDB.EjecutarLector();
                 accessDB.Lector.Read();
-                
-                if(!accessDB.Lector.IsDBNull(0))
-                    retorno = (long)accessDB.Lector["IDTabla"]; 
+
+                if (!accessDB.Lector.IsDBNull(0))
+                    retorno = (long)accessDB.Lector["IDTabla"];
             }
             catch (Exception ex)
             {

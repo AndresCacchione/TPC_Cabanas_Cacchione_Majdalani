@@ -21,11 +21,6 @@ namespace TPC_CacchioneMajdalani
             };
             Administrador = new Administrador();
             Seguimiento = new Seguimiento();
-            //{
-            //    IDTablaNuevo = null,
-            //    IDAdmin = null,
-            //    IDCliente = null
-            //};
         }
         public Administrador Administrador { get; set; }
         public Seguimiento Seguimiento { get; set; }
@@ -42,7 +37,6 @@ namespace TPC_CacchioneMajdalani
                     ReservaNegocio NegocioReserva = new ReservaNegocio();
                     Reserva = NegocioReserva.ListarReservaPorId(IdReserva);
                     Administrador.usuario = (Usuario)Session[Session.SessionID + "userSession"];
-
                 }
                 else
                 {
@@ -78,8 +72,8 @@ namespace TPC_CacchioneMajdalani
             Seguimiento.IDCliente = Reserva.Cliente.Id;
             Seguimiento.IDTabla = seguimientoNegocio.GetIDTabla("Reservas");
             Seguimiento.IDTablaAnterior = Reserva.ID;
-            Seguimiento.Motivo = "Motivo: "+ txtMotivo.Text + "Cambio en Reserva." + "Estado anterior: "+ Reserva.Estado +
-                "Estado actualizado: "+nuevoEstado.ToString() + " .- Administrador:" + Administrador.usuario.NombreUsuario +
+            Seguimiento.Motivo = "Motivo: "+ txtMotivo.Text + " Cambio en Reserva." + " Estado anterior: "+ Reserva.Estado +
+                " Estado actualizado: "+nuevoEstado.ToString() + " .- Administrador:" + Administrador.usuario.NombreUsuario +
                 ", Cliente:" + Reserva.Cliente.NombreUsuario + ", " + " ID Tabla Anterior:" + Seguimiento.IDTablaAnterior;
             seguimientoNegocio.GuardarSeguimiento(Seguimiento);
         }
@@ -94,6 +88,11 @@ namespace TPC_CacchioneMajdalani
         }
 
         protected void btnConfirmada_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnConfirmada_Click1(object sender, EventArgs e)
         {
             ReservaNegocio NegocioReserva = new ReservaNegocio();
             txtMotivo.Text = "Confirmación alta.";

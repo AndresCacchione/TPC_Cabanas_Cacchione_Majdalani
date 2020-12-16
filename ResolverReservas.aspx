@@ -54,7 +54,7 @@
     </div>
     <%if (Convert.ToByte(Request.QueryString["Estado"]) == 1)
         { %>
-    <asp:Button ID="btnConfirmada" OnClick="btnConfirmada_Click" class="btn btn-success mr-auto ml-auto" Text="Confirmada" runat="server" />
+    <asp:Button ID="btnConfirmada" OnClick="btnConfirmada_Click1" class="btn btn-success mr-auto ml-auto" Text="Confirmada" runat="server" />
     <asp:Button ID="btnCanceladaPendiente" data-toggle="modal" data-target="#modalCancelar" class="btn btn-danger mr-auto ml-auto" Text="Cancelada" runat="server" />
     <%} %>
     <%if (Convert.ToByte(Request.QueryString["Estado"]) == 2)

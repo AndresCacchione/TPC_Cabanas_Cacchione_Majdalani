@@ -14,55 +14,108 @@ namespace Negocio
 			AccessDB access = new AccessDB();
             try
             {
-				access.SetearQuery(@"if not exists(select * from sys.objects where name = 'spCargarSeguimiento')
-									begin
-									exec('create procedure spCargarSeguimiento(
-										@IDAdmin bigint,
-										@IDCliente bigint,
-										@IDTabla bigint,
-										@IDTablaAnterior bigint,
-										@IDTablaNuevo bigint,
-										@Motivo varchar(255)
-									)
-									as
-									BEGIN
-									begin try
-									if @IDTablaAnterior not in(case when ((select t.Nombre from Tablas t where @IDTabla=t.IDTabla)=''Reservas'') then  
-																(select ID from Reservas)
-																when ((select t.Nombre from Tablas t where @IDTabla=t.IDTabla)=''Complejos'') then  
-																(select ID from Complejos)
-																when ((select t.Nombre from Tablas t where @IDTabla=t.IDTabla)=''Cabañas'') then  
-																(select ID from Cabañas)
-																when ((select t.Nombre from Tablas t where @IDTabla=t.IDTabla)=''Clientes'') then
-																(select Id from Usuarios where IdNivelAcceso < 20)
-																end)
-									or @IDTablaAnterior is null
-									or @IDTablaNuevo not in(case when ((select t.Nombre from Tablas t where @IDTabla=t.IDTabla)=''Reservas'') then  
-																(select ID from Reservas)
-																when ((select t.Nombre from Tablas t where @IDTabla=t.IDTabla)=''Complejos'') then  
-																(select ID from Complejos)
-																when ((select t.Nombre from Tablas t where @IDTabla=t.IDTabla)=''Cabañas'') then  
-																(select ID from Cabañas)
-																when ((select t.Nombre from Tablas t where @IDTabla=t.IDTabla)=''Clientes'') then
-																(select Id from Usuarios where IdNivelAcceso < 20)
-																end)
-									begin
-									raiserror(''ID de tabla anterior no válido'', 16, 1)
-									end
+				access.SetearQuery(@"if not exists(select * from sys.objects where name='spTablaEnTabla')
+										begin
+										exec('create procedure spTablaEnTabla(
+													@IDTablaAnterior bigint,
+													@IDTabla bigint)
+													as
+													declare @retorno bit=0
+													begin
 
-									insert into Seguimientos values (@IDAdmin,@IDCliente,GETDATE(),@IDTabla,@IDTablaAnterior,@IDTablaNuevo,@Motivo)
-									end try
+													if(@IDTablaAnterior is null)
+														begin
+														set @retorno = 1
+														end
 
-									begin catch
-									print error_message()
-									end catch
-									END')
-									end");
+													else
+													begin
+														if((select t.Nombre from Tablas t where @IDTabla=t.IDTabla)=''Reservas'')
+														begin
+															if (@IDTablaAnterior in(select ID from Reservas))
+															begin
+															set @retorno = 1
+															end
+														end
+
+														else
+														BEGIN
+															if((select t.Nombre from Tablas t where @IDTabla=t.IDTabla)=''Complejos'')
+															begin
+																if(@IDTablaAnterior in(select ID from Complejos))
+																begin
+																set @retorno = 1
+																end
+															end
+
+															else
+
+															begin
+																if((select t.Nombre from Tablas t where @IDTabla=t.IDTabla)=''Cabañas'')
+																begin
+																	if(@IDTablaAnterior in(select ID from Cabañas))
+																	begin
+																	set @retorno = 1
+																	end
+																end
+
+																else
+
+																begin
+																	if((select t.Nombre from Tablas t where @IDTabla=t.IDTabla)=''Clientes'')
+																	begin
+																		if(@IDTablaAnterior in(select Id from Usuarios where IdNivelAcceso < 20))
+																		begin
+																		set @retorno = 1
+																		end
+																	end 
+																end
+															end
+														END
+													end
+													return @retorno
+													end
+
+													--DEVUELVE 0 SI NO ENCUENTRA @IDTablaAnterior EN LAS PK DE LA TABLA CON ID=@IDTabla')
+										end
+										if not exists(select * from sys.objects where name='spCargarSeguimiento')
+										begin
+										exec('create procedure [dbo].[spCargarSeguimiento](
+											@IDAdmin bigint,
+											@IDCliente bigint,
+											@IDTabla bigint,
+											@IDTablaAnterior bigint,
+											@IDTablaNuevo bigint,
+											@Motivo varchar(255)
+										)
+										as
+										BEGIN
+										begin try
+										declare @resultadoTablaAnterior bit 
+										declare @resultadoTablaNueva bit
+										exec @resultadoTablaAnterior = spTablaEnTabla @IDTablaAnterior, @IDTabla
+										exec @resultadoTablaNueva = spTablaEnTabla @IDTablaNuevo, @IDTabla
+
+										if (@resultadoTablaAnterior=0
+										or @IDTablaAnterior is null
+										or @resultadoTablaNueva=0)
+
+										begin
+										raiserror(''ID de tabla anterior no válido'', 16, 1)
+										end
+
+										insert into Seguimientos values (@IDAdmin,@IDCliente,GETDATE(),@IDTabla,@IDTablaAnterior,@IDTablaNuevo,@Motivo)
+										end try
+
+										begin catch
+										print error_message()
+										end catch
+										END')
+										end");
 				access.EjecutarAccion();
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
