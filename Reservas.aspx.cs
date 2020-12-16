@@ -105,49 +105,55 @@ namespace TPC_CacchioneMajdalani
             {
                 ReservaNegocio NegocioReserva = new ReservaNegocio();
                 GuardarReserva();
-                reserva.CantPersonas = Convert.ToByte(CantidadDePersonas.Text);
-                if (reserva.CantPersonas <= reserva.Cabaña.Capacidad && reserva.CantPersonas > 0)
+                if(CantidadDePersonas.Text!="")
                 {
-                    bool inserto = NegocioReserva.InsertarReserva(reserva);
-                    //ENVIO DE MAIL AL USUARIO QUE RESERVO Y AL ADMINISTRADOR PARA QUE 
-                    if (inserto)
+                    reserva.CantPersonas = Convert.ToByte(CantidadDePersonas.Text);
+                    if (reserva.CantPersonas <= reserva.Cabaña.Capacidad && reserva.CantPersonas > 0)
                     {
-                        ManagementEmail managementEmail = new ManagementEmail();
-
-                        //DESPUES DE MANAGEMENT EMAIL INSERTAR POP UP
-                        //Envio mail a los admins
-                        managementEmail.EnviarEmails(MailDestino2(), "Alta de Reserva (Verficar pago)", CuerpoMail2());
-                        //Mail de cliente
-                        List<string> EmailCliente = new List<string>();
-                        EmailCliente.Add(reserva.Cliente.DatosPersonales.Email);
-                        /// SETEARLE AL ADMINISTRADOR EL MAIL DEL COMPLEJO QUE ADMINISTRA
-                        managementEmail.EnviarEmails(EmailCliente, "Enviar comprobante de pago AL MAIL COMPLEJO", CuerpoMail2());
-                        EliminarSesionDeReservas();
-                        Response.Redirect("~/VerReservas");
-                        if (ListaReservas == null)
+                        bool inserto = NegocioReserva.InsertarReserva(reserva);
+                        //ENVIO DE MAIL AL USUARIO QUE RESERVO Y AL ADMINISTRADOR PARA QUE 
+                        if (inserto)
                         {
-                            Session.Add("listaReservas", ListaReservas);
-                            ListaReservas.Add(reserva);
-                            Session["listaReservas"] = ListaReservas;
+                            ManagementEmail managementEmail = new ManagementEmail();
+
+                            //DESPUES DE MANAGEMENT EMAIL INSERTAR POP UP
+                            //Envio mail a los admins
+                            managementEmail.EnviarEmails(MailDestino2(), "Alta de Reserva (Verficar pago)", CuerpoMail2());
+                            //Mail de cliente
+                            List<string> EmailCliente = new List<string>();
+                            EmailCliente.Add(reserva.Cliente.DatosPersonales.Email);
+                            /// SETEARLE AL ADMINISTRADOR EL MAIL DEL COMPLEJO QUE ADMINISTRA
+                            managementEmail.EnviarEmails(EmailCliente, "Enviar comprobante de pago AL MAIL COMPLEJO", CuerpoMail2());
+                            EliminarSesionDeReservas();
+                            Response.Redirect("~/VerReservas");
+                            if (ListaReservas == null)
+                            {
+                                Session.Add("listaReservas", ListaReservas);
+                                ListaReservas.Add(reserva);
+                                Session["listaReservas"] = ListaReservas;
+                            }
+                            else
+                            {
+                                ListaReservas = (List<Reserva>)Session["listaReservas"];
+                                ListaReservas.Add(reserva);
+                                Session["listaReservas"] = ListaReservas;
+                            }
+
                         }
                         else
                         {
-                            ListaReservas = (List<Reserva>)Session["listaReservas"];
-                            ListaReservas.Add(reserva);
-                            Session["listaReservas"] = ListaReservas;
+                            LblCalendario.Text = "Verifique los datos ingresados ";
                         }
-
                     }
                     else
                     {
-                        LblCalendario.Text = "Verifique los datos ingresados ";
+
+                        LblCalendario.Text = "Verifique la cantidad de personas";
                     }
                 }
                 else
                 {
-
-                    LblCalendario.Text = "Verifique la cantidad de personas ";
-
+                    LblCalendario.Text = "Seleccione la cantidad de personas ";
                 }
             }
             else

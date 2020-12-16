@@ -15,15 +15,6 @@ namespace TPC_CacchioneMajdalani
     {
 
         /// <summary>
-        /// LblCalendario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblCalendario;
-
-        /// <summary>
         /// Calendar1 control.
         /// </summary>
         /// <remarks>
@@ -60,24 +51,6 @@ namespace TPC_CacchioneMajdalani
         protected global::System.Web.UI.WebControls.TextBox HoraIngreso;
 
         /// <summary>
-        /// FechaDeEgreso control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox FechaDeEgreso;
-
-        /// <summary>
-        /// HoraEgreso control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox HoraEgreso;
-
-        /// <summary>
         /// CantidadDePersonas control.
         /// </summary>
         /// <remarks>
@@ -96,6 +69,24 @@ namespace TPC_CacchioneMajdalani
         protected global::System.Web.UI.WebControls.Label lblMaximoPersonas;
 
         /// <summary>
+        /// FechaDeEgreso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox FechaDeEgreso;
+
+        /// <summary>
+        /// HoraEgreso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox HoraEgreso;
+
+        /// <summary>
         /// importes control.
         /// </summary>
         /// <remarks>
@@ -103,6 +94,15 @@ namespace TPC_CacchioneMajdalani
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox importes;
+
+        /// <summary>
+        /// LblCalendario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblCalendario;
 
         /// <summary>
         /// Reservar control.

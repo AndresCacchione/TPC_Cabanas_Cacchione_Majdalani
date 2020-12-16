@@ -150,10 +150,10 @@ namespace Negocio
 											BEGIN
 											declare @resultado bit = 1
 													BEGIN TRY
-													if (select count(*) from Reservas where (((@FechaIngreso>fechaIngreso and @FechaIngreso < fechaEgreso) or
+													if ((select count(*) from Reservas where (((@FechaIngreso>fechaIngreso and @FechaIngreso < fechaEgreso) or
 															(@FechaEgreso> fechaIngreso and @FechaEgreso < fechaEgreso) or
 															(@FechaEgreso=fechaEgreso) or (@FechaIngreso=fechaIngreso)) and 
-															estado<3 and IdCabaña = @IdCabaña))>0
+															estado<3 and IdCabaña = @IdCabaña))>0 or @FechaIngreso < getdate())
 													begin
 													set @resultado = 0
 													end
